@@ -26,13 +26,16 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    animtimeline.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    animtimeline.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    animtimeline.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
