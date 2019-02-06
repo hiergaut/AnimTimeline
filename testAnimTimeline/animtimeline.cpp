@@ -8,6 +8,7 @@ AnimTimeline::AnimTimeline(QWidget *parent)
 
   ui->setupUi(this);
 //  ui->frame_selector->setGeometry(5, 5, 10, 10);
+//  ui->scrollAreaWidgetContents->setMinimumWidth(1000);
 }
 
 AnimTimeline::~AnimTimeline() { delete ui; }
