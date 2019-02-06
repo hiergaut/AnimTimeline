@@ -27,11 +27,13 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    animtimeline.cpp
+    animtimeline.cpp \
+    qframeselector.cpp
 
 HEADERS += \
         mainwindow.h \
-    animtimeline.h
+    animtimeline.h \
+    qframeselector.h
 
 FORMS += \
         mainwindow.ui \
