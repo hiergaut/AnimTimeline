@@ -15,7 +15,8 @@ public:
   ~AnimTimeline();
 
 protected:
-  virtual void paintEvent(QPaintEvent *event) override;
+//  virtual void paintEvent(QPaintEvent *event) override;
+//  virtual void wheelEvent(QWheelEvent *event) override;
 
 private:
   Ui::AnimTimeline *ui;

@@ -28,12 +28,18 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     animtimeline.cpp \
-    qframeselector.cpp
+    qframeselector.cpp \
+    qwidgetruler.cpp \
+    qscrollarearuler.cpp \
+    qframetimescale.cpp
 
 HEADERS += \
         mainwindow.h \
     animtimeline.h \
-    qframeselector.h
+    qframeselector.h \
+    qwidgetruler.h \
+    qscrollarearuler.h \
+    qframetimescale.h
 
 FORMS += \
         mainwindow.ui \
