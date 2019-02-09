@@ -9,16 +9,20 @@ QFrameTimescale::QFrameTimescale(QWidget* parent)
 
 void QFrameTimescale::paintEvent(QPaintEvent* event)
 {
+    int animDuration =10.0f;
 
     QPainter painter(this);
     painter.setRenderHint(QPainter::HighQualityAntialiasing);
 
-    int nbInterval = 10;
+    painter.drawText(0, 11, "sec");
+    int nbInterval = 20;
     int wInterval = width() / nbInterval;
-    for (int i = 0; i < nbInterval; i++) {
+    for (int i = 1; i < nbInterval; i++) {
         int x = wInterval * i;
-//        painter.drawLine(x, 0, x, height());
-        painter.drawText(x, 11, "0ms");
+        //        painter.drawLine(x, 0, x, height());
+        QString time =QString::number(i/10.0);
+        int dec = time.size() * 5 / 2;
+        painter.drawText(x -dec, 11, time);
     }
 
     //    QPen linePen;

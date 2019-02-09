@@ -16,9 +16,9 @@ void QFrameSelector::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.setRenderHint(QPainter::HighQualityAntialiasing);
 
-    int nbInterval =10;
+    int nbInterval =20;
     int wInterval =width() /nbInterval;
-    for (int i =0; i <nbInterval; i++) {
+    for (int i =1; i <nbInterval; i++) {
         int x =wInterval *i;
         painter.drawLine(x, 0, x, height());
     }
