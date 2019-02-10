@@ -15,6 +15,11 @@ AnimTimeline::AnimTimeline(QWidget *parent)
   connect(ui->scrollArea, SIGNAL(changePrecision(int)), ui->scrollAreaWidgetContents, SLOT(onChangePrecision(int)));
 //  connect(ui->scrollAreaWidgetContents, SIGNAL(changeScale()), ui->frame_selector, SLOT(onRedrawScale()));
 //  connect(ui->scrollAreaWidgetContents, SIGNAL(changeScale()), ui->frame_selector, SLOT(paintEvent()));
+
+//  ui->scrollAreaWidgetContents->setPlayZone(ui->frame_playZone);
+//  ui->scrollAreaWidgetContents->setLeftSlider(ui->label_leftSlider);
+//  ui->scrollAreaWidgetContents->setLeftSpacer(ui->horizontalSpacer);
+//  ui->scrollAreaWidgetContents->setFrameSelector(ui->frame_selector);
 }
 
 AnimTimeline::~AnimTimeline() { delete ui; }

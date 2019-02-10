@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>images/leftSlider.png</file>
+        <file>images/rightSlider.png</file>
+    </qresource>
+</RCC>

@@ -1,7 +1,9 @@
+
 #ifndef QFRAMESELECTOR_H
 #define QFRAMESELECTOR_H
 
 #include <QFrame>
+#include "qwidgetruler.h"
 
 class QFrameSelector : public QFrame
 {
@@ -9,8 +11,9 @@ class QFrameSelector : public QFrame
 public:
     explicit QFrameSelector(QWidget *parent = nullptr);
 
+
 signals:
-//    void changePrecision(int accuracy);
+    //    void changePrecision(int accuracy);
 
 protected:
     virtual void paintEvent(QPaintEvent * event) override;
@@ -19,6 +22,9 @@ protected:
 
 public slots:
     void onRedrawScale();
+
+private:
+    QWidgetRuler * widgetRuler;
 };
 
 #endif // QFRAMESELECTOR_H

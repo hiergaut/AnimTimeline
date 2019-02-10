@@ -3,9 +3,8 @@
 #include <QPainter>
 #include <QDebug>
 #include <QWheelEvent>
-#include "qwidgetruler.h"
 
-QFrameSelector::QFrameSelector(QWidget *parent) : QFrame (parent)
+QFrameSelector::QFrameSelector(QWidget *parent) : QFrame (parent), widgetRuler(static_cast<QWidgetRuler*>(parent))
 {
 //    qDebug() << "parent =" << parent;
 //    qDebug() << "QFrameSelector created";
@@ -23,8 +22,8 @@ void QFrameSelector::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.setRenderHint(QPainter::HighQualityAntialiasing);
 
-    int nbInterval = dynamic_cast<QWidgetRuler*>(parent())->getNbInterval();
-    int wInterval = dynamic_cast<QWidgetRuler*>(parent())->getWInterval();
+    int nbInterval = widgetRuler->getNbInterval();
+    int wInterval = widgetRuler->getWInterval();
 
 //    qDebug() << "QFrameSelector: nbInterval =" << nbInterval;
 //    qDebug() << "QFrameSelector: wwInterval =" << wInterval;
