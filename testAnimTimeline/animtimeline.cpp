@@ -13,6 +13,8 @@ AnimTimeline::AnimTimeline(QWidget *parent)
 //  ui->frame_selector->setGeometry(5, 5, 10, 10);
 //  ui->scrollAreaWidgetContents->setMinimumWidth(1000);
   connect(ui->scrollArea, SIGNAL(changePrecision(int)), ui->scrollAreaWidgetContents, SLOT(onChangePrecision(int)));
+//  connect(ui->scrollAreaWidgetContents, SIGNAL(changeScale()), ui->frame_selector, SLOT(onRedrawScale()));
+//  connect(ui->scrollAreaWidgetContents, SIGNAL(changeScale()), ui->frame_selector, SLOT(paintEvent()));
 }
 
 AnimTimeline::~AnimTimeline() { delete ui; }

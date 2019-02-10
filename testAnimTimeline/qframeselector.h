@@ -10,7 +10,7 @@ public:
     explicit QFrameSelector(QWidget *parent = nullptr);
 
 signals:
-    void changePrecision(int accuracy);
+//    void changePrecision(int accuracy);
 
 protected:
     virtual void paintEvent(QPaintEvent * event) override;
@@ -18,6 +18,7 @@ protected:
 //    virtual void wheelEvent(QWheelEvent * event) override;
 
 public slots:
+    void onRedrawScale();
 };
 
 #endif // QFRAMESELECTOR_H
