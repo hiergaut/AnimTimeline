@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>622</width>
+    <width>626</width>
     <height>130</height>
    </rect>
   </property>
@@ -278,23 +278,33 @@
            <number>1</number>
           </property>
           <item>
-           <spacer name="horizontalSpacer">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+           <widget class="QFrame" name="frame_spacer">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Minimum</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
+            <property name="minimumSize">
              <size>
               <width>50</width>
-              <height>20</height>
+              <height>0</height>
              </size>
             </property>
-           </spacer>
+            <property name="styleSheet">
+             <string notr="true">background-color: transparent;
+</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+           </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_leftSlider">
+           <widget class="QLabelSlider" name="label_leftSlider">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -348,7 +358,7 @@ border: 0px;</string>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_rightSlider">
+           <widget class="QLabelSlider" name="label_rightSlider">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -433,6 +443,8 @@ border: 0px;</string>
    <container>1</container>
    <slots>
     <signal>updatePlayZone(int)</signal>
+    <slot>onSlideLeftSlider(int)</slot>
+    <slot>onSlideRightSlider(int)</slot>
    </slots>
   </customwidget>
   <customwidget>
@@ -453,9 +465,50 @@ border: 0px;</string>
    <header>qframetimescale.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>QLabelSlider</class>
+   <extends>QLabel</extends>
+   <header>qlabelslider.h</header>
+   <slots>
+    <signal>slide(int)</signal>
+   </slots>
+  </customwidget>
  </customwidgets>
  <resources>
   <include location="timeline.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>label_leftSlider</sender>
+   <signal>slide(int)</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onSlideLeftSlider(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>61</x>
+     <y>62</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>38</x>
+     <y>90</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>label_rightSlider</sender>
+   <signal>slide(int)</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onSlideRightSlider(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>367</x>
+     <y>81</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>389</x>
+     <y>77</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

@@ -61,6 +61,7 @@ void QScrollAreaRuler::wheelEvent(QWheelEvent* event)
 
 void QScrollAreaRuler::mousePressEvent(QMouseEvent* event)
 {
+    qDebug() << "QScrollAreaRuler::mousePressEvent";
     if (event->button() == Qt::MiddleButton) {
                 mousePosX = event->x();
         //        prevMouseX = horizontalScrollBar()->value();

@@ -24,14 +24,14 @@ QFrameSelector::QFrameSelector(QWidget *parent) : QFrame (parent)
 
 void QFrameSelector::paintEvent(QPaintEvent *event)
 {
-//    qDebug() << "QFrameSelector: paintEvent";
+    qDebug() << "QFrameSelector: paintEvent " << event;
 //    double duration =10.0;
 //    double steps[] = {0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0};
 //    int iStep =0;
 //    while (width() * steps[iStep] < 50 *duration) iStep++;
 
-
     QPainter painter(this);
+//    painter.begin(this);
     painter.setRenderHint(QPainter::HighQualityAntialiasing);
 
     int nbInterval = widgetRuler->getNbInterval();
@@ -50,8 +50,9 @@ void QFrameSelector::paintEvent(QPaintEvent *event)
 //    int wInterval =width() /nbInterval;
 
 //    qDebug() << leftSpacer;
-    leftSpacer->changeSize(wInterval -leftSlider->width() +start *pixPerSec, 0);
-    playZone->setMinimumWidth(duration *pixPerSec);
+//    leftSpacerX =wInterval -leftSlider->width() +start *pixPerSec;
+//    leftSpacer->changeSize(leftSpacerX, 0);
+//    playZone->setMinimumWidth(duration *pixPerSec);
 //    repaint();
 
     painter.setPen(Qt::darkGray);
@@ -68,6 +69,7 @@ void QFrameSelector::paintEvent(QPaintEvent *event)
         painter.drawLine(x +wInterval /2, 0, x +wInterval /2, height());
     }
 
+//    painter.end();
 
 //    QPen linePen;
 //    linePen.setWidth(1);
@@ -82,15 +84,48 @@ void QFrameSelector::paintEvent(QPaintEvent *event)
 
 }
 
-bool QFrameSelector::eventFilter(QObject *watched, QEvent *event)
-{
-    qDebug() << "QFrameSelector: eventFilter " << i++;
+//bool QFrameSelector::eventFilter(QObject *watched, QEvent *event)
+//{
+//    qDebug() << "QFrameSelector: eventFilter " << i++;
 
 
-}
+//}
 
 void QFrameSelector::onRedrawScale()
 {
+}
+
+void QFrameSelector::onSlideLeftSlider(int deltaX)
+{
+    qDebug() << "QFrameSelector::onSlideLeftSlider " << deltaX;
+//    leftSpacerX +=deltaX;
+//    leftSpacer->changeSize(leftSpacerX, 0);
+//    leftSpacer->changeSize(200 +deltaX, 0);
+    leftSpacer->setMinimumWidth(leftSpacer->width() +deltaX);
+//    update();
+//    repaint();
+//    playZone->setMinimumWidth(playZone->width());
+
+}
+
+void QFrameSelector::onSlideRightSlider(int deltaX)
+{
+    qDebug() << "QFrameSelector::onSlideRightSlider " << deltaX;
+    playZone->setMinimumWidth(playZone->width() +deltaX);
+//    playZone->setMinimumWidth(100);
+//    duration += deltaX *0.1;
+//    update();
+
+}
+
+void QFrameSelector::setLeftSpacer(QFrame *value)
+{
+    leftSpacer = value;
+}
+
+void QFrameSelector::setRightSlider(QLabel *value)
+{
+    rightSlider = value;
 }
 
 void QFrameSelector::setPlayZone(QFrame *value)
@@ -103,10 +138,6 @@ void QFrameSelector::setLeftSlider(QLabel *value)
     leftSlider = value;
 }
 
-void QFrameSelector::setLeftSpacer(QSpacerItem *value)
-{
-    leftSpacer = value;
-}
 
 //void QFrameSelector::wheelEvent(QWheelEvent *event)
 //{

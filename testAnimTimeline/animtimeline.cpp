@@ -22,8 +22,11 @@ AnimTimeline::AnimTimeline(QWidget *parent)
 //  ui->scrollAreaWidgetContents->setFrameSelector(ui->frame_selector);
   ui->frame_selector->setPlayZone(ui->frame_playZone);
   ui->frame_selector->setLeftSlider(ui->label_leftSlider);
-  ui->frame_selector->setLeftSpacer(ui->horizontalSpacer);
+  ui->frame_selector->setLeftSpacer(ui->frame_spacer);
+  ui->frame_selector->setRightSlider(ui->label_rightSlider);
 //  qDebug() << "AnimeTimeline created";
+
+//  ui->frame_selector->drawRulerScale();
 }
 
 AnimTimeline::~AnimTimeline() { delete ui; }

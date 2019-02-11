@@ -32,7 +32,8 @@ SOURCES += \
     qwidgetruler.cpp \
     qscrollarearuler.cpp \
     qframetimescale.cpp \
-    qframeplayzone.cpp
+    qframeplayzone.cpp \
+    qlabelslider.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -41,7 +42,8 @@ HEADERS += \
     qwidgetruler.h \
     qscrollarearuler.h \
     qframetimescale.h \
-    qframeplayzone.h
+    qframeplayzone.h \
+    qlabelslider.h
 
 FORMS += \
         mainwindow.ui \

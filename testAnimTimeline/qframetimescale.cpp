@@ -26,7 +26,7 @@ void QFrameTimescale::paintEvent(QPaintEvent* event)
 //    int wInterval = dynamic_cast<QWidgetRuler*>(parent())->getWInterval();
     double step = dynamic_cast<QWidgetRuler*>(parent())->getStep();
     double pixPerSec = dynamic_cast<QWidgetRuler*>(parent())->getPixPerSec();
-    int wInterval = pixPerSec *step;
+//    int wInterval = pixPerSec *step;
 
 //    int nbInterval =10;
 //    int wInterval =100;
@@ -34,7 +34,7 @@ void QFrameTimescale::paintEvent(QPaintEvent* event)
 //    int nbInterval = duration /step +2;
 //    int wInterval = width() / nbInterval;
     for (int i = 1; i < nbInterval; i++) {
-        int x = wInterval * i;
+        int x = pixPerSec * step * i;
         //        painter.drawLine(x, 0, x, height());
         QString time =QString::number((i -1) * step);
         int dec = time.size() * 5 / 2;

@@ -13,11 +13,15 @@ public:
     explicit QFrameSelector(QWidget *parent = nullptr);
 
 
-    void setLeftSpacer(QSpacerItem *value);
 
     void setLeftSlider(QLabel *value);
 
     void setPlayZone(QFrame *value);
+
+    void setRightSlider(QLabel *value);
+
+    void setLeftSpacer(QFrame *value);
+//    void drawRulerScale();
 
 signals:
     //    void changePrecision(int accuracy);
@@ -25,23 +29,29 @@ signals:
 
 protected:
     virtual void paintEvent(QPaintEvent * event) override;
-    virtual bool eventFilter(QObject * watched, QEvent *event) override;
+//    virtual bool eventFilter(QObject * watched, QEvent *event) override;
 //    virtual void wheelEvent(QWheelEvent * event) override;
 
 public slots:
     void onRedrawScale();
+    void onSlideLeftSlider(int deltaX);
+    void onSlideRightSlider(int deltaX);
 //    void onLeftSliderClicked(int);
 
 private:
     QWidgetRuler * widgetRuler;
 
-    QSpacerItem * leftSpacer;
+//    QSpacerItem * leftSpacer;
+    QFrame * leftSpacer;
     QLabel * leftSlider;
+    QLabel * rightSlider;
     QFrame * playZone;
 
     double start =0.0;
     double duration =10.0;
     int i =0;
+
+    int leftSpacerX;
 
 };
 
