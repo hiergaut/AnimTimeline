@@ -266,7 +266,7 @@
            <number>0</number>
           </property>
           <property name="leftMargin">
-           <number>1</number>
+           <number>0</number>
           </property>
           <property name="topMargin">
            <number>1</number>
@@ -314,7 +314,7 @@
              <string/>
             </property>
             <property name="pixmap">
-             <pixmap resource="timeline.qrc">:/images/images/leftSlider.png</pixmap>
+             <pixmap resource="timeline.qrc">:/images/leftSlider.png</pixmap>
             </property>
            </widget>
           </item>
@@ -333,13 +333,17 @@
              </size>
             </property>
             <property name="styleSheet">
-             <string notr="true">background-color: qlineargradient(spread:pad, x1: 0 y1: 0, x2: 0 y2: 1, stop:0 rgba(0,255, 0, 30), stop:1 rgba(0, 255, 0, 30));</string>
+             <string notr="true">background-color: qlineargradient(spread:pad, x1: 0 y1: 0, x2: 0 y2: 1, stop:0 rgba(0,255, 0, 30), stop:1 rgba(0, 255, 0, 30));
+border: 0px;</string>
             </property>
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
             </property>
             <property name="frameShadow">
              <enum>QFrame::Raised</enum>
+            </property>
+            <property name="lineWidth">
+             <number>1</number>
             </property>
            </widget>
           </item>
@@ -364,7 +368,7 @@
              <string/>
             </property>
             <property name="pixmap">
-             <pixmap resource="timeline.qrc">:/images/images/rightSlider.png</pixmap>
+             <pixmap resource="timeline.qrc">:/images/rightSlider.png</pixmap>
             </property>
            </widget>
           </item>
@@ -427,6 +431,9 @@
    <extends>QFrame</extends>
    <header>qframeselector.h</header>
    <container>1</container>
+   <slots>
+    <signal>updatePlayZone(int)</signal>
+   </slots>
   </customwidget>
   <customwidget>
    <class>QWidgetRuler</class>

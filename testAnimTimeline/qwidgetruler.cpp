@@ -18,13 +18,15 @@ int QWidgetRuler::updateTimeline(int newWidth) {
     while (iStep < nbSteps && newWidth * steps[iStep] < 50 * duration) iStep++;
 
     if (iStep == nbSteps) {
+        qDebug() << "too small";
         return width();
     }
 
     step =steps[iStep];
 
-    nbInterval = duration / step +2;
-    wInterval = newWidth / nbInterval;
+    nbInterval = int(duration / step) +2;
+//    wInterval = newWidth / nbInterval;
+    pixPerSec = (newWidth / float(nbInterval)) /step;
 
 //    leftSpacer->changeSize(0, 0);
 
@@ -60,6 +62,11 @@ void QWidgetRuler::onChangePrecision(int accuracy)
 
 //    emit changeScale();
 
+}
+
+double QWidgetRuler::getPixPerSec() const
+{
+    return pixPerSec;
 }
 
 //void QWidgetRuler::setFrameSelector(QFrameSelector *value)

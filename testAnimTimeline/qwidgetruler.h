@@ -23,6 +23,8 @@ public:
 
 //    void setFrameSelector(QFrameSelector *value);
 
+    double getPixPerSec() const;
+
 signals:
     //    void changeScale();
 
@@ -39,6 +41,7 @@ private:
     double step;
     int nbInterval;
     int wInterval;
+    double pixPerSec;
 
     double start =0.0;
     double end =duration;

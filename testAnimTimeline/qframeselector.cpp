@@ -4,10 +4,22 @@
 #include <QDebug>
 #include <QWheelEvent>
 
-QFrameSelector::QFrameSelector(QWidget *parent) : QFrame (parent), widgetRuler(static_cast<QWidgetRuler*>(parent))
+QFrameSelector::QFrameSelector(QWidget *parent) : QFrame (parent)
 {
+    widgetRuler =static_cast<QWidgetRuler*>(parent);
 //    qDebug() << "parent =" << parent;
 //    qDebug() << "QFrameSelector created";
+//    leftSpacer = findChild<QSpacerItem*>("horizontalSpacer");
+//    leftSlider = findChild<QLabel*>("label_leftSlider");
+//    playZone = findChild<QFrame*>("frame_playzone");
+
+//    qDebug() << leftSlider;
+//    qDebug() << playZone;
+//    assert(leftSpacer != nullptr);
+//    assert(leftSlider != nullptr);
+//    assert(playZone != nullptr);
+//    this->installEventFilter(this);
+
 }
 
 void QFrameSelector::paintEvent(QPaintEvent *event)
@@ -23,7 +35,9 @@ void QFrameSelector::paintEvent(QPaintEvent *event)
     painter.setRenderHint(QPainter::HighQualityAntialiasing);
 
     int nbInterval = widgetRuler->getNbInterval();
-    int wInterval = widgetRuler->getWInterval();
+    double step = widgetRuler->getStep();
+    double pixPerSec = widgetRuler->getPixPerSec();
+    int wInterval = pixPerSec *step;
 
 //    qDebug() << "QFrameSelector: nbInterval =" << nbInterval;
 //    qDebug() << "QFrameSelector: wwInterval =" << wInterval;
@@ -35,16 +49,22 @@ void QFrameSelector::paintEvent(QPaintEvent *event)
 //    int nbInterval =duration /step +2;
 //    int wInterval =width() /nbInterval;
 
+//    qDebug() << leftSpacer;
+    leftSpacer->changeSize(wInterval -leftSlider->width() +start *pixPerSec, 0);
+    playZone->setMinimumWidth(duration *pixPerSec);
+//    repaint();
 
     painter.setPen(Qt::darkGray);
     for (int i =1; i <nbInterval; i++) {
-        int x =wInterval *i;
+//        int x =wInterval *i;
+        int x =i *step *pixPerSec;
         painter.drawLine(x, 0, x, height());
     }
 
     painter.setPen(QPen(Qt::lightGray));
     for (int i =1; i <nbInterval -1; i++) {
-        int x =wInterval *i;
+//        int x =wInterval *i;
+        int x =i *step *pixPerSec;
         painter.drawLine(x +wInterval /2, 0, x +wInterval /2, height());
     }
 
@@ -64,11 +84,28 @@ void QFrameSelector::paintEvent(QPaintEvent *event)
 
 bool QFrameSelector::eventFilter(QObject *watched, QEvent *event)
 {
+    qDebug() << "QFrameSelector: eventFilter " << i++;
+
 
 }
 
 void QFrameSelector::onRedrawScale()
 {
+}
+
+void QFrameSelector::setPlayZone(QFrame *value)
+{
+    playZone = value;
+}
+
+void QFrameSelector::setLeftSlider(QLabel *value)
+{
+    leftSlider = value;
+}
+
+void QFrameSelector::setLeftSpacer(QSpacerItem *value)
+{
+    leftSpacer = value;
 }
 
 //void QFrameSelector::wheelEvent(QWheelEvent *event)

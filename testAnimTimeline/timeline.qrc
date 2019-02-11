@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/images">
+    <qresource prefix="/">
         <file>images/leftSlider.png</file>
         <file>images/rightSlider.png</file>
     </qresource>
