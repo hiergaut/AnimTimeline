@@ -19,6 +19,7 @@ protected:
 
 signals:
     void slide(int deltaX);
+    void slideRelease();
 
 
 public slots:

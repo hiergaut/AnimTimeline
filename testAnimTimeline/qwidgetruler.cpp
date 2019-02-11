@@ -1,36 +1,38 @@
 #include "qwidgetruler.h"
 
-#include <QWheelEvent>
 #include <QDebug>
+#include <QWheelEvent>
 
-QWidgetRuler::QWidgetRuler(QWidget *parent) : QWidget(parent)
+QWidgetRuler::QWidgetRuler(QWidget* parent)
+    : QWidget(parent)
 {
-//    qDebug() << "QWidgetRuler created";
-//    emit onChangePrecision(0);
-//    setMinimumWidth(500);
+    //    qDebug() << "QWidgetRuler created";
+    //    emit onChangePrecision(0);
+    //    setMinimumWidth(500);
     updateTimeline(500);
 }
 
-int QWidgetRuler::updateTimeline(int newWidth) {
-//    int newWidth = 500 +accuracy;
+int QWidgetRuler::updateTimeline(int newWidth)
+{
+    //    int newWidth = 500 +accuracy;
 
-    int iStep =0;
-    while (iStep < nbSteps && newWidth * steps[iStep] < 50 * duration) iStep++;
+    int iStep = 0;
+    while (iStep < nbSteps && newWidth * steps[iStep] < 50 * duration)
+        iStep++;
 
     if (iStep == nbSteps) {
         qDebug() << "too small";
         return width();
     }
 
-    step =steps[iStep];
+    step = steps[iStep];
 
-    nbInterval = int(duration / step) +2;
-//    wInterval = newWidth / nbInterval;
-    pixPerSec = (newWidth / float(nbInterval)) /step;
+    nbInterval = int(duration / step) + 2;
+    //    wInterval = newWidth / nbInterval;
+    pixPerSec = (newWidth / float(nbInterval)) / step;
 
-//    leftSpacer->changeSize(0, 0);
-
-
+    //    emit rulerChange(step, nbInterval, pixPerSec);
+    //    leftSpacer->changeSize(0, 0);
 
     return newWidth;
 }
@@ -44,29 +46,27 @@ int QWidgetRuler::updateTimeline(int newWidth) {
 
 void QWidgetRuler::onChangePrecision(int accuracy)
 {
-//    qDebug() << "QWidgetRuler: onChangePrecision";
+    //    qDebug() << "QWidgetRuler: onChangePrecision";
 
-//    int newWidth =width() +accuracy;
+    //    int newWidth =width() +accuracy;
 
     int newWidth = updateTimeline(width() + accuracy);
     setMinimumWidth(newWidth);
-//    update();
+    //    update();
 
-//    leftSpacer->changeSize(wInterval +wInterval *start / duration, 0);
-//    leftSpacer->minimumSize(0);
-//    updateTimeline();
-//    qDebug() << leftSpacer;
-//    playZone->setMinimumWidth((nbInterval -2) *wInterval * (end -start) / duration);
-//    frameSelector->update();
+    //    leftSpacer->changeSize(wInterval +wInterval *start / duration, 0);
+    //    leftSpacer->minimumSize(0);
+    //    updateTimeline();
+    //    qDebug() << leftSpacer;
+    //    playZone->setMinimumWidth((nbInterval -2) *wInterval * (end -start) / duration);
+    //    frameSelector->update();
 
-
-//    emit changeScale();
-
+    //    emit changeScale();
 }
 
-double QWidgetRuler::getPixPerSec() const
+double * QWidgetRuler::getPixPerSec()
 {
-    return pixPerSec;
+    return &pixPerSec;
 }
 
 //void QWidgetRuler::setFrameSelector(QFrameSelector *value)
@@ -74,19 +74,19 @@ double QWidgetRuler::getPixPerSec() const
 //    frameSelector = value;
 //}
 
-int QWidgetRuler::getWInterval() const
+//int* QWidgetRuler::getWInterval() const
+//{
+//    return &wInterval;
+//}
+
+int* QWidgetRuler::getNbInterval()
 {
-    return wInterval;
+    return &nbInterval;
 }
 
-int QWidgetRuler::getNbInterval() const
+double* QWidgetRuler::getStep()
 {
-    return nbInterval;
-}
-
-double QWidgetRuler::getStep() const
-{
-    return step;
+    return &step;
 }
 
 //void QWidgetRuler::setLeftSlider(QLabel *value)

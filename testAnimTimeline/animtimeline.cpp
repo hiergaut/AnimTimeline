@@ -26,7 +26,9 @@ AnimTimeline::AnimTimeline(QWidget *parent)
   ui->frame_selector->setRightSlider(ui->label_rightSlider);
 //  qDebug() << "AnimeTimeline created";
 
+//  connect(ui->scrollAreaWidgetContents, SIGNAL(rulerChange(double, int, double)), ui->frame_selector, SLOT(onRulerChange(double, int, double)));
 //  ui->frame_selector->drawRulerScale();
+//  ui->scrollAreaWidgetContents->updateTimeline(500);
 }
 
 AnimTimeline::~AnimTimeline() { delete ui; }

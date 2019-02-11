@@ -445,6 +445,7 @@ border: 0px;</string>
     <signal>updatePlayZone(int)</signal>
     <slot>onSlideLeftSlider(int)</slot>
     <slot>onSlideRightSlider(int)</slot>
+    <slot>onSlideRelease()</slot>
    </slots>
   </customwidget>
   <customwidget>
@@ -471,6 +472,7 @@ border: 0px;</string>
    <header>qlabelslider.h</header>
    <slots>
     <signal>slide(int)</signal>
+    <signal>slideRelease()</signal>
    </slots>
   </customwidget>
  </customwidgets>
@@ -507,6 +509,38 @@ border: 0px;</string>
     <hint type="destinationlabel">
      <x>389</x>
      <y>77</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>label_leftSlider</sender>
+   <signal>slideRelease()</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onSlideRelease()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>52</x>
+     <y>21</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>12</x>
+     <y>18</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>label_rightSlider</sender>
+   <signal>slideRelease()</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onSlideRelease()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>363</x>
+     <y>32</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>407</x>
+     <y>25</y>
     </hint>
    </hints>
   </connection>

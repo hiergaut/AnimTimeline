@@ -22,10 +22,10 @@ void QFrameTimescale::paintEvent(QPaintEvent* event)
 
     painter.drawText(0, 11, "sec");
 //    qDebug() << parent();
-    int nbInterval = dynamic_cast<QWidgetRuler*>(parent())->getNbInterval();
+    int nbInterval = *dynamic_cast<QWidgetRuler*>(parent())->getNbInterval();
 //    int wInterval = dynamic_cast<QWidgetRuler*>(parent())->getWInterval();
-    double step = dynamic_cast<QWidgetRuler*>(parent())->getStep();
-    double pixPerSec = dynamic_cast<QWidgetRuler*>(parent())->getPixPerSec();
+    double step = *dynamic_cast<QWidgetRuler*>(parent())->getStep();
+    double pixPerSec = *dynamic_cast<QWidgetRuler*>(parent())->getPixPerSec();
 //    int wInterval = pixPerSec *step;
 
 //    int nbInterval =10;

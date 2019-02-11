@@ -1,9 +1,9 @@
 #ifndef QWIDGETRULER_H
 #define QWIDGETRULER_H
 
-#include <QWidget>
-#include <QSpacerItem>
 #include <QLabel>
+#include <QSpacerItem>
+#include <QWidget>
 //#include "qframeselector.h"
 
 class QWidgetRuler : public QWidget {
@@ -11,22 +11,21 @@ class QWidgetRuler : public QWidget {
 public:
     explicit QWidgetRuler(QWidget* parent = nullptr);
 
-    double getStep() const;
-    int getNbInterval() const;
-    int getWInterval() const;
+    double* getStep();
+    int* getNbInterval();
+    double* getPixPerSec();
+    //    int* getWInterval() const;
 
-//    void setPlayZone(QFrame *value);
-//    void setLeftSpacer(QSpacerItem *value);
-//    void setLeftSlider(QLabel *value);
+    //    void setPlayZone(QFrame *value);
+    //    void setLeftSpacer(QSpacerItem *value);
+    //    void setLeftSlider(QLabel *value);
 
     int updateTimeline(int newWidth);
 
-//    void setFrameSelector(QFrameSelector *value);
-
-    double getPixPerSec() const;
+    //    void setFrameSelector(QFrameSelector *value);
 
 signals:
-    //    void changeScale();
+//    void rulerChange(double step, int nbInterval, double pixPerSec);
 
 protected:
     //    void wheelEvent(QWheelEvent * event) override;
@@ -36,21 +35,22 @@ public slots:
 
 private:
     double duration = 10.0;
-    static const int nbSteps =7;
+    static const int nbSteps = 7;
     const double steps[nbSteps] = { 0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0 };
-    double step;
+
     int nbInterval;
-    int wInterval;
+    double step;
     double pixPerSec;
 
-    double start =0.0;
-    double end =duration;
+    int wInterval;
 
-//    QSpacerItem * leftSpacer;
-//    QLabel * leftSlider;
-//    QFrame * playZone;
-//    QFrameSelector * frameSelector;
+    double start = 0.0;
+    double end = duration;
 
+    //    QSpacerItem * leftSpacer;
+    //    QLabel * leftSlider;
+    //    QFrame * playZone;
+    //    QFrameSelector * frameSelector;
 };
 
 #endif // QWIDGETRULER_H
