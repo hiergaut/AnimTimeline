@@ -19,9 +19,12 @@ void QLabelSlider::mousePressEvent(QMouseEvent *event)
     qDebug() << "QLabelSlider::mousePressEvent";
 //    event->ignore();
     if (event->button() == Qt::LeftButton) {
+//        setStyleSheet("background-color: green");
 
         clicked =true;
-        x =event->x();
+//        x =event->x();
+        emit slide(event->x());
+
     }
 
 }
@@ -29,8 +32,10 @@ void QLabelSlider::mousePressEvent(QMouseEvent *event)
 void QLabelSlider::mouseReleaseEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton) {
+        setStyleSheet("background-color: gray");
 
         clicked =false;
+        emit slideRelease();
     }
 }
 

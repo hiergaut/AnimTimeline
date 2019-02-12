@@ -63,10 +63,11 @@ void QScrollAreaRuler::mousePressEvent(QMouseEvent* event)
 {
     qDebug() << "QScrollAreaRuler::mousePressEvent";
     if (event->button() == Qt::MiddleButton) {
-                mousePosX = event->x();
+        setCursor(Qt::SplitHCursor);
+        mousePosX = event->x();
         //        prevMouseX = horizontalScrollBar()->value();
-//        prevMouseX = 0;
-                sliderPos = horizontalScrollBar()->value();
+        //        prevMouseX = 0;
+        sliderPos = horizontalScrollBar()->value();
 
         midMouseDown = true;
     }
@@ -76,18 +77,19 @@ void QScrollAreaRuler::mouseReleaseEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::MiddleButton) {
         midMouseDown = false;
+        setCursor(Qt::ArrowCursor);
     }
 }
 
 void QScrollAreaRuler::mouseMoveEvent(QMouseEvent* event)
 {
     if (midMouseDown) {
-//        int newMouseX = horizontalScrollBar()->value() + event->x() - mousePosX;
-//        int ratio = log10( horizontalScrollBar()->maximum());
-//        int ratio = horizontalScrollBar()->maximum() /100 +1;
-//        horizontalScrollBar()->setValue((sliderPos +mousePosX -event->x()) *ratio);
-        horizontalScrollBar()->setValue((sliderPos +mousePosX -event->x()));
-//        qDebug() << horizontalScrollBar()->maximum();
-//        prevMouseX = newMouseX;
+        //        int newMouseX = horizontalScrollBar()->value() + event->x() - mousePosX;
+        //        int ratio = log10( horizontalScrollBar()->maximum());
+        //        int ratio = horizontalScrollBar()->maximum() /100 +1;
+        //        horizontalScrollBar()->setValue((sliderPos +mousePosX -event->x()) *ratio);
+        horizontalScrollBar()->setValue((sliderPos + mousePosX - event->x()));
+        //        qDebug() << horizontalScrollBar()->maximum();
+        //        prevMouseX = newMouseX;
     }
 }

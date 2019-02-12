@@ -26,13 +26,13 @@ QFrameSelector::QFrameSelector(QWidget* parent)
     //    assert(leftSlider != nullptr);
     //    assert(playZone != nullptr);
     //    this->installEventFilter(this);
-//        setUpdatesEnabled(false);
+    //        setUpdatesEnabled(false);
     //    repaint();
-//    int wInterval = *pixPerSec * *step;
-//    leftSpacer->setMinimumWidth(wInterval - leftSlider->width() + start * *pixPerSec);
-//    playZone->setMinimumWidth(duration * *pixPerSec);
-//    setAttribute(Qt::WA_OpaquePaintEvent);
-//    repaint();
+    //    int wInterval = *pixPerSec * *step;
+    //    leftSpacer->setMinimumWidth(wInterval - leftSlider->width() + start * *pixPerSec);
+    //    playZone->setMinimumWidth(duration * *pixPerSec);
+    //    setAttribute(Qt::WA_OpaquePaintEvent);
+    //    repaint();
 }
 
 void QFrameSelector::paintEvent(QPaintEvent* event)
@@ -51,7 +51,7 @@ void QFrameSelector::paintEvent(QPaintEvent* event)
     //    int nbInterval = widgetRuler->getNbInterval();
     //    double step = widgetRuler->getStep();
     //    double pixPerSec = widgetRuler->getPixPerSec();
-//    int wInterval = *pixPerSec * *step;
+    //    int wInterval = *pixPerSec * *step;
 
     //    qDebug() << "QFrameSelector: nbInterval =" << nbInterval;
     //    qDebug() << "QFrameSelector: wwInterval =" << wInterval;
@@ -65,11 +65,14 @@ void QFrameSelector::paintEvent(QPaintEvent* event)
     //    qDebug() << leftSpacer;
     //        int leftSpacerX =wInterval -leftSlider->width() +start *pixPerSec;
     //        leftSpacer->changeSize(leftSpacerX, 0);
-    if (! sliding) {
-        leftSpacer->setMinimumWidth(*zero -leftSlider->width() +start **pixPerSec);
-        playZone->setMinimumWidth(end **pixPerSec);
+    if (!sliding) {
+        //        leftSpacer->setMinimumWidth(*zero - leftSlider->width() + start * *pixPerSec);
+        //        playZone->setMinimumWidth(end * *pixPerSec);
+
+        leftSpacer->setMinimumWidth(*zero + start * *pixPerSec - leftSlider->width());
+        playZone->setMinimumWidth((end - start) * *pixPerSec);
     }
-//        repaint();
+    //        repaint();
 
     painter.setPen(Qt::darkGray);
     for (int i = 1; i < *nbInterval; i++) {
@@ -85,7 +88,20 @@ void QFrameSelector::paintEvent(QPaintEvent* event)
         painter.drawLine(x + *zero / 2, 0, x + *zero / 2, height());
     }
 
-//    }
+    painter.setPen(QPen(QColor(0, 0, 255, 255), 3));
+    if (cursor > 0.0) {
+        int xCursor = *zero + cursor * *pixPerSec;
+        painter.drawLine(xCursor, 0, xCursor, height());
+    } else {
+        painter.drawLine(*zero + 3, 0, *zero + 3, height());
+    }
+
+    painter.setPen(QPen(Qt::yellow, 3));
+    for (double keyPose : keyPoses) {
+        int xKeyPose = *zero + keyPose * *pixPerSec;
+        painter.drawLine(xKeyPose, 30, xKeyPose, height());
+    }
+    //    }
     //    painter.end();
 
     //    QPen linePen;
@@ -93,13 +109,50 @@ void QFrameSelector::paintEvent(QPaintEvent* event)
     //    painter.setPen(linePen);
 
     //    painter.drawLine(0, 0, 100, 100);
-//    sliding =false;
+    //    sliding =false;
 
     //    QRectF rect = this->rect();
     //    painter.fillRect(QRect(rect.left(), rect.top(), this->width(), 40), QColor(0, 255, 0));
 
     //        rulerChanged = false;
     //    }
+}
+
+void QFrameSelector::mousePressEvent(QMouseEvent* event)
+{
+    qDebug() << "QFrameSelector::mousePressEvent";
+    //    event->ignore();
+    if (event->button() == Qt::LeftButton) {
+        cursor = (event->x() - *zero) / *pixPerSec;
+        update();
+        clicked = true;
+
+        event->accept();
+    } else {
+        event->ignore();
+    }
+}
+
+void QFrameSelector::mouseMoveEvent(QMouseEvent* event)
+{
+    if (clicked) {
+        cursor = qMax((event->x() - *zero) / *pixPerSec, 0.0);
+        update();
+    }
+    else {
+        event->ignore();
+    }
+}
+
+void QFrameSelector::mouseReleaseEvent(QMouseEvent* event)
+{
+    if (event->button() == Qt::LeftButton) {
+        clicked = false;
+        event->accept();
+    }
+    else {
+        event->ignore();
+    }
 }
 
 //bool QFrameSelector::eventFilter(QObject *watched, QEvent *event)
@@ -114,23 +167,36 @@ void QFrameSelector::onRedrawScale()
 
 void QFrameSelector::onSlideLeftSlider(int deltaX)
 {
-//    setAttribute(Qt::WA_OpaquePaintEvent);
+    //    setAttribute(Qt::WA_OpaquePaintEvent);
     //    qDebug() << "QFrameSelector::onSlideLeftSlider " << deltaX;
     //    leftSpacerX +=deltaX;
     //    leftSpacer->changeSize(leftSpacerX, 0);
     //    leftSpacer->changeSize(200 +deltaX, 0);
-//    double zero =*pixPerSec **step;
+    //    double zero =*pixPerSec **step;
+    leftSlider->setStyleSheet("background-color: #00ff00");
 
-    sliding =true;
-    if (leftSpacer->width() + deltaX +leftSlider->width() >= *zero) {
+    sliding = true;
 
-        leftSpacer->setMinimumWidth(leftSpacer->width() + deltaX);
-        playZone->setMinimumWidth(playZone->width() -deltaX);
-    }
-    else {
-        leftSpacer->setMinimumWidth(*zero -leftSlider->width());
-        playZone->setMinimumWidth(*pixPerSec *(end -start));
-    }
+    //    double newStart =(leftSpacer->width() +deltaX -leftSlider->width()) / *pixPerSec;
+    double newStart = start + deltaX / *pixPerSec;
+    start = qMin(qMax(newStart, 0.0), end);
+
+    //    int newPos =leftSpacer->width() +deltaX +leftSlider->width();
+
+    leftSpacer->setMinimumWidth(*zero + start * *pixPerSec - leftSlider->width());
+    playZone->setMinimumWidth((end - start) * *pixPerSec);
+
+    //    if (newPos >= *zero) {
+
+    //        if (newPos < *zero +end * *pixPerSec) {
+    //            leftSpacer->setMinimumWidth(leftSpacer->width() + deltaX);
+    //            playZone->setMinimumWidth(playZone->width() -deltaX);
+    //        }
+    //    }
+    //    else {
+    //        leftSpacer->setMinimumWidth(*zero -leftSlider->width());
+    //        playZone->setMinimumWidth(*pixPerSec *(end -start));
+    //    }
 
     //    start +=deltaX;
     //    update();
@@ -140,15 +206,20 @@ void QFrameSelector::onSlideLeftSlider(int deltaX)
 
 void QFrameSelector::onSlideRightSlider(int deltaX)
 {
-    sliding =true;
-    double endLimit =(*nbInterval -1) * *step * *pixPerSec;
+    rightSlider->setStyleSheet("background-color: red");
+    sliding = true;
+    double newEnd = end + deltaX / *pixPerSec;
+    end = qMin(qMax(newEnd, start), maxDuration);
+
+    playZone->setMinimumWidth((end - start) * *pixPerSec);
+
+    //    double endLimit = (*nbInterval - 1) * *step * *pixPerSec;
     //    qDebug() << "QFrameSelector::onSlideRightSlider " << deltaX;
-    if (*zero +playZone->width() +deltaX <= endLimit) {
-        playZone->setMinimumWidth(playZone->width() + deltaX);
-    }
-    else {
-        playZone->setMinimumWidth(endLimit -*zero);
-    }
+    //    if (*zero + playZone->width() + deltaX <= endLimit) {
+    //        playZone->setMinimumWidth(qMax(playZone->width() + deltaX, 0));
+    //    } else {
+    //        playZone->setMinimumWidth(endLimit - *zero);
+    //    }
     //    playZone->setMinimumWidth(100);
     //    duration += deltaX *0.1;
     //    update();
@@ -156,7 +227,16 @@ void QFrameSelector::onSlideRightSlider(int deltaX)
 
 void QFrameSelector::onSlideRelease()
 {
-    sliding =false;
+    sliding = false;
+    qDebug() << "slide released";
+}
+
+void QFrameSelector::onAddKeyPose()
+{
+    qDebug() << "fuck";
+    keyPoses.push_back(cursor);
+    update();
+
 }
 
 //void QFrameSelector::onRulerChange(double step, int nbInterval, double pixPerSec)

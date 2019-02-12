@@ -23,6 +23,9 @@ signals:
 
 protected:
     virtual void paintEvent(QPaintEvent* event) override;
+    void mousePressEvent(QMouseEvent * event) override;
+    void mouseMoveEvent(QMouseEvent * event) override;
+    void mouseReleaseEvent(QMouseEvent * event) override;
     //    virtual bool eventFilter(QObject * watched, QEvent *event) override;
     //    virtual void wheelEvent(QWheelEvent * event) override;
 
@@ -31,6 +34,7 @@ public slots:
     void onSlideLeftSlider(int deltaX);
     void onSlideRightSlider(int deltaX);
     void onSlideRelease();
+    void onAddKeyPose();
     //    void onLeftSliderClicked(int);
     //    void onRulerChange(double step, int nbInterval, double pixPerSec);
 
@@ -45,18 +49,24 @@ private:
 
     double start = 0.0;
     double end = 10.0;
-    int i = 0;
+    double maxDuration = 10.0;
+    double cursor = -1.0;
+//    int i = 0;
 
-    int leftSpacerX;
+//    int leftSpacerX;
 
     int * nbInterval;
     double * step;
     double * pixPerSec;
     double * zero;
 
+    QVector<double> keyPoses;
+
+
     int iPaint = 0;
     //    bool rulerChanged =true;
     bool sliding = false;
+    bool clicked = false;
 };
 
 #endif // QFRAMESELECTOR_H
