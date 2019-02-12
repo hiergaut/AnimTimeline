@@ -31,6 +31,8 @@ int QWidgetRuler::updateTimeline(int newWidth)
     //    wInterval = newWidth / nbInterval;
     pixPerSec = (newWidth / float(nbInterval)) / step;
 
+    zero = pixPerSec *step;
+
     //    emit rulerChange(step, nbInterval, pixPerSec);
     //    leftSpacer->changeSize(0, 0);
 
@@ -62,6 +64,11 @@ void QWidgetRuler::onChangePrecision(int accuracy)
     //    frameSelector->update();
 
     //    emit changeScale();
+}
+
+double * QWidgetRuler::getZero()
+{
+    return &zero;
 }
 
 double * QWidgetRuler::getPixPerSec()

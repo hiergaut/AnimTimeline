@@ -24,8 +24,10 @@ public:
 
     //    void setFrameSelector(QFrameSelector *value);
 
+    double * getZero();
+
 signals:
-//    void rulerChange(double step, int nbInterval, double pixPerSec);
+    //    void rulerChange(double step, int nbInterval, double pixPerSec);
 
 protected:
     //    void wheelEvent(QWheelEvent * event) override;
@@ -41,8 +43,10 @@ private:
     int nbInterval;
     double step;
     double pixPerSec;
+    double zero;
 
-    int wInterval;
+//    int wInterval;
+
 
     double start = 0.0;
     double end = duration;

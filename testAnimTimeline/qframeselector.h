@@ -44,7 +44,7 @@ private:
     QFrame* playZone;
 
     double start = 0.0;
-    double duration = 10.0;
+    double end = 10.0;
     int i = 0;
 
     int leftSpacerX;
@@ -52,6 +52,7 @@ private:
     int * nbInterval;
     double * step;
     double * pixPerSec;
+    double * zero;
 
     int iPaint = 0;
     //    bool rulerChanged =true;
