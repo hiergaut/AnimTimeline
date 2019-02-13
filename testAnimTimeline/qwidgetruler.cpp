@@ -2,6 +2,7 @@
 
 #include <QDebug>
 #include <QWheelEvent>
+#include <QtMath>
 
 QWidgetRuler::QWidgetRuler(QWidget* parent)
     : QWidget(parent)
@@ -51,8 +52,11 @@ void QWidgetRuler::onChangePrecision(int accuracy)
     //    qDebug() << "QWidgetRuler: onChangePrecision";
 
     //    int newWidth =width() +accuracy;
+//    int sign =(accuracy > 0) ?(2) :(0.5);
 
+//    int newWidth = updateTimeline(width() + accuracy *log10(width()));
     int newWidth = updateTimeline(width() + accuracy);
+//    int newWidth = updateTimeline(width() * sign);
     setMinimumWidth(newWidth);
     //    update();
 

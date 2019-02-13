@@ -26,6 +26,13 @@ AnimTimeline::AnimTimeline(QWidget *parent)
   ui->frame_selector->setRightSlider(ui->label_rightSlider);
 //  qDebug() << "AnimeTimeline created";
 
+//  QIcon * ico = new QIcon();
+//  ico->addPixmap(QPixmap(":/images/pause.png"), QIcon::Normal, QIcon::Off);
+//  ico->addPixmap(QPixmap(":/images/play.png"), QIcon::Normal, QIcon::On);
+//  ui->toolButton_playPause->setIcon(*ico);
+//  ui->toolButton_playPause->setCheckable(false);
+
+
 //  connect(ui->scrollAreaWidgetContents, SIGNAL(rulerChange(double, int, double)), ui->frame_selector, SLOT(onRulerChange(double, int, double)));
 //  ui->frame_selector->drawRulerScale();
 //  ui->scrollAreaWidgetContents->updateTimeline(500);

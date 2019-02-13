@@ -288,7 +288,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="toolButton_playPause">
+       <widget class="QToolButtonPlayPause" name="toolButton_playPause">
         <property name="maximumSize">
          <size>
           <width>18</width>
@@ -703,6 +703,15 @@ border: 0px;</string>
     <slot>onStartChanged(double)</slot>
     <slot>onCursorChanged(double)</slot>
     <slot>onEndChanged(double)</slot>
+    <slot>onCursorStart()</slot>
+    <slot>onCursorPreviousKeyPosee()</slot>
+    <slot>onCursorPlayPause()</slot>
+    <slot>onCursorNextKeyPose()</slot>
+    <slot>onCursorEnd()</slot>
+    <slot>onPlayPause()</slot>
+    <slot>onCursorPreviousKeyPose()</slot>
+    <slot>onPlay()</slot>
+    <slot>onPause()</slot>
    </slots>
   </customwidget>
   <customwidget>
@@ -716,6 +725,9 @@ border: 0px;</string>
    <extends>QScrollArea</extends>
    <header>qscrollarearuler.h</header>
    <container>1</container>
+   <slots>
+    <slot>onPlayPause()</slot>
+   </slots>
   </customwidget>
   <customwidget>
    <class>QFrameTimescale</class>
@@ -730,6 +742,15 @@ border: 0px;</string>
    <slots>
     <signal>slide(int)</signal>
     <signal>slideRelease()</signal>
+   </slots>
+  </customwidget>
+  <customwidget>
+   <class>QToolButtonPlayPause</class>
+   <extends>QToolButton</extends>
+   <header>qtoolbuttonplaypause.h</header>
+   <slots>
+    <signal>playClicked()</signal>
+    <signal>pauseClicked()</signal>
    </slots>
   </customwidget>
  </customwidgets>
@@ -808,7 +829,7 @@ border: 0px;</string>
    <slot>onAddKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>291</x>
+     <x>279</x>
      <y>7</y>
     </hint>
     <hint type="destinationlabel">
@@ -924,8 +945,104 @@ border: 0px;</string>
      <y>78</y>
     </hint>
     <hint type="destinationlabel">
-     <x>307</x>
+     <x>295</x>
      <y>17</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_start</sender>
+   <signal>clicked()</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onCursorStart()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>386</x>
+     <y>10</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>449</x>
+     <y>71</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_forward</sender>
+   <signal>clicked()</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onCursorNextKeyPose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>441</x>
+     <y>5</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>461</x>
+     <y>66</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_end</sender>
+   <signal>clicked()</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onCursorEnd()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>454</x>
+     <y>13</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>494</x>
+     <y>68</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_rearward</sender>
+   <signal>clicked()</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onCursorPreviousKeyPose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>397</x>
+     <y>15</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>401</x>
+     <y>49</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_playPause</sender>
+   <signal>playClicked()</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onPlay()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>418</x>
+     <y>9</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>390</x>
+     <y>65</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_playPause</sender>
+   <signal>pauseClicked()</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onPause()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>416</x>
+     <y>16</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>422</x>
+     <y>43</y>
     </hint>
    </hints>
   </connection>

@@ -23,6 +23,7 @@ protected:
     void mousePressEvent(QMouseEvent * event) override;
     void mouseMoveEvent(QMouseEvent * event) override;
     void mouseReleaseEvent(QMouseEvent * event) override;
+    void keyPressEvent(QKeyEvent * event) override;
     //    virtual bool eventFilter(QObject * watched, QEvent *event) override;
     //    virtual void wheelEvent(QWheelEvent * event) override;
 
@@ -45,6 +46,12 @@ public slots:
     void onStartChanged(double time);
     void onEndChanged(double time);
     void onCursorChanged(double time);
+    void onCursorStart();
+    void onCursorEnd();
+    void onCursorPreviousKeyPose();
+    void onCursorNextKeyPose();
+    void onPlay();
+    void onPause();
     //    void onLeftSliderClicked(int);
     //    void onRulerChange(double step, int nbInterval, double pixPerSec);
 
@@ -61,6 +68,8 @@ private:
 //    double maxDuration = 11.0;
     double end = 10.0;
     double cursor = 0.0;
+//    double period = 1.0 /24.0;
+    double period = 1.0;
 //    int i = 0;
 
 //    int leftSpacerX;

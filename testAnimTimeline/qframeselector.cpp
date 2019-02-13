@@ -90,12 +90,12 @@ void QFrameSelector::paintEvent(QPaintEvent* event)
     }
 
     painter.setPen(QPen(QColor(0, 0, 255, 255), 3));
-//    if (cursor > 0.0) {
-        int xCursor = *zero + cursor * *pixPerSec;
-        painter.drawLine(xCursor, 0, xCursor, height());
-//    } else {
-//        painter.drawLine(*zero + 3, 0, *zero + 3, height());
-//    }
+    //    if (cursor > 0.0) {
+    int xCursor = *zero + cursor * *pixPerSec;
+    painter.drawLine(xCursor, 0, xCursor, height());
+    //    } else {
+    //        painter.drawLine(*zero + 3, 0, *zero + 3, height());
+    //    }
 
     painter.setPen(QPen(Qt::yellow, 3));
     for (double keyPose : keyPoses) {
@@ -124,7 +124,8 @@ void QFrameSelector::mousePressEvent(QMouseEvent* event)
     qDebug() << "QFrameSelector::mousePressEvent";
     //    event->ignore();
     if (event->button() == Qt::LeftButton) {
-        cursor = qMax((event->x() - *zero) / *pixPerSec, 0.0);
+        double newCursor = qMax((event->x() - *zero) / *pixPerSec, 0.0);
+        cursor = int(newCursor / period) * period;
         changeCursor(cursor);
         update();
         clicked = true;
@@ -138,7 +139,8 @@ void QFrameSelector::mousePressEvent(QMouseEvent* event)
 void QFrameSelector::mouseMoveEvent(QMouseEvent* event)
 {
     if (clicked) {
-        cursor = qMax((event->x() - *zero) / *pixPerSec, 0.0);
+        double newCursor = qMax((event->x() - *zero) / *pixPerSec, 0.0);
+        cursor = int(newCursor / period) * period;
         changeCursor(cursor);
         update();
     } else {
@@ -154,6 +156,15 @@ void QFrameSelector::mouseReleaseEvent(QMouseEvent* event)
     } else {
         event->ignore();
     }
+}
+
+void QFrameSelector::keyPressEvent(QKeyEvent *event)
+{
+        qDebug() << "keyPress";
+    if (event->key() == Qt::Key_Space) {
+        onAddKeyPose();
+    }
+
 }
 
 //bool QFrameSelector::eventFilter(QObject *watched, QEvent *event)
@@ -174,13 +185,15 @@ void QFrameSelector::onSlideLeftSlider(int deltaX)
     //    leftSpacer->changeSize(leftSpacerX, 0);
     //    leftSpacer->changeSize(200 +deltaX, 0);
     //    double zero =*pixPerSec **step;
-    leftSlider->setStyleSheet("background-color: #00ff00");
-
-    sliding = true;
+    if (!sliding) {
+        leftSlider->setStyleSheet("background-color: #00ff00");
+        sliding = true;
+    }
 
     //    double newStart =(leftSpacer->width() +deltaX -leftSlider->width()) / *pixPerSec;
     double newStart = start + deltaX / *pixPerSec;
     start = qMin(qMax(newStart, 0.0), end);
+    start = int(start / period) * period;
     emit changeStart(start);
 
     //    int newPos =leftSpacer->width() +deltaX +leftSlider->width();
@@ -212,6 +225,7 @@ void QFrameSelector::onSlideRightSlider(int deltaX)
     sliding = true;
     double newEnd = end + deltaX / *pixPerSec;
     end = qMin(qMax(newEnd, start), *maxDuration);
+    end = int(end / period) *period;
     emit changeEnd(end);
 
     playZone->setMinimumWidth((end - start) * *pixPerSec);
@@ -231,34 +245,94 @@ void QFrameSelector::onSlideRightSlider(int deltaX)
 void QFrameSelector::onSlideRelease()
 {
     sliding = false;
-    qDebug() << "slide released";
+    //    qDebug() << "slide released";
 }
 
 void QFrameSelector::onAddKeyPose()
 {
-//    if (cursor >= 0.0) {
-        keyPoses.insert(cursor);
-        emit changeNbKeyPoses(keyPoses.size());
-        update();
-        //    }
+    //    if (cursor >= 0.0) {
+    keyPoses.insert(cursor);
+    emit changeNbKeyPoses(keyPoses.size());
+    update();
+    //    }
 }
 
 void QFrameSelector::onStartChanged(double time)
 {
-    start =time;
+    start = int(time / period) *period;
+    emit(changeStart(start));
     update();
 }
 
 void QFrameSelector::onEndChanged(double time)
 {
-    end =time;
+    end = int(time /period) * period;
+    emit changeEnd(end);
     update();
 }
 
 void QFrameSelector::onCursorChanged(double time)
 {
-    cursor =time;
+    cursor = int(time /period) * period;
+    emit changeCursor(cursor);
     update();
+}
+
+void QFrameSelector::onCursorStart()
+{
+    cursor =start;
+    emit changeCursor(cursor);
+    update();
+}
+
+void QFrameSelector::onCursorEnd()
+{
+    cursor =end;
+    emit changeCursor(cursor);
+    update();
+}
+
+void QFrameSelector::onCursorPreviousKeyPose()
+{
+    auto it = keyPoses.rbegin();
+    while (it != keyPoses.rend() && *it >= cursor) it++;
+
+    if (it != keyPoses.rend()) {
+        cursor =*it;
+
+        emit changeCursor(cursor);
+        update();
+    }
+}
+
+void QFrameSelector::onCursorNextKeyPose()
+{
+//    for (double d : keyPoses) {
+//        qDebug() << d;
+//    }
+
+    auto it = keyPoses.begin();
+    while (it != keyPoses.end() && *it <= cursor) it++;
+
+    if (it != keyPoses.end()) {
+        cursor =*it;
+
+        emit changeCursor(cursor);
+        update();
+    }
+
+}
+
+void QFrameSelector::onPlay()
+{
+    qDebug() << "play";
+
+}
+
+void QFrameSelector::onPause()
+{
+    qDebug() << "pause";
+
 }
 
 //void QFrameSelector::onRulerChange(double step, int nbInterval, double pixPerSec)
