@@ -3,6 +3,7 @@
 
 #include <QFrame>
 #include <QObject>
+#include "qwidgetruler.h"
 
 class QFrameTimescale : public QFrame {
     Q_OBJECT
@@ -17,6 +18,11 @@ protected:
 public slots:
 
 private:
+    QWidgetRuler * widgetRuler;
+
+    int * nbInterval;
+    double * step;
+    double * pixPerSec;
 };
 
 #endif // QFRAMETIMESCALE_H

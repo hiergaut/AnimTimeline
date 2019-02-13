@@ -93,7 +93,7 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox">
+       <widget class="QDoubleSpinBox" name="doubleSpinBox_start">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -108,7 +108,7 @@
         </property>
         <property name="maximumSize">
          <size>
-          <width>80</width>
+          <width>85</width>
           <height>16777215</height>
          </size>
         </property>
@@ -143,7 +143,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
+       <widget class="QDoubleSpinBox" name="doubleSpinBox_cursor">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -158,7 +158,7 @@
         </property>
         <property name="maximumSize">
          <size>
-          <width>90</width>
+          <width>95</width>
           <height>20</height>
          </size>
         </property>
@@ -221,6 +221,19 @@
           <width>15</width>
           <height>15</height>
          </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="spinBox">
+        <property name="maximumSize">
+         <size>
+          <width>18</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="buttonSymbols">
+         <enum>QAbstractSpinBox::NoButtons</enum>
         </property>
        </widget>
       </item>
@@ -290,7 +303,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+       <widget class="QDoubleSpinBox" name="doubleSpinBox_end">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -305,7 +318,7 @@
         </property>
         <property name="maximumSize">
          <size>
-          <width>75</width>
+          <width>82</width>
           <height>16777215</height>
          </size>
         </property>
@@ -317,6 +330,9 @@
         </property>
         <property name="prefix">
          <string>end: </string>
+        </property>
+        <property name="value">
+         <double>10.000000000000000</double>
         </property>
        </widget>
       </item>
@@ -627,10 +643,17 @@ border: 0px;</string>
    <container>1</container>
    <slots>
     <signal>updatePlayZone(int)</signal>
+    <signal>changeStart(double)</signal>
+    <signal>changeCursor(double)</signal>
+    <signal>changeEnd(double)</signal>
+    <signal>changeNbKeyPoses(int)</signal>
     <slot>onSlideLeftSlider(int)</slot>
     <slot>onSlideRightSlider(int)</slot>
     <slot>onSlideRelease()</slot>
     <slot>onAddKeyPose()</slot>
+    <slot>onStartChanged(double)</slot>
+    <slot>onCursorChanged(double)</slot>
+    <slot>onEndChanged(double)</slot>
    </slots>
   </customwidget>
   <customwidget>
@@ -736,12 +759,124 @@ border: 0px;</string>
    <slot>onAddKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>268</x>
-     <y>5</y>
+     <x>291</x>
+     <y>7</y>
     </hint>
     <hint type="destinationlabel">
      <x>246</x>
      <y>43</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>frame_selector</sender>
+   <signal>changeStart(double)</signal>
+   <receiver>doubleSpinBox_start</receiver>
+   <slot>setValue(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>466</x>
+     <y>67</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>74</x>
+     <y>15</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>frame_selector</sender>
+   <signal>changeCursor(double)</signal>
+   <receiver>doubleSpinBox_cursor</receiver>
+   <slot>setValue(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>434</x>
+     <y>59</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>141</x>
+     <y>13</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>frame_selector</sender>
+   <signal>changeEnd(double)</signal>
+   <receiver>doubleSpinBox_end</receiver>
+   <slot>setValue(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>488</x>
+     <y>64</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>572</x>
+     <y>13</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_start</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onStartChanged(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>56</x>
+     <y>6</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>384</x>
+     <y>84</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_cursor</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onCursorChanged(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>139</x>
+     <y>4</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>423</x>
+     <y>75</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_end</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onEndChanged(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>552</x>
+     <y>2</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>481</x>
+     <y>51</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>frame_selector</sender>
+   <signal>changeNbKeyPoses(int)</signal>
+   <receiver>spinBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>394</x>
+     <y>78</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>307</x>
+     <y>17</y>
     </hint>
    </hints>
   </connection>

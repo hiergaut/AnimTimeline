@@ -9,7 +9,7 @@ QWidgetRuler::QWidgetRuler(QWidget* parent)
     //    qDebug() << "QWidgetRuler created";
     //    emit onChangePrecision(0);
     //    setMinimumWidth(500);
-    updateTimeline(500);
+    updateTimeline(500); // ui fixed width of ruler
 }
 
 int QWidgetRuler::updateTimeline(int newWidth)
@@ -17,7 +17,7 @@ int QWidgetRuler::updateTimeline(int newWidth)
     //    int newWidth = 500 +accuracy;
 
     int iStep = 0;
-    while (iStep < nbSteps && newWidth * steps[iStep] < 50 * duration)
+    while (iStep < nbSteps && newWidth * steps[iStep] < 50 * maxDuration)
         iStep++;
 
     if (iStep == nbSteps) {
@@ -27,7 +27,7 @@ int QWidgetRuler::updateTimeline(int newWidth)
 
     step = steps[iStep];
 
-    nbInterval = int(duration / step) + 2;
+    nbInterval = int(maxDuration / step) + 2;
     //    wInterval = newWidth / nbInterval;
     pixPerSec = (newWidth / float(nbInterval)) / step;
 
@@ -56,14 +56,19 @@ void QWidgetRuler::onChangePrecision(int accuracy)
     setMinimumWidth(newWidth);
     //    update();
 
-    //    leftSpacer->changeSize(wInterval +wInterval *start / duration, 0);
+    //    leftSpacer->changeSize(wInterval +wInterval *start / maxDuration, 0);
     //    leftSpacer->minimumSize(0);
     //    updateTimeline();
     //    qDebug() << leftSpacer;
-    //    playZone->setMinimumWidth((nbInterval -2) *wInterval * (end -start) / duration);
+    //    playZone->setMinimumWidth((nbInterval -2) *wInterval * (end -start) / maxDuration);
     //    frameSelector->update();
 
     //    emit changeScale();
+}
+
+double * QWidgetRuler::getMaxDuration()
+{
+    return &maxDuration;
 }
 
 double * QWidgetRuler::getZero()

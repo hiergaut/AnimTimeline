@@ -26,6 +26,8 @@ public:
 
     double * getZero();
 
+    double * getMaxDuration();
+
 signals:
     //    void rulerChange(double step, int nbInterval, double pixPerSec);
 
@@ -36,7 +38,7 @@ public slots:
     void onChangePrecision(int accuracy);
 
 private:
-    double duration = 10.0;
+    double maxDuration = 20.0;
     static const int nbSteps = 7;
     const double steps[nbSteps] = { 0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0 };
 
@@ -48,8 +50,8 @@ private:
 //    int wInterval;
 
 
-    double start = 0.0;
-    double end = duration;
+//    double start = 0.0;
+//    double end = maxDuration;
 
     //    QSpacerItem * leftSpacer;
     //    QLabel * leftSlider;

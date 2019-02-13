@@ -14,6 +14,7 @@ QFrameSelector::QFrameSelector(QWidget* parent)
     step = widgetRuler->getStep();
     pixPerSec = widgetRuler->getPixPerSec();
     zero = widgetRuler->getZero();
+    maxDuration = widgetRuler->getMaxDuration();
     //    qDebug() << "parent =" << parent;
     //    qDebug() << "QFrameSelector created";
     //    leftSpacer = findChild<QSpacerItem*>("horizontalSpacer");
@@ -89,12 +90,12 @@ void QFrameSelector::paintEvent(QPaintEvent* event)
     }
 
     painter.setPen(QPen(QColor(0, 0, 255, 255), 3));
-    if (cursor > 0.0) {
+//    if (cursor > 0.0) {
         int xCursor = *zero + cursor * *pixPerSec;
         painter.drawLine(xCursor, 0, xCursor, height());
-    } else {
-        painter.drawLine(*zero + 3, 0, *zero + 3, height());
-    }
+//    } else {
+//        painter.drawLine(*zero + 3, 0, *zero + 3, height());
+//    }
 
     painter.setPen(QPen(Qt::yellow, 3));
     for (double keyPose : keyPoses) {
@@ -123,7 +124,8 @@ void QFrameSelector::mousePressEvent(QMouseEvent* event)
     qDebug() << "QFrameSelector::mousePressEvent";
     //    event->ignore();
     if (event->button() == Qt::LeftButton) {
-        cursor = (event->x() - *zero) / *pixPerSec;
+        cursor = qMax((event->x() - *zero) / *pixPerSec, 0.0);
+        changeCursor(cursor);
         update();
         clicked = true;
 
@@ -137,9 +139,9 @@ void QFrameSelector::mouseMoveEvent(QMouseEvent* event)
 {
     if (clicked) {
         cursor = qMax((event->x() - *zero) / *pixPerSec, 0.0);
+        changeCursor(cursor);
         update();
-    }
-    else {
+    } else {
         event->ignore();
     }
 }
@@ -149,8 +151,7 @@ void QFrameSelector::mouseReleaseEvent(QMouseEvent* event)
     if (event->button() == Qt::LeftButton) {
         clicked = false;
         event->accept();
-    }
-    else {
+    } else {
         event->ignore();
     }
 }
@@ -180,6 +181,7 @@ void QFrameSelector::onSlideLeftSlider(int deltaX)
     //    double newStart =(leftSpacer->width() +deltaX -leftSlider->width()) / *pixPerSec;
     double newStart = start + deltaX / *pixPerSec;
     start = qMin(qMax(newStart, 0.0), end);
+    emit changeStart(start);
 
     //    int newPos =leftSpacer->width() +deltaX +leftSlider->width();
 
@@ -209,7 +211,8 @@ void QFrameSelector::onSlideRightSlider(int deltaX)
     rightSlider->setStyleSheet("background-color: red");
     sliding = true;
     double newEnd = end + deltaX / *pixPerSec;
-    end = qMin(qMax(newEnd, start), maxDuration);
+    end = qMin(qMax(newEnd, start), *maxDuration);
+    emit changeEnd(end);
 
     playZone->setMinimumWidth((end - start) * *pixPerSec);
 
@@ -233,10 +236,29 @@ void QFrameSelector::onSlideRelease()
 
 void QFrameSelector::onAddKeyPose()
 {
-    qDebug() << "fuck";
-    keyPoses.push_back(cursor);
-    update();
+//    if (cursor >= 0.0) {
+        keyPoses.insert(cursor);
+        emit changeNbKeyPoses(keyPoses.size());
+        update();
+        //    }
+}
 
+void QFrameSelector::onStartChanged(double time)
+{
+    start =time;
+    update();
+}
+
+void QFrameSelector::onEndChanged(double time)
+{
+    end =time;
+    update();
+}
+
+void QFrameSelector::onCursorChanged(double time)
+{
+    cursor =time;
+    update();
 }
 
 //void QFrameSelector::onRulerChange(double step, int nbInterval, double pixPerSec)
