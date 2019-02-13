@@ -202,8 +202,8 @@
         </property>
         <property name="maximumSize">
          <size>
-          <width>18</width>
-          <height>18</height>
+          <width>17</width>
+          <height>17</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -232,6 +232,9 @@
           <height>25</height>
          </size>
         </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
         <property name="buttonSymbols">
          <enum>QAbstractSpinBox::NoButtons</enum>
         </property>
@@ -251,7 +254,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QToolButton" name="toolButton_2">
+       <widget class="QToolButton" name="toolButton_start">
         <property name="maximumSize">
          <size>
           <width>18</width>
@@ -260,11 +263,15 @@
         </property>
         <property name="text">
          <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="timeline.qrc">
+          <normaloff>:/images/start.png</normaloff>:/images/start.png</iconset>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="toolButton_3">
+       <widget class="QToolButton" name="toolButton_rearward">
         <property name="maximumSize">
          <size>
           <width>18</width>
@@ -273,11 +280,15 @@
         </property>
         <property name="text">
          <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="timeline.qrc">
+          <normaloff>:/images/rearward.png</normaloff>:/images/rearward.png</iconset>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QToolButton" name="toolButton_4">
+       <widget class="QToolButton" name="toolButton_playPause">
         <property name="maximumSize">
          <size>
           <width>18</width>
@@ -286,6 +297,44 @@
         </property>
         <property name="text">
          <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="timeline.qrc">
+          <normaloff>:/images/play.png</normaloff>:/images/play.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="toolButton_forward">
+        <property name="maximumSize">
+         <size>
+          <width>18</width>
+          <height>18</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="timeline.qrc">
+          <normaloff>:/images/forward.png</normaloff>:/images/forward.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="toolButton_end">
+        <property name="maximumSize">
+         <size>
+          <width>18</width>
+          <height>18</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="timeline.qrc">
+          <normaloff>:/images/end.png</normaloff>:/images/end.png</iconset>
         </property>
        </widget>
       </item>
