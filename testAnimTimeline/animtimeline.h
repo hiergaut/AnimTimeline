@@ -20,11 +20,16 @@ protected:
 
 signals:
     void render(double time);
+    void addKeyPose(double time);
 
 public slots:
     void onCursorChanged(double time, bool isOnKeyPose);
+//    void onAddKeyPose(double time);
 //    void onKeyPose(bool isOn);
 
+
+//private slots:
+//    void on_doubleSpinBox_cursor_editingFinished();
 
 private:
     Ui::AnimTimeline* ui;

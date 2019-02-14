@@ -7,6 +7,7 @@
 #include <QSpacerItem>
 //#include <QSet>
 #include <set>
+#include <QDoubleSpinBox>
 
 class QFrameSelector : public QFrame {
     Q_OBJECT
@@ -19,6 +20,8 @@ public:
     void setRightSlider(QLabel* value);
     void setLeftSpacer(QFrame* value);
     //    void drawRulerScale();
+
+    void setCursorSpin(QDoubleSpinBox *value);
 
 protected:
     virtual void paintEvent(QPaintEvent* event) override;
@@ -37,6 +40,7 @@ signals:
     void changeNbKeyPoses(int nbEl);
     void changePauseMode();
     void isOnKeyPose(bool isOn);
+    void addKeyPose(double time);
 
     //    void changePrecision(int accuracy);
     //    void updatePlayZone(int xPos, int width);
@@ -57,6 +61,7 @@ public slots:
     void onPlay();
     void onPause();
     void onTickTimer();
+    void onCursorSpinChanged();
     //    void onLeftSliderClicked(int);
     //    void onRulerChange(double step, int nbInterval, double pixPerSec);
 
@@ -69,12 +74,14 @@ private:
     QLabel* rightSlider;
     QFrame* playZone;
 
+    QDoubleSpinBox * cursorSpin;
+
     double start = 0.0;
 //    double maxDuration = 11.0;
     double end = 10.0;
     double cursor = 0.0;
-//    double period = 1.0 /24.0;
-    double period = 1.0 /4.0;
+    double period = 1.0 /24.0;
+//    double period = 1.0 /5.0;
 //    double period = 1.0;
 //    int i = 0;
 

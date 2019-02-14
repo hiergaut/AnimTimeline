@@ -20,10 +20,10 @@
    <widget class="AnimTimeline" name="widget" native="true">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>90</y>
+      <x>140</x>
+      <y>70</y>
       <width>551</width>
-      <height>431</height>
+      <height>221</height>
      </rect>
     </property>
    </widget>

@@ -165,6 +165,9 @@
         <property name="styleSheet">
          <string notr="true">background-color: #5555ff</string>
         </property>
+        <property name="wrapping">
+         <bool>false</bool>
+        </property>
         <property name="buttonSymbols">
          <enum>QAbstractSpinBox::PlusMinus</enum>
         </property>
@@ -173,6 +176,9 @@
         </property>
         <property name="decimals">
          <number>2</number>
+        </property>
+        <property name="singleStep">
+         <double>1.000000000000000</double>
         </property>
        </widget>
       </item>
@@ -702,6 +708,7 @@ border: 0px;</string>
     <signal>changePauseMode()</signal>
     <signal>isOnKeyPose(bool)</signal>
     <signal>changeCursor(double,bool)</signal>
+    <signal>signal1()</signal>
     <slot>onSlideLeftSlider(int)</slot>
     <slot>onSlideRightSlider(int)</slot>
     <slot>onSlideRelease()</slot>
@@ -718,6 +725,7 @@ border: 0px;</string>
     <slot>onCursorPreviousKeyPose()</slot>
     <slot>onPlay()</slot>
     <slot>onPause()</slot>
+    <slot>onCursorSpinChanged()</slot>
    </slots>
   </customwidget>
   <customwidget>
@@ -895,22 +903,6 @@ border: 0px;</string>
    </hints>
   </connection>
   <connection>
-   <sender>doubleSpinBox_cursor</sender>
-   <signal>valueChanged(double)</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onCursorChanged(double)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>139</x>
-     <y>4</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>423</x>
-     <y>75</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>doubleSpinBox_end</sender>
    <signal>valueChanged(double)</signal>
    <receiver>frame_selector</receiver>
@@ -1083,6 +1075,22 @@ border: 0px;</string>
     <hint type="destinationlabel">
      <x>505</x>
      <y>262</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_cursor</sender>
+   <signal>editingFinished()</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onCursorSpinChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>160</x>
+     <y>13</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>411</x>
+     <y>86</y>
     </hint>
    </hints>
   </connection>

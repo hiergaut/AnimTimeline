@@ -15,7 +15,7 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     //  ui->frame_selector->setGeometry(5, 5, 10, 10);
     //  ui->scrollAreaWidgetContents->setMinimumWidth(1000);
     connect(ui->scrollArea, SIGNAL(changePrecision(int)), ui->scrollAreaWidgetContents, SLOT(onChangePrecision(int)));
-    connect(ui->frame_selector, SIGNAL(changeCursor(double, bool)), ui->doubleSpinBox_cursor, SLOT(setValue(double)));
+//    connect(ui->frame_selector, SIGNAL(changeCursor(double, bool)), ui->doubleSpinBox_cursor, SLOT(setValue(double)));
     //  connect(ui->scrollAreaWidgetContents, SIGNAL(changeScale()), ui->frame_selector, SLOT(onRedrawScale()));
     //  connect(ui->scrollAreaWidgetContents, SIGNAL(changeScale()), ui->frame_selector, SLOT(paintEvent()));
 
@@ -27,6 +27,12 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     ui->frame_selector->setLeftSlider(ui->label_leftSlider);
     ui->frame_selector->setLeftSpacer(ui->frame_spacer);
     ui->frame_selector->setRightSlider(ui->label_rightSlider);
+    ui->frame_selector->setCursorSpin(ui->doubleSpinBox_cursor);
+
+//    connect(ui->frame_selector, SIGNAL(addKeyPose(double)), this, SIGNAL(addKeyPose()));
+
+    // signal to signal
+    connect(ui->frame_selector, &QFrameSelector::addKeyPose, this, &AnimTimeline::addKeyPose);
     //  qDebug() << "AnimeTimeline created";
 
     //  QIcon * ico = new QIcon();
@@ -58,6 +64,11 @@ void AnimTimeline::onCursorChanged(double time, bool isOnKeyPose)
     emit render(time);
 }
 
+//void AnimTimeline::onAddKeyPose(double time)
+//{
+
+//}
+
 //void AnimTimeline::onKeyPose(bool isOn)
 //{
 //    qDebug() << "AnimTimeline: onKeyPose";
@@ -82,4 +93,9 @@ void AnimTimeline::onCursorChanged(double time, bool isOnKeyPose)
 //{
 //    qDebug() << "AnimeTimeline: wheelEvent";
 ////    event->accept();
+//}
+
+//void AnimTimeline::on_doubleSpinBox_cursor_editingFinished()
+//{
+//    qDebug() << "AnimTimline: cursor edited";
 //}
