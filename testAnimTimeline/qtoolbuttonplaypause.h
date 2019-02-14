@@ -21,12 +21,13 @@ signals:
     void pauseClicked();
 
 public slots:
+    void onPauseMode();
 
 private:
     QIcon * playIcon;
     QIcon * pauseIcon;
 
-    bool play =true;
+    bool play =false;
 };
 
 #endif // QTOOLBUTTONPLAYPAUSE_H

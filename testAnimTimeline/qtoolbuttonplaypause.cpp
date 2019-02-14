@@ -27,13 +27,13 @@ void QToolButtonPlayPause::mousePressEvent(QMouseEvent *event)
 //    update();
     if (event->button() == Qt::LeftButton) {
         if (play) {
-            this->setIcon(*pauseIcon);
-            play =false;
+            this->setIcon(*playIcon);
+            play = false;
             emit pauseClicked();
         }
         else {
-            this->setIcon(*playIcon);
-            play = true;
+            this->setIcon(*pauseIcon);
+            play =true;
             emit playClicked();
         }
 //        this->icon().addPixmap(QPixmap("images/pause.png"), QIcon::Normal, QIcon::On);
@@ -43,4 +43,10 @@ void QToolButtonPlayPause::mousePressEvent(QMouseEvent *event)
 //    emit clicked();
 //    event->ignore();
 
+}
+
+void QToolButtonPlayPause::onPauseMode()
+{
+    this->setIcon(*playIcon);
+    play =false;
 }

@@ -21,6 +21,7 @@ protected:
 
 signals:
     void changePrecision(int accuracy);
+    void addKeyPose();
 
 public slots:
 

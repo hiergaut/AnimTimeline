@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>626</width>
+    <width>886</width>
     <height>130</height>
    </rect>
   </property>
@@ -205,6 +205,9 @@
           <width>17</width>
           <height>17</height>
          </size>
+        </property>
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;insert/modify key pose on cursor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Shortcut: space&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color:white;</string>
@@ -696,6 +699,9 @@ border: 0px;</string>
     <signal>changeCursor(double)</signal>
     <signal>changeEnd(double)</signal>
     <signal>changeNbKeyPoses(int)</signal>
+    <signal>changePauseMode()</signal>
+    <signal>isOnKeyPose(bool)</signal>
+    <signal>changeCursor(double,bool)</signal>
     <slot>onSlideLeftSlider(int)</slot>
     <slot>onSlideRightSlider(int)</slot>
     <slot>onSlideRelease()</slot>
@@ -726,6 +732,7 @@ border: 0px;</string>
    <header>qscrollarearuler.h</header>
    <container>1</container>
    <slots>
+    <signal>addKeyPose()</signal>
     <slot>onPlayPause()</slot>
    </slots>
   </customwidget>
@@ -751,6 +758,7 @@ border: 0px;</string>
    <slots>
     <signal>playClicked()</signal>
     <signal>pauseClicked()</signal>
+    <slot>onPauseMode()</slot>
    </slots>
   </customwidget>
  </customwidgets>
@@ -770,7 +778,7 @@ border: 0px;</string>
     </hint>
     <hint type="destinationlabel">
      <x>38</x>
-     <y>90</y>
+     <y>80</y>
     </hint>
    </hints>
   </connection>
@@ -782,11 +790,11 @@ border: 0px;</string>
    <hints>
     <hint type="sourcelabel">
      <x>357</x>
-     <y>98</y>
+     <y>78</y>
     </hint>
     <hint type="destinationlabel">
      <x>337</x>
-     <y>100</y>
+     <y>80</y>
     </hint>
    </hints>
   </connection>
@@ -798,11 +806,11 @@ border: 0px;</string>
    <hints>
     <hint type="sourcelabel">
      <x>52</x>
-     <y>29</y>
+     <y>39</y>
     </hint>
     <hint type="destinationlabel">
      <x>12</x>
-     <y>26</y>
+     <y>36</y>
     </hint>
    </hints>
   </connection>
@@ -814,7 +822,7 @@ border: 0px;</string>
    <hints>
     <hint type="sourcelabel">
      <x>359</x>
-     <y>31</y>
+     <y>41</y>
     </hint>
     <hint type="destinationlabel">
      <x>407</x>
@@ -829,7 +837,7 @@ border: 0px;</string>
    <slot>onAddKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>279</x>
+     <x>354</x>
      <y>7</y>
     </hint>
     <hint type="destinationlabel">
@@ -856,22 +864,6 @@ border: 0px;</string>
   </connection>
   <connection>
    <sender>frame_selector</sender>
-   <signal>changeCursor(double)</signal>
-   <receiver>doubleSpinBox_cursor</receiver>
-   <slot>setValue(double)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>434</x>
-     <y>59</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>141</x>
-     <y>13</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>frame_selector</sender>
    <signal>changeEnd(double)</signal>
    <receiver>doubleSpinBox_end</receiver>
    <slot>setValue(double)</slot>
@@ -881,7 +873,7 @@ border: 0px;</string>
      <y>64</y>
     </hint>
     <hint type="destinationlabel">
-     <x>572</x>
+     <x>848</x>
      <y>13</y>
     </hint>
    </hints>
@@ -898,7 +890,7 @@ border: 0px;</string>
     </hint>
     <hint type="destinationlabel">
      <x>384</x>
-     <y>84</y>
+     <y>80</y>
     </hint>
    </hints>
   </connection>
@@ -925,7 +917,7 @@ border: 0px;</string>
    <slot>onEndChanged(double)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>552</x>
+     <x>848</x>
      <y>2</y>
     </hint>
     <hint type="destinationlabel">
@@ -945,7 +937,7 @@ border: 0px;</string>
      <y>78</y>
     </hint>
     <hint type="destinationlabel">
-     <x>295</x>
+     <x>372</x>
      <y>17</y>
     </hint>
    </hints>
@@ -957,7 +949,7 @@ border: 0px;</string>
    <slot>onCursorStart()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>386</x>
+     <x>548</x>
      <y>10</y>
     </hint>
     <hint type="destinationlabel">
@@ -973,7 +965,7 @@ border: 0px;</string>
    <slot>onCursorNextKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>441</x>
+     <x>602</x>
      <y>5</y>
     </hint>
     <hint type="destinationlabel">
@@ -989,7 +981,7 @@ border: 0px;</string>
    <slot>onCursorEnd()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>454</x>
+     <x>620</x>
      <y>13</y>
     </hint>
     <hint type="destinationlabel">
@@ -1005,7 +997,7 @@ border: 0px;</string>
    <slot>onCursorPreviousKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>397</x>
+     <x>566</x>
      <y>15</y>
     </hint>
     <hint type="destinationlabel">
@@ -1021,7 +1013,7 @@ border: 0px;</string>
    <slot>onPlay()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>418</x>
+     <x>584</x>
      <y>9</y>
     </hint>
     <hint type="destinationlabel">
@@ -1037,7 +1029,7 @@ border: 0px;</string>
    <slot>onPause()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>416</x>
+     <x>584</x>
      <y>16</y>
     </hint>
     <hint type="destinationlabel">
@@ -1046,5 +1038,59 @@ border: 0px;</string>
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>frame_selector</sender>
+   <signal>changePauseMode()</signal>
+   <receiver>toolButton_playPause</receiver>
+   <slot>onPauseMode()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>365</x>
+     <y>80</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>584</x>
+     <y>11</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>scrollArea</sender>
+   <signal>addKeyPose()</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onAddKeyPose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>646</x>
+     <y>91</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>480</x>
+     <y>80</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>frame_selector</sender>
+   <signal>changeCursor(double,bool)</signal>
+   <receiver>AnimTimeline</receiver>
+   <slot>onCursorChanged(double,bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>439</x>
+     <y>78</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>505</x>
+     <y>262</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
+ <slots>
+  <signal>render(double)</signal>
+  <slot>onCursorChanged(double)</slot>
+  <slot>onKeyPose(bool)</slot>
+  <slot>onCursorChanged(double,bool)</slot>
+ </slots>
 </ui>

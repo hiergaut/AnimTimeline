@@ -36,6 +36,11 @@ void QScrollAreaRuler::keyPressEvent(QKeyEvent* event)
     if (event->key() == Qt::Key_Control) {
         ctrlDown = true;
     }
+    if (event->key() == Qt::Key_Space) {
+        qDebug() << "space";
+        emit addKeyPose();
+    }
+    event->ignore();
 }
 
 void QScrollAreaRuler::keyReleaseEvent(QKeyEvent* event)
