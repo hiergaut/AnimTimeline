@@ -3,9 +3,8 @@
 #include <QDebug>
 #include <QPainter>
 #include <QWheelEvent>
-//#include <QtMath>
-//#include <QtGlobal>
 #include <QTimer>
+
 //#include <QtMath>
 #include <QtGlobal>
 //#include <cmath>
@@ -59,7 +58,7 @@ void QFrameSelector::paintEvent(QPaintEvent* event)
 
     QPainter painter(this);
     //    painter.begin(this);
-    painter.setRenderHint(QPainter::HighQualityAntialiasing);
+//    painter.setRenderHint(QPainter::HighQualityAntialiasing);
 
     //    int nbInterval = widgetRuler->getNbInterval();
     //    double step = widgetRuler->getStep();
@@ -133,7 +132,7 @@ void QFrameSelector::paintEvent(QPaintEvent* event)
 
 void QFrameSelector::mousePressEvent(QMouseEvent* event)
 {
-    qDebug() << "QFrameSelector::mousePressEvent";
+//    qDebug() << "QFrameSelector: mousePressEvent";
     //    event->ignore();
     if (event->button() == Qt::LeftButton) {
         double newCursor = qMax((event->x() - *zero) / *pixPerSec, 0.0);

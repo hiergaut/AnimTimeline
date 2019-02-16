@@ -41,6 +41,7 @@ signals:
     void changePauseMode();
     void isOnKeyPose(bool isOn);
     void addKeyPose(double time);
+    void changePeriod(double time);
 
     //    void changePrecision(int accuracy);
     //    void updatePlayZone(int xPos, int width);
@@ -80,8 +81,8 @@ private:
 //    double maxDuration = 11.0;
     double end = 10.0;
     double cursor = 0.0;
-    double period = 1.0 /24.0;
-//    double period = 1.0 /5.0;
+//    double period = 1.0 /24.0;
+    double period = 1.0 /5.0;
 //    double period = 1.0;
 //    int i = 0;
 
