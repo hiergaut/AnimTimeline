@@ -42,7 +42,7 @@
     <number>0</number>
    </property>
    <property name="topMargin">
-    <number>0</number>
+    <number>5</number>
    </property>
    <property name="rightMargin">
     <number>0</number>
@@ -108,15 +108,15 @@
         </property>
         <property name="maximumSize">
          <size>
-          <width>85</width>
-          <height>16777215</height>
+          <width>75</width>
+          <height>20</height>
          </size>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color: lightgreen</string>
         </property>
         <property name="buttonSymbols">
-         <enum>QAbstractSpinBox::PlusMinus</enum>
+         <enum>QAbstractSpinBox::NoButtons</enum>
         </property>
         <property name="prefix">
          <string>start: </string>
@@ -152,13 +152,13 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>70</width>
+          <width>0</width>
           <height>0</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>95</width>
+          <width>85</width>
           <height>20</height>
          </size>
         </property>
@@ -169,7 +169,7 @@
          <bool>false</bool>
         </property>
         <property name="buttonSymbols">
-         <enum>QAbstractSpinBox::PlusMinus</enum>
+         <enum>QAbstractSpinBox::NoButtons</enum>
         </property>
         <property name="prefix">
          <string>cursor: </string>
@@ -179,6 +179,9 @@
         </property>
         <property name="singleStep">
          <double>1.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>5.000000000000000</double>
         </property>
        </widget>
       </item>
@@ -208,12 +211,12 @@
         </property>
         <property name="maximumSize">
          <size>
-          <width>17</width>
-          <height>17</height>
+          <width>20</width>
+          <height>20</height>
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;insert/modify key pose on cursor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Shortcut: space&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;insert/replace key pose on cursor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Shortcut: space&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color:white;</string>
@@ -234,11 +237,27 @@
        </widget>
       </item>
       <item>
+       <widget class="QToolButton" name="toolButton_deleteKeyPose">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QSpinBox" name="spinBox">
         <property name="maximumSize">
          <size>
           <width>18</width>
-          <height>25</height>
+          <height>20</height>
          </size>
         </property>
         <property name="readOnly">
@@ -266,8 +285,8 @@
        <widget class="QToolButton" name="toolButton_start">
         <property name="maximumSize">
          <size>
-          <width>18</width>
-          <height>18</height>
+          <width>20</width>
+          <height>20</height>
          </size>
         </property>
         <property name="text">
@@ -283,8 +302,8 @@
        <widget class="QToolButton" name="toolButton_rearward">
         <property name="maximumSize">
          <size>
-          <width>18</width>
-          <height>18</height>
+          <width>20</width>
+          <height>20</height>
          </size>
         </property>
         <property name="text">
@@ -300,8 +319,8 @@
        <widget class="QToolButtonPlayPause" name="toolButton_playPause">
         <property name="maximumSize">
          <size>
-          <width>18</width>
-          <height>18</height>
+          <width>20</width>
+          <height>20</height>
          </size>
         </property>
         <property name="text">
@@ -317,8 +336,8 @@
        <widget class="QToolButton" name="toolButton_forward">
         <property name="maximumSize">
          <size>
-          <width>18</width>
-          <height>18</height>
+          <width>20</width>
+          <height>20</height>
          </size>
         </property>
         <property name="text">
@@ -334,8 +353,8 @@
        <widget class="QToolButton" name="toolButton_end">
         <property name="maximumSize">
          <size>
-          <width>18</width>
-          <height>18</height>
+          <width>20</width>
+          <height>20</height>
          </size>
         </property>
         <property name="text">
@@ -376,21 +395,21 @@
         </property>
         <property name="maximumSize">
          <size>
-          <width>82</width>
-          <height>16777215</height>
+          <width>70</width>
+          <height>20</height>
          </size>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color: #ff6666</string>
         </property>
         <property name="buttonSymbols">
-         <enum>QAbstractSpinBox::PlusMinus</enum>
+         <enum>QAbstractSpinBox::NoButtons</enum>
         </property>
         <property name="prefix">
          <string>end: </string>
         </property>
         <property name="value">
-         <double>10.000000000000000</double>
+         <double>20.000000000000000</double>
         </property>
        </widget>
       </item>
@@ -429,7 +448,7 @@
         <x>0</x>
         <y>0</y>
         <width>500</width>
-        <height>93</height>
+        <height>88</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -709,23 +728,27 @@ border: 0px;</string>
     <signal>isOnKeyPose(bool)</signal>
     <signal>changeCursor(double,bool)</signal>
     <signal>signal1()</signal>
+    <signal>startChanged(double)</signal>
+    <signal>endChanged(double)</signal>
+    <signal>nbKeyPosesChanged(int)</signal>
     <slot>onSlideLeftSlider(int)</slot>
     <slot>onSlideRightSlider(int)</slot>
     <slot>onSlideRelease()</slot>
     <slot>onAddKeyPose()</slot>
-    <slot>onStartChanged(double)</slot>
-    <slot>onCursorChanged(double)</slot>
-    <slot>onEndChanged(double)</slot>
-    <slot>onCursorStart()</slot>
-    <slot>onCursorPreviousKeyPosee()</slot>
-    <slot>onCursorPlayPause()</slot>
-    <slot>onCursorNextKeyPose()</slot>
-    <slot>onCursorEnd()</slot>
-    <slot>onPlayPause()</slot>
-    <slot>onCursorPreviousKeyPose()</slot>
     <slot>onPlay()</slot>
     <slot>onPause()</slot>
-    <slot>onCursorSpinChanged()</slot>
+    <slot>onChangeStart()</slot>
+    <slot>onChangeEnd()</slot>
+    <slot>onSetCursorToStart()</slot>
+    <slot>onSetCursorToEnd()</slot>
+    <slot>onSetCursorToPreviousKeyPose()</slot>
+    <slot>onSetCursorToNextKeyPose()</slot>
+    <slot>onChangeStartSpin()</slot>
+    <slot>onChangeCursorSpin()</slot>
+    <slot>onChangeEndSpin()</slot>
+    <slot>onAddingKeyPose()</slot>
+    <slot>onAddingKeyPose(double)</slot>
+    <slot>onDeleteKeyPose()</slot>
    </slots>
   </customwidget>
   <customwidget>
@@ -839,98 +862,18 @@ border: 0px;</string>
    </hints>
   </connection>
   <connection>
-   <sender>toolButton_keyPose</sender>
-   <signal>clicked()</signal>
+   <sender>scrollArea</sender>
+   <signal>addKeyPose()</signal>
    <receiver>frame_selector</receiver>
-   <slot>onAddKeyPose()</slot>
+   <slot>onAddingKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>354</x>
-     <y>7</y>
+     <x>646</x>
+     <y>91</y>
     </hint>
     <hint type="destinationlabel">
-     <x>246</x>
-     <y>43</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>frame_selector</sender>
-   <signal>changeStart(double)</signal>
-   <receiver>doubleSpinBox_start</receiver>
-   <slot>setValue(double)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>466</x>
-     <y>67</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>74</x>
-     <y>15</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>frame_selector</sender>
-   <signal>changeEnd(double)</signal>
-   <receiver>doubleSpinBox_end</receiver>
-   <slot>setValue(double)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>488</x>
-     <y>64</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>848</x>
-     <y>13</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>doubleSpinBox_start</sender>
-   <signal>valueChanged(double)</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onStartChanged(double)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>56</x>
-     <y>6</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>384</x>
+     <x>480</x>
      <y>80</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>doubleSpinBox_end</sender>
-   <signal>valueChanged(double)</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onEndChanged(double)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>848</x>
-     <y>2</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>481</x>
-     <y>51</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>frame_selector</sender>
-   <signal>changeNbKeyPoses(int)</signal>
-   <receiver>spinBox</receiver>
-   <slot>setValue(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>394</x>
-     <y>78</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>372</x>
-     <y>17</y>
     </hint>
    </hints>
   </connection>
@@ -938,63 +881,15 @@ border: 0px;</string>
    <sender>toolButton_start</sender>
    <signal>clicked()</signal>
    <receiver>frame_selector</receiver>
-   <slot>onCursorStart()</slot>
+   <slot>onSetCursorToStart()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>548</x>
-     <y>10</y>
+     <x>552</x>
+     <y>9</y>
     </hint>
     <hint type="destinationlabel">
      <x>449</x>
      <y>71</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolButton_forward</sender>
-   <signal>clicked()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onCursorNextKeyPose()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>602</x>
-     <y>5</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>461</x>
-     <y>66</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolButton_end</sender>
-   <signal>clicked()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onCursorEnd()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>620</x>
-     <y>13</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>494</x>
-     <y>68</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolButton_rearward</sender>
-   <signal>clicked()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onCursorPreviousKeyPose()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>566</x>
-     <y>15</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>401</x>
-     <y>49</y>
     </hint>
    </hints>
   </connection>
@@ -1005,8 +900,8 @@ border: 0px;</string>
    <slot>onPlay()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>584</x>
-     <y>9</y>
+     <x>592</x>
+     <y>8</y>
     </hint>
     <hint type="destinationlabel">
      <x>390</x>
@@ -1021,8 +916,8 @@ border: 0px;</string>
    <slot>onPause()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>584</x>
-     <y>16</y>
+     <x>592</x>
+     <y>15</y>
     </hint>
     <hint type="destinationlabel">
      <x>422</x>
@@ -1031,50 +926,82 @@ border: 0px;</string>
    </hints>
   </connection>
   <connection>
-   <sender>frame_selector</sender>
-   <signal>changePauseMode()</signal>
-   <receiver>toolButton_playPause</receiver>
-   <slot>onPauseMode()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>365</x>
-     <y>80</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>584</x>
-     <y>11</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>scrollArea</sender>
-   <signal>addKeyPose()</signal>
+   <sender>toolButton_keyPose</sender>
+   <signal>clicked()</signal>
    <receiver>frame_selector</receiver>
-   <slot>onAddKeyPose()</slot>
+   <slot>onAddingKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>646</x>
-     <y>91</y>
+     <x>334</x>
+     <y>6</y>
     </hint>
     <hint type="destinationlabel">
-     <x>480</x>
-     <y>80</y>
+     <x>246</x>
+     <y>43</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_end</sender>
+   <signal>clicked()</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onSetCursorToEnd()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>632</x>
+     <y>12</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>494</x>
+     <y>68</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_end</sender>
+   <signal>editingFinished()</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onChangeEndSpin()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>825</x>
+     <y>10</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>494</x>
+     <y>89</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>frame_selector</sender>
-   <signal>changeCursor(double,bool)</signal>
-   <receiver>AnimTimeline</receiver>
-   <slot>onCursorChanged(double,bool)</slot>
+   <signal>nbKeyPosesChanged(int)</signal>
+   <receiver>spinBox</receiver>
+   <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>439</x>
+     <x>394</x>
      <y>78</y>
     </hint>
     <hint type="destinationlabel">
-     <x>505</x>
-     <y>262</y>
+     <x>372</x>
+     <y>17</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_start</sender>
+   <signal>editingFinished()</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onChangeStartSpin()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>58</x>
+     <y>6</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>462</x>
+     <y>86</y>
     </hint>
    </hints>
   </connection>
@@ -1082,7 +1009,7 @@ border: 0px;</string>
    <sender>doubleSpinBox_cursor</sender>
    <signal>editingFinished()</signal>
    <receiver>frame_selector</receiver>
-   <slot>onCursorSpinChanged()</slot>
+   <slot>onChangeCursorSpin()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>160</x>
@@ -1091,6 +1018,54 @@ border: 0px;</string>
     <hint type="destinationlabel">
      <x>411</x>
      <y>86</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_rearward</sender>
+   <signal>clicked()</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onSetCursorToPreviousKeyPose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>572</x>
+     <y>14</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>401</x>
+     <y>49</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_forward</sender>
+   <signal>clicked()</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onSetCursorToNextKeyPose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>612</x>
+     <y>9</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>461</x>
+     <y>66</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_deleteKeyPose</sender>
+   <signal>clicked()</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onDeleteKeyPose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>357</x>
+     <y>23</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>434</x>
+     <y>77</y>
     </hint>
    </hints>
   </connection>

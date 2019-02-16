@@ -22,9 +22,77 @@
      <rect>
       <x>140</x>
       <y>70</y>
-      <width>551</width>
-      <height>221</height>
+      <width>291</width>
+      <height>211</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="doubleSpinBox">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>400</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="prefix">
+     <string>cursor: </string>
+    </property>
+    <property name="suffix">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>390</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="prefix">
+     <string>duration: </string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>440</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="prefix">
+     <string>change cursor: </string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="doubleSpinBox_4">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>550</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="prefix">
+     <string>keyPose: </string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>550</y>
+      <width>80</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>add keyPose</string>
     </property>
    </widget>
   </widget>
@@ -55,8 +123,173 @@
    <extends>QWidget</extends>
    <header>animtimeline.h</header>
    <container>1</container>
+   <slots>
+    <signal>cursorChanged(double)</signal>
+    <signal>playClicked()</signal>
+    <signal>pauseClicked()</signal>
+    <signal>keyPoseAdded(double)</signal>
+    <signal>keyPoseChanged(int)</signal>
+    <signal>removeKeyPose(int)</signal>
+    <slot>onChangeDuration(double)</slot>
+    <slot>onChangeCursor(double)</slot>
+    <slot>onChangeAnimDuration(double)</slot>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>widget</sender>
+   <signal>cursorChanged(double)</signal>
+   <receiver>doubleSpinBox</receiver>
+   <slot>setValue(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>305</x>
+     <y>214</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>221</x>
+     <y>444</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_2</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>widget</receiver>
+   <slot>onChangeAnimDuration(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>499</x>
+     <y>438</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>433</x>
+     <y>188</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>cursorChanged(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>onChangeCursor(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>272</x>
+     <y>236</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>262</x>
+     <y>360</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>playClicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>onPlay()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>520</x>
+     <y>237</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>567</x>
+     <y>376</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>pauseClicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>onPause()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>486</x>
+     <y>264</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>500</x>
+     <y>402</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>keyPoseAdded(double)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>onAddKeyPose(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>363</x>
+     <y>258</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>352</x>
+     <y>343</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_3</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>widget</receiver>
+   <slot>onChangeCursor(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>264</x>
+     <y>481</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>242</x>
+     <y>269</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>keyPoseChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>onKeyPoseChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>588</x>
+     <y>252</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>705</x>
+     <y>455</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>widget</sender>
+   <signal>removeKeyPose(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>onRemoveKeyPose(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>549</x>
+     <y>226</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>570</x>
+     <y>559</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>cursorChanged(double)</slot>
+  <slot>onChangeCursor(double)</slot>
+  <slot>onPlay()</slot>
+  <slot>onPause()</slot>
+  <slot>onAddKeyPose(double)</slot>
+  <slot>onKeyPoseChanged(int)</slot>
+  <slot>onRemoveKeyPose(int)</slot>
+ </slots>
 </ui>

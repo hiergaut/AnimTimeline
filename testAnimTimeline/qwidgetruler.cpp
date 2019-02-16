@@ -70,6 +70,14 @@ void QWidgetRuler::onChangePrecision(int accuracy)
     //    emit changeScale();
 }
 
+void QWidgetRuler::setMaxDuration(double value)
+{
+    maxDuration = value;
+    updateTimeline(width());
+    update();
+//    onChangePrecision(0);
+}
+
 double * QWidgetRuler::getMaxDuration()
 {
     return &maxDuration;

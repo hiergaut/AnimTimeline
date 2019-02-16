@@ -28,11 +28,21 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     ui->frame_selector->setLeftSpacer(ui->frame_spacer);
     ui->frame_selector->setRightSlider(ui->label_rightSlider);
     ui->frame_selector->setCursorSpin(ui->doubleSpinBox_cursor);
+    ui->frame_selector->setStartSpin(ui->doubleSpinBox_start);
+    ui->frame_selector->setEndSpin(ui->doubleSpinBox_end);
+    ui->frame_selector->setRemoveKeyPoseButton(ui->toolButton_deleteKeyPose);
 
 //    connect(ui->frame_selector, SIGNAL(addKeyPose(double)), this, SIGNAL(addKeyPose()));
 
     // signal to signal
-    connect(ui->frame_selector, &QFrameSelector::addKeyPose, this, &AnimTimeline::addKeyPose);
+    connect(ui->frame_selector, &QFrameSelector::keyPoseAdded, this, &AnimTimeline::keyPoseAdded);
+    connect(ui->frame_selector, &QFrameSelector::cursorChanged, this, &AnimTimeline::cursorChanged);
+//    connect(ui->frame_selector, &QFrameSelector::onAddingKeyPose, this, &AnimTimeline::onAddingKeyPose);
+    connect(ui->toolButton_playPause, &QToolButtonPlayPause::playClicked, this, &AnimTimeline::playClicked);
+    connect(ui->toolButton_playPause, &QToolButtonPlayPause::pauseClicked, this, &AnimTimeline::pauseClicked);
+    connect(ui->frame_selector, &QFrameSelector::keyPoseChanged, this, &AnimTimeline::keyPoseChanged);
+    connect(ui->frame_selector, &QFrameSelector::removeKeyPose, this, &AnimTimeline::removeKeyPose);
+//    connect(this, &AnimTimeline::onChangeDuration, ui->scrollAreaWidgetContents, &QWidgetRuler::setMaxDuration);
     //  qDebug() << "AnimeTimeline created";
 
     //  QIcon * ico = new QIcon();
@@ -48,21 +58,58 @@ AnimTimeline::AnimTimeline(QWidget* parent)
 
 AnimTimeline::~AnimTimeline() { delete ui; }
 
-void AnimTimeline::onCursorChanged(double time, bool isOnKeyPose)
+
+void AnimTimeline::onChangeAnimDuration(double time)
 {
-    //    qDebug() << "AnimTimeline: render " << time;
-    qDebug() << "\033[35mAnimTimeline: render " << time << "\033[0m";
-
-    if (isOnKeyPose) {
-        ui->doubleSpinBox_cursor->setStyleSheet("background-color: yellow");
-    } else {
-        //        ui->doubleSpinBox_cursor->setStyleSheet("background-color: lightBlue");
-        ui->doubleSpinBox_cursor->setStyleSheet("background-color: #5555ff");
-    }
-    update();
-
-    emit render(time);
+    ui->scrollAreaWidgetContents->setMaxDuration(time);
+    ui->frame_selector->updatePlayZone();
 }
+
+void AnimTimeline::onChangeCursor(double time)
+{
+    ui->frame_selector->setCursor(time);
+}
+
+void AnimTimeline::onAddingKeyPose(double time)
+{
+    ui->frame_selector->onAddingKeyPose(time);
+}
+
+void AnimTimeline::onSetPauseMode()
+{
+    ui->toolButton_playPause->onPauseMode();
+}
+
+double AnimTimeline::getCursor()
+{
+    return ui->frame_selector->getCursor();
+}
+
+double AnimTimeline::getStart()
+{
+    return ui->frame_selector->getStart();
+}
+
+double AnimTimeline::getEnd()
+{
+    return ui->frame_selector->getEnd();
+}
+
+//void AnimTimeline::onCursorChanged(double time, bool isOnKeyPose)
+//{
+//    //    qDebug() << "AnimTimeline: render " << time;
+//    qDebug() << "\033[35mAnimTimeline: render " << time << "\033[0m";
+
+//    if (isOnKeyPose) {
+//        ui->doubleSpinBox_cursor->setStyleSheet("background-color: yellow");
+//    } else {
+//        //        ui->doubleSpinBox_cursor->setStyleSheet("background-color: lightBlue");
+//        ui->doubleSpinBox_cursor->setStyleSheet("background-color: #5555ff");
+//    }
+//    update();
+
+//    emit render(time);
+//}
 
 //void AnimTimeline::onAddKeyPose(double time)
 //{

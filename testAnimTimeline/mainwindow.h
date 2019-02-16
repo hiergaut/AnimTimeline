@@ -15,6 +15,17 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+public slots:
+    void onChangeCursor(double time);
+    void onPlay();
+    void onPause();
+    void onAddKeyPose(double time);
+    void onKeyPoseChanged(int num);
+    void onRemoveKeyPose(int num);
+
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

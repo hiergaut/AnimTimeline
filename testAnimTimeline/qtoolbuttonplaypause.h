@@ -21,7 +21,9 @@ signals:
     void pauseClicked();
 
 public slots:
+    void onPlayMode();
     void onPauseMode();
+//    void onPauseMode();
 
 private:
     QIcon * playIcon;

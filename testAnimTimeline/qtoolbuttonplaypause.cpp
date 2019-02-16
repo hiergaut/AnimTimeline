@@ -45,6 +45,12 @@ void QToolButtonPlayPause::mousePressEvent(QMouseEvent *event)
 
 }
 
+void QToolButtonPlayPause::onPlayMode()
+{
+    this->setIcon(*pauseIcon);
+    play =true;
+}
+
 void QToolButtonPlayPause::onPauseMode()
 {
     this->setIcon(*playIcon);

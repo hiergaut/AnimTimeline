@@ -25,8 +25,9 @@ public:
     //    void setFrameSelector(QFrameSelector *value);
 
     double * getZero();
-
     double * getMaxDuration();
+
+    void setMaxDuration(double value);
 
 signals:
     //    void rulerChange(double step, int nbInterval, double pixPerSec);
@@ -38,7 +39,7 @@ public slots:
     void onChangePrecision(int accuracy);
 
 private:
-    double maxDuration = 20.0;
+    double maxDuration = 30.0;
     static const int nbSteps = 7;
     const double steps[nbSteps] = { 0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0 };
 

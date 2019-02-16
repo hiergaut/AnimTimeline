@@ -8,12 +8,13 @@
 //#include <QSet>
 #include <set>
 #include <QDoubleSpinBox>
+#include <QToolButton>
 
 class QFrameSelector : public QFrame {
     Q_OBJECT
 public:
     explicit QFrameSelector(QWidget* parent = nullptr);
-    ~QFrameSelector() override;
+//    ~QFrameSelector() override;
 
     void setLeftSlider(QLabel* value);
     void setPlayZone(QFrame* value);
@@ -22,6 +23,19 @@ public:
     //    void drawRulerScale();
 
     void setCursorSpin(QDoubleSpinBox *value);
+
+    void setStartSpin(QDoubleSpinBox *value);
+
+    void setEndSpin(QDoubleSpinBox *value);
+    void setCursor(double time);
+    void updatePlayZone();
+    double getCursor();
+
+    double getStart() const;
+
+    double getEnd() const;
+
+    void setRemoveKeyPoseButton(QToolButton *value);
 
 protected:
     virtual void paintEvent(QPaintEvent* event) override;
@@ -34,37 +48,52 @@ protected:
 
 
 signals:
-    void changeStart(double time);
-    void changeEnd(double time);
-    void changeCursor(double time, bool isOnKeyPose);
-    void changeNbKeyPoses(int nbEl);
-    void changePauseMode();
-    void isOnKeyPose(bool isOn);
-    void addKeyPose(double time);
-    void changePeriod(double time);
+//    void startChanged(double time);
+//    void endChanged(double time);
+    void cursorChanged(double time);
+    void nbKeyPosesChanged(int nbEl);
+//    void changePauseMode();
+//    void pause();
+//    void play();
+//    void isOnKeyPose(bool isOn);
+    void keyPoseAdded(double time);
+    void keyPoseChanged(int num);
+    void removeKeyPose(int num);
+//    void changePeriod(double time);
 
     //    void changePrecision(int accuracy);
     //    void updatePlayZone(int xPos, int width);
 
 public slots:
-    void onRedrawScale();
+//    void onRedrawScale();
     void onSlideLeftSlider(int deltaX);
     void onSlideRightSlider(int deltaX);
     void onSlideRelease();
-    void onAddKeyPose();
-    void onStartChanged(double time);
-    void onEndChanged(double time);
-    void onCursorChanged(double time);
-    void onCursorStart();
-    void onCursorEnd();
-    void onCursorPreviousKeyPose();
-    void onCursorNextKeyPose();
+
+    void onAddingKeyPose(double time = -1.0);
+    void onDeleteKeyPose();
+
+    void onChangeStart(double time);
+    void onChangeEnd(double time);
+    void onChangeCursor(double time);
+
+    void onSetCursorToStart();
+    void onSetCursorToEnd();
+    void onSetCursorToPreviousKeyPose();
+    void onSetCursorToNextKeyPose();
+
     void onPlay();
     void onPause();
-    void onTickTimer();
-    void onCursorSpinChanged();
+//    void onTickTimer();
+    void onChangeCursorSpin();
+    void onChangeStartSpin();
+    void onChangeEndSpin();
     //    void onLeftSliderClicked(int);
     //    void onRulerChange(double step, int nbInterval, double pixPerSec);
+private:
+    void updateCursorSpin();
+    void updateStartSpin();
+    void updateEndSpin();
 
 private:
     QWidgetRuler* widgetRuler;
@@ -76,13 +105,17 @@ private:
     QFrame* playZone;
 
     QDoubleSpinBox * cursorSpin;
+    QDoubleSpinBox * startSpin;
+    QDoubleSpinBox * endSpin;
+
+    QToolButton * removeKeyPoseButton;
 
     double start = 0.0;
 //    double maxDuration = 11.0;
-    double end = 10.0;
-    double cursor = 0.0;
+    double end = 20.0;
+    double cursor = 5.0;
 //    double period = 1.0 /24.0;
-    double period = 1.0 /5.0;
+//    double period = 1.0 /5.0;
 //    double period = 1.0;
 //    int i = 0;
 
