@@ -20,10 +20,10 @@
    <widget class="AnimTimeline" name="widget" native="true">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>70</y>
-      <width>291</width>
-      <height>211</height>
+      <x>160</x>
+      <y>110</y>
+      <width>501</width>
+      <height>161</height>
      </rect>
     </property>
    </widget>
@@ -93,6 +93,19 @@
     </property>
     <property name="text">
      <string>add keyPose</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>60</y>
+      <width>80</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>detach</string>
     </property>
    </widget>
   </widget>

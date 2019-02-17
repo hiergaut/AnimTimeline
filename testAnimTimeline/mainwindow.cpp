@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 
 #include <QDebug>
+//#include "animtimeline.h"
+#include "dialog.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,6 +16,10 @@ MainWindow::MainWindow(QWidget *parent) :
 //    ui->widget->hide();
 //    ui->widget->setVisible(false);
 //    ui->widget->setEnabled(false);
+//    ui->widget->show();
+
+//    dialog->setModal(true);
+//    dialog->exec();
 
 }
 
@@ -59,4 +65,15 @@ void MainWindow::onChangeCursor(double time)
 void MainWindow::on_pushButton_clicked()
 {
    ui->widget->onAddingKeyPose(ui->doubleSpinBox_4->value());
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+//    Dialog dialog;
+//    dialog.setModal(true);
+//    dialog.exec();
+//    ui->widget->hide();
+    dialog = new Dialog(ui->widget, this);
+    dialog->show();
+
 }

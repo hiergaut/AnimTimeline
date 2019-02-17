@@ -34,7 +34,8 @@ SOURCES += \
     qframetimescale.cpp \
     qframeplayzone.cpp \
     qlabelslider.cpp \
-    qtoolbuttonplaypause.cpp
+    qtoolbuttonplaypause.cpp \
+    dialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -45,11 +46,13 @@ HEADERS += \
     qframetimescale.h \
     qframeplayzone.h \
     qlabelslider.h \
-    qtoolbuttonplaypause.h
+    qtoolbuttonplaypause.h \
+    dialog.h
 
 FORMS += \
         mainwindow.ui \
-    animtimeline.ui
+    animtimeline.ui \
+    dialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
