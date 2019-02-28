@@ -33,6 +33,8 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     ui->frame_selector->setStartSpin(ui->doubleSpinBox_start);
     ui->frame_selector->setEndSpin(ui->doubleSpinBox_end);
     ui->frame_selector->setRemoveKeyPoseButton(ui->toolButton_deleteKeyPose);
+    ui->frame_selector->setStartInc(ui->doubleSpinBox_startInc);
+    ui->frame_selector->setEndInc(ui->doubleSpinBox_endInc);
 
 //    connect(ui->frame_selector, SIGNAL(addKeyPose(double)), this, SIGNAL(addKeyPose()));
 

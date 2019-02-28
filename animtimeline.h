@@ -51,6 +51,7 @@ public slots:
     //private slots:
     //    void on_doubleSpinBox_cursor_editingFinished();
 
+
 private:
     Ui::AnimTimeline* ui;
 };

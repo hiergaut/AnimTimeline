@@ -44,6 +44,10 @@ public:
     std::set<double> getKeyPoses() const;
     void setKeyPoses(const std::set<double> &value);
 
+    void setStartInc(QDoubleSpinBox *value);
+
+    void setEndInc(QDoubleSpinBox *value);
+
 protected:
     virtual void paintEvent(QPaintEvent* event) override;
     void mousePressEvent(QMouseEvent * event) override;
@@ -95,12 +99,18 @@ public slots:
     void onChangeCursorSpin();
     void onChangeStartSpin();
     void onChangeEndSpin();
+
+    void onStartIncPlus();
+    void onStartIncLess();
+    void onEndIncPlus();
+    void onEndIncLess();
     //    void onLeftSliderClicked(int);
     //    void onRulerChange(double step, int nbInterval, double pixPerSec);
 private:
     void updateCursorSpin();
     void updateStartSpin();
     void updateEndSpin();
+    void updateKeyPoses(double gap);
 
 private:
     QWidgetRuler* widgetRuler;
@@ -114,6 +124,8 @@ private:
     QDoubleSpinBox * cursorSpin;
     QDoubleSpinBox * startSpin;
     QDoubleSpinBox * endSpin;
+    QDoubleSpinBox * startInc;
+    QDoubleSpinBox * endInc;
 
     QToolButton * removeKeyPoseButton;
 

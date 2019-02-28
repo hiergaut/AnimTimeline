@@ -332,7 +332,8 @@ void QFrameSelector::onDeleteKeyPose()
 void QFrameSelector::onChangeStart(double time)
 {
     //    start = int(time / period) * period;
-    start = time;
+//    start = time;
+    start = qMax(qMin(time, end), 0.0);
     updateStartSpin();
     update();
 
@@ -342,7 +343,9 @@ void QFrameSelector::onChangeStart(double time)
 void QFrameSelector::onChangeEnd(double time)
 {
     //    end = int(time / period) * period;
-    end = time;
+//    qDebug() << "onChangedEnd " << time;
+    end = qMin(qMax(time, start), *maxDuration);
+//    end = time;
     updateEndSpin();
     update();
 
@@ -498,15 +501,74 @@ void QFrameSelector::onChangeCursorSpin()
 
 void QFrameSelector::onChangeStartSpin()
 {
-    start = startSpin->value();
+//    start = startSpin->value();
+    start = qMax(qMin(startSpin->value(), end), 0.0);
+    updateStartSpin();
     update();
 }
 
 void QFrameSelector::onChangeEndSpin()
 {
-    end = endSpin->value();
+//    end = endSpin->value();
+    end = qMin(qMax(endSpin->value(), start), *maxDuration);
+    updateEndSpin();
     update();
 }
+
+void QFrameSelector::onStartIncPlus()
+{
+    double gap = startInc->value();
+
+    start +=gap;
+    updateStartSpin();
+
+    cursor +=gap;
+    updateCursorSpin();
+
+    end += gap;
+    updateEndSpin();
+
+    updateKeyPoses(gap);
+    widgetRuler->setMaxDuration(*maxDuration + gap);
+//    *maxDuration += gap;
+//    update();
+}
+
+void QFrameSelector::onStartIncLess()
+{
+    double gap = startInc->value();
+
+    start = qMax(0.0, start -gap);
+    updateStartSpin();
+    cursor =qMax(0.0, cursor -gap);
+    updateCursorSpin();
+    end = qMax(0.0, end -gap);
+    updateEndSpin();
+
+    updateKeyPoses(-gap);
+    widgetRuler->setMaxDuration(qMax(0.0, *maxDuration - gap));
+}
+
+void QFrameSelector::onEndIncPlus()
+{
+    double gap = endInc->value();
+
+    widgetRuler->setMaxDuration(*maxDuration + gap);
+}
+
+void QFrameSelector::onEndIncLess()
+{
+    double gap = endInc->value();
+
+    end = qMin(*maxDuration -gap, end);
+    updateEndSpin();
+
+    cursor = qMin(*maxDuration -gap, cursor);
+    updateCursorSpin();
+
+    widgetRuler->setMaxDuration(qMax(0.0, *maxDuration - gap));
+}
+
 
 void QFrameSelector::updateCursorSpin()
 {
@@ -528,6 +590,26 @@ void QFrameSelector::updateStartSpin()
 void QFrameSelector::updateEndSpin()
 {
     endSpin->setValue(end);
+}
+
+void QFrameSelector::updateKeyPoses(double gap)
+{
+    std::set<double> clone;
+    for (double d : keyPoses) {
+        clone.insert(d +gap);
+    }
+
+    keyPoses =clone;
+}
+
+void QFrameSelector::setEndInc(QDoubleSpinBox *value)
+{
+    endInc = value;
+}
+
+void QFrameSelector::setStartInc(QDoubleSpinBox *value)
+{
+    startInc = value;
 }
 
 std::set<double> QFrameSelector::getKeyPoses() const

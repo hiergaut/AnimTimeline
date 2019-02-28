@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>669</width>
-    <height>130</height>
+    <width>631</width>
+    <height>140</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,7 +19,7 @@
   <property name="maximumSize">
    <size>
     <width>16777215</width>
-    <height>130</height>
+    <height>140</height>
    </size>
   </property>
   <property name="sizeIncrement">
@@ -216,7 +216,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;insert/replace key pose on cursor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;shortcut: &amp;lt;space&amp;gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;insert/replace key pose on cursor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;shortcut: &amp;lt;i&amp;gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color:white;</string>
@@ -248,7 +248,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;delete keyPose on cursor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;shortcut: &amp;lt;shift&amp;gt;&amp;lt;space&amp;gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;delete keyPose on cursor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;shortcut: &amp;lt;shift&amp;gt;&amp;lt;i&amp;gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
          <string>...</string>
@@ -469,7 +469,7 @@
         <x>0</x>
         <y>0</y>
         <width>500</width>
-        <height>93</height>
+        <height>103</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -593,6 +593,103 @@
             <property name="frameShadow">
              <enum>QFrame::Raised</enum>
             </property>
+            <widget class="QToolButton" name="toolButton_plusStart">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>11</y>
+               <width>15</width>
+               <height>15</height>
+              </rect>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>15</width>
+               <height>15</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background: white;</string>
+             </property>
+             <property name="text">
+              <string>...</string>
+             </property>
+             <property name="icon">
+              <iconset resource="timeline.qrc">
+               <normaloff>:/images/plus.png</normaloff>:/images/plus.png</iconset>
+             </property>
+            </widget>
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_startInc">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>33</y>
+               <width>30</width>
+               <height>15</height>
+              </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>15</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
+             <property name="cursor">
+              <cursorShape>ArrowCursor</cursorShape>
+             </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="decimals">
+              <number>1</number>
+             </property>
+             <property name="value">
+              <double>5.000000000000000</double>
+             </property>
+            </widget>
+            <widget class="QToolButton" name="toolButton_lessStart">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>55</y>
+               <width>15</width>
+               <height>15</height>
+              </rect>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>15</width>
+               <height>15</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background: white;</string>
+             </property>
+             <property name="text">
+              <string>...</string>
+             </property>
+             <property name="icon">
+              <iconset resource="timeline.qrc">
+               <normaloff>:/images/less.png</normaloff>:/images/less.png</iconset>
+             </property>
+            </widget>
            </widget>
           </item>
           <item>
@@ -690,11 +787,134 @@ border: 0px;</string>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>20</width>
+              <width>0</width>
               <height>20</height>
              </size>
             </property>
            </spacer>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame_spacer_2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: transparent;
+</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <widget class="QToolButton" name="toolButton_plusEnd">
+             <property name="geometry">
+              <rect>
+               <x>33</x>
+               <y>11</y>
+               <width>15</width>
+               <height>15</height>
+              </rect>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>15</width>
+               <height>15</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background: white;</string>
+             </property>
+             <property name="text">
+              <string>...</string>
+             </property>
+             <property name="icon">
+              <iconset resource="timeline.qrc">
+               <normaloff>:/images/plus.png</normaloff>:/images/plus.png</iconset>
+             </property>
+            </widget>
+            <widget class="QDoubleSpinBox" name="doubleSpinBox_endInc">
+             <property name="geometry">
+              <rect>
+               <x>18</x>
+               <y>33</y>
+               <width>30</width>
+               <height>15</height>
+              </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>15</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
+             <property name="cursor">
+              <cursorShape>ArrowCursor</cursorShape>
+             </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="buttonSymbols">
+              <enum>QAbstractSpinBox::NoButtons</enum>
+             </property>
+             <property name="decimals">
+              <number>1</number>
+             </property>
+             <property name="value">
+              <double>5.000000000000000</double>
+             </property>
+            </widget>
+            <widget class="QToolButton" name="toolButton_lessEnd">
+             <property name="geometry">
+              <rect>
+               <x>33</x>
+               <y>55</y>
+               <width>15</width>
+               <height>15</height>
+              </rect>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>15</width>
+               <height>15</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background: white;</string>
+             </property>
+             <property name="text">
+              <string>...</string>
+             </property>
+             <property name="icon">
+              <iconset resource="timeline.qrc">
+               <normaloff>:/images/less.png</normaloff>:/images/less.png</iconset>
+             </property>
+            </widget>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -770,6 +990,10 @@ border: 0px;</string>
     <slot>onAddingKeyPose()</slot>
     <slot>onAddingKeyPose(double)</slot>
     <slot>onDeleteKeyPose()</slot>
+    <slot>onStartIncPlus()</slot>
+    <slot>onStartIncLess()</slot>
+    <slot>onEndIncPlus()</slot>
+    <slot>onEndIncLess()</slot>
    </slots>
   </customwidget>
   <customwidget>
@@ -890,7 +1114,7 @@ border: 0px;</string>
    <slot>onAddingKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>646</x>
+     <x>630</x>
      <y>91</y>
     </hint>
     <hint type="destinationlabel">
@@ -906,7 +1130,7 @@ border: 0px;</string>
    <slot>onSetCursorToStart()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>424</x>
+     <x>399</x>
      <y>10</y>
     </hint>
     <hint type="destinationlabel">
@@ -922,7 +1146,7 @@ border: 0px;</string>
    <slot>onPlay()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>464</x>
+     <x>439</x>
      <y>9</y>
     </hint>
     <hint type="destinationlabel">
@@ -938,7 +1162,7 @@ border: 0px;</string>
    <slot>onPause()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>464</x>
+     <x>439</x>
      <y>16</y>
     </hint>
     <hint type="destinationlabel">
@@ -954,7 +1178,7 @@ border: 0px;</string>
    <slot>onAddingKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>276</x>
+     <x>263</x>
      <y>7</y>
     </hint>
     <hint type="destinationlabel">
@@ -970,7 +1194,7 @@ border: 0px;</string>
    <slot>onSetCursorToEnd()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>504</x>
+     <x>479</x>
      <y>13</y>
     </hint>
     <hint type="destinationlabel">
@@ -986,7 +1210,7 @@ border: 0px;</string>
    <slot>onChangeEndSpin()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>659</x>
+     <x>621</x>
      <y>10</y>
     </hint>
     <hint type="destinationlabel">
@@ -1006,7 +1230,7 @@ border: 0px;</string>
      <y>78</y>
     </hint>
     <hint type="destinationlabel">
-     <x>314</x>
+     <x>301</x>
      <y>18</y>
     </hint>
    </hints>
@@ -1050,7 +1274,7 @@ border: 0px;</string>
    <slot>onSetCursorToPreviousKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>444</x>
+     <x>419</x>
      <y>15</y>
     </hint>
     <hint type="destinationlabel">
@@ -1066,7 +1290,7 @@ border: 0px;</string>
    <slot>onSetCursorToNextKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>484</x>
+     <x>459</x>
      <y>10</y>
     </hint>
     <hint type="destinationlabel">
@@ -1082,7 +1306,7 @@ border: 0px;</string>
    <slot>onDeleteKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>296</x>
+     <x>283</x>
      <y>20</y>
     </hint>
     <hint type="destinationlabel">
@@ -1104,6 +1328,70 @@ border: 0px;</string>
     <hint type="destinationlabel">
      <x>406</x>
      <y>81</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_plusStart</sender>
+   <signal>clicked()</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onStartIncPlus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>6</x>
+     <y>45</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>405</x>
+     <y>86</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_lessStart</sender>
+   <signal>clicked()</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onStartIncLess()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>15</x>
+     <y>88</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>379</x>
+     <y>99</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_plusEnd</sender>
+   <signal>clicked()</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onEndIncPlus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>486</x>
+     <y>37</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>431</x>
+     <y>95</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_lessEnd</sender>
+   <signal>clicked()</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onEndIncLess()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>487</x>
+     <y>86</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>434</x>
+     <y>75</y>
     </hint>
    </hints>
   </connection>

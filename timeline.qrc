@@ -9,5 +9,7 @@
         <file>images/play.png</file>
         <file>images/rearward.png</file>
         <file>images/start.png</file>
+        <file>images/plus.png</file>
+        <file>images/less.png</file>
     </qresource>
 </RCC>
