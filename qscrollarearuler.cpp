@@ -1,6 +1,6 @@
 #include "qscrollarearuler.h"
 
-#include <QDebug>
+//#include <QDebug>
 #include <QScrollBar>
 #include <QWheelEvent>
 //#include <QtMath>
@@ -8,8 +8,6 @@
 QScrollAreaRuler::QScrollAreaRuler(QWidget* parent)
     : QScrollArea(parent)
 {
-    ctrlDown = false;
-    midMouseDown = false;
 
     horizontalScrollBar()->setStyleSheet("\
                     QScrollBar:horizontal {\
@@ -36,17 +34,27 @@ void QScrollAreaRuler::keyPressEvent(QKeyEvent* event)
     if (event->key() == Qt::Key_Control) {
         ctrlDown = true;
     }
-    if (event->key() == Qt::Key_Space) {
-        qDebug() << "space";
-        emit addKeyPose();
+    if (event->key() == Qt::Key_I) {
+        if (shiftDown) {
+            emit removeKeyPose();
+        } else {
+            emit addKeyPose();
+        }
     }
-    event->ignore();
+    if (event->key() == Qt::Key_Shift) {
+        shiftDown = true;
+    }
+//    event->ignore();
+    event->accept(); // avoid Esc, QDialog::reject()
 }
 
 void QScrollAreaRuler::keyReleaseEvent(QKeyEvent* event)
 {
     if (event->key() == Qt::Key_Control) {
         ctrlDown = false;
+    }
+    if (event->key() == Qt::Key_Shift) {
+        shiftDown = false;
     }
 }
 
@@ -66,7 +74,7 @@ void QScrollAreaRuler::wheelEvent(QWheelEvent* event)
 
 void QScrollAreaRuler::mousePressEvent(QMouseEvent* event)
 {
-    qDebug() << "QScrollAreaRuler::mousePressEvent";
+//    qDebug() << "QScrollAreaRuler::mousePressEvent";
     if (event->button() == Qt::MiddleButton) {
         setCursor(Qt::SplitHCursor);
         mousePosX = event->x();

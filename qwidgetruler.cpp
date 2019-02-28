@@ -1,6 +1,6 @@
 #include "qwidgetruler.h"
 
-#include <QDebug>
+//#include <QDebug>
 #include <QWheelEvent>
 #include <QtMath>
 
@@ -22,7 +22,7 @@ int QWidgetRuler::updateTimeline(int newWidth)
         iStep++;
 
     if (iStep == nbSteps) {
-        qDebug() << "too small";
+//        qDebug() << "too small";
         return width();
     }
 

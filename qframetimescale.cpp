@@ -1,7 +1,7 @@
 #include "qframetimescale.h"
 
 #include "qwidgetruler.h"
-#include <QDebug>
+//#include <QDebug>
 #include <QPainter>
 
 QFrameTimescale::QFrameTimescale(QWidget* parent)
@@ -42,7 +42,7 @@ void QFrameTimescale::paintEvent(QPaintEvent* event)
         int x = *pixPerSec * *step * i;
         //        painter.drawLine(x, 0, x, height());
         QString time = QString::number((i - 1) * *step);
-        int dec = time.size() * 5 / 2;
+        int dec = time.size() * 6 / 2;
         painter.drawText(x - dec, 11, time);
     }
 

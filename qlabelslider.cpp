@@ -1,6 +1,6 @@
 #include "qlabelslider.h"
 
-#include <QDebug>
+//#include <QDebug>
 #include <QMouseEvent>
 
 QLabelSlider::QLabelSlider(QWidget *parent) : QLabel(parent)
@@ -10,13 +10,13 @@ QLabelSlider::QLabelSlider(QWidget *parent) : QLabel(parent)
 
 void QLabelSlider::keyPressEvent(QKeyEvent *event)
 {
-    qDebug() << "QLabelSlider";
+//    qDebug() << "QLabelSlider";
 
 }
 
 void QLabelSlider::mousePressEvent(QMouseEvent *event)
 {
-    qDebug() << "QLabelSlider::mousePressEvent";
+//    qDebug() << "QLabelSlider::mousePressEvent";
 //    event->ignore();
     if (event->button() == Qt::LeftButton) {
 //        setStyleSheet("background-color: green");

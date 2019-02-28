@@ -34,8 +34,15 @@ public:
     double getStart() const;
 
     double getEnd() const;
+    int getNbKeyPoses() const;
+    double getKeyPose(int id) const;
 
     void setRemoveKeyPoseButton(QToolButton *value);
+
+//    std::set<double> keyPoses;
+
+    std::set<double> getKeyPoses() const;
+    void setKeyPoses(const std::set<double> &value);
 
 protected:
     virtual void paintEvent(QPaintEvent* event) override;
@@ -137,7 +144,7 @@ private:
     bool sliding = false;
     bool clicked = false;
 
-    QTimer * timer;
+//    QTimer * timer;
 };
 
 #endif // QFRAMESELECTOR_H

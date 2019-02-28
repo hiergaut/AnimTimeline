@@ -1,7 +1,7 @@
 #include "qtoolbuttonplaypause.h"
 
 #include <QMouseEvent>
-#include <QDebug>
+//#include <QDebug>
 
 QToolButtonPlayPause::QToolButtonPlayPause(QWidget *parent) : QToolButton(parent)
 {

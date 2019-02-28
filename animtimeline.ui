@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>886</width>
+    <width>669</width>
     <height>130</height>
    </rect>
   </property>
@@ -785,6 +785,7 @@ border: 0px;</string>
    <container>1</container>
    <slots>
     <signal>addKeyPose()</signal>
+    <signal>removeKeyPose()</signal>
     <slot>onPlayPause()</slot>
    </slots>
   </customwidget>
@@ -905,8 +906,8 @@ border: 0px;</string>
    <slot>onSetCursorToStart()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>552</x>
-     <y>9</y>
+     <x>424</x>
+     <y>10</y>
     </hint>
     <hint type="destinationlabel">
      <x>449</x>
@@ -921,8 +922,8 @@ border: 0px;</string>
    <slot>onPlay()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>592</x>
-     <y>8</y>
+     <x>464</x>
+     <y>9</y>
     </hint>
     <hint type="destinationlabel">
      <x>390</x>
@@ -937,8 +938,8 @@ border: 0px;</string>
    <slot>onPause()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>592</x>
-     <y>15</y>
+     <x>464</x>
+     <y>16</y>
     </hint>
     <hint type="destinationlabel">
      <x>422</x>
@@ -953,8 +954,8 @@ border: 0px;</string>
    <slot>onAddingKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>334</x>
-     <y>6</y>
+     <x>276</x>
+     <y>7</y>
     </hint>
     <hint type="destinationlabel">
      <x>246</x>
@@ -969,8 +970,8 @@ border: 0px;</string>
    <slot>onSetCursorToEnd()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>632</x>
-     <y>12</y>
+     <x>504</x>
+     <y>13</y>
     </hint>
     <hint type="destinationlabel">
      <x>494</x>
@@ -985,7 +986,7 @@ border: 0px;</string>
    <slot>onChangeEndSpin()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>825</x>
+     <x>659</x>
      <y>10</y>
     </hint>
     <hint type="destinationlabel">
@@ -1005,8 +1006,8 @@ border: 0px;</string>
      <y>78</y>
     </hint>
     <hint type="destinationlabel">
-     <x>372</x>
-     <y>17</y>
+     <x>314</x>
+     <y>18</y>
     </hint>
    </hints>
   </connection>
@@ -1049,8 +1050,8 @@ border: 0px;</string>
    <slot>onSetCursorToPreviousKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>572</x>
-     <y>14</y>
+     <x>444</x>
+     <y>15</y>
     </hint>
     <hint type="destinationlabel">
      <x>401</x>
@@ -1065,8 +1066,8 @@ border: 0px;</string>
    <slot>onSetCursorToNextKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>612</x>
-     <y>9</y>
+     <x>484</x>
+     <y>10</y>
     </hint>
     <hint type="destinationlabel">
      <x>461</x>
@@ -1081,12 +1082,28 @@ border: 0px;</string>
    <slot>onDeleteKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>357</x>
-     <y>23</y>
+     <x>296</x>
+     <y>20</y>
     </hint>
     <hint type="destinationlabel">
      <x>434</x>
      <y>77</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>scrollArea</sender>
+   <signal>removeKeyPose()</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onDeleteKeyPose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>540</x>
+     <y>105</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>406</x>
+     <y>81</y>
     </hint>
    </hints>
   </connection>

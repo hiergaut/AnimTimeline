@@ -1,15 +1,17 @@
 #ifndef ANIMTIMELINE_H
 #define ANIMTIMELINE_H
 
-#include <QWidget>
+//#include <QWidget>
+#include <QDialog>
 //#include <set>
 //#include <vector>
+#include <set>
 
 namespace Ui {
 class AnimTimeline;
 }
 
-class AnimTimeline : public QWidget {
+class AnimTimeline : public QDialog {
     Q_OBJECT
 
 public:
@@ -24,20 +26,23 @@ public:
     double getCursor();
     double getStart();
     double getEnd();
+    int getNbKeyPoses();
+    double getKeyPose(int id);
 
 signals:
     void cursorChanged(double time);
     void keyPoseAdded(double time);
+    void removeKeyPose(int num);
     void keyPoseChanged(int num);
     void playClicked();
     void pauseClicked();
-    void removeKeyPose(int num);
 
 public slots:
     void onChangeAnimDuration(double time);
     void onChangeCursor(double time);
     void onAddingKeyPose(double time);
     void onSetPauseMode();
+    void onSetPlayMode();
 
     //    void onCursorChanged(double time, bool isOnKeyPose);
     //    void onAddKeyPose(double time);

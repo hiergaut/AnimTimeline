@@ -1,13 +1,15 @@
 #include "animtimeline.h"
 #include "ui_animtimeline.h"
 
-#include <QDebug>
+//#include <QDebug>
 #include <QEvent>
 #include <QPainter>
 #include <QWheelEvent>
+//#include <QApplication>
+#include <QDesktopWidget>
 
 AnimTimeline::AnimTimeline(QWidget* parent)
-    : QWidget(parent)
+    : QDialog(parent)
     , ui(new Ui::AnimTimeline)
 {
 
@@ -54,6 +56,12 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     //  connect(ui->scrollAreaWidgetContents, SIGNAL(rulerChange(double, int, double)), ui->frame_selector, SLOT(onRulerChange(double, int, double)));
     //  ui->frame_selector->drawRulerScale();
     //  ui->scrollAreaWidgetContents->updateTimeline(500);
+    auto geometry = QApplication::desktop()->screenGeometry();
+    int screenHeight = geometry.height();
+    int screenWidth = geometry.width();
+    int dialogLeft = screenWidth - this->width() -200;
+    int dialogTop = screenHeight - this->height() -400;
+    move(dialogLeft, dialogTop);
 }
 
 AnimTimeline::~AnimTimeline() { delete ui; }
@@ -67,7 +75,8 @@ void AnimTimeline::onChangeAnimDuration(double time)
 
 void AnimTimeline::onChangeCursor(double time)
 {
-    ui->frame_selector->setCursor(time);
+//    ui->frame_selector->setCursor(time);
+    ui->frame_selector->onChangeCursor(time);
 }
 
 void AnimTimeline::onAddingKeyPose(double time)
@@ -78,6 +87,11 @@ void AnimTimeline::onAddingKeyPose(double time)
 void AnimTimeline::onSetPauseMode()
 {
     ui->toolButton_playPause->onPauseMode();
+}
+
+void AnimTimeline::onSetPlayMode()
+{
+    ui->toolButton_playPause->onPlayMode();
 }
 
 double AnimTimeline::getCursor()
@@ -94,6 +108,18 @@ double AnimTimeline::getEnd()
 {
     return ui->frame_selector->getEnd();
 }
+
+int AnimTimeline::getNbKeyPoses()
+{
+    return ui->frame_selector->getNbKeyPoses();
+}
+
+double AnimTimeline::getKeyPose(int id)
+{
+    return ui->frame_selector->getKeyPose(id);
+}
+
+
 
 //void AnimTimeline::onCursorChanged(double time, bool isOnKeyPose)
 //{

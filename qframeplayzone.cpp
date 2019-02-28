@@ -1,6 +1,6 @@
 #include "qframeplayzone.h"
 
-#include <QDebug>
+//#include <QDebug>
 
 QFramePlayZone::QFramePlayZone(QWidget* parent)
     : QFrame(parent)

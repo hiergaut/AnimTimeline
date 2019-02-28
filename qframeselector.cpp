@@ -49,11 +49,11 @@ QFrameSelector::QFrameSelector(QWidget* parent)
 
 void QFrameSelector::paintEvent(QPaintEvent* event)
 {
-//    if (end > *maxDuration) {
-//        end = *maxDuration;
-//    }
+    //    if (end > *maxDuration) {
+    //        end = *maxDuration;
+    //    }
     //    if (rulerChanged) {
-    qDebug() << "QFrameSelector: paintEvent " << event->type() << iPaint++;
+    //    qDebug() << "QFrameSelector: paintEvent " << event->type() << iPaint++;
     //    double duration =10.0;
     //    double steps[] = {0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0};
     //    int iStep =0;
@@ -143,9 +143,9 @@ void QFrameSelector::mousePressEvent(QMouseEvent* event)
         onChangeCursor(newCursor);
         //        double leftStep = int(cursor / period) * period;
 
-//        emit cursorChanged(cursor);
-//        cursorSpin->setValue(cursor);
-//        update();
+        //        emit cursorChanged(cursor);
+        //        cursorSpin->setValue(cursor);
+        //        update();
 
         //        if (cursor - leftStep > 1.0e-5) {
         //            //        if (cursor != leftStep) {
@@ -165,11 +165,11 @@ void QFrameSelector::mouseMoveEvent(QMouseEvent* event)
         double newCursor = qMax((event->x() - *zero) / *pixPerSec, 0.0);
         //        newCursor = int(newCursor / period) * period;
 
-//        cursor = qMax((event->x() - *zero) / *pixPerSec, 0.0);
+        //        cursor = qMax((event->x() - *zero) / *pixPerSec, 0.0);
         onChangeCursor(newCursor);
-//        emit cursorChanged(cursor);
-//        updateCursorSpin();
-//        update();
+        //        emit cursorChanged(cursor);
+        //        updateCursorSpin();
+        //        update();
 
         //        if (qAbs(cursor - newCursor) > 1.0e-5) {
         //            //        if (cursor != newCursor) {
@@ -195,7 +195,7 @@ void QFrameSelector::mouseReleaseEvent(QMouseEvent* event)
 
 void QFrameSelector::keyPressEvent(QKeyEvent* event)
 {
-    qDebug() << "keyPress";
+    //    qDebug() << "keyPress";
     if (event->key() == Qt::Key_Space) {
         onAddingKeyPose(cursor);
     }
@@ -228,8 +228,8 @@ void QFrameSelector::onSlideLeftSlider(int deltaX)
     //    double newStart =(leftSpacer->width() +deltaX -leftSlider->width()) / *pixPerSec;
     double newStart = start + deltaX / *pixPerSec;
     start = qMin(qMax(newStart, 0.0), end);
-//    start = int(start / period) * period;
-//    emit startChanged(start);
+    //    start = int(start / period) * period;
+    //    emit startChanged(start);
     onChangeStart(start);
 
     //    int newPos =leftSpacer->width() +deltaX +leftSlider->width();
@@ -237,7 +237,7 @@ void QFrameSelector::onSlideLeftSlider(int deltaX)
     leftSpacer->setMinimumWidth(*zero + start * *pixPerSec - leftSlider->width());
     playZone->setMinimumWidth((end - start) * *pixPerSec);
 
-//    updateStartSpin();
+    //    updateStartSpin();
     //    if (newPos >= *zero) {
 
     //        if (newPos < *zero +end * *pixPerSec) {
@@ -266,13 +266,12 @@ void QFrameSelector::onSlideRightSlider(int deltaX)
     end = qMin(qMax(newEnd, start), *maxDuration);
 
     onChangeEnd(end);
-//    end = int(end / period) * period;
-//    emit endChanged(end);
+    //    end = int(end / period) * period;
+    //    emit endChanged(end);
 
     playZone->setMinimumWidth((end - start) * *pixPerSec);
 
-
-//    updateEndSpin();
+    //    updateEndSpin();
     //    double endLimit = (*nbInterval - 1) * *step * *pixPerSec;
     //    qDebug() << "QFrameSelector::onSlideRightSlider " << deltaX;
     //    if (*zero + playZone->width() + deltaX <= endLimit) {
@@ -304,62 +303,63 @@ void QFrameSelector::onAddingKeyPose(double time)
 
         emit nbKeyPosesChanged(keyPoses.size());
         emit keyPoseAdded(time);
-    }
-    else {
-//        int num =0;
+    } else {
+        //        int num =0;
         auto it = keyPoses.find(time);
         emit keyPoseChanged(std::distance(keyPoses.begin(), it));
     }
-//    emit cursorChanged(cursor);
+    //    emit cursorChanged(cursor);
     //    }
 }
 
 void QFrameSelector::onDeleteKeyPose()
 {
     auto it = keyPoses.find(cursor);
-    assert(it != keyPoses.end());
+//    assert(it != keyPoses.end());
+    if (it != keyPoses.end()) {
 
-    int num = std::distance(keyPoses.begin(), it);
-    keyPoses.erase(it);
+        int num = std::distance(keyPoses.begin(), it);
+        keyPoses.erase(it);
 
-    updateCursorSpin();
-    update();
+        updateCursorSpin();
+        update();
 
-    emit nbKeyPosesChanged(keyPoses.size());
-    emit removeKeyPose(num);
+        emit nbKeyPosesChanged(keyPoses.size());
+        emit removeKeyPose(num);
+    }
 }
 
 void QFrameSelector::onChangeStart(double time)
 {
-//    start = int(time / period) * period;
+    //    start = int(time / period) * period;
     start = time;
     updateStartSpin();
     update();
 
-//    emit startChanged(start);
+    //    emit startChanged(start);
 }
 
 void QFrameSelector::onChangeEnd(double time)
 {
-//    end = int(time / period) * period;
+    //    end = int(time / period) * period;
     end = time;
     updateEndSpin();
     update();
 
-//    emit endChanged(end);
+    //    emit endChanged(end);
 }
 
 void QFrameSelector::onChangeCursor(double time)
 {
-    qDebug() << "QFrameSelector: onChangeCursor";
+//        qDebug() << "QFrameSelector: onChangeCursor " << time;
     //    double newCursor = int(time / period) * period;
 
-//    emit cursorChanged(cursor);
+    //    emit cursorChanged(cursor);
     cursor = time;
     updateCursorSpin();
     update();
 
-//    cursorSpin->setValue(cursor);
+    //    cursorSpin->setValue(cursor);
     //    if (cursor != newCursor) {
     //    if (qAbs(cursor - newCursor) > 1.0e-5) {
     //        cursor = newCursor;
@@ -375,23 +375,23 @@ void QFrameSelector::onChangeCursor(double time)
 void QFrameSelector::onSetCursorToStart()
 {
     onChangeCursor(start);
-//    cursor = start;
-//    updateCursorSpin();
-//    update();
+    //    cursor = start;
+    //    updateCursorSpin();
+    //    update();
 
-//    emit cursorChanged(cursor);
-//    cursorSpin->setValue(cursor);
+    //    emit cursorChanged(cursor);
+    //    cursorSpin->setValue(cursor);
 }
 
 void QFrameSelector::onSetCursorToEnd()
 {
     onChangeCursor(end);
-//    cursor = end;
-//    updateCursorSpin();
-//    update();
+    //    cursor = end;
+    //    updateCursorSpin();
+    //    update();
 
-//    emit cursorChanged(cursor);
-//    cursorSpin->setValue(cursor);
+    //    emit cursorChanged(cursor);
+    //    cursorSpin->setValue(cursor);
 }
 
 void QFrameSelector::onSetCursorToPreviousKeyPose()
@@ -411,13 +411,13 @@ void QFrameSelector::onSetCursorToPreviousKeyPose()
 
     if (it != keyPoses.rend()) {
         onChangeCursor(*it);
-//        cursor = *it;
+        //        cursor = *it;
 
-//        updateCursorSpin();
-////        cursorSpin->setValue(cursor);
-//        update();
+        //        updateCursorSpin();
+        ////        cursorSpin->setValue(cursor);
+        //        update();
 
-//        emit cursorChanged(cursor);
+        //        emit cursorChanged(cursor);
     }
 }
 
@@ -435,7 +435,7 @@ void QFrameSelector::onSetCursorToNextKeyPose()
         cursor = *it;
 
         updateCursorSpin();
-//        cursorSpin->setValue(cursor);
+        //        cursorSpin->setValue(cursor);
         update();
 
         emit cursorChanged(cursor);
@@ -445,24 +445,24 @@ void QFrameSelector::onSetCursorToNextKeyPose()
 void QFrameSelector::onPlay()
 {
 
-//        qDebug() << "play";
-//    //    if (cursor < end)
-//    //        timer->start(period * 1000);
-//    //    else {
-//    //        changePauseMode();
-//    //    }
+    //        qDebug() << "play";
+    //    //    if (cursor < end)
+    //    //        timer->start(period * 1000);
+    //    //    else {
+    //    //        changePauseMode();
+    //    //    }
 
-//    //    while (cursor != end) {
-//    //        cursor += period;
-//    //        emit cursorChanged(cursor);
+    //    //    while (cursor != end) {
+    //    //        cursor += period;
+    //    //        emit cursorChanged(cursor);
 
-//    //        update();
-//    //    }
+    //    //        update();
+    //    //    }
 }
 
 void QFrameSelector::onPause()
 {
-//        qDebug() << "pause";
+    //        qDebug() << "pause";
     //    timer->stop();
 }
 
@@ -490,10 +490,10 @@ void QFrameSelector::onPause()
 void QFrameSelector::onChangeCursorSpin()
 {
     onChangeCursor(cursorSpin->value());
-//    cursor = cursorSpin->value();
-//    update();
+    //    cursor = cursorSpin->value();
+    //    update();
 
-//    emit cursorChanged(cursor);
+    //    emit cursorChanged(cursor);
 }
 
 void QFrameSelector::onChangeStartSpin()
@@ -530,7 +530,17 @@ void QFrameSelector::updateEndSpin()
     endSpin->setValue(end);
 }
 
-void QFrameSelector::setRemoveKeyPoseButton(QToolButton *value)
+std::set<double> QFrameSelector::getKeyPoses() const
+{
+    return keyPoses;
+}
+
+void QFrameSelector::setKeyPoses(const std::set<double> &value)
+{
+    keyPoses = value;
+}
+
+void QFrameSelector::setRemoveKeyPoseButton(QToolButton* value)
 {
     removeKeyPoseButton = value;
 }
@@ -540,12 +550,26 @@ double QFrameSelector::getEnd() const
     return end;
 }
 
+int QFrameSelector::getNbKeyPoses() const
+{
+    return keyPoses.size();
+}
+
+double QFrameSelector::getKeyPose(int id) const
+{
+    auto it = keyPoses.begin();
+    while (it != keyPoses.end() && id-- > 0)
+        it++;
+
+    return *it;
+}
+
 double QFrameSelector::getStart() const
 {
     return start;
 }
 
-void QFrameSelector::setEndSpin(QDoubleSpinBox *value)
+void QFrameSelector::setEndSpin(QDoubleSpinBox* value)
 {
     endSpin = value;
 }
@@ -564,10 +588,9 @@ void QFrameSelector::updatePlayZone()
 
     end = *maxDuration;
     updateEndSpin();
-//    if (end > *maxDuration) {
-//        end = *maxDuration;
-//    }
-
+    //    if (end > *maxDuration) {
+    //        end = *maxDuration;
+    //    }
 }
 
 double QFrameSelector::getCursor()
@@ -575,7 +598,7 @@ double QFrameSelector::getCursor()
     return cursor;
 }
 
-void QFrameSelector::setStartSpin(QDoubleSpinBox *value)
+void QFrameSelector::setStartSpin(QDoubleSpinBox* value)
 {
     startSpin = value;
 }

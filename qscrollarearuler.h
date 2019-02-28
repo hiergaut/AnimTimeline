@@ -22,12 +22,14 @@ protected:
 signals:
     void changePrecision(int accuracy);
     void addKeyPose();
+    void removeKeyPose();
 
 public slots:
 
 private:
-    bool ctrlDown;
-    bool midMouseDown;
+    bool ctrlDown =false;
+    bool shiftDown = false;
+    bool midMouseDown =false;
 
     int mousePosX;
     int sliderPos;
