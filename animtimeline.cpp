@@ -35,6 +35,7 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     ui->frame_selector->setRemoveKeyPoseButton(ui->toolButton_deleteKeyPose);
     ui->frame_selector->setStartInc(ui->doubleSpinBox_startInc);
     ui->frame_selector->setEndInc(ui->doubleSpinBox_endInc);
+    ui->frame_selector->setTotalDurationSpin(ui->doubleSpinBox_maxDuration);
 
 //    connect(ui->frame_selector, SIGNAL(addKeyPose(double)), this, SIGNAL(addKeyPose()));
 
@@ -45,6 +46,7 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     connect(ui->toolButton_playPause, &QToolButtonPlayPause::playClicked, this, &AnimTimeline::playClicked);
     connect(ui->toolButton_playPause, &QToolButtonPlayPause::pauseClicked, this, &AnimTimeline::pauseClicked);
     connect(ui->frame_selector, &QFrameSelector::keyPoseChanged, this, &AnimTimeline::keyPoseChanged);
+    connect(ui->frame_selector, &QFrameSelector::keyPosesChanged, this, &AnimTimeline::keyPosesChanged);
     connect(ui->frame_selector, &QFrameSelector::removeKeyPose, this, &AnimTimeline::removeKeyPose);
 //    connect(this, &AnimTimeline::onChangeDuration, ui->scrollAreaWidgetContents, &QWidgetRuler::setMaxDuration);
     //  qDebug() << "AnimeTimeline created";

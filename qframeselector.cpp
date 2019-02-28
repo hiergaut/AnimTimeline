@@ -375,6 +375,16 @@ void QFrameSelector::onChangeCursor(double time)
     emit cursorChanged(cursor);
 }
 
+void QFrameSelector::onChangeDuration()
+{
+//    *maxDuration =time;
+    double newDuration = totalDurationSpin->value();
+
+    end = qMin(qMax(endSpin->value(), start), newDuration);
+    updateEndSpin();
+    widgetRuler->setMaxDuration(newDuration);
+}
+
 void QFrameSelector::onSetCursorToStart()
 {
     onChangeCursor(start);
@@ -530,6 +540,8 @@ void QFrameSelector::onStartIncPlus()
 
     updateKeyPoses(gap);
     widgetRuler->setMaxDuration(*maxDuration + gap);
+
+    updateDurationSpin();
 //    *maxDuration += gap;
 //    update();
 }
@@ -547,6 +559,7 @@ void QFrameSelector::onStartIncLess()
 
     updateKeyPoses(-gap);
     widgetRuler->setMaxDuration(qMax(0.0, *maxDuration - gap));
+    updateDurationSpin();
 }
 
 void QFrameSelector::onEndIncPlus()
@@ -554,6 +567,7 @@ void QFrameSelector::onEndIncPlus()
     double gap = endInc->value();
 
     widgetRuler->setMaxDuration(*maxDuration + gap);
+    updateDurationSpin();
 }
 
 void QFrameSelector::onEndIncLess()
@@ -567,6 +581,7 @@ void QFrameSelector::onEndIncLess()
     updateCursorSpin();
 
     widgetRuler->setMaxDuration(qMax(0.0, *maxDuration - gap));
+    updateDurationSpin();
 }
 
 
@@ -600,7 +615,19 @@ void QFrameSelector::updateKeyPoses(double gap)
     }
 
     keyPoses =clone;
+    emit keyPosesChanged(gap);
 }
+
+void QFrameSelector::updateDurationSpin()
+{
+   totalDurationSpin->setValue(*maxDuration);
+}
+
+void QFrameSelector::setTotalDurationSpin(QDoubleSpinBox *value)
+{
+    totalDurationSpin = value;
+}
+
 
 void QFrameSelector::setEndInc(QDoubleSpinBox *value)
 {

@@ -108,12 +108,15 @@
         </property>
         <property name="maximumSize">
          <size>
-          <width>75</width>
+          <width>80</width>
           <height>20</height>
          </size>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color: lightgreen</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
         <property name="buttonSymbols">
          <enum>QAbstractSpinBox::NoButtons</enum>
@@ -143,6 +146,59 @@
        </spacer>
       </item>
       <item>
+       <widget class="QDoubleSpinBox" name="doubleSpinBox_end">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>61</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: #ff6666</string>
+        </property>
+        <property name="buttonSymbols">
+         <enum>QAbstractSpinBox::NoButtons</enum>
+        </property>
+        <property name="prefix">
+         <string/>
+        </property>
+        <property name="suffix">
+         <string> :end</string>
+        </property>
+        <property name="value">
+         <double>20.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_6">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Minimum</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
        <widget class="QDoubleSpinBox" name="doubleSpinBox_cursor">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -162,17 +218,23 @@
           <height>20</height>
          </size>
         </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
         <property name="styleSheet">
          <string notr="true">background-color: #5555ff</string>
         </property>
         <property name="wrapping">
          <bool>false</bool>
         </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
         <property name="buttonSymbols">
          <enum>QAbstractSpinBox::NoButtons</enum>
         </property>
         <property name="prefix">
-         <string>cursor: </string>
+         <string/>
         </property>
         <property name="decimals">
          <number>2</number>
@@ -401,36 +463,30 @@
        </spacer>
       </item>
       <item>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_end">
+       <widget class="QDoubleSpinBox" name="doubleSpinBox_maxDuration">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
         <property name="minimumSize">
          <size>
-          <width>61</width>
+          <width>120</width>
           <height>0</height>
          </size>
         </property>
-        <property name="maximumSize">
-         <size>
-          <width>70</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: #ff6666</string>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
         </property>
         <property name="buttonSymbols">
          <enum>QAbstractSpinBox::NoButtons</enum>
         </property>
         <property name="prefix">
-         <string>end: </string>
+         <string>total duration: </string>
         </property>
         <property name="value">
-         <double>20.000000000000000</double>
+         <double>30.000000000000000</double>
         </property>
        </widget>
       </item>
@@ -597,15 +653,15 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>11</y>
-               <width>15</width>
-               <height>15</height>
+               <y>9</y>
+               <width>20</width>
+               <height>20</height>
               </rect>
              </property>
              <property name="maximumSize">
               <size>
-               <width>15</width>
-               <height>15</height>
+               <width>20</width>
+               <height>20</height>
               </size>
              </property>
              <property name="styleSheet">
@@ -618,12 +674,18 @@
               <iconset resource="timeline.qrc">
                <normaloff>:/images/plus.png</normaloff>:/images/plus.png</iconset>
              </property>
+             <property name="iconSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
             </widget>
             <widget class="QDoubleSpinBox" name="doubleSpinBox_startInc">
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>33</y>
+               <y>34</y>
                <width>30</width>
                <height>15</height>
               </rect>
@@ -668,15 +730,15 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>55</y>
-               <width>15</width>
-               <height>15</height>
+               <y>54</y>
+               <width>20</width>
+               <height>20</height>
               </rect>
              </property>
              <property name="maximumSize">
               <size>
-               <width>15</width>
-               <height>15</height>
+               <width>20</width>
+               <height>20</height>
               </size>
              </property>
              <property name="styleSheet">
@@ -688,6 +750,12 @@
              <property name="icon">
               <iconset resource="timeline.qrc">
                <normaloff>:/images/less.png</normaloff>:/images/less.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
              </property>
             </widget>
            </widget>
@@ -820,16 +888,16 @@ border: 0px;</string>
             <widget class="QToolButton" name="toolButton_plusEnd">
              <property name="geometry">
               <rect>
-               <x>33</x>
-               <y>11</y>
-               <width>15</width>
-               <height>15</height>
+               <x>31</x>
+               <y>9</y>
+               <width>20</width>
+               <height>20</height>
               </rect>
              </property>
              <property name="maximumSize">
               <size>
-               <width>15</width>
-               <height>15</height>
+               <width>20</width>
+               <height>20</height>
               </size>
              </property>
              <property name="styleSheet">
@@ -842,12 +910,18 @@ border: 0px;</string>
               <iconset resource="timeline.qrc">
                <normaloff>:/images/plus.png</normaloff>:/images/plus.png</iconset>
              </property>
+             <property name="iconSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
             </widget>
             <widget class="QDoubleSpinBox" name="doubleSpinBox_endInc">
              <property name="geometry">
               <rect>
-               <x>18</x>
-               <y>33</y>
+               <x>20</x>
+               <y>34</y>
                <width>30</width>
                <height>15</height>
               </rect>
@@ -891,16 +965,16 @@ border: 0px;</string>
             <widget class="QToolButton" name="toolButton_lessEnd">
              <property name="geometry">
               <rect>
-               <x>33</x>
-               <y>55</y>
-               <width>15</width>
-               <height>15</height>
+               <x>31</x>
+               <y>54</y>
+               <width>20</width>
+               <height>20</height>
               </rect>
              </property>
              <property name="maximumSize">
               <size>
-               <width>15</width>
-               <height>15</height>
+               <width>20</width>
+               <height>20</height>
               </size>
              </property>
              <property name="styleSheet">
@@ -912,6 +986,12 @@ border: 0px;</string>
              <property name="icon">
               <iconset resource="timeline.qrc">
                <normaloff>:/images/less.png</normaloff>:/images/less.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
              </property>
             </widget>
            </widget>
@@ -994,6 +1074,7 @@ border: 0px;</string>
     <slot>onStartIncLess()</slot>
     <slot>onEndIncPlus()</slot>
     <slot>onEndIncLess()</slot>
+    <slot>onChangeDuration()</slot>
    </slots>
   </customwidget>
   <customwidget>
@@ -1130,7 +1211,7 @@ border: 0px;</string>
    <slot>onSetCursorToStart()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>399</x>
+     <x>397</x>
      <y>10</y>
     </hint>
     <hint type="destinationlabel">
@@ -1146,7 +1227,7 @@ border: 0px;</string>
    <slot>onPlay()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>439</x>
+     <x>437</x>
      <y>9</y>
     </hint>
     <hint type="destinationlabel">
@@ -1162,7 +1243,7 @@ border: 0px;</string>
    <slot>onPause()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>439</x>
+     <x>437</x>
      <y>16</y>
     </hint>
     <hint type="destinationlabel">
@@ -1178,7 +1259,7 @@ border: 0px;</string>
    <slot>onAddingKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>263</x>
+     <x>309</x>
      <y>7</y>
     </hint>
     <hint type="destinationlabel">
@@ -1194,7 +1275,7 @@ border: 0px;</string>
    <slot>onSetCursorToEnd()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>479</x>
+     <x>477</x>
      <y>13</y>
     </hint>
     <hint type="destinationlabel">
@@ -1210,7 +1291,7 @@ border: 0px;</string>
    <slot>onChangeEndSpin()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>621</x>
+     <x>149</x>
      <y>10</y>
     </hint>
     <hint type="destinationlabel">
@@ -1230,7 +1311,7 @@ border: 0px;</string>
      <y>78</y>
     </hint>
     <hint type="destinationlabel">
-     <x>301</x>
+     <x>347</x>
      <y>18</y>
     </hint>
    </hints>
@@ -1258,7 +1339,7 @@ border: 0px;</string>
    <slot>onChangeCursorSpin()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>160</x>
+     <x>255</x>
      <y>13</y>
     </hint>
     <hint type="destinationlabel">
@@ -1274,7 +1355,7 @@ border: 0px;</string>
    <slot>onSetCursorToPreviousKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>419</x>
+     <x>417</x>
      <y>15</y>
     </hint>
     <hint type="destinationlabel">
@@ -1290,7 +1371,7 @@ border: 0px;</string>
    <slot>onSetCursorToNextKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>459</x>
+     <x>457</x>
      <y>10</y>
     </hint>
     <hint type="destinationlabel">
@@ -1306,7 +1387,7 @@ border: 0px;</string>
    <slot>onDeleteKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>283</x>
+     <x>329</x>
      <y>20</y>
     </hint>
     <hint type="destinationlabel">
@@ -1392,6 +1473,22 @@ border: 0px;</string>
     <hint type="destinationlabel">
      <x>434</x>
      <y>75</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBox_maxDuration</sender>
+   <signal>editingFinished()</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onChangeDuration()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>570</x>
+     <y>11</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>442</x>
+     <y>84</y>
     </hint>
    </hints>
   </connection>

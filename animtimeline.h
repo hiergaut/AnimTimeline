@@ -34,6 +34,7 @@ signals:
     void keyPoseAdded(double time);
     void removeKeyPose(int num);
     void keyPoseChanged(int num);
+    void keyPosesChanged(double gap);
     void playClicked();
     void pauseClicked();
 

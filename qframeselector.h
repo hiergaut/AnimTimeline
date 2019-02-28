@@ -48,6 +48,10 @@ public:
 
     void setEndInc(QDoubleSpinBox *value);
 
+//    void setTotalDuration(QDoubleSpinBox *value);
+
+    void setTotalDurationSpin(QDoubleSpinBox *value);
+
 protected:
     virtual void paintEvent(QPaintEvent* event) override;
     void mousePressEvent(QMouseEvent * event) override;
@@ -69,6 +73,7 @@ signals:
 //    void isOnKeyPose(bool isOn);
     void keyPoseAdded(double time);
     void keyPoseChanged(int num);
+    void keyPosesChanged(double gap);
     void removeKeyPose(int num);
 //    void changePeriod(double time);
 
@@ -87,6 +92,7 @@ public slots:
     void onChangeStart(double time);
     void onChangeEnd(double time);
     void onChangeCursor(double time);
+    void onChangeDuration();
 
     void onSetCursorToStart();
     void onSetCursorToEnd();
@@ -111,6 +117,7 @@ private:
     void updateStartSpin();
     void updateEndSpin();
     void updateKeyPoses(double gap);
+    void updateDurationSpin();
 
 private:
     QWidgetRuler* widgetRuler;
@@ -124,6 +131,8 @@ private:
     QDoubleSpinBox * cursorSpin;
     QDoubleSpinBox * startSpin;
     QDoubleSpinBox * endSpin;
+    QDoubleSpinBox * totalDurationSpin;
+
     QDoubleSpinBox * startInc;
     QDoubleSpinBox * endInc;
 
