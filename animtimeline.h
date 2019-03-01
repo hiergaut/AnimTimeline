@@ -37,6 +37,7 @@ signals:
     void keyPosesChanged(double gap);
     void playClicked();
     void pauseClicked();
+    void durationChanged(double time);
 
 public slots:
     void onChangeAnimDuration(double time);

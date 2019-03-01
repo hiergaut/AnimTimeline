@@ -51,6 +51,7 @@ public:
 //    void setTotalDuration(QDoubleSpinBox *value);
 
     void setTotalDurationSpin(QDoubleSpinBox *value);
+    void updateDurationSpin();
 
 protected:
     virtual void paintEvent(QPaintEvent* event) override;
@@ -117,7 +118,6 @@ private:
     void updateStartSpin();
     void updateEndSpin();
     void updateKeyPoses(double gap);
-    void updateDurationSpin();
 
 private:
     QWidgetRuler* widgetRuler;

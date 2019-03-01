@@ -30,6 +30,7 @@ public:
     void setMaxDuration(double value);
 
 signals:
+    void durationChanged(double time);
     //    void rulerChange(double step, int nbInterval, double pixPerSec);
 
 protected:

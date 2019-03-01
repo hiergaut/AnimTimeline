@@ -1,6 +1,6 @@
 #include "qwidgetruler.h"
 
-//#include <QDebug>
+#include <QDebug>
 #include <QWheelEvent>
 #include <QtMath>
 
@@ -22,17 +22,17 @@ int QWidgetRuler::updateTimeline(int newWidth)
         iStep++;
 
     if (iStep == nbSteps) {
-//        qDebug() << "too small";
+        qDebug() << "can't compress more ruler";
         return width();
     }
 
     step = steps[iStep];
 
-    nbInterval = int(maxDuration / step) + 2;
+    nbInterval = qCeil(maxDuration / step) + 2;
     //    wInterval = newWidth / nbInterval;
     pixPerSec = (newWidth / float(nbInterval)) / step;
 
-    zero = pixPerSec *step;
+    zero = pixPerSec * step;
 
     //    emit rulerChange(step, nbInterval, pixPerSec);
     //    leftSpacer->changeSize(0, 0);
@@ -52,11 +52,11 @@ void QWidgetRuler::onChangePrecision(int accuracy)
     //    qDebug() << "QWidgetRuler: onChangePrecision";
 
     //    int newWidth =width() +accuracy;
-//    int sign =(accuracy > 0) ?(2) :(0.5);
+    //    int sign =(accuracy > 0) ?(2) :(0.5);
 
-//    int newWidth = updateTimeline(width() + accuracy *log10(width()));
+    //    int newWidth = updateTimeline(width() + accuracy *log10(width()));
     int newWidth = updateTimeline(width() + accuracy);
-//    int newWidth = updateTimeline(width() * sign);
+    //    int newWidth = updateTimeline(width() * sign);
     setMinimumWidth(newWidth);
     //    update();
 
@@ -72,23 +72,28 @@ void QWidgetRuler::onChangePrecision(int accuracy)
 
 void QWidgetRuler::setMaxDuration(double value)
 {
-    maxDuration = value;
-    updateTimeline(width());
-    update();
-//    onChangePrecision(0);
+    if (value != maxDuration) {
+        qDebug() << "QWidgetRuler::setMaxDuration: " << value;
+
+        maxDuration = value;
+        updateTimeline(width());
+        update();
+        emit durationChanged(value);
+        //    onChangePrecision(0);
+    }
 }
 
-double * QWidgetRuler::getMaxDuration()
+double* QWidgetRuler::getMaxDuration()
 {
     return &maxDuration;
 }
 
-double * QWidgetRuler::getZero()
+double* QWidgetRuler::getZero()
 {
     return &zero;
 }
 
-double * QWidgetRuler::getPixPerSec()
+double* QWidgetRuler::getPixPerSec()
 {
     return &pixPerSec;
 }

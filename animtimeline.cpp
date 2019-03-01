@@ -48,6 +48,7 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     connect(ui->frame_selector, &QFrameSelector::keyPoseChanged, this, &AnimTimeline::keyPoseChanged);
     connect(ui->frame_selector, &QFrameSelector::keyPosesChanged, this, &AnimTimeline::keyPosesChanged);
     connect(ui->frame_selector, &QFrameSelector::removeKeyPose, this, &AnimTimeline::removeKeyPose);
+    connect(ui->scrollAreaWidgetContents, &QWidgetRuler::durationChanged, this, &AnimTimeline::durationChanged);
 //    connect(this, &AnimTimeline::onChangeDuration, ui->scrollAreaWidgetContents, &QWidgetRuler::setMaxDuration);
     //  qDebug() << "AnimeTimeline created";
 
@@ -74,7 +75,8 @@ AnimTimeline::~AnimTimeline() { delete ui; }
 void AnimTimeline::onChangeAnimDuration(double time)
 {
     ui->scrollAreaWidgetContents->setMaxDuration(time);
-    ui->frame_selector->updatePlayZone();
+    ui->frame_selector->updateDurationSpin();
+//    ui->frame_selector->updatePlayZone();
 }
 
 void AnimTimeline::onChangeCursor(double time)
