@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1060</width>
+    <width>800</width>
     <height>140</height>
    </rect>
   </property>
@@ -51,7 +51,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QFrame" name="frame_buttons">
+    <widget class="QFrameButtons" name="frame_buttons">
      <property name="sizePolicy">
       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -524,7 +524,7 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>900</width>
+        <width>700</width>
         <height>103</height>
        </rect>
       </property>
@@ -536,7 +536,7 @@
       </property>
       <property name="minimumSize">
        <size>
-        <width>900</width>
+        <width>700</width>
         <height>0</height>
        </size>
       </property>
@@ -1116,6 +1116,12 @@ border: 0px;</string>
     <signal>pauseClicked()</signal>
     <slot>onPauseMode()</slot>
    </slots>
+  </customwidget>
+  <customwidget>
+   <class>QFrameButtons</class>
+   <extends>QFrame</extends>
+   <header>qframebuttons.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

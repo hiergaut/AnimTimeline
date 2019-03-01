@@ -37,6 +37,8 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     ui->frame_selector->setEndInc(ui->doubleSpinBox_endInc);
     ui->frame_selector->setTotalDurationSpin(ui->doubleSpinBox_maxDuration);
 
+    ui->frame_buttons->setAnimTimeline(this);
+
 //    connect(ui->frame_selector, SIGNAL(addKeyPose(double)), this, SIGNAL(addKeyPose()));
 
     // signal to signal
@@ -64,9 +66,10 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     auto geometry = QApplication::desktop()->screenGeometry();
     int screenHeight = geometry.height();
     int screenWidth = geometry.width();
-    int dialogLeft = screenWidth - this->width() -100;
+    int dialogLeft = screenWidth - this->width() -50;
     int dialogTop = screenHeight - this->height() -50;
     move(dialogLeft, dialogTop);
+
 }
 
 AnimTimeline::~AnimTimeline() { delete ui; }
