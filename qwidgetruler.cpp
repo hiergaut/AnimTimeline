@@ -22,7 +22,7 @@ int QWidgetRuler::updateTimeline(int newWidth)
         iStep++;
 
     if (iStep == nbSteps) {
-        qDebug() << "can't compress more ruler";
+        qDebug() << "QWidgetRuler::updateTimeline: " << newWidth << " too short";
         return width();
     }
 
@@ -73,7 +73,7 @@ void QWidgetRuler::onChangePrecision(int accuracy)
 void QWidgetRuler::setMaxDuration(double value)
 {
     if (value != maxDuration) {
-        qDebug() << "QWidgetRuler::setMaxDuration: " << value;
+//        qDebug() << "QWidgetRuler::setMaxDuration: " << value;
 
         maxDuration = value;
         updateTimeline(width());

@@ -50,7 +50,7 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     connect(ui->toolButton_playPause, &QToolButtonPlayPause::pauseClicked, this, &AnimTimeline::pauseClicked);
     connect(ui->frame_selector, &QFrameSelector::keyPoseChanged, this, &AnimTimeline::keyPoseChanged);
     connect(ui->frame_selector, &QFrameSelector::keyPosesChanged, this, &AnimTimeline::keyPosesChanged);
-    connect(ui->frame_selector, &QFrameSelector::removeKeyPose, this, &AnimTimeline::removeKeyPose);
+    connect(ui->frame_selector, &QFrameSelector::keyPoseDeleted, this, &AnimTimeline::keyPoseDeleted);
     connect(ui->scrollAreaWidgetContents, &QWidgetRuler::durationChanged, this, &AnimTimeline::durationChanged);
 //    connect(this, &AnimTimeline::onChangeDuration, ui->scrollAreaWidgetContents, &QWidgetRuler::setMaxDuration);
     //  qDebug() << "AnimeTimeline created";
@@ -87,6 +87,16 @@ void AnimTimeline::onChangeCursor(double time)
 {
 //    ui->frame_selector->setCursor(time);
     ui->frame_selector->onChangeCursor(time);
+}
+
+void AnimTimeline::onChangeStart(double time)
+{
+    ui->frame_selector->onChangeStart(time);
+}
+
+void AnimTimeline::onChangeEnd(double time)
+{
+    ui->frame_selector->onChangeEnd(time);
 }
 
 void AnimTimeline::onAddingKeyPose(double time)

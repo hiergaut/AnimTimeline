@@ -1,11 +1,7 @@
 #ifndef ANIMTIMELINE_H
 #define ANIMTIMELINE_H
 
-//#include <QWidget>
 #include <QDialog>
-//#include <set>
-//#include <vector>
-#include <set>
 
 namespace Ui {
 class AnimTimeline;
@@ -18,10 +14,6 @@ public:
     explicit AnimTimeline(QWidget* parent = nullptr);
     ~AnimTimeline();
 
-protected:
-    //  virtual void paintEvent(QPaintEvent *event) override;
-    //  virtual void wheelEvent(QWheelEvent *event) override;
-
 public:
     double getCursor();
     double getStart();
@@ -30,28 +22,26 @@ public:
     double getKeyPose(int id);
 
 signals:
-    void cursorChanged(double time);
-    void keyPoseAdded(double time);
-    void removeKeyPose(int num);
-    void keyPoseChanged(int num);
-    void keyPosesChanged(double gap);
     void playClicked();
     void pauseClicked();
     void durationChanged(double time);
 
+    void cursorChanged(double time);
+    void keyPoseAdded(double time);
+    void keyPoseDeleted(int num);
+    void keyPoseChanged(int num);
+    void keyPosesChanged(double gap);
+
+
 public slots:
-    void onChangeAnimDuration(double time);
-    void onChangeCursor(double time);
-    void onAddingKeyPose(double time);
-    void onSetPauseMode();
     void onSetPlayMode();
+    void onSetPauseMode();
+    void onChangeAnimDuration(double time);
 
-    //    void onCursorChanged(double time, bool isOnKeyPose);
-    //    void onAddKeyPose(double time);
-    //    void onKeyPose(bool isOn);
-
-    //private slots:
-    //    void on_doubleSpinBox_cursor_editingFinished();
+    void onChangeCursor(double time);
+    void onChangeStart(double time);
+    void onChangeEnd(double time);
+    void onAddingKeyPose(double time);
 
 
 private:

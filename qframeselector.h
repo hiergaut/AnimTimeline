@@ -75,7 +75,7 @@ signals:
     void keyPoseAdded(double time);
     void keyPoseChanged(int num);
     void keyPosesChanged(double gap);
-    void removeKeyPose(int num);
+    void keyPoseDeleted(int num);
 //    void changePeriod(double time);
 
     //    void changePrecision(int accuracy);
