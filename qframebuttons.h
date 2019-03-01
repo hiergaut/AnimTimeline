@@ -4,6 +4,7 @@
 #include <QFrame>
 #include "animtimeline.h"
 #include <QPoint>
+#include "qwidgetruler.h"
 
 class QFrameButtons : public QFrame
 {
@@ -12,6 +13,8 @@ public:
     explicit QFrameButtons(QWidget *parent = nullptr);
 
     void setAnimTimeline(AnimTimeline *value);
+
+    void setRuler(QWidgetRuler *value);
 
 protected:
     void mousePressEvent(QMouseEvent * event) override;
@@ -26,6 +29,7 @@ public slots:
 private:
     bool clicked =false;
     AnimTimeline * animTimeline;
+    QWidgetRuler * ruler;
     QPoint offset;
 
 };

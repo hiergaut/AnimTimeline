@@ -38,6 +38,7 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     ui->frame_selector->setTotalDurationSpin(ui->doubleSpinBox_maxDuration);
 
     ui->frame_buttons->setAnimTimeline(this);
+    ui->frame_buttons->setRuler(ui->scrollAreaWidgetContents);
 
 //    connect(ui->frame_selector, SIGNAL(addKeyPose(double)), this, SIGNAL(addKeyPose()));
 

@@ -10,7 +10,7 @@ QWidgetRuler::QWidgetRuler(QWidget* parent)
     //    qDebug() << "QWidgetRuler created";
     //    emit onChangePrecision(0);
     //    setMinimumWidth(500);
-    updateTimeline(700); // ui fixed width of ruler
+    updateTimeline(500); // ui fixed width of ruler
 }
 
 int QWidgetRuler::updateTimeline(int newWidth)

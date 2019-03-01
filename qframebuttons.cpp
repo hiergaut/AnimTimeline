@@ -52,8 +52,15 @@ void QFrameButtons::wheelEvent(QWheelEvent* event)
 
     int diffWidth = previousWidth - animTimeline->width();
     animTimeline->move(animTimeline->x() + diffWidth, animTimeline->y());
+    ruler->onChangePrecision(-diffWidth);
+
     //    }
     //    animTimeline->update();
+}
+
+void QFrameButtons::setRuler(QWidgetRuler *value)
+{
+    ruler = value;
 }
 
 void QFrameButtons::setAnimTimeline(AnimTimeline* value)
