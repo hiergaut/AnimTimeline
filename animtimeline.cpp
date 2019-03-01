@@ -64,8 +64,8 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     auto geometry = QApplication::desktop()->screenGeometry();
     int screenHeight = geometry.height();
     int screenWidth = geometry.width();
-    int dialogLeft = screenWidth - this->width() -200;
-    int dialogTop = screenHeight - this->height() -400;
+    int dialogLeft = screenWidth - this->width() -100;
+    int dialogTop = screenHeight - this->height() -50;
     move(dialogLeft, dialogTop);
 }
 

@@ -1,6 +1,6 @@
 #include "qscrollarearuler.h"
 
-//#include <QDebug>
+#include <QDebug>
 #include <QScrollBar>
 #include <QWheelEvent>
 //#include <QtMath>
@@ -45,11 +45,12 @@ void QScrollAreaRuler::keyPressEvent(QKeyEvent* event)
         shiftDown = true;
     }
 //    event->ignore();
-    event->accept(); // avoid Esc, QDialog::reject()
+//    event->accept(); // avoid Esc, QDialog::reject()
 }
 
 void QScrollAreaRuler::keyReleaseEvent(QKeyEvent* event)
 {
+//    qDebug() << "QScrollAreaRuler::keyReleaseEvent";
     if (event->key() == Qt::Key_Control) {
         ctrlDown = false;
     }
