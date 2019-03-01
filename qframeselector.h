@@ -67,6 +67,8 @@ signals:
 //    void startChanged(double time);
 //    void endChanged(double time);
     void cursorChanged(double time);
+    void startChanged(double time);
+    void endChanged(double time);
     void nbKeyPosesChanged(int nbEl);
 //    void changePauseMode();
 //    void pause();

@@ -46,19 +46,28 @@ void QFrameButtons::wheelEvent(QWheelEvent* event)
 
     //    animTimeline->move(animTimeline->x() -ry, animTimeline->y());
     //    animTimeline->setMinimumWidth(animTimeline->width() +gap);
-    //    if (animTimeline->width() >= 500 || gap >= 0) {
-    int previousWidth = animTimeline->width();
-    animTimeline->setGeometry(animTimeline->x() + 1, animTimeline->y() + 1, animTimeline->width() + 1 + gap, animTimeline->height());
+    if (animTimeline->width() >= 650 || gap >= 0) {
+            int previousWidth = animTimeline->width();
 
-    int diffWidth = previousWidth - animTimeline->width();
-    animTimeline->move(animTimeline->x() + diffWidth, animTimeline->y());
-    ruler->onChangePrecision(-diffWidth);
+        int newX = animTimeline->x() - gap;
+        int newY = animTimeline->y() + 1;
+        int newWidth = animTimeline->width() + 1 + gap;
+        int newHeight = animTimeline->height();
+
+        animTimeline->setGeometry(newX, newY, newWidth, newHeight);
+
+        int diffWidth = previousWidth - animTimeline->width();
+        ruler->onChangePrecision(-diffWidth);
+    }
+
+    //    int diffWidth = previousWidth - animTimeline->width();
+    //    animTimeline->move(animTimeline->x() + diffWidth, animTimeline->y());
 
     //    }
     //    animTimeline->update();
 }
 
-void QFrameButtons::setRuler(QWidgetRuler *value)
+void QFrameButtons::setRuler(QWidgetRuler* value)
 {
     ruler = value;
 }

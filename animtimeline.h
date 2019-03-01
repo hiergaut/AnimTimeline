@@ -27,6 +27,8 @@ signals:
     void durationChanged(double time);
 
     void cursorChanged(double time);
+    void startChanged(double time);
+    void endChanged(double time);
     void keyPoseAdded(double time);
     void keyPoseDeleted(int num);
     void keyPoseChanged(int num);
