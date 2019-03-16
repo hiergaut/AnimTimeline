@@ -306,7 +306,7 @@ void QFrameSelector::onAddingKeyPose(double time)
     } else {
         //        int num =0;
         auto it = keyPoses.find(time);
-        emit keyPoseChanged(std::distance(keyPoses.begin(), it));
+        emit keyPoseChanged(std::distance(keyPoses.begin(), it), time);
     }
     //    emit cursorChanged(cursor);
     //    }

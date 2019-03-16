@@ -75,7 +75,7 @@ signals:
 //    void play();
 //    void isOnKeyPose(bool isOn);
     void keyPoseAdded(double time);
-    void keyPoseChanged(int num);
+    void keyPoseChanged(int num, double time);
     void keyPosesChanged(double gap);
     void keyPoseDeleted(int num);
 //    void changePeriod(double time);
