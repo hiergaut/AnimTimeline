@@ -15,7 +15,7 @@ public:
     ~AnimTimeline() override;
 
 protected:
-    void showEvent(QShowEvent * ev) override;
+    void showEvent(QShowEvent* ev) override;
 
 public:
     double getCursor();
@@ -37,7 +37,6 @@ signals:
     void keyPoseChanged(int num, double time);
     void keyPosesChanged(double gap);
 
-
 public slots:
     void onSetPlayMode();
     void onSetPauseMode();
@@ -47,7 +46,6 @@ public slots:
     void onChangeStart(double time);
     void onChangeEnd(double time);
     void onAddingKeyPose(double time);
-
 
 private:
     Ui::AnimTimeline* ui;

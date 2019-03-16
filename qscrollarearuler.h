@@ -27,9 +27,9 @@ signals:
 public slots:
 
 private:
-    bool ctrlDown =false;
+    bool ctrlDown = false;
     bool shiftDown = false;
-    bool midMouseDown =false;
+    bool midMouseDown = false;
 
     int mousePosX;
     int sliderPos;

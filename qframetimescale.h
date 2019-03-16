@@ -1,9 +1,9 @@
 #ifndef QFRAMETIMESCALE_H
 #define QFRAMETIMESCALE_H
 
+#include "qwidgetruler.h"
 #include <QFrame>
 #include <QObject>
-#include "qwidgetruler.h"
 
 class QFrameTimescale : public QFrame {
     Q_OBJECT
@@ -13,16 +13,16 @@ public:
 signals:
 
 protected:
-    virtual void paintEvent(QPaintEvent *event) override;
+    virtual void paintEvent(QPaintEvent* event) override;
 
 public slots:
 
 private:
-    QWidgetRuler * widgetRuler;
+    QWidgetRuler* widgetRuler;
 
-    int * nbInterval;
-    double * step;
-    double * pixPerSec;
+    int* nbInterval;
+    double* step;
+    double* pixPerSec;
 };
 
 #endif // QFRAMETIMESCALE_H

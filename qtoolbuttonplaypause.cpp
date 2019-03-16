@@ -1,9 +1,9 @@
 #include "qtoolbuttonplaypause.h"
 
 #include <QMouseEvent>
-//#include <QDebug>
 
-QToolButtonPlayPause::QToolButtonPlayPause(QWidget *parent) : QToolButton(parent)
+QToolButtonPlayPause::QToolButtonPlayPause(QWidget* parent)
+    : QToolButton(parent)
 {
 
     playIcon = new QIcon();
@@ -12,7 +12,6 @@ QToolButtonPlayPause::QToolButtonPlayPause(QWidget *parent) : QToolButton(parent
     pauseIcon->addPixmap(QPixmap(":/images/pause.png"));
 
     this->setIcon(*playIcon);
-
 }
 
 QToolButtonPlayPause::~QToolButtonPlayPause()
@@ -21,38 +20,29 @@ QToolButtonPlayPause::~QToolButtonPlayPause()
     delete pauseIcon;
 }
 
-void QToolButtonPlayPause::mousePressEvent(QMouseEvent *event)
+void QToolButtonPlayPause::mousePressEvent(QMouseEvent* event)
 {
-//    this->setCheckable(true);
-//    update();
     if (event->button() == Qt::LeftButton) {
         if (play) {
             this->setIcon(*playIcon);
             play = false;
             emit pauseClicked();
-        }
-        else {
+        } else {
             this->setIcon(*pauseIcon);
-            play =true;
+            play = true;
             emit playClicked();
         }
-//        this->icon().addPixmap(QPixmap("images/pause.png"), QIcon::Normal, QIcon::On);
-//        this->setIcon(*pauseIcon);
-//        update();
     }
-//    emit clicked();
-//    event->ignore();
-
 }
 
 void QToolButtonPlayPause::onPlayMode()
 {
     this->setIcon(*pauseIcon);
-    play =true;
+    play = true;
 }
 
 void QToolButtonPlayPause::onPauseMode()
 {
     this->setIcon(*playIcon);
-    play =false;
+    play = false;
 }

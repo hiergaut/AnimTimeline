@@ -4,7 +4,6 @@
 #include <QLabel>
 #include <QSpacerItem>
 #include <QWidget>
-//#include "qframeselector.h"
 
 class QWidgetRuler : public QWidget {
     Q_OBJECT
@@ -14,27 +13,16 @@ public:
     double* getStep();
     int* getNbInterval();
     double* getPixPerSec();
-    //    int* getWInterval() const;
-
-    //    void setPlayZone(QFrame *value);
-    //    void setLeftSpacer(QSpacerItem *value);
-    //    void setLeftSlider(QLabel *value);
 
     int updateTimeline(int newWidth);
 
-    //    void setFrameSelector(QFrameSelector *value);
-
-    double * getZero();
-    double * getMaxDuration();
+    double* getZero();
+    double* getMaxDuration();
 
     void setMaxDuration(double value);
 
 signals:
     void durationChanged(double time);
-    //    void rulerChange(double step, int nbInterval, double pixPerSec);
-
-protected:
-    //    void wheelEvent(QWheelEvent * event) override;
 
 public slots:
     void onChangePrecision(int accuracy);
@@ -48,17 +36,6 @@ private:
     double step;
     double pixPerSec;
     double zero;
-
-//    int wInterval;
-
-
-//    double start = 0.0;
-//    double end = maxDuration;
-
-    //    QSpacerItem * leftSpacer;
-    //    QLabel * leftSlider;
-    //    QFrame * playZone;
-    //    QFrameSelector * frameSelector;
 };
 
 #endif // QWIDGETRULER_H

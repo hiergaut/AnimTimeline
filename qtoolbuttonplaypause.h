@@ -4,17 +4,14 @@
 #include <QObject>
 #include <QToolButton>
 
-
-class QToolButtonPlayPause : public QToolButton
-{
+class QToolButtonPlayPause : public QToolButton {
     Q_OBJECT
 public:
-    explicit QToolButtonPlayPause(QWidget *parent = nullptr);
+    explicit QToolButtonPlayPause(QWidget* parent = nullptr);
     ~QToolButtonPlayPause() override;
 
-
 protected:
-    void mousePressEvent(QMouseEvent *event) override;
+    void mousePressEvent(QMouseEvent* event) override;
 
 signals:
     void playClicked();
@@ -23,13 +20,12 @@ signals:
 public slots:
     void onPlayMode();
     void onPauseMode();
-//    void onPauseMode();
 
 private:
-    QIcon * playIcon;
-    QIcon * pauseIcon;
+    QIcon* playIcon;
+    QIcon* pauseIcon;
 
-    bool play =false;
+    bool play = false;
 };
 
 #endif // QTOOLBUTTONPLAYPAUSE_H

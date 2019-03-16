@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>659</width>
+    <width>628</width>
     <height>140</height>
    </rect>
   </property>
@@ -15,6 +15,12 @@
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>140</height>
+   </size>
   </property>
   <property name="maximumSize">
    <size>
@@ -127,6 +133,9 @@
         <property name="decimals">
          <number>2</number>
         </property>
+        <property name="maximum">
+         <double>99.000000000000000</double>
+        </property>
        </widget>
       </item>
       <item>
@@ -176,6 +185,9 @@
         </property>
         <property name="suffix">
          <string> :end</string>
+        </property>
+        <property name="maximum">
+         <double>99.000000000000000</double>
         </property>
         <property name="value">
          <double>20.000000000000000</double>
@@ -239,6 +251,9 @@
         <property name="decimals">
          <number>2</number>
         </property>
+        <property name="maximum">
+         <double>99.000000000000000</double>
+        </property>
         <property name="singleStep">
          <double>1.000000000000000</double>
         </property>
@@ -278,7 +293,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;insert/replace key pose on cursor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;shortcut: &amp;lt;i&amp;gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#ffffff;&quot;&gt;insert/replace key pose on cursor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;shortcut: &amp;lt;i&amp;gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color:black;</string>
@@ -488,6 +503,9 @@
         </property>
         <property name="prefix">
          <string>total duration: </string>
+        </property>
+        <property name="maximum">
+         <double>99.000000000000000</double>
         </property>
         <property name="value">
          <double>30.000000000000000</double>

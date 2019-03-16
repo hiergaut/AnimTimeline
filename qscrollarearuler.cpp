@@ -3,7 +3,6 @@
 #include <QDebug>
 #include <QScrollBar>
 #include <QWheelEvent>
-//#include <QtMath>
 
 QScrollAreaRuler::QScrollAreaRuler(QWidget* parent)
     : QScrollArea(parent)
@@ -44,13 +43,10 @@ void QScrollAreaRuler::keyPressEvent(QKeyEvent* event)
     if (event->key() == Qt::Key_Shift) {
         shiftDown = true;
     }
-//    event->ignore();
-//    event->accept(); // avoid Esc, QDialog::reject()
 }
 
 void QScrollAreaRuler::keyReleaseEvent(QKeyEvent* event)
 {
-//    qDebug() << "QScrollAreaRuler::keyReleaseEvent";
     if (event->key() == Qt::Key_Control) {
         ctrlDown = false;
     }
@@ -61,26 +57,20 @@ void QScrollAreaRuler::keyReleaseEvent(QKeyEvent* event)
 
 void QScrollAreaRuler::wheelEvent(QWheelEvent* event)
 {
-    //  qDebug() << "QScrollAreaRuler: wheelEvent " << event->angleDelta().ry();
-    //  setMinimumWidth(width() + event->angleDelta().ry() / 2);
     if (ctrlDown) {
         horizontalScrollBar()->setValue(horizontalScrollBar()->value() + event->angleDelta().ry());
 
     } else {
         emit changePrecision(event->angleDelta().ry());
     }
-    //    if (event->type() == QEvent::)
     event->accept();
 }
 
 void QScrollAreaRuler::mousePressEvent(QMouseEvent* event)
 {
-//    qDebug() << "QScrollAreaRuler::mousePressEvent";
     if (event->button() == Qt::MiddleButton) {
         setCursor(Qt::SplitHCursor);
         mousePosX = event->x();
-        //        prevMouseX = horizontalScrollBar()->value();
-        //        prevMouseX = 0;
         sliderPos = horizontalScrollBar()->value();
 
         midMouseDown = true;
@@ -98,12 +88,6 @@ void QScrollAreaRuler::mouseReleaseEvent(QMouseEvent* event)
 void QScrollAreaRuler::mouseMoveEvent(QMouseEvent* event)
 {
     if (midMouseDown) {
-        //        int newMouseX = horizontalScrollBar()->value() + event->x() - mousePosX;
-        //        int ratio = log10( horizontalScrollBar()->maximum());
-        //        int ratio = horizontalScrollBar()->maximum() /100 +1;
-        //        horizontalScrollBar()->setValue((sliderPos +mousePosX -event->x()) *ratio);
         horizontalScrollBar()->setValue((sliderPos + mousePosX - event->x()));
-        //        qDebug() << horizontalScrollBar()->maximum();
-        //        prevMouseX = newMouseX;
     }
 }
