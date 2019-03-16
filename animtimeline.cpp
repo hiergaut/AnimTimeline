@@ -67,16 +67,27 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     //  connect(ui->scrollAreaWidgetContents, SIGNAL(rulerChange(double, int, double)), ui->frame_selector, SLOT(onRulerChange(double, int, double)));
     //  ui->frame_selector->drawRulerScale();
     //  ui->scrollAreaWidgetContents->updateTimeline(500);
-    auto geometry = QApplication::desktop()->screenGeometry();
-    int screenHeight = geometry.height();
-    int screenWidth = geometry.width();
-    int dialogLeft = screenWidth - this->width() -50;
-    int dialogTop = screenHeight - this->height() -50;
-    move(dialogLeft, dialogTop);
-
+//    auto geometry = QApplication::desktop()->screenGeometry();
+//    int parentHeight = geometry.height();
 }
 
 AnimTimeline::~AnimTimeline() { delete ui; }
+
+void AnimTimeline::showEvent(QShowEvent *ev)
+{
+    (void)ev;
+//    qDebug() << "AnimTimeline::showEvent\n";
+//    int parentHeight = parent()->height();
+    QWidget * parent =static_cast<QWidget*>(this->parent());
+
+    int parent_x = parent->x();
+    int parent_y = parent->y();
+    int parent_height = parent->height();
+    int parent_width = parent->width();
+    int timelineLeft = parent_x + parent_width - this->width() -50;
+    int timelineTop = parent_y + parent_height - this->height() -50;
+    move(timelineLeft, timelineTop);
+}
 
 
 void AnimTimeline::onChangeAnimDuration(double time)

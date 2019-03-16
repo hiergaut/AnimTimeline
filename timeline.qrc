@@ -11,5 +11,6 @@
         <file>images/start.png</file>
         <file>images/plus.png</file>
         <file>images/less.png</file>
+        <file>images/deleteKey.png</file>
     </qresource>
 </RCC>

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>605</width>
+    <width>659</width>
     <height>140</height>
    </rect>
   </property>
@@ -281,7 +281,7 @@
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;insert/replace key pose on cursor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;shortcut: &amp;lt;i&amp;gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color:white;</string>
+         <string notr="true">background-color:black;</string>
         </property>
         <property name="text">
          <string>...</string>
@@ -314,6 +314,10 @@
         </property>
         <property name="text">
          <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="timeline.qrc">
+          <normaloff>:/images/deleteKey.png</normaloff>:/images/deleteKey.png</iconset>
         </property>
        </widget>
       </item>

@@ -10,35 +10,35 @@ QFrameButtons::QFrameButtons(QWidget* parent)
 {
 }
 
-void QFrameButtons::mousePressEvent(QMouseEvent* event)
-{
-    if (event->button() == Qt::LeftButton) {
-        clicked = true;
-        offset = event->pos() + animTimeline->pos();
-        //        dialogTop =animTimeline->y();
-        //        dialogLeft =animTimeline->x();
-    }
-}
+//void QFrameButtons::mousePressEvent(QMouseEvent* event)
+//{
+//    if (event->button() == Qt::LeftButton) {
+//        clicked = true;
+//        offset = event->pos() + animTimeline->pos();
+//        //        dialogTop =animTimeline->y();
+//        //        dialogLeft =animTimeline->x();
+//    }
+//}
 
-void QFrameButtons::mouseMoveEvent(QMouseEvent* event)
-{
-    if (event->buttons() & Qt::LeftButton) {
-        //        int leftInc = event->x();
-        //        int topInc =event->y();
-        //        animTimeline->move(dialogLeft +leftInc, dialogTop +topInc);
-        //        this->move(mapToParent(event->pos() -offset));
-        animTimeline->move(event->pos() - offset);
-        //        animTimeline->update();
-        //        animTimeline->move(event->pos());
-    }
-}
+//void QFrameButtons::mouseMoveEvent(QMouseEvent* event)
+//{
+//    if (event->buttons() & Qt::LeftButton) {
+//        //        int leftInc = event->x();
+//        //        int topInc =event->y();
+//        //        animTimeline->move(dialogLeft +leftInc, dialogTop +topInc);
+//        //        this->move(mapToParent(event->pos() -offset));
+//        animTimeline->move(event->pos() - offset);
+//        //        animTimeline->update();
+//        //        animTimeline->move(event->pos());
+//    }
+//}
 
-void QFrameButtons::mouseReleaseEvent(QMouseEvent* event)
-{
-    if (event->button() == Qt::LeftButton) {
-        clicked = false;
-    }
-}
+//void QFrameButtons::mouseReleaseEvent(QMouseEvent* event)
+//{
+//    if (event->button() == Qt::LeftButton) {
+//        clicked = false;
+//    }
+//}
 
 void QFrameButtons::wheelEvent(QWheelEvent* event)
 {

@@ -12,7 +12,10 @@ class AnimTimeline : public QDialog {
 
 public:
     explicit AnimTimeline(QWidget* parent = nullptr);
-    ~AnimTimeline();
+    ~AnimTimeline() override;
+
+protected:
+    void showEvent(QShowEvent * ev) override;
 
 public:
     double getCursor();
