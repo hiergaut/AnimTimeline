@@ -41,6 +41,16 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     connect(ui->frame_selector, &QFrameSelector::keyPoseDeleted, this, &AnimTimeline::keyPoseDeleted);
     connect(ui->frame_selector, &QFrameSelector::keyPoseChanged, this, &AnimTimeline::keyPoseChanged);
     connect(ui->frame_selector, &QFrameSelector::keyPosesChanged, this, &AnimTimeline::keyPosesChanged);
+
+    // if not parent widget so move timeline with current widget screen resolution
+    if (! parent) {
+        QRect rec = QApplication::desktop()->screenGeometry();
+        int height = rec.height();
+        int width = rec.width();
+        int timelineLeft = width - this->width() - 50;
+        int timelineTop = height - this->height() - 50;
+        move(timelineLeft, timelineTop);
+    }
 }
 
 AnimTimeline::~AnimTimeline() { delete ui; }
@@ -50,14 +60,17 @@ void AnimTimeline::showEvent(QShowEvent* ev)
     (void)ev;
 
     QWidget* parent = static_cast<QWidget*>(this->parent());
+    // timeline can move into specific parent area
+    if (parent) {
 
-    int parent_x = parent->x();
-    int parent_y = parent->y();
-    int parent_height = parent->height();
-    int parent_width = parent->width();
-    int timelineLeft = parent_x + parent_width - this->width() - 50;
-    int timelineTop = parent_y + parent_height - this->height() - 50;
-    move(timelineLeft, timelineTop);
+        int parent_x = parent->x();
+        int parent_y = parent->y();
+        int parent_height = parent->height();
+        int parent_width = parent->width();
+        int timelineLeft = parent_x + parent_width - this->width() - 50;
+        int timelineTop = parent_y + parent_height - this->height() - 50;
+        move(timelineLeft, timelineTop);
+    }
 }
 
 void AnimTimeline::onChangeAnimDuration(double time)
