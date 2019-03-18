@@ -57,6 +57,7 @@ void QFrameSelector::mousePressEvent(QMouseEvent* event)
     if (event->button() == Qt::LeftButton) {
         double newCursor = qMax((event->x() - *zero) / *pixPerSec, 0.0);
         onChangeCursor(newCursor);
+        emit cursorChanged(cursor);
 
         clicked = true;
         event->accept();
@@ -71,6 +72,7 @@ void QFrameSelector::mouseMoveEvent(QMouseEvent* event)
         double newCursor = qMax((event->x() - *zero) / *pixPerSec, 0.0);
 
         onChangeCursor(newCursor);
+        emit cursorChanged(cursor);
     } else {
         event->ignore();
     }
@@ -86,12 +88,12 @@ void QFrameSelector::mouseReleaseEvent(QMouseEvent* event)
     }
 }
 
-void QFrameSelector::keyPressEvent(QKeyEvent* event)
-{
-    if (event->key() == Qt::Key_Space) {
-        onAddingKeyPose(cursor);
-    }
-}
+//void QFrameSelector::keyPressEvent(QKeyEvent* event)
+//{
+//    if (event->key() == Qt::Key_Space) {
+//        onAddingKeyPose(cursor);
+//    }
+//}
 
 void QFrameSelector::onSlideLeftSlider(int deltaX)
 {
@@ -189,8 +191,6 @@ void QFrameSelector::onChangeCursor(double time)
     cursor = time;
     updateCursorSpin();
     update();
-
-    emit cursorChanged(cursor);
 }
 
 void QFrameSelector::onChangeDuration()
@@ -205,11 +205,13 @@ void QFrameSelector::onChangeDuration()
 void QFrameSelector::onSetCursorToStart()
 {
     onChangeCursor(start);
+    emit cursorChanged(cursor);
 }
 
 void QFrameSelector::onSetCursorToEnd()
 {
     onChangeCursor(end);
+    emit cursorChanged(cursor);
 }
 
 void QFrameSelector::onSetCursorToPreviousKeyPose()
@@ -220,6 +222,7 @@ void QFrameSelector::onSetCursorToPreviousKeyPose()
 
     if (it != keyPoses.rend()) {
         onChangeCursor(*it);
+        emit cursorChanged(cursor);
     }
 }
 
@@ -250,6 +253,7 @@ void QFrameSelector::onPause()
 void QFrameSelector::onChangeCursorSpin()
 {
     onChangeCursor(cursorSpin->value());
+    emit cursorChanged(cursor);
 }
 
 void QFrameSelector::onChangeStartSpin()

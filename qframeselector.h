@@ -51,7 +51,7 @@ protected:
     void mousePressEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
-    void keyPressEvent(QKeyEvent* event) override;
+//    void keyPressEvent(QKeyEvent* event) override;
 
 signals:
     void cursorChanged(double time);
@@ -68,6 +68,7 @@ public slots:
     void onSlideRightSlider(int deltaX);
     void onSlideRelease();
 
+    // by default, add keyPose on cursor
     void onAddingKeyPose(double time = -1.0);
     void onDeleteKeyPose();
 
