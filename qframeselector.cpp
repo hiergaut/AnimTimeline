@@ -5,6 +5,8 @@
 #include <QWheelEvent>
 #include <QtGlobal>
 
+#include "animtimeline.h"
+
 QFrameSelector::QFrameSelector(QWidget* parent)
     : QFrame(parent)
 {
@@ -142,7 +144,8 @@ void QFrameSelector::onAddingKeyPose(double time)
         updateCursorSpin();
         update();
 
-        emit nbKeyPosesChanged(static_cast<int>(keyPoses.size()));
+//        emit nbKeyPosesChanged(static_cast<int>(keyPoses.size()));
+        nbKeyPosesSpin->setValue(static_cast<int>(keyPoses.size()));
     } else {
         auto it = keyPoses.find(time);
         emit keyPoseChanged(static_cast<int>(std::distance(keyPoses.begin(), it)), time);
@@ -161,7 +164,8 @@ void QFrameSelector::onDeleteKeyPose()
         updateCursorSpin();
         update();
 
-        emit nbKeyPosesChanged(static_cast<int>(keyPoses.size()));
+//        emit nbKeyPosesChanged(static_cast<int>(keyPoses.size()));
+        nbKeyPosesSpin->setValue(static_cast<int>(keyPoses.size()));
         emit keyPoseDeleted(num);
     }
 }
@@ -358,6 +362,12 @@ void QFrameSelector::updateKeyPoses(double gap)
     keyPoses = clone;
     emit keyPosesChanged(gap);
 }
+
+void QFrameSelector::setNbKeyPosesSpin(QSpinBox *value)
+{
+    nbKeyPosesSpin = value;
+}
+
 
 void QFrameSelector::updateDurationSpin()
 {

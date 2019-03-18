@@ -46,6 +46,8 @@ public:
     void setTotalDurationSpin(QDoubleSpinBox* value);
     void updateDurationSpin();
 
+    void setNbKeyPosesSpin(QSpinBox *value);
+
 protected:
     virtual void paintEvent(QPaintEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
@@ -111,6 +113,8 @@ private:
     QDoubleSpinBox* startSpin;
     QDoubleSpinBox* endSpin;
     QDoubleSpinBox* totalDurationSpin;
+
+    QSpinBox * nbKeyPosesSpin;
 
     QDoubleSpinBox* startInc;
     QDoubleSpinBox* endInc;

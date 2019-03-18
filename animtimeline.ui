@@ -314,7 +314,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QSpinBox" name="spinBox">
+       <widget class="QSpinBox" name="spinBox_nbKeyPoses">
         <property name="maximumSize">
          <size>
           <width>25</width>
@@ -1332,7 +1332,7 @@ border: 0px;</string>
   <connection>
    <sender>frame_selector</sender>
    <signal>nbKeyPosesChanged(int)</signal>
-   <receiver>spinBox</receiver>
+   <receiver>spinBox_nbKeyPoses</receiver>
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
