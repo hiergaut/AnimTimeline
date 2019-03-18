@@ -314,6 +314,28 @@
        </widget>
       </item>
       <item>
+       <widget class="QSpinBox" name="spinBox">
+        <property name="maximumSize">
+         <size>
+          <width>25</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;numbers of keyPoses&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+        <property name="buttonSymbols">
+         <enum>QAbstractSpinBox::NoButtons</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QToolButton" name="toolButton_deleteKeyPose">
         <property name="enabled">
          <bool>false</bool>
@@ -333,25 +355,6 @@
         <property name="icon">
          <iconset resource="timeline.qrc">
           <normaloff>:/images/deleteKey.png</normaloff>:/images/deleteKey.png</iconset>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QSpinBox" name="spinBox">
-        <property name="maximumSize">
-         <size>
-          <width>18</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;numbers of keyPoses&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-        <property name="buttonSymbols">
-         <enum>QAbstractSpinBox::NoButtons</enum>
         </property>
        </widget>
       </item>
@@ -1221,8 +1224,8 @@ border: 0px;</string>
    <slot>onAddingKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>630</x>
-     <y>91</y>
+     <x>552</x>
+     <y>113</y>
     </hint>
     <hint type="destinationlabel">
      <x>480</x>
@@ -1237,8 +1240,8 @@ border: 0px;</string>
    <slot>onSetCursorToStart()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>397</x>
-     <y>10</y>
+     <x>323</x>
+     <y>11</y>
     </hint>
     <hint type="destinationlabel">
      <x>449</x>
@@ -1253,8 +1256,8 @@ border: 0px;</string>
    <slot>onPlay()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>437</x>
-     <y>9</y>
+     <x>363</x>
+     <y>10</y>
     </hint>
     <hint type="destinationlabel">
      <x>390</x>
@@ -1269,8 +1272,8 @@ border: 0px;</string>
    <slot>onPause()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>437</x>
-     <y>16</y>
+     <x>363</x>
+     <y>17</y>
     </hint>
     <hint type="destinationlabel">
      <x>422</x>
@@ -1285,8 +1288,8 @@ border: 0px;</string>
    <slot>onAddingKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>309</x>
-     <y>7</y>
+     <x>257</x>
+     <y>8</y>
     </hint>
     <hint type="destinationlabel">
      <x>246</x>
@@ -1301,8 +1304,8 @@ border: 0px;</string>
    <slot>onSetCursorToEnd()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>477</x>
-     <y>13</y>
+     <x>403</x>
+     <y>14</y>
     </hint>
     <hint type="destinationlabel">
      <x>494</x>
@@ -1337,8 +1340,8 @@ border: 0px;</string>
      <y>78</y>
     </hint>
     <hint type="destinationlabel">
-     <x>347</x>
-     <y>18</y>
+     <x>295</x>
+     <y>19</y>
     </hint>
    </hints>
   </connection>
@@ -1365,8 +1368,8 @@ border: 0px;</string>
    <slot>onChangeCursorSpin()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>255</x>
-     <y>13</y>
+     <x>230</x>
+     <y>14</y>
     </hint>
     <hint type="destinationlabel">
      <x>411</x>
@@ -1381,8 +1384,8 @@ border: 0px;</string>
    <slot>onSetCursorToPreviousKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>417</x>
-     <y>15</y>
+     <x>343</x>
+     <y>16</y>
     </hint>
     <hint type="destinationlabel">
      <x>401</x>
@@ -1397,8 +1400,8 @@ border: 0px;</string>
    <slot>onSetCursorToNextKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>457</x>
-     <y>10</y>
+     <x>383</x>
+     <y>11</y>
     </hint>
     <hint type="destinationlabel">
      <x>461</x>
@@ -1413,7 +1416,7 @@ border: 0px;</string>
    <slot>onDeleteKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>329</x>
+     <x>277</x>
      <y>20</y>
     </hint>
     <hint type="destinationlabel">
@@ -1445,8 +1448,8 @@ border: 0px;</string>
    <slot>onStartIncPlus()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>6</x>
-     <y>45</y>
+     <x>9</x>
+     <y>51</y>
     </hint>
     <hint type="destinationlabel">
      <x>405</x>
@@ -1509,8 +1512,8 @@ border: 0px;</string>
    <slot>onChangeDuration()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>570</x>
-     <y>11</y>
+     <x>549</x>
+     <y>12</y>
     </hint>
     <hint type="destinationlabel">
      <x>442</x>
