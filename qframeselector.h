@@ -59,7 +59,7 @@ signals:
     void cursorChanged(double time);
     void startChanged(double time);
     void endChanged(double time);
-    void nbKeyPosesChanged(int nbEl);
+//    void nbKeyPosesChanged(int nbEl);
     void keyPoseAdded(double time);
     void keyPoseChanged(int num, double time);
     void keyPosesChanged(double gap);
