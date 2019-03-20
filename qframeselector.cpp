@@ -177,6 +177,9 @@ void QFrameSelector::onDeleteKeyPose()
 
 void QFrameSelector::onClearKeyPoses() {
     keyPoses.clear();
+    nbKeyPosesSpin->setValue(0);
+
+    update();
 }
 
 void QFrameSelector::onChangeStart(double time)
