@@ -71,8 +71,9 @@ public slots:
     void onSlideRelease();
 
     // by default, add keyPose on cursor
-    void onAddingKeyPose(double time = -1.0);
+    void onAddingKeyPose(double time = -1.0, bool internal =true);
     void onDeleteKeyPose();
+    void onClearKeyPoses();
 
     void onChangeStart(double time);
     void onChangeEnd(double time);

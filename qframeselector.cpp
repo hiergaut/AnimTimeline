@@ -133,7 +133,7 @@ void QFrameSelector::onSlideRelease()
     sliding = false;
 }
 
-void QFrameSelector::onAddingKeyPose(double time)
+void QFrameSelector::onAddingKeyPose(double time, bool internal)
 {
     if (static_cast<int>(time) == -1)
         time = cursor;
@@ -145,10 +145,15 @@ void QFrameSelector::onAddingKeyPose(double time)
         update();
 
 //        emit nbKeyPosesChanged(static_cast<int>(keyPoses.size()));
+        if (internal)
+            emit keyPoseAdded(time);
+
         nbKeyPosesSpin->setValue(static_cast<int>(keyPoses.size()));
     } else {
         auto it = keyPoses.find(time);
-        emit keyPoseChanged(static_cast<int>(std::distance(keyPoses.begin(), it)), time);
+
+        if (internal)
+            emit keyPoseChanged(static_cast<int>(std::distance(keyPoses.begin(), it)), time);
     }
 }
 
@@ -168,6 +173,10 @@ void QFrameSelector::onDeleteKeyPose()
         nbKeyPosesSpin->setValue(static_cast<int>(keyPoses.size()));
         emit keyPoseDeleted(num);
     }
+}
+
+void QFrameSelector::onClearKeyPoses() {
+    keyPoses.clear();
 }
 
 void QFrameSelector::onChangeStart(double time)

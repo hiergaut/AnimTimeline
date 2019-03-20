@@ -97,7 +97,11 @@ void AnimTimeline::onChangeEnd(double time)
 
 void AnimTimeline::onAddingKeyPose(double time)
 {
-    ui->frame_selector->onAddingKeyPose(time);
+    ui->frame_selector->onAddingKeyPose(time, false);
+}
+
+void AnimTimeline::onClearKeyPoses() {
+    ui->frame_selector->onClearKeyPoses();
 }
 
 void AnimTimeline::onSetPauseMode()

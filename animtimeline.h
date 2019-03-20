@@ -46,6 +46,7 @@ public slots:
     void onChangeStart(double time);
     void onChangeEnd(double time);
     void onAddingKeyPose(double time);
+    void onClearKeyPoses();
 
 private:
     Ui::AnimTimeline* ui;
