@@ -179,6 +179,7 @@ void QFrameSelector::onClearKeyPoses() {
     keyPoses.clear();
     nbKeyPosesSpin->setValue(0);
 
+    updateCursorSpin();
     update();
 }
 
