@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>553</width>
+    <width>619</width>
     <height>140</height>
    </rect>
   </property>
@@ -317,7 +317,7 @@
        <widget class="QSpinBox" name="spinBox_nbKeyPoses">
         <property name="maximumSize">
          <size>
-          <width>25</width>
+          <width>35</width>
           <height>20</height>
          </size>
         </property>
@@ -553,7 +553,7 @@
         <x>0</x>
         <y>0</y>
         <width>500</width>
-        <height>103</height>
+        <height>107</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -680,8 +680,8 @@
             <widget class="QToolButton" name="toolButton_plusStart">
              <property name="geometry">
               <rect>
-               <x>7</x>
-               <y>7</y>
+               <x>9</x>
+               <y>9</y>
                <width>20</width>
                <height>20</height>
               </rect>
@@ -712,10 +712,10 @@
             <widget class="QDoubleSpinBox" name="doubleSpinBox_startInc">
              <property name="geometry">
               <rect>
-               <x>1</x>
-               <y>33</y>
+               <x>9</x>
+               <y>34</y>
                <width>30</width>
-               <height>15</height>
+               <height>20</height>
               </rect>
              </property>
              <property name="sizePolicy">
@@ -724,10 +724,16 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>20</height>
+              </size>
+             </property>
              <property name="maximumSize">
               <size>
                <width>30</width>
-               <height>15</height>
+               <height>20</height>
               </size>
              </property>
              <property name="font">
@@ -757,8 +763,8 @@
             <widget class="QToolButton" name="toolButton_lessStart">
              <property name="geometry">
               <rect>
-               <x>7</x>
-               <y>54</y>
+               <x>9</x>
+               <y>59</y>
                <width>20</width>
                <height>20</height>
               </rect>
@@ -962,10 +968,16 @@ border: 0px;</string>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="maximumSize">
                 <size>
                  <width>30</width>
-                 <height>15</height>
+                 <height>20</height>
                 </size>
                </property>
                <property name="font">
