@@ -61,7 +61,7 @@ signals:
     void endChanged(double time);
 //    void nbKeyPosesChanged(int nbEl);
     void keyPoseAdded(double time);
-    void keyPoseChanged(int num, double time);
+    void keyPoseChanged(int num);
     void keyPosesChanged(double gap);
     void keyPoseDeleted(int num);
 
