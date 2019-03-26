@@ -153,7 +153,7 @@ void QFrameSelector::onAddingKeyPose(double time, bool internal)
         auto it = keyPoses.find(time);
 
         if (internal)
-            emit keyPoseChanged(static_cast<int>(std::distance(keyPoses.begin(), it)), time);
+            emit keyPoseChanged(static_cast<int>(std::distance(keyPoses.begin(), it)));
     }
 }
 
