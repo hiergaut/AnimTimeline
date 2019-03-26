@@ -277,6 +277,8 @@ void QFrameSelector::onChangeStartSpin()
     start = qMax(qMin(startSpin->value(), end), 0.0);
     updateStartSpin();
     update();
+
+    emit startChanged(start);
 }
 
 void QFrameSelector::onChangeEndSpin()
@@ -284,6 +286,8 @@ void QFrameSelector::onChangeEndSpin()
     end = qMin(qMax(endSpin->value(), start), *maxDuration);
     updateEndSpin();
     update();
+
+    emit endChanged(end);
 }
 
 void QFrameSelector::onStartIncPlus()
