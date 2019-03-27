@@ -742,7 +742,7 @@
             <widget class="QDoubleSpinBox" name="doubleSpinBox_startInc">
              <property name="geometry">
               <rect>
-               <x>9</x>
+               <x>3</x>
                <y>32</y>
                <width>30</width>
                <height>20</height>
