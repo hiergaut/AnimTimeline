@@ -62,6 +62,7 @@ signals:
 //    void nbKeyPosesChanged(int nbEl);
     void keyPoseAdded(double time);
     void keyPoseChanged(int num);
+    void keyPoseMoved(int num, double time);
     void keyPosesChanged(double gap);
     void keyPoseDeleted(int num);
 
@@ -138,7 +139,7 @@ private:
 
     int iPaint = 0;
     bool sliding = false;
-    bool clicked = false;
+    bool mouseLeftClicked = false;
 };
 
 #endif // QFRAMESELECTOR_H

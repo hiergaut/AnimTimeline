@@ -61,8 +61,32 @@ void QFrameSelector::mousePressEvent(QMouseEvent* event)
         onChangeCursor(newCursor);
         emit cursorChanged(cursor);
 
-        clicked = true;
+        mouseLeftClicked = true;
         event->accept();
+
+    } else if (event->button() == Qt::RightButton) {
+        double newPose = qMax((event->x() - *zero) / *pixPerSec, 0.0);
+
+        auto it = keyPoses.find(cursor);
+
+        if (it != keyPoses.end()) {
+
+            int num = static_cast<int>(std::distance(keyPoses.begin(), it));
+//            *it =newPose;
+            keyPoses.erase(it);
+            keyPoses.insert(newPose);
+
+//            updateCursorSpin();
+//            update();
+            onChangeCursor(newPose);
+            emit keyPoseMoved(num, newPose);
+
+            //        emit nbKeyPosesChanged(static_cast<int>(keyPoses.size()));
+//            nbKeyPosesSpin->setValue(static_cast<int>(keyPoses.size()));
+//            emit keyPoseDeleted(num);
+        }
+
+
     } else {
         event->ignore();
     }
@@ -70,7 +94,7 @@ void QFrameSelector::mousePressEvent(QMouseEvent* event)
 
 void QFrameSelector::mouseMoveEvent(QMouseEvent* event)
 {
-    if (clicked) {
+    if (mouseLeftClicked) {
         double newCursor = qMax((event->x() - *zero) / *pixPerSec, 0.0);
 
         onChangeCursor(newCursor);
@@ -83,8 +107,9 @@ void QFrameSelector::mouseMoveEvent(QMouseEvent* event)
 void QFrameSelector::mouseReleaseEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::LeftButton) {
-        clicked = false;
+        mouseLeftClicked = false;
         event->accept();
+
     } else {
         event->ignore();
     }
@@ -144,7 +169,7 @@ void QFrameSelector::onAddingKeyPose(double time, bool internal)
         updateCursorSpin();
         update();
 
-//        emit nbKeyPosesChanged(static_cast<int>(keyPoses.size()));
+        //        emit nbKeyPosesChanged(static_cast<int>(keyPoses.size()));
         if (internal)
             emit keyPoseAdded(time);
 
@@ -169,13 +194,14 @@ void QFrameSelector::onDeleteKeyPose()
         updateCursorSpin();
         update();
 
-//        emit nbKeyPosesChanged(static_cast<int>(keyPoses.size()));
+        //        emit nbKeyPosesChanged(static_cast<int>(keyPoses.size()));
         nbKeyPosesSpin->setValue(static_cast<int>(keyPoses.size()));
         emit keyPoseDeleted(num);
     }
 }
 
-void QFrameSelector::onClearKeyPoses() {
+void QFrameSelector::onClearKeyPoses()
+{
     keyPoses.clear();
     nbKeyPosesSpin->setValue(0);
 
@@ -380,11 +406,10 @@ void QFrameSelector::updateKeyPoses(double gap)
     emit keyPosesChanged(gap);
 }
 
-void QFrameSelector::setNbKeyPosesSpin(QSpinBox *value)
+void QFrameSelector::setNbKeyPosesSpin(QSpinBox* value)
 {
     nbKeyPosesSpin = value;
 }
-
 
 void QFrameSelector::updateDurationSpin()
 {

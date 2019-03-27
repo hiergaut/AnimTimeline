@@ -36,6 +36,7 @@ signals:
     void keyPoseDeleted(int num);
     void keyPoseChanged(int num);
     void keyPosesChanged(double gap);
+    void keyPoseMoved(int num, double time);
 
 public slots:
     void onSetPlayMode();
