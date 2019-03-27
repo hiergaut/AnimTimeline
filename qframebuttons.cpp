@@ -1,6 +1,7 @@
 #include "qframebuttons.h"
 
 #include <QWheelEvent>
+#include <QMessageBox>
 
 QFrameButtons::QFrameButtons(QWidget* parent)
     : QFrame(parent)
@@ -34,4 +35,25 @@ void QFrameButtons::setRuler(QWidgetRuler* value)
 void QFrameButtons::setAnimTimeline(AnimTimeline* value)
 {
     animTimeline = value;
+}
+
+void QFrameButtons::helpClicked()
+{
+    QMessageBox msgBox;
+    msgBox.setText("List of Shortcuts :\n"
+                   "\n"
+                   "keyBoard :\n"
+                   "i : insert/replace keyPose on cursor\n"
+                   "<shift> + i : delete keyPose on cursor\n"
+                   "<left> : previous keyPose\n"
+                   "<right> : next keyPose\n"
+                   "\n"
+                   "mouse :\n"
+                   "<wheelMouse[Up/Down]> : zoom on ruler\n"
+                   "<ctrl>+<wheelMouse[Up/Down] : move right/left ruler\n"
+                   "<leftClick> : move cursor\n"
+                   "<rightClick> (cursor on keyPose) : move keyPose\n"
+                   "<rightClick> : insert time on mouse\n"
+                   "<shift>+<rightClick> : remove time on mouse\n");
+    msgBox.exec();
 }

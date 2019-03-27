@@ -21,6 +21,7 @@ protected:
 signals:
 
 public slots:
+    void helpClicked();
 
 private:
     bool clicked = false;

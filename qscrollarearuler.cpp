@@ -43,6 +43,12 @@ void QScrollAreaRuler::keyPressEvent(QKeyEvent* event)
     if (event->key() == Qt::Key_Shift) {
         shiftDown = true;
     }
+    if (event->key() == Qt::Key_Left) {
+        emit previousKeyPose();
+    }
+    if (event->key() == Qt::Key_Right) {
+        emit nextKeyPose();
+    }
 }
 
 void QScrollAreaRuler::keyReleaseEvent(QKeyEvent* event)

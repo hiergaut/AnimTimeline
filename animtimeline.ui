@@ -288,8 +288,8 @@
         </property>
         <property name="maximumSize">
          <size>
-          <width>20</width>
-          <height>20</height>
+          <width>18</width>
+          <height>18</height>
          </size>
         </property>
         <property name="toolTip">
@@ -378,8 +378,8 @@
        <widget class="QToolButton" name="toolButton_start">
         <property name="maximumSize">
          <size>
-          <width>20</width>
-          <height>20</height>
+          <width>18</width>
+          <height>18</height>
          </size>
         </property>
         <property name="toolTip">
@@ -398,8 +398,8 @@
        <widget class="QToolButton" name="toolButton_rearward">
         <property name="maximumSize">
          <size>
-          <width>20</width>
-          <height>20</height>
+          <width>18</width>
+          <height>18</height>
          </size>
         </property>
         <property name="toolTip">
@@ -438,8 +438,8 @@
        <widget class="QToolButton" name="toolButton_forward">
         <property name="maximumSize">
          <size>
-          <width>20</width>
-          <height>20</height>
+          <width>18</width>
+          <height>18</height>
          </size>
         </property>
         <property name="toolTip">
@@ -458,8 +458,8 @@
        <widget class="QToolButton" name="toolButton_end">
         <property name="maximumSize">
          <size>
-          <width>20</width>
-          <height>20</height>
+          <width>18</width>
+          <height>18</height>
          </size>
         </property>
         <property name="toolTip">
@@ -515,6 +515,36 @@
         </property>
         <property name="value">
          <double>30.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_7">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>0</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QToolButton" name="toolButton_help">
+        <property name="maximumSize">
+         <size>
+          <width>18</width>
+          <height>18</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="timeline.qrc">
+          <normaloff>:/images/help.png</normaloff>:/images/help.png</iconset>
         </property>
        </widget>
       </item>
@@ -682,14 +712,14 @@
               <rect>
                <x>9</x>
                <y>9</y>
-               <width>20</width>
-               <height>20</height>
+               <width>18</width>
+               <height>18</height>
               </rect>
              </property>
              <property name="maximumSize">
               <size>
-               <width>20</width>
-               <height>20</height>
+               <width>18</width>
+               <height>18</height>
               </size>
              </property>
              <property name="styleSheet">
@@ -713,7 +743,7 @@
              <property name="geometry">
               <rect>
                <x>9</x>
-               <y>34</y>
+               <y>32</y>
                <width>30</width>
                <height>20</height>
               </rect>
@@ -764,15 +794,15 @@
              <property name="geometry">
               <rect>
                <x>9</x>
-               <y>59</y>
-               <width>20</width>
-               <height>20</height>
+               <y>57</y>
+               <width>18</width>
+               <height>18</height>
               </rect>
              </property>
              <property name="maximumSize">
               <size>
-               <width>20</width>
-               <height>20</height>
+               <width>18</width>
+               <height>18</height>
               </size>
              </property>
              <property name="styleSheet">
@@ -938,8 +968,8 @@ border: 0px;</string>
               <widget class="QToolButton" name="toolButton_plusEnd">
                <property name="maximumSize">
                 <size>
-                 <width>20</width>
-                 <height>20</height>
+                 <width>18</width>
+                 <height>18</height>
                 </size>
                </property>
                <property name="styleSheet">
@@ -1009,8 +1039,8 @@ border: 0px;</string>
               <widget class="QToolButton" name="toolButton_lessEnd">
                <property name="maximumSize">
                 <size>
-                 <width>20</width>
-                 <height>20</height>
+                 <width>18</width>
+                 <height>18</height>
                 </size>
                </property>
                <property name="styleSheet">
@@ -1131,6 +1161,8 @@ border: 0px;</string>
     <signal>addKeyPose()</signal>
     <signal>removeKeyPose()</signal>
     <signal>adKeyPose(double,bool)</signal>
+    <signal>nextKeyPose()</signal>
+    <signal>previousKeyPose()</signal>
     <slot>onPlayPause()</slot>
    </slots>
   </customwidget>
@@ -1164,6 +1196,9 @@ border: 0px;</string>
    <extends>QFrame</extends>
    <header>qframebuttons.h</header>
    <container>1</container>
+   <slots>
+    <slot>helpClicked()</slot>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources>
@@ -1241,8 +1276,8 @@ border: 0px;</string>
    <slot>onSetCursorToStart()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>376</x>
-     <y>12</y>
+     <x>352</x>
+     <y>13</y>
     </hint>
     <hint type="destinationlabel">
      <x>449</x>
@@ -1257,8 +1292,8 @@ border: 0px;</string>
    <slot>onPlay()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>416</x>
-     <y>11</y>
+     <x>392</x>
+     <y>12</y>
     </hint>
     <hint type="destinationlabel">
      <x>390</x>
@@ -1273,8 +1308,8 @@ border: 0px;</string>
    <slot>onPause()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>416</x>
-     <y>18</y>
+     <x>392</x>
+     <y>19</y>
     </hint>
     <hint type="destinationlabel">
      <x>422</x>
@@ -1289,8 +1324,8 @@ border: 0px;</string>
    <slot>onAddingKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>282</x>
-     <y>9</y>
+     <x>266</x>
+     <y>10</y>
     </hint>
     <hint type="destinationlabel">
      <x>246</x>
@@ -1305,8 +1340,8 @@ border: 0px;</string>
    <slot>onSetCursorToEnd()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>456</x>
-     <y>15</y>
+     <x>432</x>
+     <y>16</y>
     </hint>
     <hint type="destinationlabel">
      <x>494</x>
@@ -1369,8 +1404,8 @@ border: 0px;</string>
    <slot>onSetCursorToPreviousKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>396</x>
-     <y>17</y>
+     <x>372</x>
+     <y>18</y>
     </hint>
     <hint type="destinationlabel">
      <x>401</x>
@@ -1385,8 +1420,8 @@ border: 0px;</string>
    <slot>onSetCursorToNextKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>436</x>
-     <y>12</y>
+     <x>412</x>
+     <y>13</y>
     </hint>
     <hint type="destinationlabel">
      <x>461</x>
@@ -1401,7 +1436,7 @@ border: 0px;</string>
    <slot>onDeleteKeyPose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>337</x>
+     <x>321</x>
      <y>20</y>
     </hint>
     <hint type="destinationlabel">
@@ -1519,6 +1554,54 @@ border: 0px;</string>
     <hint type="destinationlabel">
      <x>480</x>
      <y>80</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolButton_help</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>frame_buttons</receiver>
+   <slot>helpClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>608</x>
+     <y>16</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>593</x>
+     <y>14</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>scrollArea</sender>
+   <signal>nextKeyPose()</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onSetCursorToNextKeyPose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>567</x>
+     <y>96</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>431</x>
+     <y>95</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>scrollArea</sender>
+   <signal>previousKeyPose()</signal>
+   <receiver>frame_selector</receiver>
+   <slot>onSetCursorToPreviousKeyPose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>553</x>
+     <y>38</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>381</x>
+     <y>94</y>
     </hint>
    </hints>
   </connection>

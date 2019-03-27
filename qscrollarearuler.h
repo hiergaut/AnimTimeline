@@ -28,6 +28,8 @@ signals:
     void changePrecision(int accuracy);
     void addKeyPose();
     void removeKeyPose();
+    void previousKeyPose();
+    void nextKeyPose();
 
 public slots:
 
