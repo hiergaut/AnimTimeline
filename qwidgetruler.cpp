@@ -39,7 +39,7 @@ void QWidgetRuler::onChangePrecision(int accuracy)
 void QWidgetRuler::setMaxDuration(double value)
 {
     //    if (value != maxDuration) {
-    if (qAbs(value - maxDuration) < 1e-5) {
+    if (qAbs(value - maxDuration) > 1e-5) {
 
         maxDuration = value;
         updateTimeline(width());

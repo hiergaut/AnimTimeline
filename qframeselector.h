@@ -20,10 +20,9 @@ public:
     void setLeftSpacer(QFrame* value);
 
     void setCursorSpin(QDoubleSpinBox* value);
-
     void setStartSpin(QDoubleSpinBox* value);
-
     void setEndSpin(QDoubleSpinBox* value);
+
     void setCursor(double time);
     void updatePlayZone();
     double getCursor();
@@ -40,12 +39,10 @@ public:
     void setKeyPoses(const std::set<double>& value);
 
     void setStartInc(QDoubleSpinBox* value);
-
     void setEndInc(QDoubleSpinBox* value);
 
     void setTotalDurationSpin(QDoubleSpinBox* value);
     void updateDurationSpin();
-
     void setNbKeyPosesSpin(QSpinBox* value);
 
     void setShiftDown(bool* value);
@@ -62,6 +59,7 @@ protected:
     //    void keyReleaseEvent(QKeyEvent* event) override;
 
 signals:
+    // all external signal
     void cursorChanged(double time);
     void startChanged(double time);
     void endChanged(double time);
@@ -69,7 +67,7 @@ signals:
     void keyPoseAdded(double time);
     void keyPoseChanged(int num);
     void keyPoseMoved(int num, double time);
-    void keyPosesChanged(double gap, int first);
+    void keyPosesMoved(double gap, int first);
     void keyPoseDeleted(int num);
 
 public slots:

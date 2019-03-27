@@ -38,13 +38,14 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     connect(ui->toolButton_playPause, &QToolButtonPlayPause::playClicked, this, &AnimTimeline::playClicked);
     connect(ui->toolButton_playPause, &QToolButtonPlayPause::pauseClicked, this, &AnimTimeline::pauseClicked);
     connect(ui->scrollAreaWidgetContents, &QWidgetRuler::durationChanged, this, &AnimTimeline::durationChanged);
+
     connect(ui->frame_selector, &QFrameSelector::cursorChanged, this, &AnimTimeline::cursorChanged);
     connect(ui->frame_selector, &QFrameSelector::startChanged, this, &AnimTimeline::startChanged);
     connect(ui->frame_selector, &QFrameSelector::endChanged, this, &AnimTimeline::endChanged);
     connect(ui->frame_selector, &QFrameSelector::keyPoseAdded, this, &AnimTimeline::keyPoseAdded);
     connect(ui->frame_selector, &QFrameSelector::keyPoseDeleted, this, &AnimTimeline::keyPoseDeleted);
     connect(ui->frame_selector, &QFrameSelector::keyPoseChanged, this, &AnimTimeline::keyPoseChanged);
-    connect(ui->frame_selector, &QFrameSelector::keyPosesChanged, this, &AnimTimeline::keyPosesChanged);
+    connect(ui->frame_selector, &QFrameSelector::keyPosesMoved, this, &AnimTimeline::keyPosesMoved);
     connect(ui->frame_selector, &QFrameSelector::keyPoseMoved, this, &AnimTimeline::keyPoseMoved);
 
     // if not parent widget so move timeline with current widget screen resolution

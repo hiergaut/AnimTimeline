@@ -116,6 +116,7 @@ void QFrameSelector::mousePressEvent(QMouseEvent* event)
                 updateDurationSpin();
             }
         }
+        update();
 
     } else {
         event->ignore();
@@ -206,6 +207,7 @@ void QFrameSelector::onSlideRelease()
     sliding = false;
 }
 
+// external slot, warning on using external signal
 void QFrameSelector::onAddingKeyPose(double time, bool internal)
 {
     if (static_cast<int>(time) == -1)
@@ -248,6 +250,7 @@ void QFrameSelector::onDeleteKeyPose()
     }
 }
 
+// external slot, warning on using external signal
 void QFrameSelector::onClearKeyPoses()
 {
     keyPoses.clear();
@@ -257,6 +260,7 @@ void QFrameSelector::onClearKeyPoses()
     update();
 }
 
+// external slot, warning on using external signal
 void QFrameSelector::onChangeStart(double time)
 {
     start = qMax(qMin(time, end), 0.0);
@@ -266,6 +270,7 @@ void QFrameSelector::onChangeStart(double time)
     emit startChanged(start);
 }
 
+// external slot, warning on using external signal
 void QFrameSelector::onChangeEnd(double time)
 {
     end = qMin(qMax(time, start), *maxDuration);
@@ -276,6 +281,7 @@ void QFrameSelector::onChangeEnd(double time)
     emit endChanged(end);
 }
 
+// external slot, warning on using external signal
 void QFrameSelector::onChangeCursor(double time)
 {
     cursor = time;
@@ -457,7 +463,7 @@ void QFrameSelector::updateKeyPoses(double gap, int first)
     }
 
     keyPoses = clone;
-    emit keyPosesChanged(gap, first);
+    emit keyPosesMoved(gap, first);
 }
 
 void QFrameSelector::setShiftDown(bool* value)
