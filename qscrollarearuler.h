@@ -10,6 +10,8 @@ class QScrollAreaRuler : public QScrollArea {
 public:
     explicit QScrollAreaRuler(QWidget* parent = nullptr);
 
+    bool * getShiftDown();
+
 protected:
     void keyPressEvent(QKeyEvent* event) override;
     void keyReleaseEvent(QKeyEvent* event) override;

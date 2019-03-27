@@ -35,7 +35,7 @@ signals:
     void keyPoseAdded(double time);
     void keyPoseDeleted(int num);
     void keyPoseChanged(int num);
-    void keyPosesChanged(double gap);
+    void keyPosesChanged(double gap, int first = 0);
     void keyPoseMoved(int num, double time);
 
 public slots:

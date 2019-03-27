@@ -48,12 +48,19 @@ public:
 
     void setNbKeyPosesSpin(QSpinBox *value);
 
+    void setShiftDown(bool *value);
+
 protected:
     virtual void paintEvent(QPaintEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
+//    void wheelEvent(QWheelEvent* event) override;
 //    void keyPressEvent(QKeyEvent* event) override;
+
+    // keyPress event on area but not here
+//    void keyPressEvent(QKeyEvent* event) override;
+//    void keyReleaseEvent(QKeyEvent* event) override;
 
 signals:
     void cursorChanged(double time);
@@ -63,7 +70,7 @@ signals:
     void keyPoseAdded(double time);
     void keyPoseChanged(int num);
     void keyPoseMoved(int num, double time);
-    void keyPosesChanged(double gap);
+    void keyPosesChanged(double gap, int first);
     void keyPoseDeleted(int num);
 
 public slots:
@@ -101,7 +108,7 @@ private:
     void updateCursorSpin();
     void updateStartSpin();
     void updateEndSpin();
-    void updateKeyPoses(double gap);
+    void updateKeyPoses(double gap, int first = 0);
 
 private:
     QWidgetRuler* widgetRuler;
@@ -140,6 +147,7 @@ private:
     int iPaint = 0;
     bool sliding = false;
     bool mouseLeftClicked = false;
+    bool * shiftDown;
 };
 
 #endif // QFRAMESELECTOR_H

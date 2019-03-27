@@ -30,6 +30,9 @@ QScrollAreaRuler::QScrollAreaRuler(QWidget* parent)
 
 void QScrollAreaRuler::keyPressEvent(QKeyEvent* event)
 {
+//    qDebug() << "ruler press" << endl;
+//    event->ignore();
+
     if (event->key() == Qt::Key_Control) {
         ctrlDown = true;
     }
@@ -43,6 +46,7 @@ void QScrollAreaRuler::keyPressEvent(QKeyEvent* event)
     if (event->key() == Qt::Key_Shift) {
         shiftDown = true;
     }
+//    event->ignore();
 }
 
 void QScrollAreaRuler::keyReleaseEvent(QKeyEvent* event)
@@ -90,4 +94,9 @@ void QScrollAreaRuler::mouseMoveEvent(QMouseEvent* event)
     if (midMouseDown) {
         horizontalScrollBar()->setValue((sliderPos + mousePosX - event->x()));
     }
+}
+
+bool * QScrollAreaRuler::getShiftDown()
+{
+    return &shiftDown;
 }

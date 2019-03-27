@@ -62,34 +62,82 @@ void QFrameSelector::mousePressEvent(QMouseEvent* event)
         emit cursorChanged(cursor);
 
         mouseLeftClicked = true;
-        event->accept();
 
     } else if (event->button() == Qt::RightButton) {
         double newPose = qMax((event->x() - *zero) / *pixPerSec, 0.0);
 
         auto it = keyPoses.find(cursor);
 
+        // already on keyPose
         if (it != keyPoses.end()) {
 
             int num = static_cast<int>(std::distance(keyPoses.begin(), it));
-//            *it =newPose;
+            //            *it =newPose;
             keyPoses.erase(it);
             keyPoses.insert(newPose);
 
-//            updateCursorSpin();
-//            update();
+            //            updateCursorSpin();
+            //            update();
             onChangeCursor(newPose);
             emit keyPoseMoved(num, newPose);
 
             //        emit nbKeyPosesChanged(static_cast<int>(keyPoses.size()));
-//            nbKeyPosesSpin->setValue(static_cast<int>(keyPoses.size()));
-//            emit keyPoseDeleted(num);
-        }
+            //            nbKeyPosesSpin->setValue(static_cast<int>(keyPoses.size()));
+            //            emit keyPoseDeleted(num);
 
+            // not on keyPose
+        } else {
+            double eventTime = qMax((event->x() - *zero) / *pixPerSec, 0.0);
+//            int delta = event->angleDelta().ry();
+
+            auto it = keyPoses.begin();
+//            double left = 0.0;
+            int iRight = 0;
+            while (it != keyPoses.end() && *it < eventTime) {
+//                left = *it;
+                iRight++;
+                it++;
+            }
+            // if keyPoses on the right
+            if (it != keyPoses.end()) {
+
+                double right = *it;
+                //        int iRight = static_cast<int>(std::distance(keyPoses.begin(), it));
+
+                double dist = right - eventTime;
+//                qDebug() << "eventTime : " << eventTime << ", right : " << right << endl;
+
+//                if (delta > 0) {
+                double gap = (*shiftDown) ?(-dist) :(dist);
+                if (start > eventTime) {
+                    start += gap;
+                    updateStartSpin();
+                }
+
+                if (end > eventTime) {
+                    end += gap;
+                    updateEndSpin();
+                }
+
+                if (cursor > eventTime) {
+                    cursor += gap;
+                    updateCursorSpin();
+                }
+                updateKeyPoses(gap, iRight);
+
+
+                widgetRuler->setMaxDuration(*maxDuration + gap);
+                updateDurationSpin();
+
+//                update();
+            }
+        }
 
     } else {
         event->ignore();
+        return;
     }
+    event->accept();
 }
 
 void QFrameSelector::mouseMoveEvent(QMouseEvent* event)
@@ -114,6 +162,29 @@ void QFrameSelector::mouseReleaseEvent(QMouseEvent* event)
         event->ignore();
     }
 }
+
+//void QFrameSelector::wheelEvent(QWheelEvent* event)
+//{
+//    if (*shiftDown) {
+//    }
+//}
+
+//void QFrameSelector::keyPressEvent(QKeyEvent *event)
+//{
+//    qDebug() << "keyPress" << endl;
+
+//    if (event->key() == Qt::Key_Shift) {
+//        shiftDown = true;
+//    }
+//}
+
+//void QFrameSelector::keyReleaseEvent(QKeyEvent *event)
+//{
+//    if (event->key() == Qt::Key_Shift) {
+//        shiftDown = false;
+//    }
+
+//}
 
 //void QFrameSelector::keyPressEvent(QKeyEvent* event)
 //{
@@ -395,15 +466,26 @@ void QFrameSelector::updateEndSpin()
     endSpin->setValue(end);
 }
 
-void QFrameSelector::updateKeyPoses(double gap)
+void QFrameSelector::updateKeyPoses(double gap, int first)
 {
     std::set<double> clone;
+    int i = 0;
     for (double d : keyPoses) {
-        clone.insert(d + gap);
+        if (i < first)
+            clone.insert(d);
+        else {
+            clone.insert(d + gap);
+        }
+        i++;
     }
 
     keyPoses = clone;
-    emit keyPosesChanged(gap);
+    emit keyPosesChanged(gap, first);
+}
+
+void QFrameSelector::setShiftDown(bool* value)
+{
+    shiftDown = value;
 }
 
 void QFrameSelector::setNbKeyPosesSpin(QSpinBox* value)
