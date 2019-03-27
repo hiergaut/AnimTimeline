@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QScrollArea>
 #include <QWidget>
+#include "qwidgetruler.h"
 
 class QScrollAreaRuler : public QScrollArea {
     Q_OBJECT
@@ -11,6 +12,8 @@ public:
     explicit QScrollAreaRuler(QWidget* parent = nullptr);
 
     bool * getShiftDown();
+
+    void setRuler(QWidgetRuler *value);
 
 protected:
     void keyPressEvent(QKeyEvent* event) override;
@@ -35,6 +38,7 @@ private:
 
     int mousePosX;
     int sliderPos;
+    QWidgetRuler * ruler;
 };
 
 #endif // QSCROLLAREARULER_H

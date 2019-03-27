@@ -46,27 +46,26 @@ public:
     void setTotalDurationSpin(QDoubleSpinBox* value);
     void updateDurationSpin();
 
-    void setNbKeyPosesSpin(QSpinBox *value);
+    void setNbKeyPosesSpin(QSpinBox* value);
 
-    void setShiftDown(bool *value);
+    void setShiftDown(bool* value);
 
 protected:
     virtual void paintEvent(QPaintEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
-//    void wheelEvent(QWheelEvent* event) override;
-//    void keyPressEvent(QKeyEvent* event) override;
+    //    void wheelEvent(QWheelEvent* event) override;
 
     // keyPress event on area but not here
-//    void keyPressEvent(QKeyEvent* event) override;
-//    void keyReleaseEvent(QKeyEvent* event) override;
+    //    void keyPressEvent(QKeyEvent* event) override;
+    //    void keyReleaseEvent(QKeyEvent* event) override;
 
 signals:
     void cursorChanged(double time);
     void startChanged(double time);
     void endChanged(double time);
-//    void nbKeyPosesChanged(int nbEl);
+    //    void nbKeyPosesChanged(int nbEl);
     void keyPoseAdded(double time);
     void keyPoseChanged(int num);
     void keyPoseMoved(int num, double time);
@@ -79,7 +78,7 @@ public slots:
     void onSlideRelease();
 
     // by default, add keyPose on cursor
-    void onAddingKeyPose(double time = -1.0, bool internal =true);
+    void onAddingKeyPose(double time = -1.0, bool internal = true);
     void onDeleteKeyPose();
     void onClearKeyPoses();
 
@@ -123,7 +122,7 @@ private:
     QDoubleSpinBox* endSpin;
     QDoubleSpinBox* totalDurationSpin;
 
-    QSpinBox * nbKeyPosesSpin;
+    QSpinBox* nbKeyPosesSpin;
 
     QDoubleSpinBox* startInc;
     QDoubleSpinBox* endInc;
@@ -147,7 +146,7 @@ private:
     int iPaint = 0;
     bool sliding = false;
     bool mouseLeftClicked = false;
-    bool * shiftDown;
+    bool* shiftDown;
 };
 
 #endif // QFRAMESELECTOR_H

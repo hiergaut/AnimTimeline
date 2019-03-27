@@ -1,6 +1,6 @@
 #include "qscrollarearuler.h"
 
-#include <QDebug>
+//#include <QDebug>
 #include <QScrollBar>
 #include <QWheelEvent>
 
@@ -30,9 +30,6 @@ QScrollAreaRuler::QScrollAreaRuler(QWidget* parent)
 
 void QScrollAreaRuler::keyPressEvent(QKeyEvent* event)
 {
-//    qDebug() << "ruler press" << endl;
-//    event->ignore();
-
     if (event->key() == Qt::Key_Control) {
         ctrlDown = true;
     }
@@ -46,7 +43,6 @@ void QScrollAreaRuler::keyPressEvent(QKeyEvent* event)
     if (event->key() == Qt::Key_Shift) {
         shiftDown = true;
     }
-//    event->ignore();
 }
 
 void QScrollAreaRuler::keyReleaseEvent(QKeyEvent* event)
@@ -61,11 +57,19 @@ void QScrollAreaRuler::keyReleaseEvent(QKeyEvent* event)
 
 void QScrollAreaRuler::wheelEvent(QWheelEvent* event)
 {
+    int ry = event->angleDelta().ry();
+    int gap = (ry > 0) ? (ruler->minimumWidth() / 4) : (-ruler->minimumWidth() / 4);
+
     if (ctrlDown) {
-        horizontalScrollBar()->setValue(horizontalScrollBar()->value() + event->angleDelta().ry());
+        horizontalScrollBar()->setValue(horizontalScrollBar()->value() + 3 * ry);
 
     } else {
-        emit changePrecision(event->angleDelta().ry());
+        emit changePrecision(gap);
+
+        double x = event->x();
+        int endScroll = ruler->minimumWidth() -width();
+        double ratio = x /width();
+        horizontalScrollBar()->setValue(static_cast<int>(endScroll * ratio));
     }
     event->accept();
 }
@@ -96,7 +100,12 @@ void QScrollAreaRuler::mouseMoveEvent(QMouseEvent* event)
     }
 }
 
-bool * QScrollAreaRuler::getShiftDown()
+void QScrollAreaRuler::setRuler(QWidgetRuler* value)
+{
+    ruler = value;
+}
+
+bool* QScrollAreaRuler::getShiftDown()
 {
     return &shiftDown;
 }

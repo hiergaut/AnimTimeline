@@ -1,6 +1,6 @@
 #include "qframeselector.h"
 
-#include <QDebug>
+//#include <QDebug>
 #include <QPainter>
 #include <QWheelEvent>
 #include <QtGlobal>
@@ -72,43 +72,30 @@ void QFrameSelector::mousePressEvent(QMouseEvent* event)
         if (it != keyPoses.end()) {
 
             int num = static_cast<int>(std::distance(keyPoses.begin(), it));
-            //            *it =newPose;
             keyPoses.erase(it);
             keyPoses.insert(newPose);
 
-            //            updateCursorSpin();
-            //            update();
             onChangeCursor(newPose);
             emit keyPoseMoved(num, newPose);
 
-            //        emit nbKeyPosesChanged(static_cast<int>(keyPoses.size()));
-            //            nbKeyPosesSpin->setValue(static_cast<int>(keyPoses.size()));
-            //            emit keyPoseDeleted(num);
-
-            // not on keyPose
         } else {
+            // not on keyPose
+
             double eventTime = qMax((event->x() - *zero) / *pixPerSec, 0.0);
-//            int delta = event->angleDelta().ry();
 
             auto it = keyPoses.begin();
-//            double left = 0.0;
             int iRight = 0;
             while (it != keyPoses.end() && *it < eventTime) {
-//                left = *it;
                 iRight++;
                 it++;
             }
+
             // if keyPoses on the right
             if (it != keyPoses.end()) {
 
                 double right = *it;
-                //        int iRight = static_cast<int>(std::distance(keyPoses.begin(), it));
-
                 double dist = right - eventTime;
-//                qDebug() << "eventTime : " << eventTime << ", right : " << right << endl;
-
-//                if (delta > 0) {
-                double gap = (*shiftDown) ?(-dist) :(dist);
+                double gap = (*shiftDown) ? (-dist) : (dist);
                 if (start > eventTime) {
                     start += gap;
                     updateStartSpin();
@@ -125,11 +112,8 @@ void QFrameSelector::mousePressEvent(QMouseEvent* event)
                 }
                 updateKeyPoses(gap, iRight);
 
-
                 widgetRuler->setMaxDuration(*maxDuration + gap);
                 updateDurationSpin();
-
-//                update();
             }
         }
 
@@ -184,13 +168,6 @@ void QFrameSelector::mouseReleaseEvent(QMouseEvent* event)
 //        shiftDown = false;
 //    }
 
-//}
-
-//void QFrameSelector::keyPressEvent(QKeyEvent* event)
-//{
-//    if (event->key() == Qt::Key_Space) {
-//        onAddingKeyPose(cursor);
-//    }
 //}
 
 void QFrameSelector::onSlideLeftSlider(int deltaX)

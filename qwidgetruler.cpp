@@ -23,7 +23,7 @@ int QWidgetRuler::updateTimeline(int newWidth)
     step = steps[iStep];
 
     nbInterval = qCeil(maxDuration / step) + 2;
-    pixPerSec = (newWidth / float(nbInterval)) / step;
+    pixPerSec = (newWidth / double(nbInterval)) / step;
 
     zero = pixPerSec * step;
 
@@ -38,7 +38,8 @@ void QWidgetRuler::onChangePrecision(int accuracy)
 
 void QWidgetRuler::setMaxDuration(double value)
 {
-    if (value != maxDuration) {
+    //    if (value != maxDuration) {
+    if (qAbs(value - maxDuration) < 1e-5) {
 
         maxDuration = value;
         updateTimeline(width());

@@ -32,6 +32,8 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     ui->frame_buttons->setAnimTimeline(this);
     ui->frame_buttons->setRuler(ui->scrollAreaWidgetContents);
 
+    ui->scrollArea->setRuler(ui->scrollAreaWidgetContents);
+
     // signal to signal
     connect(ui->toolButton_playPause, &QToolButtonPlayPause::playClicked, this, &AnimTimeline::playClicked);
     connect(ui->toolButton_playPause, &QToolButtonPlayPause::pauseClicked, this, &AnimTimeline::pauseClicked);
@@ -46,7 +48,7 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     connect(ui->frame_selector, &QFrameSelector::keyPoseMoved, this, &AnimTimeline::keyPoseMoved);
 
     // if not parent widget so move timeline with current widget screen resolution
-    if (! parent) {
+    if (!parent) {
         QRect rec = QApplication::desktop()->screenGeometry();
         int height = rec.height();
         int width = rec.width();
@@ -63,6 +65,7 @@ void AnimTimeline::showEvent(QShowEvent* ev)
     (void)ev;
 
     QWidget* parent = static_cast<QWidget*>(this->parent());
+
     // timeline can move into specific parent area
     if (parent) {
 
@@ -102,7 +105,8 @@ void AnimTimeline::onAddingKeyPose(double time)
     ui->frame_selector->onAddingKeyPose(time, false);
 }
 
-void AnimTimeline::onClearKeyPoses() {
+void AnimTimeline::onClearKeyPoses()
+{
     ui->frame_selector->onClearKeyPoses();
 }
 
