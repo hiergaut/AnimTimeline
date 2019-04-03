@@ -287,13 +287,25 @@ void QFrameSelector::onChangeEnd(double time)
 // external slot, warning on using external signal
 void QFrameSelector::onChangeCursor(double time)
 {
-    cursor = time;
+    double pos = 1.0; // random initialize
+    double min = 999.0;
+    double dist;
+//    cursor = time;
     for (double keyPose : keyPoses) {
-        if (qAbs(keyPose - cursor) < STICKY_KEYPOSE_DISTANCE) {
-            cursor = keyPose;
-            break;
+//        if (keyPose > cursor + STICKY_KEYPOSE_DISTANCE)
+//            break;
+
+        dist = qAbs(keyPose -time);
+        if (dist < STICKY_KEYPOSE_DISTANCE) {
+
+            if (min > dist) {
+                pos = keyPose;
+                min = dist;
+            }
         }
     }
+
+    cursor = (min != 999.0) ?(pos) :(time);
     updateCursorSpin();
     update();
 }
