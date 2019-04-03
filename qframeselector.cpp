@@ -247,6 +247,8 @@ void QFrameSelector::onDeleteKeyPose()
         //        emit nbKeyPosesChanged(static_cast<int>(keyPoses.size()));
         nbKeyPosesSpin->setValue(static_cast<int>(keyPoses.size()));
         emit keyPoseDeleted(num);
+
+        onSetCursorToNextKeyPose();
     }
 }
 
