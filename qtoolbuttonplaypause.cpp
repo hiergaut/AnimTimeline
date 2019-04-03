@@ -51,8 +51,10 @@ void QToolButtonPlayPause::onChangeMode()
 {
     if (play) {
         onPauseMode();
+        emit playClicked();
     }
     else {
         onPlayMode();
+        emit pauseClicked();
     }
 }
