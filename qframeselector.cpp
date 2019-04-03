@@ -287,7 +287,7 @@ void QFrameSelector::onChangeEnd(double time)
 // external slot, warning on using external signal
 void QFrameSelector::onChangeCursor(double time)
 {
-    double pos = 1.0; // random initialize
+    double pos = 2.0; // random initialize
     double min = 999.0;
     double dist;
 //    cursor = time;
