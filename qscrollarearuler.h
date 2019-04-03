@@ -1,22 +1,22 @@
 #ifndef QSCROLLAREARULER_H
 #define QSCROLLAREARULER_H
 
+#include "qtoolbuttonplaypause.h"
+#include "qwidgetruler.h"
 #include <QObject>
 #include <QScrollArea>
 #include <QWidget>
-#include "qwidgetruler.h"
-#include "qtoolbuttonplaypause.h"
 
 class QScrollAreaRuler : public QScrollArea {
     Q_OBJECT
 public:
     explicit QScrollAreaRuler(QWidget* parent = nullptr);
 
-    bool * getShiftDown();
+    bool* getShiftDown();
 
-    void setRuler(QWidgetRuler *value);
+    void setRuler(QWidgetRuler* value);
 
-    void setPlayPause(QToolButtonPlayPause *value);
+    void setPlayPause(QToolButtonPlayPause* value);
 
 protected:
     void keyPressEvent(QKeyEvent* event) override;
@@ -43,8 +43,8 @@ private:
 
     int mousePosX;
     int sliderPos;
-    QWidgetRuler * ruler;
-    QToolButtonPlayPause * playPause;
+    QWidgetRuler* ruler;
+    QToolButtonPlayPause* playPause;
 };
 
 #endif // QSCROLLAREARULER_H

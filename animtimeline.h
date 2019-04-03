@@ -1,6 +1,7 @@
 #ifndef ANIMTIMELINE_H
 #define ANIMTIMELINE_H
 
+#include "constants.h"
 #include <QDialog>
 
 namespace Ui {

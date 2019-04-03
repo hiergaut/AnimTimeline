@@ -2,6 +2,7 @@
 #ifndef QFRAMESELECTOR_H
 #define QFRAMESELECTOR_H
 
+#include "constants.h"
 #include "qwidgetruler.h"
 #include <QDoubleSpinBox>
 #include <QFrame>
@@ -127,9 +128,9 @@ private:
 
     QToolButton* removeKeyPoseButton;
 
-    double start = 0.0;
-    double end = 20.0;
-    double cursor = 5.0;
+    double start = INIT_START;
+    double end = INIT_END;
+    double cursor = INIT_CURSOR;
 
     int* nbInterval;
     double* step;

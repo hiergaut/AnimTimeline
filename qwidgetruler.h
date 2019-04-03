@@ -4,6 +4,7 @@
 #include <QLabel>
 #include <QSpacerItem>
 #include <QWidget>
+#include "constants.h"
 
 class QWidgetRuler : public QWidget {
     Q_OBJECT
@@ -28,7 +29,7 @@ public slots:
     void onChangePrecision(int accuracy);
 
 private:
-    double maxDuration = 30.0;
+    double maxDuration = INIT_DURATION;
     static const int nbSteps = 7;
     const double steps[nbSteps] = { 0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0 };
 

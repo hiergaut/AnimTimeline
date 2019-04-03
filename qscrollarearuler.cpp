@@ -1,6 +1,6 @@
 #include "qscrollarearuler.h"
 
-#include <QDebug>
+//#include <QDebug>
 #include <QScrollBar>
 #include <QWheelEvent>
 
@@ -33,23 +33,23 @@ void QScrollAreaRuler::keyPressEvent(QKeyEvent* event)
     if (event->key() == Qt::Key_Control) {
         ctrlDown = true;
     }
-    if (event->key() == Qt::Key_Space) {
+    else if (event->key() == Qt::Key_Space) {
         playPause->onChangeMode();
     }
-    if (event->key() == Qt::Key_I) {
+    else if (event->key() == Qt::Key_I) {
         if (shiftDown) {
             emit removeKeyPose();
         } else {
             emit addKeyPose();
         }
     }
-    if (event->key() == Qt::Key_Shift) {
+    else if (event->key() == Qt::Key_Shift) {
         shiftDown = true;
     }
-    if (event->key() == Qt::Key_Left) {
+    else if (event->key() == Qt::Key_Left) {
         emit previousKeyPose();
     }
-    if (event->key() == Qt::Key_Right) {
+    else if (event->key() == Qt::Key_Right) {
         emit nextKeyPose();
     }
 }
@@ -59,7 +59,7 @@ void QScrollAreaRuler::keyReleaseEvent(QKeyEvent* event)
     if (event->key() == Qt::Key_Control) {
         ctrlDown = false;
     }
-    if (event->key() == Qt::Key_Shift) {
+    else if (event->key() == Qt::Key_Shift) {
         shiftDown = false;
     }
 }

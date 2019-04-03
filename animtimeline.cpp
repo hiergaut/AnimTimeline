@@ -33,7 +33,6 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     ui->frame_buttons->setAnimTimeline(this);
     ui->frame_buttons->setRuler(ui->scrollAreaWidgetContents);
 
-
     ui->scrollArea->setRuler(ui->scrollAreaWidgetContents);
     ui->scrollArea->setPlayPause(ui->toolButton_playPause);
 
@@ -51,13 +50,13 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     connect(ui->frame_selector, &QFrameSelector::keyPosesMoved, this, &AnimTimeline::keyPosesMoved);
     connect(ui->frame_selector, &QFrameSelector::keyPoseMoved, this, &AnimTimeline::keyPoseMoved);
 
-    // if not parent widget so move timeline with current widget screen resolution
+    // if nil parent, the timeline is moved into the current screen resolution/area
     if (!parent) {
         QRect rec = QApplication::desktop()->screenGeometry();
         int height = rec.height();
         int width = rec.width();
-        int timelineLeft = width - this->width() - 50;
-        int timelineTop = height - this->height() - 50;
+        int timelineLeft = width - this->width() - INIT_MARGIN;
+        int timelineTop = height - this->height() - INIT_MARGIN;
         move(timelineLeft, timelineTop);
     }
 }
@@ -77,87 +76,87 @@ void AnimTimeline::showEvent(QShowEvent* ev)
         int parent_y = parent->y();
         int parent_height = parent->height();
         int parent_width = parent->width();
-        int timelineLeft = parent_x + parent_width - this->width() - 50;
-        int timelineTop = parent_y + parent_height - this->height() - 50;
+        int timelineLeft = parent_x + parent_width - this->width() - INIT_MARGIN;
+        int timelineTop = parent_y + parent_height - this->height() - INIT_MARGIN;
         move(timelineLeft, timelineTop);
     }
 }
 
 void AnimTimeline::onChangeAnimDuration(double time)
 {
-//    qDebug() << "onChangeAnimDuration : " << time << endl;
+    //    qDebug() << "onChangeAnimDuration : " << time << endl;
     ui->scrollAreaWidgetContents->setMaxDuration(time);
     ui->frame_selector->updateDurationSpin();
 }
 
 void AnimTimeline::onChangeCursor(double time)
 {
-//    qDebug() << "onChangeCursor : " << time << endl;
+    //    qDebug() << "onChangeCursor : " << time << endl;
     ui->frame_selector->onChangeCursor(time);
 }
 
 void AnimTimeline::onChangeStart(double time)
 {
-//    qDebug() << "onChangeStart : " << time << endl;
+    //    qDebug() << "onChangeStart : " << time << endl;
     ui->frame_selector->onChangeStart(time);
 }
 
 void AnimTimeline::onChangeEnd(double time)
 {
-//    qDebug() << "onChangeEnd : " << time << endl;
+    //    qDebug() << "onChangeEnd : " << time << endl;
     ui->frame_selector->onChangeEnd(time);
 }
 
 void AnimTimeline::onAddingKeyPose(double time)
 {
-//    qDebug() << "onAddingKeyPose : " << time << endl;
+    //    qDebug() << "onAddingKeyPose : " << time << endl;
     ui->frame_selector->onAddingKeyPose(time, false);
 }
 
 void AnimTimeline::onClearKeyPoses()
 {
-//    qDebug() << "onClearKeyPoses : " << endl;
+    //    qDebug() << "onClearKeyPoses : " << endl;
     ui->frame_selector->onClearKeyPoses();
 }
 
 void AnimTimeline::onSetPauseMode()
 {
-//    qDebug() << "onSetPauseMode : " << endl;
+    //    qDebug() << "onSetPauseMode : " << endl;
     ui->toolButton_playPause->onPauseMode();
 }
 
 void AnimTimeline::onSetPlayMode()
 {
-//    qDebug() << "onSetPlayMode : " << endl;
+    //    qDebug() << "onSetPlayMode : " << endl;
     ui->toolButton_playPause->onPlayMode();
 }
 
 double AnimTimeline::getCursor()
 {
-//    qDebug() << "getCursor : " << endl;
+    //    qDebug() << "getCursor : " << endl;
     return ui->frame_selector->getCursor();
 }
 
 double AnimTimeline::getStart()
 {
-//    qDebug() << "getStart : " << endl;
+    //    qDebug() << "getStart : " << endl;
     return ui->frame_selector->getStart();
 }
 
 double AnimTimeline::getEnd()
 {
-//    qDebug() << "getEnd : " << endl;
+    //    qDebug() << "getEnd : " << endl;
     return ui->frame_selector->getEnd();
 }
 
 int AnimTimeline::getNbKeyPoses()
 {
-//    qDebug() << "getNbKeyPoses : " << endl;
+    //    qDebug() << "getNbKeyPoses : " << endl;
     return ui->frame_selector->getNbKeyPoses();
 }
 
 double AnimTimeline::getKeyPose(int id)
 {
-//    qDebug() << "getKeyPose : " << endl;
+    //    qDebug() << "getKeyPose : " << endl;
     return ui->frame_selector->getKeyPose(id);
 }

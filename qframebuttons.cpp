@@ -1,7 +1,7 @@
 #include "qframebuttons.h"
 
-#include <QWheelEvent>
 #include <QMessageBox>
+#include <QWheelEvent>
 
 QFrameButtons::QFrameButtons(QWidget* parent)
     : QFrame(parent)

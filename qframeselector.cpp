@@ -1,6 +1,6 @@
 #include "qframeselector.h"
 
-#include <QDebug>
+//#include <QDebug>
 #include <QPainter>
 #include <QWheelEvent>
 #include <QtGlobal>
@@ -68,45 +68,46 @@ void QFrameSelector::mousePressEvent(QMouseEvent* event)
 
         auto it = keyPoses.find(cursor);
 
-        // already on keyPose
+        // if already on keyPose, move current keyPose
         if (it != keyPoses.end()) {
 
-            int num = static_cast<int>(std::distance(keyPoses.begin(), it));
-            keyPoses.erase(it);
-            keyPoses.insert(newPose);
+            // if no keyPose under mouse, move keyPose to newPose
+            if (keyPoses.find(newPose) == keyPoses.end()) {
+                int num = static_cast<int>(std::distance(keyPoses.begin(), it));
+                keyPoses.erase(it);
+                keyPoses.insert(newPose);
 
-            onChangeCursor(newPose);
-            emit keyPoseMoved(num, newPose);
+                onChangeCursor(newPose);
+                emit keyPoseMoved(num, newPose);
+            }
 
         } else {
             // not on keyPose
 
-            double eventTime = qMax((event->x() - *zero) / *pixPerSec, 0.0);
-
             auto it = keyPoses.begin();
             int iRight = 0;
-            while (it != keyPoses.end() && *it < eventTime) {
+            while (it != keyPoses.end() && *it < newPose) {
                 iRight++;
                 it++;
             }
 
-            // if keyPoses on the right
+            // if keyPoses on the right, remove or insert time
             if (it != keyPoses.end()) {
 
                 double right = *it;
-                double dist = right - eventTime;
+                double dist = right - newPose;
                 double gap = (*shiftDown) ? (-dist) : (dist);
-                if (start > eventTime) {
+                if (start > newPose) {
                     start += gap;
                     updateStartSpin();
                 }
 
-                if (end > eventTime) {
+                if (end > newPose) {
                     end += gap;
                     updateEndSpin();
                 }
 
-                if (cursor > eventTime) {
+                if (cursor > newPose) {
                     cursor += gap;
                     updateCursorSpin();
                 }
@@ -287,6 +288,12 @@ void QFrameSelector::onChangeEnd(double time)
 void QFrameSelector::onChangeCursor(double time)
 {
     cursor = time;
+    for (double keyPose : keyPoses) {
+        if (qAbs(keyPose - cursor) < STICKY_KEYPOSE_DISTANCE) {
+            cursor = keyPose;
+            break;
+        }
+    }
     updateCursorSpin();
     update();
 }

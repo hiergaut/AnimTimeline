@@ -22,7 +22,6 @@ public slots:
     void onPauseMode();
     void onChangeMode();
 
-
 private:
     QIcon* playIcon;
     QIcon* pauseIcon;
