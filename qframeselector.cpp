@@ -1,6 +1,6 @@
 #include "qframeselector.h"
 
-//#include <QDebug>
+#include <QDebug>
 #include <QPainter>
 #include <QWheelEvent>
 #include <QtGlobal>

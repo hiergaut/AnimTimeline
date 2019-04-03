@@ -1,6 +1,7 @@
 #include "animtimeline.h"
 #include "ui_animtimeline.h"
 
+#include <QDebug>
 #include <QDesktopWidget>
 #include <QEvent>
 #include <QPainter>
@@ -82,66 +83,79 @@ void AnimTimeline::showEvent(QShowEvent* ev)
 
 void AnimTimeline::onChangeAnimDuration(double time)
 {
+    qDebug() << "onChangeAnimDuration : " << time << endl;
     ui->scrollAreaWidgetContents->setMaxDuration(time);
     ui->frame_selector->updateDurationSpin();
 }
 
 void AnimTimeline::onChangeCursor(double time)
 {
+    qDebug() << "onChangeCursor : " << time << endl;
     ui->frame_selector->onChangeCursor(time);
 }
 
 void AnimTimeline::onChangeStart(double time)
 {
+    qDebug() << "onChangeStart : " << time << endl;
     ui->frame_selector->onChangeStart(time);
 }
 
 void AnimTimeline::onChangeEnd(double time)
 {
+    qDebug() << "onChangeEnd : " << time << endl;
     ui->frame_selector->onChangeEnd(time);
 }
 
 void AnimTimeline::onAddingKeyPose(double time)
 {
+    qDebug() << "onAddingKeyPose : " << time << endl;
     ui->frame_selector->onAddingKeyPose(time, false);
 }
 
 void AnimTimeline::onClearKeyPoses()
 {
+    qDebug() << "onClearKeyPoses : " << endl;
     ui->frame_selector->onClearKeyPoses();
 }
 
 void AnimTimeline::onSetPauseMode()
 {
+    qDebug() << "onSetPauseMode : " << endl;
     ui->toolButton_playPause->onPauseMode();
 }
 
 void AnimTimeline::onSetPlayMode()
 {
+    qDebug() << "onSetPlayMode : " << endl;
     ui->toolButton_playPause->onPlayMode();
 }
 
 double AnimTimeline::getCursor()
 {
+    qDebug() << "getCursor : " << endl;
     return ui->frame_selector->getCursor();
 }
 
 double AnimTimeline::getStart()
 {
+    qDebug() << "getStart : " << endl;
     return ui->frame_selector->getStart();
 }
 
 double AnimTimeline::getEnd()
 {
+    qDebug() << "getEnd : " << endl;
     return ui->frame_selector->getEnd();
 }
 
 int AnimTimeline::getNbKeyPoses()
 {
+    qDebug() << "getNbKeyPoses : " << endl;
     return ui->frame_selector->getNbKeyPoses();
 }
 
 double AnimTimeline::getKeyPose(int id)
 {
+    qDebug() << "getKeyPose : " << endl;
     return ui->frame_selector->getKeyPose(id);
 }
