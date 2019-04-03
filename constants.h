@@ -24,7 +24,7 @@
 //          ^                        ^ <- ^
 // on ruler clicking, automove to nearest keyPose if the distance is below this constant
 // unit : seconde
-#define STICKY_KEYPOSE_DISTANCE 0.2
+#define STICKY_KEYPOSE_DISTANCE 0.5
 
 
 // define default playzone start value

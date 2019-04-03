@@ -58,7 +58,7 @@ void QFrameSelector::mousePressEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::LeftButton) {
         double newCursor = qMax((event->x() - *zero) / *pixPerSec, 0.0);
-        onChangeCursor(newCursor);
+        onChangeCursor(newCursor, true);
         emit cursorChanged(cursor);
 
         mouseLeftClicked = true;
@@ -131,7 +131,7 @@ void QFrameSelector::mouseMoveEvent(QMouseEvent* event)
     if (mouseLeftClicked) {
         double newCursor = qMax((event->x() - *zero) / *pixPerSec, 0.0);
 
-        onChangeCursor(newCursor);
+        onChangeCursor(newCursor, true);
         emit cursorChanged(cursor);
     } else {
         event->ignore();
@@ -285,27 +285,31 @@ void QFrameSelector::onChangeEnd(double time)
 }
 
 // external slot, warning on using external signal
-void QFrameSelector::onChangeCursor(double time)
+void QFrameSelector::onChangeCursor(double time, bool findNearestKeyPose)
 {
-    double pos = 2.0; // random initialize
-    double min = 999.0;
-    double dist;
-//    cursor = time;
-    for (double keyPose : keyPoses) {
-//        if (keyPose > cursor + STICKY_KEYPOSE_DISTANCE)
-//            break;
+    if (findNearestKeyPose) {
+        double pos = 2.0; // random initialize
+        double min = 999.0;
+        double dist;
+        //    cursor = time;
+        for (double keyPose : keyPoses) {
+            //        if (keyPose > cursor + STICKY_KEYPOSE_DISTANCE)
+            //            break;
 
-        dist = qAbs(keyPose -time);
-        if (dist < STICKY_KEYPOSE_DISTANCE) {
+            dist = qAbs(keyPose - time);
+            if (dist < STICKY_KEYPOSE_DISTANCE) {
 
-            if (min > dist) {
-                pos = keyPose;
-                min = dist;
+                if (min > dist) {
+                    pos = keyPose;
+                    min = dist;
+                }
             }
         }
-    }
 
-    cursor = (min != 999.0) ?(pos) :(time);
+        cursor = (min != 999.0) ? (pos) : (time);
+    } else {
+        cursor = time;
+    }
     updateCursorSpin();
     update();
 }

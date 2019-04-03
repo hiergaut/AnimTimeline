@@ -83,7 +83,7 @@ public slots:
 
     void onChangeStart(double time);
     void onChangeEnd(double time);
-    void onChangeCursor(double time);
+    void onChangeCursor(double time, bool findNearestKeyPose = false);
     void onChangeDuration();
 
     void onSetCursorToStart();
