@@ -47,6 +47,7 @@ void QFrameButtons::helpClicked()
                    "<shift> + i : delete keyPose on cursor\n"
                    "<left> : previous keyPose\n"
                    "<right> : next keyPose\n"
+                   "<space> : play/pause mode\n"
                    "\n"
                    "mouse :\n"
                    "<wheelMouse[Up/Down]> : zoom on ruler\n"

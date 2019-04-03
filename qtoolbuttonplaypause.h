@@ -20,6 +20,8 @@ signals:
 public slots:
     void onPlayMode();
     void onPauseMode();
+    void onChangeMode();
+
 
 private:
     QIcon* playIcon;

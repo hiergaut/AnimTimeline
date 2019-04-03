@@ -46,3 +46,13 @@ void QToolButtonPlayPause::onPauseMode()
     this->setIcon(*playIcon);
     play = false;
 }
+
+void QToolButtonPlayPause::onChangeMode()
+{
+    if (play) {
+        onPauseMode();
+    }
+    else {
+        onPlayMode();
+    }
+}

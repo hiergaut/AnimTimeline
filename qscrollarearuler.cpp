@@ -1,6 +1,6 @@
 #include "qscrollarearuler.h"
 
-//#include <QDebug>
+#include <QDebug>
 #include <QScrollBar>
 #include <QWheelEvent>
 
@@ -32,6 +32,9 @@ void QScrollAreaRuler::keyPressEvent(QKeyEvent* event)
 {
     if (event->key() == Qt::Key_Control) {
         ctrlDown = true;
+    }
+    if (event->key() == Qt::Key_Space) {
+        playPause->onChangeMode();
     }
     if (event->key() == Qt::Key_I) {
         if (shiftDown) {
@@ -104,6 +107,11 @@ void QScrollAreaRuler::mouseMoveEvent(QMouseEvent* event)
     if (midMouseDown) {
         horizontalScrollBar()->setValue((sliderPos + mousePosX - event->x()));
     }
+}
+
+void QScrollAreaRuler::setPlayPause(QToolButtonPlayPause *value)
+{
+    playPause = value;
 }
 
 void QScrollAreaRuler::setRuler(QWidgetRuler* value)

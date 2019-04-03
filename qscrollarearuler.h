@@ -5,6 +5,7 @@
 #include <QScrollArea>
 #include <QWidget>
 #include "qwidgetruler.h"
+#include "qtoolbuttonplaypause.h"
 
 class QScrollAreaRuler : public QScrollArea {
     Q_OBJECT
@@ -14,6 +15,8 @@ public:
     bool * getShiftDown();
 
     void setRuler(QWidgetRuler *value);
+
+    void setPlayPause(QToolButtonPlayPause *value);
 
 protected:
     void keyPressEvent(QKeyEvent* event) override;
@@ -41,6 +44,7 @@ private:
     int mousePosX;
     int sliderPos;
     QWidgetRuler * ruler;
+    QToolButtonPlayPause * playPause;
 };
 
 #endif // QSCROLLAREARULER_H
