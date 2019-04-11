@@ -67,7 +67,8 @@ void QScrollAreaRuler::keyReleaseEvent(QKeyEvent* event)
 void QScrollAreaRuler::wheelEvent(QWheelEvent* event)
 {
     int ry = event->angleDelta().ry();
-    int gap = (ry > 0) ? (ruler->minimumWidth() / 4) : (-ruler->minimumWidth() / 4);
+//    int gap = (ry > 0) ? (ruler->minimumWidth() / 4) : (-ruler->minimumWidth() / 4);
+    int gap = (ry *ruler->minimumWidth()) / 500;
 
     if (ctrlDown) {
         horizontalScrollBar()->setValue(horizontalScrollBar()->value() + 3 * ry);
