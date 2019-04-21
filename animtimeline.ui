@@ -2,11 +2,14 @@
 <ui version="4.0">
  <class>AnimTimeline</class>
  <widget class="QWidget" name="AnimTimeline">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>619</width>
+    <width>650</width>
     <height>140</height>
    </rect>
   </property>
@@ -18,7 +21,7 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>0</width>
+    <width>650</width>
     <height>140</height>
    </size>
   </property>
@@ -33,6 +36,9 @@
     <width>0</width>
     <height>0</height>
    </size>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::NoFocus</enum>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -118,6 +124,9 @@
           <height>20</height>
          </size>
         </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
         <property name="styleSheet">
          <string notr="true">background-color: lightgreen</string>
         </property>
@@ -128,13 +137,16 @@
          <enum>QAbstractSpinBox::NoButtons</enum>
         </property>
         <property name="prefix">
-         <string>start: </string>
+         <string>start : </string>
         </property>
         <property name="decimals">
          <number>2</number>
         </property>
         <property name="maximum">
-         <double>99.000000000000000</double>
+         <double>999.000000000000000</double>
+        </property>
+        <property name="value">
+         <double>0.000000000000000</double>
         </property>
        </widget>
       </item>
@@ -184,13 +196,13 @@
          <string/>
         </property>
         <property name="suffix">
-         <string> :end</string>
+         <string> : end</string>
         </property>
         <property name="maximum">
-         <double>99.000000000000000</double>
+         <double>999.000000000000000</double>
         </property>
         <property name="value">
-         <double>20.000000000000000</double>
+         <double>15.000000000000000</double>
         </property>
        </widget>
       </item>
@@ -252,7 +264,7 @@
          <number>2</number>
         </property>
         <property name="maximum">
-         <double>99.000000000000000</double>
+         <double>999.000000000000000</double>
         </property>
         <property name="singleStep">
          <double>1.000000000000000</double>
@@ -323,6 +335,12 @@
         </property>
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;numbers of keyPoses&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border:white;</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -511,10 +529,10 @@
          <string>total duration: </string>
         </property>
         <property name="maximum">
-         <double>99.000000000000000</double>
+         <double>999.000000000000000</double>
         </property>
         <property name="value">
-         <double>30.000000000000000</double>
+         <double>20.000000000000000</double>
         </property>
        </widget>
       </item>
@@ -582,19 +600,19 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>500</width>
+        <width>648</width>
         <height>103</height>
        </rect>
       </property>
       <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
       <property name="minimumSize">
        <size>
-        <width>500</width>
+        <width>0</width>
         <height>0</height>
        </size>
       </property>
@@ -862,7 +880,7 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>300</width>
+              <width>400</width>
               <height>0</height>
              </size>
             </property>
@@ -1204,408 +1222,7 @@ border: 0px;</string>
  <resources>
   <include location="timeline.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>label_leftSlider</sender>
-   <signal>slide(int)</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onSlideLeftSlider(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>56</x>
-     <y>70</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>38</x>
-     <y>80</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>label_rightSlider</sender>
-   <signal>slide(int)</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onSlideRightSlider(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>357</x>
-     <y>78</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>337</x>
-     <y>80</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>label_leftSlider</sender>
-   <signal>slideRelease()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onSlideRelease()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>52</x>
-     <y>39</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>12</x>
-     <y>36</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>label_rightSlider</sender>
-   <signal>slideRelease()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onSlideRelease()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>359</x>
-     <y>41</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>407</x>
-     <y>33</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolButton_start</sender>
-   <signal>clicked()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onSetCursorToStart()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>352</x>
-     <y>13</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>449</x>
-     <y>71</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolButton_playPause</sender>
-   <signal>playClicked()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onPlay()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>392</x>
-     <y>12</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>390</x>
-     <y>65</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolButton_playPause</sender>
-   <signal>pauseClicked()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onPause()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>392</x>
-     <y>19</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>422</x>
-     <y>43</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolButton_keyPose</sender>
-   <signal>clicked()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onAddingKeyPose()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>266</x>
-     <y>10</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>246</x>
-     <y>43</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolButton_end</sender>
-   <signal>clicked()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onSetCursorToEnd()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>432</x>
-     <y>16</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>494</x>
-     <y>68</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>doubleSpinBox_end</sender>
-   <signal>editingFinished()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onChangeEndSpin()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>149</x>
-     <y>10</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>494</x>
-     <y>89</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>doubleSpinBox_start</sender>
-   <signal>editingFinished()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onChangeStartSpin()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>58</x>
-     <y>6</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>462</x>
-     <y>86</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>doubleSpinBox_cursor</sender>
-   <signal>editingFinished()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onChangeCursorSpin()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>230</x>
-     <y>14</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>411</x>
-     <y>86</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolButton_rearward</sender>
-   <signal>clicked()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onSetCursorToPreviousKeyPose()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>372</x>
-     <y>18</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>401</x>
-     <y>49</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolButton_forward</sender>
-   <signal>clicked()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onSetCursorToNextKeyPose()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>412</x>
-     <y>13</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>461</x>
-     <y>66</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolButton_deleteKeyPose</sender>
-   <signal>clicked()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onDeleteKeyPose()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>321</x>
-     <y>20</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>434</x>
-     <y>77</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>scrollArea</sender>
-   <signal>removeKeyPose()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onDeleteKeyPose()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>540</x>
-     <y>105</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>406</x>
-     <y>81</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolButton_plusStart</sender>
-   <signal>clicked()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onStartIncPlus()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>11</x>
-     <y>53</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>405</x>
-     <y>86</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolButton_lessStart</sender>
-   <signal>clicked()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onStartIncLess()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>15</x>
-     <y>88</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>379</x>
-     <y>99</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolButton_plusEnd</sender>
-   <signal>clicked()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onEndIncPlus()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>486</x>
-     <y>37</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>431</x>
-     <y>95</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolButton_lessEnd</sender>
-   <signal>clicked()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onEndIncLess()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>487</x>
-     <y>86</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>434</x>
-     <y>75</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>doubleSpinBox_maxDuration</sender>
-   <signal>editingFinished()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onChangeDuration()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>549</x>
-     <y>12</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>442</x>
-     <y>84</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>scrollArea</sender>
-   <signal>addKeyPose()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onAddingKeyPose()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>552</x>
-     <y>113</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>480</x>
-     <y>80</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>toolButton_help</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>frame_buttons</receiver>
-   <slot>helpClicked()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>608</x>
-     <y>16</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>593</x>
-     <y>14</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>scrollArea</sender>
-   <signal>nextKeyPose()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onSetCursorToNextKeyPose()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>567</x>
-     <y>96</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>431</x>
-     <y>95</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>scrollArea</sender>
-   <signal>previousKeyPose()</signal>
-   <receiver>frame_selector</receiver>
-   <slot>onSetCursorToPreviousKeyPose()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>553</x>
-     <y>38</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>381</x>
-     <y>94</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
  <slots>
   <signal>render(double)</signal>
   <slot>onCursorChanged(double)</slot>

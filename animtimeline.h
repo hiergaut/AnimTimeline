@@ -6,6 +6,8 @@
 
 namespace Ui {
 class AnimTimeline;
+//static double * animTimelineWidth;
+//static AnimTimeline * ui;
 }
 
 class AnimTimeline : public QDialog {
@@ -33,6 +35,7 @@ signals:
     void cursorChanged(double time);
     void startChanged(double time);
     void endChanged(double time);
+
     void keyPoseAdded(double time);
     void keyPoseDeleted(int num);
     void keyPoseChanged(int num);
@@ -47,6 +50,7 @@ public slots:
     void onChangeCursor(double time);
     void onChangeStart(double time);
     void onChangeEnd(double time);
+
     void onAddingKeyPose(double time);
     void onClearKeyPoses();
 

@@ -25,7 +25,7 @@ public:
     void setEndSpin(QDoubleSpinBox* value);
 
     void setCursor(double time);
-    void updatePlayZone();
+//    void updatePlayZone();
     double getCursor();
 
     double getStart() const;
@@ -48,8 +48,15 @@ public:
 
     void setShiftDown(bool* value);
 
+    void setDrawLock(bool *value);
+
+    void setStart(double value);
+
+    void setEnd(double value);
+
 protected:
     virtual void paintEvent(QPaintEvent* event) override;
+
     void mousePressEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
@@ -102,6 +109,8 @@ public slots:
     void onEndIncPlus();
     void onEndIncLess();
 
+    void onCursorChanged(double time);
+
 private:
     void updateCursorSpin();
     void updateStartSpin();
@@ -109,6 +118,8 @@ private:
     void updateKeyPoses(double gap, int first = 0);
 
 private:
+    int counter {0};
+
     QWidgetRuler* widgetRuler;
 
     QFrame* leftSpacer;
@@ -128,9 +139,9 @@ private:
 
     QToolButton* removeKeyPoseButton;
 
-    double start = INIT_START;
-    double end = INIT_END;
-    double cursor = INIT_CURSOR;
+    double start;
+    double end;
+    double cursor;
 
     int* nbInterval;
     double* step;
@@ -146,6 +157,8 @@ private:
     bool sliding = false;
     bool mouseLeftClicked = false;
     bool* shiftDown;
+
+    bool * drawLock;
 };
 
 #endif // QFRAMESELECTOR_H

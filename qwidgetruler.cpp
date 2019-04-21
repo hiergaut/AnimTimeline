@@ -1,40 +1,78 @@
 #include "qwidgetruler.h"
 
+//#include "ui_animtimeline.h"
+//#include "animtimeline.h"
+
+#include "constants.h"
+
+#include <QDebug>
 #include <QWheelEvent>
 #include <QtMath>
 
 QWidgetRuler::QWidgetRuler(QWidget* parent)
     : QWidget(parent)
 {
-    updateTimeline(500); // ui fixed width of ruler
+//    updateTimeline(parent->width());
+    qDebug() << "end construct widgetRuler, parent : " << parent;
+    qDebug() << "ruler width " << width();
+//    drawRuler(width()); // ui fixed width of ruler
+//    setSizePolicy(QSizePolicy::Fixed, sizePolicy().verticalPolicy());
+//    setMinimumWidth(1000);
+//    update();
 }
 
-int QWidgetRuler::updateTimeline(int newWidth)
+int QWidgetRuler::drawRuler(int width)
 {
     int iStep = 0;
-    while (iStep < nbSteps && newWidth * steps[iStep] < 50 * maxDuration)
+    while (iStep < nbSteps && width * steps[iStep] < 50 * maxDuration)
         iStep++;
 
     if (iStep == nbSteps) {
-        //        qDebug() << "QWidgetRuler::updateTimeline: " << newWidth << " too short";
-        return width();
+                qDebug() << "QWidgetRuler::drawRuler: " << width << " too short";
+
+        return this->width();
     }
 
     step = steps[iStep];
 
     nbInterval = qCeil(maxDuration / step) + 2;
-    pixPerSec = (newWidth / double(nbInterval)) / step;
+    pixPerSec = (width / double(nbInterval)) / step;
 
     zero = pixPerSec * step;
+    qDebug() << "ruler parent : " << this->parent();
 
-    return newWidth;
+//    setMinimumWidth(width -100);
+//    timescaleLock =selectorLock =false;
+    setMinimumWidth(width);
+
+//    update();
+
+    return width;
 }
 
-void QWidgetRuler::onChangePrecision(int accuracy)
+void QWidgetRuler::onDrawRuler(int width)
 {
-    int newWidth = updateTimeline(width() + accuracy);
-    setMinimumWidth(newWidth);
+//    int width = updateTimeline(width() + accuracy);
+    drawRuler(width);
+//    drawLock =true;
+//    update();
+//    setMinimumWidth(width);
 }
+
+bool * QWidgetRuler::getSelectorLock()
+{
+    return &selectorLock;
+}
+
+bool * QWidgetRuler::getTimescaleLock()
+{
+    return &timescaleLock;
+}
+
+//bool * QWidgetRuler::getDrawLock()
+//{
+//    return &drawLock;
+//}
 
 void QWidgetRuler::setMaxDuration(double value)
 {
@@ -42,9 +80,10 @@ void QWidgetRuler::setMaxDuration(double value)
     if (qAbs(value - maxDuration) > 1e-5) {
 
         maxDuration = value;
-        updateTimeline(width());
+        drawRuler(width());
         update();
-        emit durationChanged(value);
+
+        emit durationChanged(value); //external signal
     }
 }
 

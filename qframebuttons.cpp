@@ -1,5 +1,6 @@
 #include "qframebuttons.h"
 
+#include <QDebug>
 #include <QMessageBox>
 #include <QWheelEvent>
 
@@ -8,28 +9,45 @@ QFrameButtons::QFrameButtons(QWidget* parent)
 {
 }
 
-void QFrameButtons::wheelEvent(QWheelEvent* event)
-{
-    int gap = event->angleDelta().ry();
+//void QFrameButtons::wheelEvent(QWheelEvent* event)
+//{
+//    int gap = event->angleDelta().ry();
 
-    if (animTimeline->width() >= 650 || gap >= 0) {
-        int previousWidth = animTimeline->width();
+//    if (animTimeline->width() >= 650 || gap >= 0) {
+//        int previousWidth = animTimeline->width();
 
-        int newX = animTimeline->x() - gap;
-        int newY = animTimeline->y() + 1;
-        int newWidth = animTimeline->width() + 1 + gap;
-        int newHeight = animTimeline->height();
+//        int newX = animTimeline->x() - gap;
+//        int newY = animTimeline->y() + 1;
+//        int newWidth = animTimeline->width() + 1 + gap;
+//        int newHeight = animTimeline->height();
 
-        animTimeline->setGeometry(newX, newY, newWidth, newHeight);
+//        animTimeline->setGeometry(newX, newY, newWidth, newHeight);
 
-        int diffWidth = previousWidth - animTimeline->width();
-        ruler->onChangePrecision(-diffWidth);
-    }
-}
+//        int diffWidth = previousWidth - animTimeline->width();
+//        ruler->onDrawRuler(-diffWidth);
+//    }
+//}
 
 void QFrameButtons::setRuler(QWidgetRuler* value)
 {
     ruler = value;
+}
+
+void QFrameButtons::keyPressEvent(QKeyEvent* event)
+{
+    //    qDebug() << "QFrameButtons::keyPressEvent, event : " << event;
+    //    event->accept();
+    //    scrollArea->keyPressEvent(event);
+//    if (event->key() == Qt::Key_Enter) {
+//        event->accept();
+//    } else {
+        emit keyPressed(event);
+//    }
+}
+
+void QFrameButtons::keyReleaseEvent(QKeyEvent* event)
+{
+    emit keyReleased(event);
 }
 
 void QFrameButtons::setAnimTimeline(AnimTimeline* value)
@@ -57,4 +75,9 @@ void QFrameButtons::helpClicked()
                    "<rightClick> : insert time on mouse\n"
                    "<shift>+<rightClick> : remove time on mouse\n");
     msgBox.exec();
+}
+
+void QFrameButtons::setScrollArea(QScrollArea* value)
+{
+    scrollArea = value;
 }

@@ -1,7 +1,7 @@
 #include "animtimeline.h"
 #include "ui_animtimeline.h"
 
-//#include <QDebug>
+#include <QDebug>
 #include <QDesktopWidget>
 #include <QEvent>
 #include <QPainter>
@@ -11,11 +11,58 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     : QDialog(parent)
     , ui(new Ui::AnimTimeline)
 {
-
+    //    Ui::ui =ui;
+    //    qDebug() << this;
+    qDebug() << "setup start";
     ui->setupUi(this);
+    qDebug() << "setup end";
 
-    connect(ui->scrollArea, SIGNAL(changePrecision(int)), ui->scrollAreaWidgetContents, SLOT(onChangePrecision(int)));
+    // scroolAreaWidgetContents receiver
+    connect(ui->scrollArea, SIGNAL(changePrecision(int)), ui->scrollAreaWidgetContents, SLOT(onDrawRuler(int)));
 
+    // frame_buttons receiver
+    connect(ui->toolButton_help, &QToolButton::clicked, ui->frame_buttons, &QFrameButtons::helpClicked);
+
+    // frame_selector receiver
+    //    connect(ui->doubleSpinBox_cursor, &QDoubleSpinBox::editingFinished, ui->frame_selector, &QFrameSelector::onChangeCursorSpin);
+    //    connect(ui->doubleSpinBox_end, &QDoubleSpinBox::editingFinished, ui->frame_selector, &QFrameSelector::onChangeEndSpin);
+    //    connect(ui->doubleSpinBox_maxDuration, &QDoubleSpinBox::editingFinished, ui->frame_selector, &QFrameSelector::onChangeDuration);
+    //    connect(ui->doubleSpinBox_start, &QDoubleSpinBox::editingFinished, ui->frame_selector, &QFrameSelector::onChangeStartSpin);
+    connect(ui->doubleSpinBox_cursor, SIGNAL(valueChanged(double)), ui->frame_selector, SLOT(onChangeCursorSpin()));
+    connect(ui->doubleSpinBox_end, SIGNAL(valueChanged(double)), ui->frame_selector, SLOT(onChangeEndSpin()));
+    connect(ui->doubleSpinBox_maxDuration, SIGNAL(valueChanged(double)), ui->frame_selector, SLOT(onChangeDuration()));
+    connect(ui->doubleSpinBox_start, SIGNAL(valueChanged(double)), ui->frame_selector, SLOT(onChangeStartSpin()));
+
+    connect(ui->label_leftSlider, &QLabelSlider::slide, ui->frame_selector, &QFrameSelector::onSlideLeftSlider);
+    connect(ui->label_leftSlider, &QLabelSlider::slideRelease, ui->frame_selector, &QFrameSelector::onSlideRelease);
+    connect(ui->label_rightSlider, &QLabelSlider::slide, ui->frame_selector, &QFrameSelector::onSlideRightSlider);
+    connect(ui->label_rightSlider, &QLabelSlider::slideRelease, ui->frame_selector, &QFrameSelector::onSlideRelease);
+
+    connect(ui->scrollArea, &QScrollAreaRuler::removeKeyPose, ui->frame_selector, &QFrameSelector::onDeleteKeyPose);
+    connect(ui->scrollArea, SIGNAL(addKeyPose()), ui->frame_selector, SLOT(onAddingKeyPose()));
+    connect(ui->scrollArea, &QScrollAreaRuler::nextKeyPose, ui->frame_selector, &QFrameSelector::onSetCursorToNextKeyPose);
+    connect(ui->scrollArea, &QScrollAreaRuler::previousKeyPose, ui->frame_selector, &QFrameSelector::onSetCursorToPreviousKeyPose);
+
+    connect(ui->toolButton_deleteKeyPose, &QToolButton::clicked, ui->frame_selector, &QFrameSelector::onDeleteKeyPose);
+    connect(ui->toolButton_end, &QToolButton::clicked, ui->frame_selector, &QFrameSelector::onSetCursorToEnd);
+    connect(ui->toolButton_forward, &QToolButton::clicked, ui->frame_selector, &QFrameSelector::onSetCursorToNextKeyPose);
+    connect(ui->toolButton_keyPose, SIGNAL(clicked()), ui->frame_selector, SLOT(onAddingKeyPose()));
+    connect(ui->toolButton_lessEnd, &QToolButton::clicked, ui->frame_selector, &QFrameSelector::onEndIncLess);
+    connect(ui->toolButton_lessStart, &QToolButton::clicked, ui->frame_selector, &QFrameSelector::onStartIncLess);
+    connect(ui->toolButton_playPause, &QToolButtonPlayPause::playClicked, ui->frame_selector, &QFrameSelector::onPlay);
+    connect(ui->toolButton_playPause, &QToolButtonPlayPause::pauseClicked, ui->frame_selector, &QFrameSelector::onPause);
+    connect(ui->toolButton_plusEnd, &QToolButton::clicked, ui->frame_selector, &QFrameSelector::onEndIncPlus);
+    connect(ui->toolButton_plusStart, &QToolButton::clicked, ui->frame_selector, &QFrameSelector::onStartIncPlus);
+    connect(ui->toolButton_rearward, &QToolButton::clicked, ui->frame_selector, &QFrameSelector::onSetCursorToPreviousKeyPose);
+    connect(ui->toolButton_start, &QToolButton::clicked, ui->frame_selector, &QFrameSelector::onSetCursorToStart);
+
+    // scrollArea receiver
+    connect(ui->frame_buttons, &QFrameButtons::keyPressed, ui->scrollArea, &QScrollAreaRuler::onKeyPress);
+    connect(ui->frame_buttons, &QFrameButtons::keyReleased, ui->scrollArea, &QScrollAreaRuler::onKeyRelease);
+
+    //    connect(ui->frame_buttons, &QFrame::keyPressEvent, ui->scrollArea, &QScrollArea::keyPressEvent);
+
+    // set internal references
     ui->frame_selector->setPlayZone(ui->frame_playZone);
     ui->frame_selector->setLeftSlider(ui->label_leftSlider);
     ui->frame_selector->setLeftSpacer(ui->frame_spacer);
@@ -29,6 +76,13 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     ui->frame_selector->setTotalDurationSpin(ui->doubleSpinBox_maxDuration);
     ui->frame_selector->setNbKeyPosesSpin(ui->spinBox_nbKeyPoses);
     ui->frame_selector->setShiftDown(ui->scrollArea->getShiftDown());
+    //    ui->frame_selector->setDrawLock(ui->scrollAreaWidgetContents->getDrawLock());
+    ui->frame_selector->setStart(ui->doubleSpinBox_start->value());
+    ui->frame_selector->setCursor(ui->doubleSpinBox_cursor->value());
+    ui->frame_selector->setEnd(ui->doubleSpinBox_end->value());
+    //    ui->frame_selector->setDrawLock(ui->scrollAreaWidgetContents->getDrawLock());
+
+    //    ui->frame_timescale->setDrawLock(ui->scrollAreaWidgetContents->getDrawLock());
 
     ui->frame_buttons->setAnimTimeline(this);
     ui->frame_buttons->setRuler(ui->scrollAreaWidgetContents);
@@ -36,6 +90,12 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     ui->scrollArea->setRuler(ui->scrollAreaWidgetContents);
     ui->scrollArea->setPlayPause(ui->toolButton_playPause);
 
+    ui->scrollAreaWidgetContents->setMaxDuration(ui->doubleSpinBox_maxDuration->value());
+    ui->scrollArea->setAnimTimeline(this);
+
+    //    ui->frame_buttons->setScrollArea(ui->scrollArea);
+
+    // connect internal signals to external ones (black box)
     // signal to signal
     connect(ui->toolButton_playPause, &QToolButtonPlayPause::playClicked, this, &AnimTimeline::playClicked);
     connect(ui->toolButton_playPause, &QToolButtonPlayPause::pauseClicked, this, &AnimTimeline::pauseClicked);
@@ -59,14 +119,19 @@ AnimTimeline::AnimTimeline(QWidget* parent)
         int timelineTop = height - this->height() - INIT_MARGIN;
         move(timelineLeft, timelineTop);
     }
+    //    qDebug() << "end construct animTimeline";
+    //    qDebug() << "ruler width : " << ui->scrollAreaWidgetContents->width();
+    //    qDebug() << "timeline width : " << width();
+    //    Ui::animTimelineWidth =&this->width();
+    ui->scrollAreaWidgetContents->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
+    ui->scrollAreaWidgetContents->onDrawRuler(width() - 2); // left/right border width = 2 *1 pixel
+    //    setFocusPolicy(Qt::StrongFocus);
 }
 
 AnimTimeline::~AnimTimeline() { delete ui; }
 
-void AnimTimeline::showEvent(QShowEvent* ev)
+void AnimTimeline::showEvent(QShowEvent*)
 {
-    (void)ev;
-
     QWidget* parent = static_cast<QWidget*>(this->parent());
 
     // timeline can move into specific parent area
@@ -82,54 +147,60 @@ void AnimTimeline::showEvent(QShowEvent* ev)
     }
 }
 
+// ------------------------------- EXTERNAL SLOTS -----------------------------
+
+void AnimTimeline::onSetPlayMode()
+{
+    qDebug() << "\033[32monSetPlayMode()\033[0m";
+    ui->toolButton_playPause->onPlayMode();
+}
+
+void AnimTimeline::onSetPauseMode()
+{
+    qDebug() << "\033[32monSetPauseMode()\033[0m";
+    ui->toolButton_playPause->onPauseMode();
+}
+
 void AnimTimeline::onChangeAnimDuration(double time)
 {
-    //    qDebug() << "onChangeAnimDuration : " << time << endl;
+    qDebug() << "\033[32monChangeAnimDuration(" << time << ")\033[0m";
     ui->scrollAreaWidgetContents->setMaxDuration(time);
     ui->frame_selector->updateDurationSpin();
 }
 
+
 void AnimTimeline::onChangeCursor(double time)
 {
-    //    qDebug() << "onChangeCursor : " << time << endl;
+    qDebug() << "\033[32monChangeCursor(" << time << ")\033[0m";
     ui->frame_selector->onChangeCursor(time);
 }
 
 void AnimTimeline::onChangeStart(double time)
 {
-    //    qDebug() << "onChangeStart : " << time << endl;
+    qDebug() << "\033[32monChangeStart(" << time << ")\033[0m";
     ui->frame_selector->onChangeStart(time);
 }
 
 void AnimTimeline::onChangeEnd(double time)
 {
-    //    qDebug() << "onChangeEnd : " << time << endl;
+    qDebug() << "\033[32monChangeEnd(" << time << ")\033[0m";
     ui->frame_selector->onChangeEnd(time);
 }
 
+
 void AnimTimeline::onAddingKeyPose(double time)
 {
-    //    qDebug() << "onAddingKeyPose : " << time << endl;
+    qDebug() << "\033[32monAddingKeyPose(" << time << ")\033[0m";
     ui->frame_selector->onAddingKeyPose(time, false);
 }
 
 void AnimTimeline::onClearKeyPoses()
 {
-    //    qDebug() << "onClearKeyPoses : " << endl;
+    qDebug() << "\033[32monClearKeyPoses()\033[0m";
     ui->frame_selector->onClearKeyPoses();
 }
 
-void AnimTimeline::onSetPauseMode()
-{
-    //    qDebug() << "onSetPauseMode : " << endl;
-    ui->toolButton_playPause->onPauseMode();
-}
-
-void AnimTimeline::onSetPlayMode()
-{
-    //    qDebug() << "onSetPlayMode : " << endl;
-    ui->toolButton_playPause->onPlayMode();
-}
+// ------------------------------- GETTER -------------------------------------
 
 double AnimTimeline::getCursor()
 {

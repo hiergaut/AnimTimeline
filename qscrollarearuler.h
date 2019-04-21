@@ -1,6 +1,7 @@
 #ifndef QSCROLLAREARULER_H
 #define QSCROLLAREARULER_H
 
+#include "animtimeline.h"
 #include "qtoolbuttonplaypause.h"
 #include "qwidgetruler.h"
 #include <QObject>
@@ -18,11 +19,14 @@ public:
 
     void setPlayPause(QToolButtonPlayPause* value);
 
+    void setAnimTimeline(AnimTimeline *value);
+
 protected:
     void keyPressEvent(QKeyEvent* event) override;
     void keyReleaseEvent(QKeyEvent* event) override;
 
     void wheelEvent(QWheelEvent* event) override;
+
     void mousePressEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
@@ -35,6 +39,8 @@ signals:
     void nextKeyPose();
 
 public slots:
+    void onKeyPress(QKeyEvent *event);
+    void onKeyRelease(QKeyEvent *event);
 
 private:
     bool ctrlDown = false;
@@ -45,6 +51,7 @@ private:
     int sliderPos;
     QWidgetRuler* ruler;
     QToolButtonPlayPause* playPause;
+    AnimTimeline * animTimeline;
 };
 
 #endif // QSCROLLAREARULER_H

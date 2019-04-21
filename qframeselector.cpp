@@ -1,6 +1,6 @@
 #include "qframeselector.h"
 
-//#include <QDebug>
+#include <QDebug>
 #include <QPainter>
 #include <QWheelEvent>
 #include <QtGlobal>
@@ -16,42 +16,53 @@ QFrameSelector::QFrameSelector(QWidget* parent)
     pixPerSec = widgetRuler->getPixPerSec();
     zero = widgetRuler->getZero();
     maxDuration = widgetRuler->getMaxDuration();
+    drawLock =widgetRuler->getSelectorLock();
+
+    qDebug() << "end construct frameSelector, parent : " << parent;
 }
 
-void QFrameSelector::paintEvent(QPaintEvent* event)
+void QFrameSelector::paintEvent(QPaintEvent* ev)
 {
-    (void)event;
+    //    (void)event;
+//    qDebug() << ev;
+//    qDebug() << "QFrameSelector::paintEvent";
 
-    QPainter painter(this);
+//    if (! *drawLock) {
+        qDebug() << "QFrameSelector::paintEvent " << ++counter;
 
-    if (!sliding) {
+        QPainter painter(this);
 
-        leftSpacer->setMinimumWidth(static_cast<int>(*zero + start * *pixPerSec - leftSlider->width()));
-        playZone->setMinimumWidth(static_cast<int>((end - start) * *pixPerSec));
-    }
+        if (!sliding) {
 
-    painter.setPen(Qt::darkGray);
-    for (int i = 1; i < *nbInterval; i++) {
-        int x = static_cast<int>(i * *step * *pixPerSec);
-        painter.drawLine(x, 0, x, height());
-    }
+            leftSpacer->setMinimumWidth(static_cast<int>(*zero + start * *pixPerSec - leftSlider->width()));
+            playZone->setMinimumWidth(static_cast<int>((end - start) * *pixPerSec));
+        }
 
-    painter.setPen(QPen(Qt::lightGray));
-    for (int i = 1; i < *nbInterval - 1; i++) {
-        int x = static_cast<int>(i * *step * *pixPerSec);
-        int middle = static_cast<int>(x + *zero / 2);
-        painter.drawLine(middle, 0, middle, height());
-    }
+        painter.setPen(Qt::darkGray);
+        for (int i = 1; i < *nbInterval; i++) {
+            int x = static_cast<int>(i * *step * *pixPerSec);
+            painter.drawLine(x, 0, x, height());
+        }
 
-    painter.setPen(QPen(QColor(0, 0, 255, 255), 3));
-    int xCursor = static_cast<int>(*zero + cursor * *pixPerSec);
-    painter.drawLine(xCursor, 0, xCursor, height());
+        painter.setPen(QPen(Qt::lightGray));
+        for (int i = 1; i < *nbInterval - 1; i++) {
+            int x = static_cast<int>(i * *step * *pixPerSec);
+            int middle = static_cast<int>(x + *zero / 2);
+            painter.drawLine(middle, 0, middle, height());
+        }
 
-    painter.setPen(QPen(Qt::yellow, 3));
-    for (double keyPose : keyPoses) {
-        int xKeyPose = static_cast<int>(*zero + keyPose * *pixPerSec);
-        painter.drawLine(xKeyPose, 30, xKeyPose, height());
-    }
+        painter.setPen(QPen(QColor(0, 0, 255, 255), 3));
+        int xCursor = static_cast<int>(*zero + cursor * *pixPerSec);
+        painter.drawLine(xCursor, 0, xCursor, height());
+
+        painter.setPen(QPen(Qt::yellow, 3));
+        for (double keyPose : keyPoses) {
+            int xKeyPose = static_cast<int>(*zero + keyPose * *pixPerSec);
+            painter.drawLine(xKeyPose, 30, xKeyPose, height());
+        }
+
+//        *drawLock =true;
+//    }
 }
 
 void QFrameSelector::mousePressEvent(QMouseEvent* event)
@@ -320,7 +331,7 @@ void QFrameSelector::onChangeDuration()
 
     end = qMin(qMax(endSpin->value(), start), newDuration);
     updateEndSpin();
-    widgetRuler->setMaxDuration(newDuration);
+    widgetRuler->setMaxDuration(newDuration); // emit external signal
 }
 
 void QFrameSelector::onSetCursorToStart()
@@ -452,6 +463,13 @@ void QFrameSelector::onEndIncLess()
     updateDurationSpin();
 }
 
+void QFrameSelector::onCursorChanged(double time)
+{
+    cursor = time;
+    updateCursorSpin();
+    update();
+}
+
 void QFrameSelector::updateCursorSpin()
 {
     if (keyPoses.find(cursor) != keyPoses.end()) {
@@ -489,6 +507,21 @@ void QFrameSelector::updateKeyPoses(double gap, int first)
 
     keyPoses = clone;
     emit keyPosesMoved(gap, first);
+}
+
+void QFrameSelector::setEnd(double value)
+{
+    end = value;
+}
+
+void QFrameSelector::setStart(double value)
+{
+    start = value;
+}
+
+void QFrameSelector::setDrawLock(bool *value)
+{
+    drawLock = value;
 }
 
 void QFrameSelector::setShiftDown(bool* value)
@@ -568,18 +601,18 @@ void QFrameSelector::setEndSpin(QDoubleSpinBox* value)
 void QFrameSelector::setCursor(double time)
 {
     cursor = time;
-    updateCursorSpin();
-    update();
+//    updateCursorSpin();
+//    update();
 }
 
-void QFrameSelector::updatePlayZone()
-{
-    start = 0;
-    updateStartSpin();
+//void QFrameSelector::updatePlayZone()
+//{
+//    start = 0;
+//    updateStartSpin();
 
-    end = *maxDuration;
-    updateEndSpin();
-}
+//    end = *maxDuration;
+//    updateEndSpin();
+//}
 
 double QFrameSelector::getCursor()
 {

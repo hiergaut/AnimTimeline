@@ -7,10 +7,9 @@ QLabelSlider::QLabelSlider(QWidget* parent)
 {
 }
 
-void QLabelSlider::keyPressEvent(QKeyEvent* event)
-{
-    (void)event;
-}
+//void QLabelSlider::keyPressEvent(QKeyEvent* event)
+//{
+//}
 
 void QLabelSlider::mousePressEvent(QMouseEvent* event)
 {

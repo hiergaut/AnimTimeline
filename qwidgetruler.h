@@ -15,28 +15,37 @@ public:
     int* getNbInterval();
     double* getPixPerSec();
 
-    int updateTimeline(int newWidth);
+    int drawRuler(int newWidth);
 
     double* getZero();
     double* getMaxDuration();
 
     void setMaxDuration(double value);
 
+//    bool * getDrawLock();
+
+    bool * getTimescaleLock();
+
+    bool * getSelectorLock();
+
 signals:
     void durationChanged(double time);
 
 public slots:
-    void onChangePrecision(int accuracy);
+    void onDrawRuler(int width);
 
 private:
-    double maxDuration = INIT_DURATION;
     static const int nbSteps = 7;
     const double steps[nbSteps] = { 0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0 };
 
-    int nbInterval;
+    int nbInterval {0};
     double step;
     double pixPerSec;
     double zero;
+    double maxDuration;
+
+    bool timescaleLock {true};
+    bool selectorLock {true};
 };
 
 #endif // QWIDGETRULER_H
