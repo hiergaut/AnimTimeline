@@ -43,16 +43,18 @@ public:
     void setEndInc(QDoubleSpinBox* value);
 
     void setTotalDurationSpin(QDoubleSpinBox* value);
-    void updateDurationSpin();
+    void updateDurationSpin(); // EXTERNAL SLOT
     void setNbKeyPosesSpin(QSpinBox* value);
 
     void setShiftDown(bool* value);
 
-    void setDrawLock(bool *value);
+//    void setDrawLock(bool *value);
 
     void setStart(double value);
 
     void setEnd(double value);
+
+    double nearestStep(double time);
 
 protected:
     virtual void paintEvent(QPaintEvent* event) override;
@@ -67,47 +69,52 @@ protected:
     //    void keyReleaseEvent(QKeyEvent* event) override;
 
 signals:
-    // all external signal
-    void cursorChanged(double time);
-    void startChanged(double time);
-    void endChanged(double time);
-    //    void nbKeyPosesChanged(int nbEl);
-    void keyPoseAdded(double time);
-    void keyPoseChanged(int num);
-    void keyPoseMoved(int num, double time);
-    void keyPosesMoved(double gap, int first);
-    void keyPoseDeleted(int num);
+    void cursorChanged(double time); // EXTERNAL SIGNAL
+    void startChanged(double time); // EXTERNAL SIGNAL
+    void endChanged(double time); // EXTERNAL SIGNAL
+
+    void keyPoseAdded(double time); // EXTERNAL SIGNAL
+    void keyPoseDeleted(int num); // EXTERNAL SIGNAL
+    void keyPoseChanged(int num); // EXTERNAL SIGNAL
+    void keyPosesMoved(double gap, size_t first); // EXTERNAL SIGNAL
+    void keyPoseMoved(int num, double time); // EXTERNAL SIGNAL
 
 public slots:
     void onSlideLeftSlider(int deltaX);
     void onSlideRightSlider(int deltaX);
     void onSlideRelease();
 
-    // by default, add keyPose on cursor
-    void onAddingKeyPose(double time = -1.0, bool internal = true);
-    void onDeleteKeyPose();
-    void onClearKeyPoses();
+    void onAddingKeyPose(double time); // EXTERNAL SLOT
+    // by default (time = -1.0), add keyPose on cursor
+    void onInternalAddingKeyPose(double time = -1.0);
 
-    void onChangeStart(double time);
-    void onChangeEnd(double time);
-    void onChangeCursor(double time, bool findNearestKeyPose = false);
-    void onChangeDuration();
+
+    void onDeleteKeyPose();
+    void onClearKeyPoses(); // EXTERNAL SLOT
+
+    void onChangeStart(double time); // EXTERNAL SLOT
+    void onChangeEnd(double time); // EXTERNAL SLOT
+
+    void onChangeCursor(double time); // EXTERNAL SLOT
+    bool onInternalChangeCursor(double time);
+
 
     void onSetCursorToStart();
     void onSetCursorToEnd();
     void onSetCursorToPreviousKeyPose();
     void onSetCursorToNextKeyPose();
 
-    void onPlay();
-    void onPause();
-    void onChangeCursorSpin();
+//    void onPlay();
+//    void onPause();
     void onChangeStartSpin();
     void onChangeEndSpin();
+    void onChangeCursorSpin();
+    void onChangeDuration();
 
-    void onStartIncPlus();
-    void onStartIncLess();
-    void onEndIncPlus();
-    void onEndIncLess();
+//    void onStartIncPlus();
+//    void onStartIncLess();
+//    void onEndIncPlus();
+//    void onEndIncLess();
 
     void onCursorChanged(double time);
 
@@ -115,10 +122,10 @@ private:
     void updateCursorSpin();
     void updateStartSpin();
     void updateEndSpin();
-    void updateKeyPoses(double gap, int first = 0);
+    void updateKeyPoses(double gap, size_t first = 0);
 
 private:
-    int counter {0};
+    int paintCounter {0};
 
     QWidgetRuler* widgetRuler;
 
@@ -153,12 +160,12 @@ private:
     //    QSet<double> keyPoses;
     std::set<double> keyPoses;
 
-    int iPaint = 0;
-    bool sliding = false;
-    bool mouseLeftClicked = false;
-    bool* shiftDown;
+//    int iPaint = 0;
+    bool sliding {false};
+    bool mouseLeftClicked {false};
 
-    bool * drawLock;
+    bool* shiftDown;
+//    bool * drawLock;
 };
 
 #endif // QFRAMESELECTOR_H

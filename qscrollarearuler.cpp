@@ -195,6 +195,11 @@ bool* QScrollAreaRuler::getShiftDown()
 }
 
 void QScrollAreaRuler::onKeyPress(QKeyEvent *event) {
+    switch (event->key()) {
+    case Qt::Key_Right:
+    case Qt::Key_Left:
+        return;
+    }
     keyPressEvent(event);
 }
 

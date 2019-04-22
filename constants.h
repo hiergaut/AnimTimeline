@@ -38,9 +38,9 @@
 // |    |              |   |   |     |             |   |
 //  -----------------------     -----------------------
 //          ^                        ^ <- ^
-// on ruler clicking, automove to nearest keyPose if the distance is below this constant
-// unit : seconde
-#define STICKY_KEYPOSE_DISTANCE 0.5
+// on ruler clicking, automove to nearest keyPose or step multiple if the distance is below this constant
+// unit : pixel
+#define AUTO_SUGGEST_CURSOR_RADIUS 5
 
 
 // define default playzone start value

@@ -8,17 +8,18 @@
 #include <QDebug>
 #include <QWheelEvent>
 #include <QtMath>
+//#include <QScrollArea>
 
 QWidgetRuler::QWidgetRuler(QWidget* parent)
     : QWidget(parent)
 {
-//    updateTimeline(parent->width());
+    //    updateTimeline(parent->width());
     qDebug() << "end construct widgetRuler, parent : " << parent;
     qDebug() << "ruler width " << width();
-//    drawRuler(width()); // ui fixed width of ruler
-//    setSizePolicy(QSizePolicy::Fixed, sizePolicy().verticalPolicy());
-//    setMinimumWidth(1000);
-//    update();
+    //    drawRuler(width()); // ui fixed width of ruler
+    //    setSizePolicy(QSizePolicy::Fixed, sizePolicy().verticalPolicy());
+    //    setMinimumWidth(1000);
+    //    update();
 }
 
 int QWidgetRuler::drawRuler(int width)
@@ -28,7 +29,7 @@ int QWidgetRuler::drawRuler(int width)
         iStep++;
 
     if (iStep == nbSteps) {
-                qDebug() << "QWidgetRuler::drawRuler: " << width << " too short";
+        qDebug() << "\033[31mQWidgetRuler::drawRuler : " << width << " too short step\033[0m";
 
         return this->width();
     }
@@ -41,30 +42,30 @@ int QWidgetRuler::drawRuler(int width)
     zero = pixPerSec * step;
     qDebug() << "ruler parent : " << this->parent();
 
-//    setMinimumWidth(width -100);
-//    timescaleLock =selectorLock =false;
+    //    setMinimumWidth(width -100);
+    //    timescaleLock =selectorLock =false;
     setMinimumWidth(width);
 
-//    update();
+    //    update();
 
     return width;
 }
 
 void QWidgetRuler::onDrawRuler(int width)
 {
-//    int width = updateTimeline(width() + accuracy);
+    //    int width = updateTimeline(width() + accuracy);
     drawRuler(width);
-//    drawLock =true;
-//    update();
-//    setMinimumWidth(width);
+    //    drawLock =true;
+    //    update();
+    //    setMinimumWidth(width);
 }
 
-bool * QWidgetRuler::getSelectorLock()
+bool* QWidgetRuler::getSelectorLock()
 {
     return &selectorLock;
 }
 
-bool * QWidgetRuler::getTimescaleLock()
+bool* QWidgetRuler::getTimescaleLock()
 {
     return &timescaleLock;
 }
@@ -74,6 +75,7 @@ bool * QWidgetRuler::getTimescaleLock()
 //    return &drawLock;
 //}
 
+// EXTERNAL SLOT
 void QWidgetRuler::setMaxDuration(double value)
 {
     //    if (value != maxDuration) {

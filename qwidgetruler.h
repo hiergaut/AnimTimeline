@@ -20,7 +20,7 @@ public:
     double* getZero();
     double* getMaxDuration();
 
-    void setMaxDuration(double value);
+    void setMaxDuration(double value); // EXTERNAL SLOT
 
 //    bool * getDrawLock();
 
@@ -29,14 +29,14 @@ public:
     bool * getSelectorLock();
 
 signals:
-    void durationChanged(double time);
+    void durationChanged(double time); // EXTERNAL SIGNAL
 
 public slots:
     void onDrawRuler(int width);
 
 private:
-    static const int nbSteps = 7;
-    const double steps[nbSteps] = { 0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0 };
+    static const int nbSteps = 10;
+    const double steps[nbSteps] = { 0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0, 50.0, 100.0 };
 
     int nbInterval {0};
     double step;

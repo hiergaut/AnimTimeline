@@ -105,7 +105,7 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_start">
+       <widget class="QDoubleSpinBoxSmart" name="doubleSpinBox_start">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -135,6 +135,9 @@
         </property>
         <property name="buttonSymbols">
          <enum>QAbstractSpinBox::NoButtons</enum>
+        </property>
+        <property name="keyboardTracking">
+         <bool>false</bool>
         </property>
         <property name="prefix">
          <string>start : </string>
@@ -167,7 +170,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_end">
+       <widget class="QDoubleSpinBoxSmart" name="doubleSpinBox_end">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -223,7 +226,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_cursor">
+       <widget class="QDoubleSpinBoxSmart" name="doubleSpinBox_cursor">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -326,7 +329,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QSpinBox" name="spinBox_nbKeyPoses">
+       <widget class="QSpinBoxSmart" name="spinBox_nbKeyPoses">
         <property name="maximumSize">
          <size>
           <width>35</width>
@@ -506,7 +509,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_maxDuration">
+       <widget class="QDoubleSpinBoxSmart" name="doubleSpinBox_maxDuration">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -519,8 +522,11 @@
           <height>0</height>
          </size>
         </property>
+        <property name="styleSheet">
+         <string notr="true">background: darkgray;</string>
+        </property>
         <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         <set>Qt::AlignCenter</set>
         </property>
         <property name="buttonSymbols">
          <enum>QAbstractSpinBox::NoButtons</enum>
@@ -1217,6 +1223,16 @@ border: 0px;</string>
    <slots>
     <slot>helpClicked()</slot>
    </slots>
+  </customwidget>
+  <customwidget>
+   <class>QDoubleSpinBoxSmart</class>
+   <extends>QDoubleSpinBox</extends>
+   <header>qdoublespinboxsmart.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QSpinBoxSmart</class>
+   <extends>QSpinBox</extends>
+   <header>qspinboxsmart.h</header>
   </customwidget>
  </customwidgets>
  <resources>
