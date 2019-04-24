@@ -49,10 +49,10 @@ public slots:
     void onAddingKeyPose(double time); // EXTERNAL SLOT
     void onClearKeyPoses(); // EXTERNAL SLOT
 
-    void onChangeStart(double time); // EXTERNAL SLOT
-    void onChangeEnd(double time); // EXTERNAL SLOT
-    void onChangeCursor(double time); // EXTERNAL SLOT
-    void onUpdateDurationSpin(); // EXTERNAL SLOT
+    void onChangeStart(double time, bool internal = true); // EXTERNAL SLOT
+    void onChangeEnd(double time, bool internal = true); // EXTERNAL SLOT
+    void onChangeCursor(double time, bool internal = true); // EXTERNAL SLOT
+    void onChangeDuration(double time, bool internal = true); // EXTERNAL SLOT
 
     //
     // ---------------------- INTERNAL SLOTS ----------------------------------
@@ -76,14 +76,14 @@ public slots:
     void onChangeStartSpin();
     void onChangeEndSpin();
     void onChangeCursorSpin();
-    void onChangeDuration();
+    void onChangeDurationSpin();
 
     //    void onStartIncPlus();
     //    void onStartIncLess();
     //    void onEndIncPlus();
     //    void onEndIncLess();
 
-    void onCursorChanged(double time);
+//    void onCursorChanged(double time);
 
 private:
     // ---------------------- PRIVATE FUNCTIONS --------------------------------
