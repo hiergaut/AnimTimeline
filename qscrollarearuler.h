@@ -31,6 +31,8 @@ public:
 
     void setSelector(QFrameSelector *value);
 
+    bool * getMidMouseDown();
+
 protected:
     void keyPressEvent(QKeyEvent* event) override;
     void keyReleaseEvent(QKeyEvent* event) override;
@@ -44,11 +46,12 @@ protected:
 
 signals:
 //    void changePrecision(int width);
-    void addKeyPose();
+    void keyPoseOnMouseAdded();
     void removeKeyPose();
     void previousKeyPose();
     void nextKeyPose();
     void durationChanged();
+    void addKeyPose();
 
 public slots:
     void onKeyPress(QKeyEvent *event);

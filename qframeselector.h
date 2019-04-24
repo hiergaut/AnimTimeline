@@ -58,13 +58,15 @@ public slots:
     // ---------------------- INTERNAL SLOTS ----------------------------------
     void onSlideLeftSlider(int deltaX);
     void onSlideRightSlider(int deltaX);
-    void onSlideRelease();
+//    void onSlideRelease();
+    void onLeftSlideRelease();
+    void onRightSlideRelease();
 
     // by default (time = -1.0), add keyPose on cursor
     void onInternalAddingKeyPose(double time = -1.0);
 
     void onDeleteKeyPose();
-    bool onInternalChangeCursor(double time, bool findNearestStep = true);
+//    bool onInternalChangeCursor(double time, bool findNearestStep = true);
 
     void onSetCursorToStart();
     void onSetCursorToEnd();
@@ -77,6 +79,8 @@ public slots:
     void onChangeEndSpin();
     void onChangeCursorSpin();
     void onChangeDurationSpin();
+
+//    void onAddingKeyPoseOnMouse();
 
     //    void onStartIncPlus();
     //    void onStartIncLess();
@@ -113,8 +117,14 @@ private:
     bool sliding { false };
     bool mouseLeftClicked { false };
 
+    bool * midMouseDown;
+
     bool* shiftDown;
     //    bool * drawLock;
+    int updateKeyPoseFlash {0};
+    double keyPoseFlash;
+
+    QTimer * timer;
 
     // ---------------------- REFERENCES --------------------------------------
     QWidgetRuler* widgetRuler;
@@ -168,6 +178,7 @@ public:
     void setStartInc(QDoubleSpinBox* value);
     void setEndInc(QDoubleSpinBox* value);
     void setNbKeyPosesSpin(QSpinBox* value);
+    void setMidMouseDown(bool *value);
 };
 
 #endif // QFRAMESELECTOR_H

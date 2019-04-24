@@ -18,3 +18,9 @@ void QSpinBoxSmart::wheelEvent(QWheelEvent *event)
     }
     event->accept();
 }
+
+void QSpinBoxSmart::keyPressEvent(QKeyEvent *event)
+{
+    emit deleteKeyPose();
+
+}

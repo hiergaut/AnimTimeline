@@ -13,10 +13,12 @@ public:
 
 protected:
         void wheelEvent(QWheelEvent* event) override;
+    void keyPressEvent(QKeyEvent* event) override;
 
 signals:
         void nextKeyPose();
         void previousKeyPose();
+        void deleteKeyPose();
 };
 
 #endif // QSPINBOXSMART_H

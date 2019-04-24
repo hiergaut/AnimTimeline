@@ -40,12 +40,13 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     //    connect(ui->doubleSpinBox_start, SIGNAL(valueChanged(double)), ui->frame_selector, SLOT(onChangeStartSpin()));
 
     connect(ui->label_leftSlider, &QLabelSlider::slide, ui->frame_selector, &QFrameSelector::onSlideLeftSlider);
-    connect(ui->label_leftSlider, &QLabelSlider::slideRelease, ui->frame_selector, &QFrameSelector::onSlideRelease);
+    connect(ui->label_leftSlider, &QLabelSlider::slideRelease, ui->frame_selector, &QFrameSelector::onLeftSlideRelease);
     connect(ui->label_rightSlider, &QLabelSlider::slide, ui->frame_selector, &QFrameSelector::onSlideRightSlider);
-    connect(ui->label_rightSlider, &QLabelSlider::slideRelease, ui->frame_selector, &QFrameSelector::onSlideRelease);
+    connect(ui->label_rightSlider, &QLabelSlider::slideRelease, ui->frame_selector, &QFrameSelector::onRightSlideRelease);
 
     connect(ui->scrollArea, &QScrollAreaRuler::removeKeyPose, ui->frame_selector, &QFrameSelector::onDeleteKeyPose);
     connect(ui->scrollArea, SIGNAL(addKeyPose()), ui->frame_selector, SLOT(onInternalAddingKeyPose()));
+//    connect(ui->scrollArea, SIGNAL(keyPoseOnMouseAdded()), ui->frame_selector, SLOT(onAddingKeyPoseOnMouse()));
     connect(ui->scrollArea, &QScrollAreaRuler::nextKeyPose, ui->frame_selector, &QFrameSelector::onSetCursorToNextKeyPose);
     connect(ui->scrollArea, &QScrollAreaRuler::previousKeyPose, ui->frame_selector, &QFrameSelector::onSetCursorToPreviousKeyPose);
     connect(ui->scrollArea, &QScrollAreaRuler::durationChanged, ui->frame_selector, &QFrameSelector::onChangeDurationSpin);
@@ -65,7 +66,9 @@ AnimTimeline::AnimTimeline(QWidget* parent)
 
     connect(ui->spinBox_nbKeyPoses, &QSpinBoxSmart::nextKeyPose, ui->frame_selector, &QFrameSelector::onSetCursorToNextKeyPose);
     connect(ui->spinBox_nbKeyPoses, &QSpinBoxSmart::previousKeyPose, ui->frame_selector, &QFrameSelector::onSetCursorToPreviousKeyPose);
+    connect(ui->spinBox_nbKeyPoses, &QSpinBoxSmart::deleteKeyPose, ui->frame_selector, &QFrameSelector::onDeleteKeyPose);
 
+    //
     // SCROLL_AREA_RULER
     connect(ui->frame_buttons, &QFrameButtons::keyPressed, ui->scrollArea, &QScrollAreaRuler::onKeyPress);
     connect(ui->frame_buttons, &QFrameButtons::keyReleased, ui->scrollArea, &QScrollAreaRuler::onKeyRelease);
@@ -92,6 +95,7 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     //    ui->frame_selector->setDrawLock(ui->scrollAreaWidgetContents->getDrawLock());
     //    ui->frame_selector->setDrawLock(ui->scrollAreaWidgetContents->getDrawLock());
     //    ui->frame_timescale->setDrawLock(ui->scrollAreaWidgetContents->getDrawLock());
+    ui->frame_selector->setMidMouseDown(ui->scrollArea->getMidMouseDown());
 
     // FRAME_BUTTONS
     ui->frame_buttons->setAnimTimeline(this);

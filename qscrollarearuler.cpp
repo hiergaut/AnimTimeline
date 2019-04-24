@@ -49,11 +49,17 @@ void QScrollAreaRuler::keyPressEvent(QKeyEvent* event)
         playPause->onChangeMode();
         break;
 
+//    case Qt::Key_Delete:
+//        emit removeKeyPose();
+//        break;
+
     case Qt::Key_I:
         if (shiftDown) {
             emit removeKeyPose();
         } else {
+//            emit keyPoseOnMouseAdded();
             emit addKeyPose();
+            // TODO : add key pose on mouse if no key pose selected
         }
         break;
 
@@ -298,6 +304,11 @@ void QScrollAreaRuler::onKeyPress(QKeyEvent* event)
 void QScrollAreaRuler::onKeyRelease(QKeyEvent* event)
 {
     keyReleaseEvent(event);
+}
+
+bool * QScrollAreaRuler::getMidMouseDown()
+{
+    return &midMouseDown;
 }
 
 void QScrollAreaRuler::setSelector(QFrameSelector *value)
