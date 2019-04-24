@@ -1,7 +1,7 @@
 #ifndef ANIMTIMELINE_H
 #define ANIMTIMELINE_H
 
-#include "constants.h"
+#include "configurations.h"
 #include <QDialog>
 
 namespace Ui {
@@ -16,7 +16,8 @@ public:
     explicit AnimTimeline(QWidget* parent = nullptr);
     ~AnimTimeline() override;
 
-    //protected:
+protected:
+    void resizeEvent(QResizeEvent* ev) override;
     //    void showEvent(QShowEvent* ev) override;
 
     //public:
@@ -34,7 +35,7 @@ signals:
 
     void keyPoseAdded(double time);
     void keyPoseDeleted(int num);
-    void keyPoseChanged(uint num);
+    void keyPoseChanged(int num);
     void keyPoseMoved(int num, double time);
     void keyPosesMoved(double gap, int first = 0);
 

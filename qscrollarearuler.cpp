@@ -1,11 +1,12 @@
 #include "qscrollarearuler.h"
 
-#include "animtimeline.h"
-#include "ui_animtimeline.h"
+//#include "animtimeline.h"
+//#include "ui_animtimeline.h"
 
 #include <QDebug>
 #include <QScrollBar>
 #include <QWheelEvent>
+#include <QtMath>
 
 QScrollAreaRuler::QScrollAreaRuler(QWidget* parent)
     : QScrollArea(parent)
@@ -71,6 +72,16 @@ void QScrollAreaRuler::keyPressEvent(QKeyEvent* event)
     case Qt::Key_Escape:
         animTimeline->hide();
         break;
+
+    case Qt::Key_Up:
+        spinDuration->setValue(spinDuration->value() + spinDuration->singleStep());
+        emit durationChanged();
+        break;
+
+    case Qt::Key_Down:
+        spinDuration->setValue(spinDuration->value() - spinDuration->singleStep());
+        emit durationChanged();
+        break;
     }
 }
 
@@ -95,7 +106,7 @@ void QScrollAreaRuler::wheelEvent(QWheelEvent* event)
     int ry = event->angleDelta().ry();
 
     // change dialog width
-    if (shiftDown) {
+    if (shiftDown && ctrlDown) {
         //        if (animTimeline->width() >= 650 || ry >= 0) {
         int curWidth = animTimeline->width();
         int minWidth = animTimeline->minimumWidth();
@@ -111,39 +122,111 @@ void QScrollAreaRuler::wheelEvent(QWheelEvent* event)
         int newWidth = animTimeline->width() + 1 + ry;
         int newHeight = animTimeline->height();
 
+        //        bool wholeRuler = animTimeline->width() -2 == ruler->minimumWidth();
+
+        ruler->onDrawRuler(newWidth - 2);
+        //        emit changePrecision(newWidth -2);
         animTimeline->setGeometry(newX, newY, newWidth, newHeight);
 
         //            int diffWidth = curWidth - animTimeline->width();
-        ruler->onDrawRuler(qMax(ruler->minimumWidth(), animTimeline->width() - 2));
+        //        ruler->onDrawRuler(qMax(ruler->minimumWidth(), animTimeline->width() - 2));
+        //        ruler->onDrawRuler(animTimeline->width() - 2);
         //        }
-        return;
     }
-
-    //    int gap = (ry > 0) ? (ruler->minimumWidth() / 4) : (-ruler->minimumWidth() / 4);
-    //    int gap = (ry *ruler->minimumWidth()) / 500;
-    int newRulerWidth = ruler->minimumWidth() + ry;
-    if (newRulerWidth <= width() - 2) {
-        if (ruler->minimumWidth() == width() - 2) {
-            return;
+    // next/previous keyPose
+    else if (shiftDown) {
+        if (ry > 0) {
+            emit nextKeyPose();
         } else {
-            newRulerWidth = width() - 2;
+            emit previousKeyPose();
         }
+
     }
-    qDebug() << "new ruler width : " << newRulerWidth;
-    //    int newRulerWidth = ruler->width() + ry;
-
     // scroll left/right bar
-    if (ctrlDown) {
-        horizontalScrollBar()->setValue(horizontalScrollBar()->value() + 3 * ry);
+    else if (ctrlDown) {
+        //    if (ctrlDown) {
+        horizontalScrollBar()->setValue(static_cast<int>(horizontalScrollBar()->value() + ry * SLIDE_SPEED));
 
-        // zoom in/out
-    } else {
-        emit changePrecision(newRulerWidth);
+    }
+    // zoom in/out
+    else {
+        //        QWidgetRuler * ruler = Ui::ui->scrollAreaWidgetContents;
+        //        int newRulerWidth = ruler->minimumWidth() + ry;
+        int newRulerWidth = static_cast<int>(ruler->minimumWidth() + ry * ZOOM_SPEED * ruler->minimumWidth() / width());
+        //        qDebug() << "newRulerWidth : " << width();
+        if (newRulerWidth <= width() - 2) {
+            if (ruler->minimumWidth() == width() -2) {
+                return;
+            } else {
+                newRulerWidth = width() - 2;
+            }
+        }
+        qDebug() << "new ruler width : " << newRulerWidth;
+        //    int newRulerWidth = ruler->width() + ry;
+
+        double hScroll = horizontalScrollBar()->value();
+//        double w = width() - 2;
+//        double zoomFactor = static_cast<double>(newRulerWidth) / ruler->minimumWidth();
+        double x = event->x();
+
+        double * zero = ruler->getZero();
+        double * pixPerSec = ruler->getPixPerSec();
+
+        double time = (hScroll +x - *zero) / *pixPerSec;
+        time = selector->nearestStep(time);
+        qDebug() << "TIME = " << time;
+
+//        double hScrollAfterProjection { 0.0 };
+//        // zoom in
+//        if (ry > 0) {
+//            //            double d = w / zoomFactor;
+//            //            double a = x - d / 2;
+
+//            //            double c = qMax(qMin(a, w - d), 0.0);
+//            //            qDebug() << "hScroll : " << hScroll << ", width() -2 : " << w << ", zoomFactor : " << zoomFactor;
+//            //            qDebug() << "d : " << d << ", a : " << a << ", c : " << c;
+//            //            hScrollAfterProjection = (hScroll + c) * zoomFactor;
+//            double X = x * zoomFactor;
+
+//            hScrollAfterProjection = hScroll * zoomFactor + X - x;
+//        }
+//        // zoom out
+//        else {
+
+//            //            double d = w *zoomFactor;
+//            //            double a =x -d /2;
+//            //            double c =a /zoomFactor;
+//            //            hScrollAfterProjection = (hScroll -c)*zoomFactor;
+
+//            hScrollAfterProjection = x * zoomFactor - x;
+//        }
+
+//        double temp = *zero;
+//        double prevZero = *zero;
+//        double prevPixPerSec = *pixPerSec;
+
+        //                emit changePrecision(newRulerWidth);
+        ruler->onDrawRuler(newRulerWidth);
+
+        double a = time * *pixPerSec +*zero;
+
+//        double hScrollAfterProjection = (hScroll +x) *zoomFactor -x;
+        double hScrollAfterProjection = a -x;
+
+//        double time = (hScroll +x - *zero) / *pixPerSec;
+//        hScrollAfterProjection = qCeil(((hScroll +x - prevZero) * *pixPerSec) /prevPixPerSec + *zero -x);
+//        hScrollAfterProjection = ((hScroll +x - prevZero) * *pixPerSec) /prevPixPerSec + *zero -x + 0.6;
+//        double diff = *zero -temp;
+
+        //    int gap = (ry > 0) ? (ruler->minimumWidth() / 4) : (-ruler->minimumWidth() / 4);
+        //    int gap = (ry *ruler->minimumWidth()) / 500;
 
         //        double x = event->x();
         //        int endScroll = ruler->minimumWidth() -width();
         //        double ratio = x /width();
-        //        horizontalScrollBar()->setValue(static_cast<int>(endScroll * ratio));
+        //                horizontalScrollBar()->setValue(static_cast<int>(endScroll * ratio));
+        qDebug() << "scroll : " << hScrollAfterProjection;
+        horizontalScrollBar()->setValue(static_cast<int>(hScrollAfterProjection));
     }
     event->accept(); // parent is animTimeline (root) with non event catching
 }
@@ -174,6 +257,12 @@ void QScrollAreaRuler::mouseMoveEvent(QMouseEvent* event)
     }
 }
 
+//void QScrollAreaRuler::scrollContentsBy(int dx, int dy)
+//{
+//    //    qDebug() << "QScrollAreaRuler::scrollContentsBy";
+//    qDebug() << "scroll : " << horizontalScrollBar()->value();
+//}
+
 void QScrollAreaRuler::setAnimTimeline(AnimTimeline* value)
 {
     animTimeline = value;
@@ -194,16 +283,83 @@ bool* QScrollAreaRuler::getShiftDown()
     return &shiftDown;
 }
 
-void QScrollAreaRuler::onKeyPress(QKeyEvent *event) {
+void QScrollAreaRuler::onKeyPress(QKeyEvent* event)
+{
     switch (event->key()) {
     case Qt::Key_Right:
     case Qt::Key_Left:
+    case Qt::Key_Up:
+    case Qt::Key_Down:
         return;
     }
     keyPressEvent(event);
 }
 
-void QScrollAreaRuler::onKeyRelease(QKeyEvent *event)
+void QScrollAreaRuler::onKeyRelease(QKeyEvent* event)
 {
     keyReleaseEvent(event);
+}
+
+void QScrollAreaRuler::setSelector(QFrameSelector *value)
+{
+    selector = value;
+}
+
+//void QScrollAreaRuler::setZero(double *value)
+//{
+//    zero = value;
+//}
+
+//void QScrollAreaRuler::onZoomRuler(QWheelEvent* event, double xr)
+//{
+//    qDebug() << "onZoomRuler : xr = " << xr;
+//    int ry = event->angleDelta().ry();
+//    // zoom in/out
+//    //        QWidgetRuler * ruler = Ui::ui->scrollAreaWidgetContents;
+//    //        int newRulerWidth = ruler->minimumWidth() + ry;
+//    int newRulerWidth = ruler->minimumWidth() + ry * ruler->minimumWidth() / width();
+//    //        qDebug() << "newRulerWidth : " << width();
+//    if (newRulerWidth <= width() - 2) {
+//        if (ruler->minimumWidth() == newRulerWidth) {
+//            return;
+//        } else {
+//            newRulerWidth = width() - 2;
+//        }
+//    }
+//    qDebug() << "new ruler width : " << newRulerWidth;
+//    //    int newRulerWidth = ruler->width() + ry;
+
+//    double hScroll = horizontalScrollBar()->value();
+//    double w = width() - 2;
+//    double zoomFactor = static_cast<double>(newRulerWidth) / ruler->minimumWidth();
+//    qDebug() << "onZoomRuler : zoomFactor = " << zoomFactor;
+//    double x = event->x();
+//    qDebug() << "onZoomRuler : x = " << x;
+
+//    double hScrollAfterProjection { 0.0 };
+
+//    hScrollAfterProjection = (hScroll +x) *zoomFactor -x;
+
+//    //                emit changePrecision(newRulerWidth);
+//    ruler->onDrawRuler(newRulerWidth);
+
+//    //    int gap = (ry > 0) ? (ruler->minimumWidth() / 4) : (-ruler->minimumWidth() / 4);
+//    //    int gap = (ry *ruler->minimumWidth()) / 500;
+
+//    //        double x = event->x();
+//    //        int endScroll = ruler->minimumWidth() -width();
+//    //        double ratio = x /width();
+//    //                horizontalScrollBar()->setValue(static_cast<int>(endScroll * ratio));
+//    qDebug() << "scroll : " << hScrollAfterProjection;
+//    horizontalScrollBar()->setValue(static_cast<int>(hScrollAfterProjection));
+//}
+
+bool* QScrollAreaRuler::getCtrlDown()
+{
+    return &ctrlDown;
+}
+
+void QScrollAreaRuler::setSpinDuration(QDoubleSpinBoxSmart* value)
+{
+    spinDuration = value;
 }

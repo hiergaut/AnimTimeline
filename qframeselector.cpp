@@ -21,6 +21,64 @@ QFrameSelector::QFrameSelector(QWidget* parent)
     qDebug() << "end construct frameSelector, parent : " << parent;
 }
 
+double QFrameSelector::nearestStep(double time) const
+{
+    double deltaT = AUTO_SUGGEST_CURSOR_RADIUS / *pixPerSec;
+
+    //    double pos = 2.0; // random initialize
+    //    double
+    double minDist = totalDurationSpin->maximum();
+    double dist;
+
+    double newCursor = time;
+    //    cursor = time;
+
+    for (double keyPose : keyPoses) {
+        //        if (keyPose > cursor + AUTO_SUGGEST_CURSOR_RADIUS)
+        //            break;
+
+        dist = qAbs(keyPose - time);
+        if (dist < deltaT && dist < minDist) {
+
+            //                            pos = keyPose;
+            minDist = dist;
+            newCursor = keyPose;
+            //            cursor = keyPose;
+            //            break;
+        }
+        if (time < keyPose)
+            break;
+    }
+
+    for (int i = 0; i < *nbInterval - 1; ++i) {
+        double pos = i * *step;
+        dist = qAbs(pos - time);
+        if (dist < deltaT && dist < minDist) {
+            minDist = dist;
+            newCursor = pos;
+        }
+
+        pos = i * *step + 0.5 * *step;
+        dist = qAbs(pos - time);
+        if (dist < deltaT && dist < minDist) {
+            minDist = dist;
+            newCursor = pos;
+        }
+
+        if (time < pos)
+            break;
+    }
+
+    //    return std::pair<bool, double>(qAbs(time -newCursor) > 1e-5, newCursor);
+    //    bool found = qAbs(time -newCursor) > 1e-5;
+    //    if (found)
+    //        time =newCursor;
+
+    return newCursor;
+}
+
+//
+// ------------------------------- PROTECTED ----------------------------------
 void QFrameSelector::paintEvent(QPaintEvent*)
 {
     //    (void)event;
@@ -31,6 +89,8 @@ void QFrameSelector::paintEvent(QPaintEvent*)
     qDebug() << "QFrameSelector::paintEvent " << ++paintCounter;
 
     QPainter painter(this);
+    int h =height();
+    int w = width();
 
     if (!sliding) {
 
@@ -38,27 +98,78 @@ void QFrameSelector::paintEvent(QPaintEvent*)
         playZone->setMinimumWidth(static_cast<int>((end - start) * *pixPerSec));
     }
 
-    painter.setPen(Qt::darkGray);
+    int hDown = 2 * h / 3;
+//    painter.setPen(Qt::darkGray);
+    painter.setPen(Qt::black);
     for (int i = 1; i < *nbInterval; i++) {
         int x = static_cast<int>(i * *step * *pixPerSec);
-        painter.drawLine(x, 0, x, height());
+        painter.drawLine(x, hDown, x, h);
     }
 
-    painter.setPen(QPen(Qt::lightGray));
+    int hDown2 = 3 * h / 4;
+//    painter.setPen(QPen(Qt::lightGray));
+    painter.setPen(Qt::darkGray);
     for (int i = 1; i < *nbInterval - 1; i++) {
-        int x = static_cast<int>(i * *step * *pixPerSec);
-        int middle = static_cast<int>(x + *zero / 2);
-        painter.drawLine(middle, 0, middle, height());
+//        int x = static_cast<int>(i * *step * *pixPerSec);
+//        int middle = static_cast<int>(x + *zero / 2);
+        int middle = static_cast<int>((i +0.5) * *step * *pixPerSec);
+        painter.drawLine(middle, hDown2, middle, h);
     }
+
+//    painter.setPen(QPen(Qt::blue));
+//    painter.setPen(QPen(Qt::white));
+    painter.setPen(QPen(Qt::lightGray));
+    double frameDuration = 1.0 / FPS;
+    int hUp = h /3;
+    double nbFrame = *maxDuration / frameDuration;
+    for (int i =0; i < nbFrame; i++) {
+        int x = static_cast<int>(i *frameDuration * *pixPerSec +*zero);
+        painter.drawLine(x, 0, x, hUp);
+    }
+
+    painter.setPen(Qt::white);
+    painter.drawLine(0, h /2, w, h /2);
+
+
+//    int xLine = 10;
+//    int radius = 5;
+//    painter.setPen(Qt::black);
+////    painter.setPen(Qt::black);
+//    painter.setBrush(Qt::darkGray);
+//    painter.drawEllipse(xLine, h /2 - radius, 2 *radius, 2 * radius);
+
+    painter.setPen(Qt::darkGray);
+//    painter.setPen(Qt::black);
+    int gap = 2;
+//    painter.drawLine(0, 0, 20, h /2 -gap);
+//    painter.drawLine(xLine +2 *radius, h /2 -gap, w, h /2 -gap);
+//    painter.drawLine(xLine +2 *radius, h /2 +gap, w, h /2 +gap);
+    painter.drawLine(0, h /2 -gap, w, h /2 -gap);
+    painter.drawLine(0, h /2 +gap, w, h /2 +gap);
+
+//    painter.drawLine(0, h, 20, h /2 +gap);
+
+//    int hStep = h /10;
+//    int vMiddle = h /2;
+//    int vStep = 4;
+//    int hRight = 0.60 * *zero;
+//    for (int i =0; i <5; ++i) {
+//        int v = vMiddle +vStep *i;
+//        painter.drawLine(0, v, hRight, v);
+
+//        v = vMiddle -vStep *i;
+//        painter.drawLine(0, v, hRight, v);
+
+//    }
 
     painter.setPen(QPen(QColor(0, 0, 255, 255), 3));
     int xCursor = static_cast<int>(*zero + cursor * *pixPerSec);
-    painter.drawLine(xCursor, 0, xCursor, height());
+    painter.drawLine(xCursor, 0, xCursor, h);
 
     painter.setPen(QPen(Qt::yellow, 3));
     for (double keyPose : keyPoses) {
         int xKeyPose = static_cast<int>(*zero + keyPose * *pixPerSec);
-        painter.drawLine(xKeyPose, 30, xKeyPose, height());
+        painter.drawLine(xKeyPose, 30, xKeyPose, h);
     }
 
     //        *drawLock =true;
@@ -67,6 +178,7 @@ void QFrameSelector::paintEvent(QPaintEvent*)
 
 void QFrameSelector::mousePressEvent(QMouseEvent* event)
 {
+    // ---------------------- LEFT CLICK --------------------------------------
     if (event->button() == Qt::LeftButton) {
         double newCursor = qMax((event->x() - *zero) / *pixPerSec, 0.0);
         qDebug() << "QFrameSelector::mousePressEvent : newCursor = " << newCursor;
@@ -76,19 +188,24 @@ void QFrameSelector::mousePressEvent(QMouseEvent* event)
 
         mouseLeftClicked = true;
 
+        //
+        // ------------------ RIGHT CLICK -------------------------------------
     } else if (event->button() == Qt::RightButton) {
         double newPose = qMax((event->x() - *zero) / *pixPerSec, 0.0);
 
         auto it = keyPoses.find(cursor);
 
         // if already on keyPose, move current keyPose
+        // ------------------- CURSOR ON KEYPOSE -----------------------
         if (it != keyPoses.end()) {
 
+            // -------------- SINGLE MOVE -------------------------------------
             if (*shiftDown) {
+                double nearest = nearestStep(newPose);
                 // if no keyPose under mouse, move keyPose to newPose
-                if (keyPoses.find(newPose) == keyPoses.end()) {
+                if (keyPoses.find(nearest) == keyPoses.end()) {
 
-                    if (onInternalChangeCursor(newPose)) {
+                    if (onInternalChangeCursor(nearest, false)) {
 
                         int num = static_cast<int>(std::distance(keyPoses.begin(), it));
                         keyPoses.erase(it);
@@ -97,29 +214,34 @@ void QFrameSelector::mousePressEvent(QMouseEvent* event)
                         updateCursorSpin();
 
                         //                onChangeCursor(newPose);
-                        emit keyPoseMoved(num, cursor);
+                        emit keyPoseMoved(num, cursor); // EXTERNAL SIGNAL
                     }
                 }
+
+                // ---------- MULTIPLE MOVE -----------------------------------
             } else {
                 // if no keyPose under mouse, move keyPose to newPose
-                if (keyPoses.find(newPose) == keyPoses.end()) {
-                    auto itLeft = --it;
+//                if (keyPoses.find(newPose) == keyPoses.end()) {
+                    auto itLeft = it;
+                    --itLeft;
                     double left = (it == keyPoses.begin()) ? (0.0) : (*itLeft);
 
                     if (newPose > left) {
                         double dist = newPose - cursor;
                         int num = static_cast<int>(std::distance(keyPoses.begin(), it));
-                        updateKeyPoses(dist, num);
+                        moveKeyPoses(dist, num);
 
-//                        widgetRuler->setMaxDuration(*maxDuration + dist);
-//                        updateDurationSpin();
+                        //                        widgetRuler->setMaxDuration(*maxDuration + dist);
+                        //                        updateDurationSpin();
                     }
-                }
+//                }
             }
 
-            // not on keyPose
+            // ---------------- CURSOR NOT ON KEYPOSE --------------------------
         } else {
 
+            // if shiftdown, slide first right keypose to the left
+            // --------------- MOVE RIGHT KEYPOSE TO THE LEFT -----------------
             if (*shiftDown) {
                 auto it = keyPoses.begin();
                 int iRight = 0;
@@ -148,15 +270,17 @@ void QFrameSelector::mousePressEvent(QMouseEvent* event)
                     //                        cursor += dist;
                     //                        updateCursorSpin();
                     //                    }
-                    updateKeyPoses(dist, iRight);
+                    moveKeyPoses(dist, iRight);
 
-//                    widgetRuler->setMaxDuration(*maxDuration + dist);
-//                    updateDurationSpin();
+                    //                    widgetRuler->setMaxDuration(*maxDuration + dist);
+                    //                    updateDurationSpin();
                 }
 
+                // if not shiftdown, slide first left keypose to the right
+                // ---------------- MOVE LEFT KEYPOSE TO THE RIGHT -----------
             } else {
                 auto it = keyPoses.rbegin();
-                size_t iLeft = keyPoses.size() - 1;
+                int iLeft = static_cast<int>(keyPoses.size() - 1);
                 while (it != keyPoses.rend() && *it > newPose) {
                     ++it;
                     --iLeft;
@@ -180,10 +304,10 @@ void QFrameSelector::mousePressEvent(QMouseEvent* event)
                     //                        cursor += dist;
                     //                        updateCursorSpin();
                     //                    }
-                    updateKeyPoses(dist, iLeft);
+                    moveKeyPoses(dist, iLeft);
 
-//                    widgetRuler->setMaxDuration(*maxDuration + dist);
-//                    updateDurationSpin();
+                    //                    widgetRuler->setMaxDuration(*maxDuration + dist);
+                    //                    updateDurationSpin();
                 }
             }
         }
@@ -204,7 +328,7 @@ void QFrameSelector::mouseMoveEvent(QMouseEvent* event)
 
         //        onChangeCursor(newCursor, true);
         if (onInternalChangeCursor(newCursor))
-            emit cursorChanged(cursor);
+            emit cursorChanged(cursor); // EXTERNAL SIGNAL
     } else {
         event->ignore();
     }
@@ -244,42 +368,8 @@ void QFrameSelector::mouseReleaseEvent(QMouseEvent* event)
 
 //}
 
-void QFrameSelector::onSlideLeftSlider(int deltaX)
-{
-
-    if (!sliding) {
-        leftSlider->setStyleSheet("background-color: #00ff00");
-        sliding = true;
-    }
-
-    double newStart = start + deltaX / *pixPerSec;
-    start = qMin(qMax(newStart, 0.0), end);
-
-    onChangeStart(start);
-
-    leftSpacer->setMinimumWidth(static_cast<int>(*zero + start * *pixPerSec - leftSlider->width()));
-    playZone->setMinimumWidth(static_cast<int>((end - start) * *pixPerSec));
-}
-
-void QFrameSelector::onSlideRightSlider(int deltaX)
-{
-    if (!sliding) {
-        rightSlider->setStyleSheet("background-color: red");
-        sliding = true;
-    }
-    double newEnd = end + deltaX / *pixPerSec;
-    end = qMin(qMax(newEnd, start), *maxDuration);
-
-    onChangeEnd(end);
-
-    playZone->setMinimumWidth(static_cast<int>((end - start) * *pixPerSec));
-}
-
-void QFrameSelector::onSlideRelease()
-{
-    sliding = false;
-}
-
+//
+// -------------------------- EXTERNAL SLOTS ----------------------------------
 // EXTERNAL SLOT
 void QFrameSelector::onAddingKeyPose(double time)
 {
@@ -305,53 +395,6 @@ void QFrameSelector::onAddingKeyPose(double time)
     }
 }
 
-void QFrameSelector::onInternalAddingKeyPose(double time)
-{
-    // by default (time = -1.0), add keyPose on cursor
-    if (static_cast<int>(time) == -1)
-        time = cursor;
-
-    int nbKeyPoses = static_cast<int>(keyPoses.size());
-    keyPoses.insert(time);
-
-    // if keyPose not already here
-    if (static_cast<int>(keyPoses.size()) != nbKeyPoses) {
-        updateCursorSpin();
-        update();
-
-        //        emit nbKeyPosesChanged(static_cast<int>(keyPoses.size()));
-        emit keyPoseAdded(time);
-
-        nbKeyPosesSpin->setValue(static_cast<int>(keyPoses.size()));
-
-        // keyPose already here, change actual keyPose
-    } else {
-        auto it = keyPoses.find(time);
-
-        emit keyPoseChanged(static_cast<int>(std::distance(keyPoses.begin(), it)));
-    }
-}
-
-void QFrameSelector::onDeleteKeyPose()
-{
-    auto it = keyPoses.find(cursor);
-
-    if (it != keyPoses.end()) {
-
-        int num = static_cast<int>(std::distance(keyPoses.begin(), it));
-        keyPoses.erase(it);
-
-        updateCursorSpin();
-        update();
-
-        //        emit nbKeyPosesChanged(static_cast<int>(keyPoses.size()));
-        nbKeyPosesSpin->setValue(static_cast<int>(keyPoses.size()));
-        emit keyPoseDeleted(num);
-
-        onSetCursorToNextKeyPose();
-    }
-}
-
 // EXTERNAL SLOT
 void QFrameSelector::onClearKeyPoses()
 {
@@ -369,7 +412,7 @@ void QFrameSelector::onChangeStart(double time)
     updateStartSpin();
     update();
 
-    emit startChanged(start);
+    emit startChanged(start); // EXTERNAL SIGNAL
 }
 
 // EXTERNAL SLOT
@@ -380,7 +423,7 @@ void QFrameSelector::onChangeEnd(double time)
     updateEndSpin();
     update();
 
-    emit endChanged(end);
+    emit endChanged(end); // EXTERNAL SIGNAL
 }
 
 // EXTERNAL SLOT (warning on using EXTERNAL SIGNAL)
@@ -414,65 +457,111 @@ void QFrameSelector::onChangeCursor(double time)
     update();
 }
 
-double QFrameSelector::nearestStep(double time)
+// EXTERNAL SLOT
+void QFrameSelector::onUpdateDurationSpin()
 {
-    double deltaT = AUTO_SUGGEST_CURSOR_RADIUS / *pixPerSec;
-
-    //    double pos = 2.0; // random initialize
-    //    double
-    double minDist = totalDurationSpin->maximum();
-    double dist;
-
-    double newCursor = time;
-    //    cursor = time;
-
-    for (double keyPose : keyPoses) {
-        //        if (keyPose > cursor + AUTO_SUGGEST_CURSOR_RADIUS)
-        //            break;
-
-        dist = qAbs(keyPose - time);
-        if (dist < deltaT && dist < minDist) {
-
-            //                            pos = keyPose;
-            minDist = dist;
-            newCursor = keyPose;
-            //            cursor = keyPose;
-            //            break;
-        }
-        if (time < keyPose)
-            break;
-    }
-
-    for (int i = 1; i < *nbInterval; i++) {
-        double pos = i * *step;
-        dist = qAbs(pos - time);
-        if (dist < deltaT && dist < minDist) {
-            minDist = dist;
-            newCursor = pos;
-        }
-
-        pos = i * *step + 0.5 * *step;
-        dist = qAbs(pos - time);
-        if (dist < deltaT && dist < minDist) {
-            minDist = dist;
-            newCursor = pos;
-        }
-
-        if (time < pos)
-            break;
-    }
-
-    return newCursor;
+    totalDurationSpin->setValue(*maxDuration);
 }
 
-bool QFrameSelector::onInternalChangeCursor(double time)
+//
+// -------------------------- INTERNAL SLOTS ----------------------------------
+void QFrameSelector::onSlideLeftSlider(int deltaX)
+{
+
+    if (!sliding) {
+        leftSlider->setStyleSheet("background-color: #00ff00");
+        sliding = true;
+    }
+
+    double newStart = start + deltaX / *pixPerSec;
+    start = qMin(qMax(newStart, 0.0), end);
+
+    onChangeStart(start); // EXTERNAL SLOT
+
+    leftSpacer->setMinimumWidth(static_cast<int>(*zero + start * *pixPerSec - leftSlider->width()));
+    playZone->setMinimumWidth(static_cast<int>((end - start) * *pixPerSec));
+}
+
+void QFrameSelector::onSlideRightSlider(int deltaX)
+{
+    if (!sliding) {
+        rightSlider->setStyleSheet("background-color: red");
+        sliding = true;
+    }
+    double newEnd = end + deltaX / *pixPerSec;
+    end = qMin(qMax(newEnd, start), *maxDuration);
+
+    onChangeEnd(end); // EXTERNAL SLOT
+
+    playZone->setMinimumWidth(static_cast<int>((end - start) * *pixPerSec));
+}
+
+void QFrameSelector::onSlideRelease()
+{
+    sliding = false;
+}
+
+void QFrameSelector::onInternalAddingKeyPose(double time)
+{
+    // by default (time = -1.0), add keyPose on cursor
+    if (static_cast<int>(time) == -1)
+        time = cursor;
+
+    int nbKeyPoses = static_cast<int>(keyPoses.size());
+    keyPoses.insert(time);
+
+    // if keyPose not already here
+    if (static_cast<int>(keyPoses.size()) != nbKeyPoses) {
+        updateCursorSpin();
+        update();
+
+        //        emit nbKeyPosesChanged(static_cast<int>(keyPoses.size()));
+        emit keyPoseAdded(time); // EXTERNAL SIGNAL
+
+        nbKeyPosesSpin->setValue(static_cast<int>(keyPoses.size()));
+
+        // keyPose already here, change actual keyPose
+    } else {
+        auto it = keyPoses.find(time);
+
+        emit keyPoseChanged(static_cast<int>(std::distance(keyPoses.begin(), it))); // EXTERNAL SIGNAL
+    }
+}
+
+void QFrameSelector::onDeleteKeyPose()
+{
+    auto it = keyPoses.find(cursor);
+
+    if (it != keyPoses.end()) {
+
+        int num = static_cast<int>(std::distance(keyPoses.begin(), it));
+        keyPoses.erase(it);
+
+        updateCursorSpin();
+        update();
+
+        //        emit nbKeyPosesChanged(static_cast<int>(keyPoses.size()));
+        nbKeyPosesSpin->setValue(static_cast<int>(keyPoses.size()));
+        emit keyPoseDeleted(num); // EXTERNAL SIGNAL
+
+        onSetCursorToNextKeyPose();
+    }
+}
+
+bool QFrameSelector::onInternalChangeCursor(double time, bool findNearestStep)
 {
     //    if (findNearestKeyPose) {
     //    int pixelTime =static_cast<int>(*zero +time * *pixPerSec);
-    double newCursor = nearestStep(time);
+    double newCursor { time };
+
+    if (findNearestStep)
+        newCursor = nearestStep(time);
 
     if (qAbs(cursor - newCursor) < 1e-5)
         return false;
+
+    //    if (! nearestStep(time))
+    //        return false;
 
     cursor = newCursor;
     //    cursor = (min != 999.0) ? (pos) : (time);
@@ -488,14 +577,14 @@ void QFrameSelector::onSetCursorToStart()
 {
     //    onChangeCursor(start);
     if (onInternalChangeCursor(start))
-        emit cursorChanged(cursor);
+        emit cursorChanged(cursor); // EXTERNAL SIGNAL
 }
 
 void QFrameSelector::onSetCursorToEnd()
 {
     //    onChangeCursor(end);
     if (onInternalChangeCursor(end))
-        emit cursorChanged(cursor);
+        emit cursorChanged(cursor); // EXTERNAL SIGNAL
 }
 
 void QFrameSelector::onSetCursorToPreviousKeyPose()
@@ -507,7 +596,7 @@ void QFrameSelector::onSetCursorToPreviousKeyPose()
     if (it != keyPoses.rend()) {
         //        onChangeCursor(*it);
         if (onInternalChangeCursor(*it))
-            emit cursorChanged(cursor);
+            emit cursorChanged(cursor); // EXTERNAL SIGNAL
     }
 }
 
@@ -519,7 +608,7 @@ void QFrameSelector::onSetCursorToNextKeyPose()
 
     if (it != keyPoses.end()) {
         if (onInternalChangeCursor(*it))
-            emit cursorChanged(cursor);
+            emit cursorChanged(cursor); // EXTERNAL SIGNAL
         //        cursor = *it;
 
         //        updateCursorSpin();
@@ -545,7 +634,7 @@ void QFrameSelector::onChangeStartSpin()
 
     if (diff > 1e-5) {
         update();
-        emit startChanged(start);
+        emit startChanged(start); // EXTERNAL SIGNAL
     }
 }
 
@@ -564,7 +653,7 @@ void QFrameSelector::onChangeEndSpin()
     if (diff > 1e-5) {
         update();
 
-        emit endChanged(end);
+        emit endChanged(end); // EXTERNAL SIGNAL
     }
 }
 
@@ -572,7 +661,7 @@ void QFrameSelector::onChangeCursorSpin()
 {
     //    onChangeCursor(cursorSpin->value());
     if (onInternalChangeCursor(cursorSpin->value()))
-        emit cursorChanged(cursor);
+        emit cursorChanged(cursor); // EXTERNAL SIGNAL
 }
 
 void QFrameSelector::onChangeDuration()
@@ -583,14 +672,14 @@ void QFrameSelector::onChangeDuration()
     if (qAbs(newStart - start) > 1e-5) {
         start = newStart;
         updateStartSpin();
-        emit startChanged(start);
+        emit startChanged(start); // EXTERNAL SIGNAL
     }
 
     double newEnd = qMin(qMax(endSpin->value(), end), newDuration);
     if (qAbs(newEnd - end) > 1e-5) {
         end = newEnd;
         updateEndSpin();
-        emit endChanged(end);
+        emit endChanged(end); // EXTERNAL SIGNAL
     }
 
     widgetRuler->setMaxDuration(newDuration); // emit external signal
@@ -609,7 +698,7 @@ void QFrameSelector::onChangeDuration()
 //    end += gap;
 //    updateEndSpin();
 
-//    updateKeyPoses(gap);
+//    moveKeyPoses(gap);
 //    widgetRuler->setMaxDuration(*maxDuration + gap);
 
 //    updateDurationSpin();
@@ -626,7 +715,7 @@ void QFrameSelector::onChangeDuration()
 //    end = qMax(0.0, end - gap);
 //    updateEndSpin();
 
-//    updateKeyPoses(-gap);
+//    moveKeyPoses(-gap);
 //    widgetRuler->setMaxDuration(qMax(0.0, *maxDuration - gap));
 //    updateDurationSpin();
 //}
@@ -660,6 +749,8 @@ void QFrameSelector::onCursorChanged(double time)
     update();
 }
 
+//
+// -------------------------- PRIVATE FUNCTIONS -------------------------------
 void QFrameSelector::updateCursorSpin()
 {
     if (keyPoses.find(cursor) != keyPoses.end()) {
@@ -682,11 +773,11 @@ void QFrameSelector::updateEndSpin()
     endSpin->setValue(end);
 }
 
-void QFrameSelector::updateKeyPoses(double gap, size_t iFirst)
+void QFrameSelector::moveKeyPoses(double gap, int iFirst)
 {
     std::set<double> clone;
-    size_t i = 0;
-    double first;
+    int i = 0;
+    double first {0};
     for (double d : keyPoses) {
         if (i < iFirst)
             clone.insert(d);
@@ -700,93 +791,66 @@ void QFrameSelector::updateKeyPoses(double gap, size_t iFirst)
     }
     keyPoses = clone;
 
-    double left = (gap > 0) ? (first) : (first - gap);
+    double left = (gap > 0) ? (first) : (first + gap);
 
-    if (start > left) {
-        start += gap;
+    // emit keyPosesMoved before emitting cursorChanged to render the truly pose on cursor
+    emit keyPosesMoved(gap, iFirst); // EXTERNAL SIGNAL
+
+    if (start >= left) {
+        //        start += gap;
+        start = qMax(qMin(start + gap, *maxDuration), 0.0);
         updateStartSpin();
+
+        emit startChanged(start);
     }
 
-    if (end > left) {
-        end += gap;
+    if (end >= left) {
+        //        end += gap;
+        end = qMax(qMin(end + gap, *maxDuration), 0.0);
         updateEndSpin();
+
+        emit endChanged(end);
     }
 
-    if (cursor > left) {
-        cursor += gap;
+    if (cursor >= left) {
+        bool cursorOnKeyPose = qAbs(cursor -first) < 1e-5;
+
+        cursor = qMax(cursor + gap, 0.0);
         updateCursorSpin();
+
+        if (! cursorOnKeyPose)
+            emit cursorChanged(cursor);
     }
 
-    widgetRuler->setMaxDuration(*maxDuration + gap);
-    updateDurationSpin();
-
-    emit keyPosesMoved(gap, iFirst);
+    //    widgetRuler->setMaxDuration(*maxDuration + gap);
+    //    updateDurationSpin();
+    update();
 }
 
-void QFrameSelector::setEnd(double value)
-{
-    end = value;
-}
 
-void QFrameSelector::setStart(double value)
-{
-    start = value;
-}
-
-//void QFrameSelector::setDrawLock(bool *value)
+//void QFrameSelector::updatePlayZone()
 //{
-//    drawLock = value;
+//    start = 0;
+//    updateStartSpin();
+
+//    end = *maxDuration;
+//    updateEndSpin();
 //}
 
-void QFrameSelector::setShiftDown(bool* value)
+// -------------------------- GETTERS -----------------------------------------
+double QFrameSelector::getStart() const
 {
-    shiftDown = value;
-}
-
-void QFrameSelector::setNbKeyPosesSpin(QSpinBox* value)
-{
-    nbKeyPosesSpin = value;
-}
-
-// EXTERNAL SLOT
-void QFrameSelector::updateDurationSpin()
-{
-    totalDurationSpin->setValue(*maxDuration);
-}
-
-void QFrameSelector::setTotalDurationSpin(QDoubleSpinBox* value)
-{
-    totalDurationSpin = value;
-}
-
-void QFrameSelector::setEndInc(QDoubleSpinBox* value)
-{
-    endInc = value;
-}
-
-void QFrameSelector::setStartInc(QDoubleSpinBox* value)
-{
-    startInc = value;
-}
-
-std::set<double> QFrameSelector::getKeyPoses() const
-{
-    return keyPoses;
-}
-
-void QFrameSelector::setKeyPoses(const std::set<double>& value)
-{
-    keyPoses = value;
-}
-
-void QFrameSelector::setRemoveKeyPoseButton(QToolButton* value)
-{
-    removeKeyPoseButton = value;
+    return start;
 }
 
 double QFrameSelector::getEnd() const
 {
     return end;
+}
+
+double QFrameSelector::getCursor()
+{
+    return cursor;
 }
 
 int QFrameSelector::getNbKeyPoses() const
@@ -803,16 +867,13 @@ double QFrameSelector::getKeyPose(int id) const
     return *it;
 }
 
-double QFrameSelector::getStart() const
+std::set<double> QFrameSelector::getKeyPoses() const
 {
-    return start;
+    return keyPoses;
 }
 
-void QFrameSelector::setEndSpin(QDoubleSpinBox* value)
-{
-    endSpin = value;
-}
-
+//
+// -------------------------- SETTERS -----------------------------------------
 void QFrameSelector::setCursor(double time)
 {
     cursor = time;
@@ -820,38 +881,41 @@ void QFrameSelector::setCursor(double time)
     //    update();
 }
 
-//void QFrameSelector::updatePlayZone()
-//{
-//    start = 0;
-//    updateStartSpin();
+void QFrameSelector::setKeyPoses(const std::set<double>& value)
+{
+    keyPoses = value;
+}
 
-//    end = *maxDuration;
-//    updateEndSpin();
+void QFrameSelector::setShiftDown(bool* value)
+{
+    shiftDown = value;
+}
+
+//void QFrameSelector::setDrawLock(bool *value)
+//{
+//    drawLock = value;
 //}
 
-double QFrameSelector::getCursor()
+void QFrameSelector::setStart(double value)
 {
-    return cursor;
+    start = value;
 }
 
-void QFrameSelector::setStartSpin(QDoubleSpinBox* value)
+void QFrameSelector::setEnd(double value)
 {
-    startSpin = value;
+    end = value;
 }
 
-void QFrameSelector::setCursorSpin(QDoubleSpinBox* value)
-{
-    cursorSpin = value;
-}
-
+//
+// -------------------------- REFERENCES SETTERS ------------------------------
 void QFrameSelector::setLeftSpacer(QFrame* value)
 {
     leftSpacer = value;
 }
 
-void QFrameSelector::setRightSlider(QLabel* value)
+void QFrameSelector::setLeftSlider(QLabel* value)
 {
-    rightSlider = value;
+    leftSlider = value;
 }
 
 void QFrameSelector::setPlayZone(QFrame* value)
@@ -859,7 +923,49 @@ void QFrameSelector::setPlayZone(QFrame* value)
     playZone = value;
 }
 
-void QFrameSelector::setLeftSlider(QLabel* value)
+void QFrameSelector::setRightSlider(QLabel* value)
 {
-    leftSlider = value;
+    rightSlider = value;
+}
+//
+
+void QFrameSelector::setCursorSpin(QDoubleSpinBox* value)
+{
+    cursorSpin = value;
+}
+
+void QFrameSelector::setStartSpin(QDoubleSpinBox* value)
+{
+    startSpin = value;
+}
+
+void QFrameSelector::setEndSpin(QDoubleSpinBox* value)
+{
+    endSpin = value;
+}
+
+void QFrameSelector::setTotalDurationSpin(QDoubleSpinBox* value)
+{
+    totalDurationSpin = value;
+}
+//
+
+void QFrameSelector::setRemoveKeyPoseButton(QToolButton* value)
+{
+    removeKeyPoseButton = value;
+}
+
+void QFrameSelector::setStartInc(QDoubleSpinBox* value)
+{
+    startInc = value;
+}
+
+void QFrameSelector::setEndInc(QDoubleSpinBox* value)
+{
+    endInc = value;
+}
+
+void QFrameSelector::setNbKeyPosesSpin(QSpinBox* value)
+{
+    nbKeyPosesSpin = value;
 }

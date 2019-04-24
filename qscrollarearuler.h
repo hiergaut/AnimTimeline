@@ -7,6 +7,8 @@
 #include <QObject>
 #include <QScrollArea>
 #include <QWidget>
+#include "qdoublespinboxsmart.h"
+#include "qframeselector.h"
 
 class QScrollAreaRuler : public QScrollArea {
     Q_OBJECT
@@ -21,6 +23,14 @@ public:
 
     void setAnimTimeline(AnimTimeline *value);
 
+    void setSpinDuration(QDoubleSpinBoxSmart *value);
+
+    bool * getCtrlDown();
+
+//    void setZero(double *value);
+
+    void setSelector(QFrameSelector *value);
+
 protected:
     void keyPressEvent(QKeyEvent* event) override;
     void keyReleaseEvent(QKeyEvent* event) override;
@@ -30,17 +40,20 @@ protected:
     void mousePressEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
+//    void scrollContentsBy(int dx, int dy) override;
 
 signals:
-    void changePrecision(int accuracy);
+//    void changePrecision(int width);
     void addKeyPose();
     void removeKeyPose();
     void previousKeyPose();
     void nextKeyPose();
+    void durationChanged();
 
 public slots:
     void onKeyPress(QKeyEvent *event);
     void onKeyRelease(QKeyEvent *event);
+//    void onZoomRuler(QWheelEvent *event, double xr);
 
 private:
     bool ctrlDown = false;
@@ -49,9 +62,14 @@ private:
 
     int mousePosX;
     int sliderPos;
+
     QWidgetRuler* ruler;
     QToolButtonPlayPause* playPause;
     AnimTimeline * animTimeline;
+    QDoubleSpinBoxSmart * spinDuration;
+
+    QFrameSelector * selector;
+//    double * zero;
 };
 
 #endif // QSCROLLAREARULER_H
