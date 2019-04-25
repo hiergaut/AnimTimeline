@@ -45,13 +45,13 @@ int QWidgetRuler::drawRuler(int width)
     pixPerSec = (width / double(nbInterval)) / step;
 
     zero = pixPerSec * step;
-    qDebug() << "ruler parent : " << this->parent();
+    //    qDebug() << "ruler parent : " << this->parent();
 
     //    setMinimumWidth(width -100);
     //    timescaleLock =selectorLock =false;
     setMinimumWidth(width);
 
-    //    update();
+    update();
 
     return width;
 }
@@ -75,10 +75,10 @@ void QWidgetRuler::setShiftDown(bool* value)
     shiftDown = value;
 }
 
-bool* QWidgetRuler::getCtrlDown() const
-{
-    return ctrlDown;
-}
+//bool* QWidgetRuler::getCtrlDown() const
+//{
+//    return ctrlDown;
+//}
 
 //void QWidgetRuler::setAreaRuler(QScrollAreaRuler* value)
 //{
@@ -189,18 +189,18 @@ bool* QWidgetRuler::getTimescaleLock()
 //}
 
 // EXTERNAL SLOT
-void QWidgetRuler::setMaxDuration(double value)
-{
-    //    if (value != maxDuration) {
-    if (qAbs(value - maxDuration) > 1e-5) {
+//void QWidgetRuler::setMaxDuration(double value)
+//{
+//    //    if (value != maxDuration) {
+//    if (qAbs(value - maxDuration) > 1e-5) {
 
-        maxDuration = value;
-        drawRuler(width());
-        update();
+//        maxDuration = value;
+//        drawRuler(width());
+//        update();
 
-        emit durationChanged(value); //external signal
-    }
-}
+////        emit durationChanged(value); //external signal
+//    }
+//}
 
 double* QWidgetRuler::getMaxDuration()
 {

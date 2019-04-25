@@ -17,7 +17,7 @@ public:
     ~AnimTimeline() override;
 
 protected:
-    void resizeEvent(QResizeEvent* ev) override;
+    virtual void resizeEvent(QResizeEvent* ev) override;
     //    void showEvent(QShowEvent* ev) override;
 
     //public:
@@ -35,9 +35,9 @@ signals:
 
     void keyPoseAdded(double time);
     void keyPoseDeleted(int num);
-    void keyPoseChanged(int num);
+    void keyPoseChanged(int num); // skeleton changed
     void keyPoseMoved(int num, double time);
-    void keyPosesMoved(double gap, int first = 0);
+    void keyPosesMoved(double gap, int first = 0); // first ith keyPose to move
 
     void playClicked();
     void pauseClicked();
@@ -46,13 +46,16 @@ public slots:
     void onChangeStart(double time);
     void onChangeEnd(double time);
     void onChangeCursor(double time);
-    void onChangeAnimDuration(double time);
+    void onChangeDuration(double time);
 
     void onAddingKeyPose(double time);
     void onClearKeyPoses();
 
     void onSetPlayMode();
     void onSetPauseMode();
+
+    //private:
+    //    virtual void resizeEvent(QResizeEvent* ev) override;
 
 private:
     Ui::AnimTimeline* ui;

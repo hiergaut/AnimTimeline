@@ -45,16 +45,16 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     connect(ui->label_rightSlider, &QLabelSlider::slideRelease, ui->frame_selector, &QFrameSelector::onRightSlideRelease);
 
     connect(ui->scrollArea, &QScrollAreaRuler::removeKeyPose, ui->frame_selector, &QFrameSelector::onDeleteKeyPose);
-    connect(ui->scrollArea, SIGNAL(addKeyPose()), ui->frame_selector, SLOT(onInternalAddingKeyPose()));
+    connect(ui->scrollArea, SIGNAL(addKeyPose()), ui->frame_selector, SLOT(onAddingKeyPose()));
 //    connect(ui->scrollArea, SIGNAL(keyPoseOnMouseAdded()), ui->frame_selector, SLOT(onAddingKeyPoseOnMouse()));
     connect(ui->scrollArea, &QScrollAreaRuler::nextKeyPose, ui->frame_selector, &QFrameSelector::onSetCursorToNextKeyPose);
     connect(ui->scrollArea, &QScrollAreaRuler::previousKeyPose, ui->frame_selector, &QFrameSelector::onSetCursorToPreviousKeyPose);
-    connect(ui->scrollArea, &QScrollAreaRuler::durationChanged, ui->frame_selector, &QFrameSelector::onChangeDurationSpin);
+    connect(ui->scrollArea, SIGNAL(durationChanged(double)), ui->frame_selector, SLOT(onChangeDuration(double)));
 
     connect(ui->toolButton_deleteKeyPose, &QToolButton::clicked, ui->frame_selector, &QFrameSelector::onDeleteKeyPose);
     connect(ui->toolButton_end, &QToolButton::clicked, ui->frame_selector, &QFrameSelector::onSetCursorToEnd);
     connect(ui->toolButton_forward, &QToolButton::clicked, ui->frame_selector, &QFrameSelector::onSetCursorToNextKeyPose);
-    connect(ui->toolButton_keyPose, SIGNAL(clicked()), ui->frame_selector, SLOT(onInternalAddingKeyPose()));
+    connect(ui->toolButton_keyPose, SIGNAL(clicked()), ui->frame_selector, SLOT(onAddingKeyPose()));
     //    connect(ui->toolButton_lessEnd, &QToolButton::clicked, ui->frame_selector, &QFrameSelector::onEndIncLess);
     //    connect(ui->toolButton_lessStart, &QToolButton::clicked, ui->frame_selector, &QFrameSelector::onStartIncLess);
     //    connect(ui->toolButton_playPause, &QToolButtonPlayPause::playClicked, ui->frame_selector, &QFrameSelector::onPlay);
@@ -89,18 +89,20 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     ui->frame_selector->setRemoveKeyPoseButton(ui->toolButton_deleteKeyPose);
     //    ui->frame_selector->setStartInc(ui->doubleSpinBox_startInc);
     //    ui->frame_selector->setEndInc(ui->doubleSpinBox_endInc);
-    ui->frame_selector->setTotalDurationSpin(ui->doubleSpinBox_maxDuration);
+    ui->frame_selector->setDurationSpin(ui->doubleSpinBox_maxDuration);
     ui->frame_selector->setNbKeyPosesSpin(ui->spinBox_nbKeyPoses);
     ui->frame_selector->setShiftDown(ui->scrollArea->getShiftDown());
     //    ui->frame_selector->setDrawLock(ui->scrollAreaWidgetContents->getDrawLock());
     //    ui->frame_selector->setDrawLock(ui->scrollAreaWidgetContents->getDrawLock());
     //    ui->frame_timescale->setDrawLock(ui->scrollAreaWidgetContents->getDrawLock());
     ui->frame_selector->setMidMouseDown(ui->scrollArea->getMidMouseDown());
+    ui->frame_selector->setCtrlDown(ui->scrollArea->getCtrlDown());
 
     // FRAME_BUTTONS
     ui->frame_buttons->setAnimTimeline(this);
     ui->frame_buttons->setRuler(ui->scrollAreaWidgetContents);
     //    ui->frame_buttons->setScrollArea(ui->scrollArea);
+    ui->frame_buttons->setHelpButton(ui->toolButton_help);
 
     // SCROLL_AREA_RULER
     ui->scrollArea->setAnimTimeline(this);
@@ -119,26 +121,31 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     ui->scrollAreaWidgetContents->setShiftDown(ui->scrollArea->getShiftDown());
     ui->scrollAreaWidgetContents->setCtrlDown(ui->scrollArea->getCtrlDown());
 
+
+
     //
     // --------------------------- SET DEFAULT UI VALUES -----------------------
     // FRAME_SELECTOR
     ui->frame_selector->setStart(ui->doubleSpinBox_start->value());
     ui->frame_selector->setCursor(ui->doubleSpinBox_cursor->value());
     ui->frame_selector->setEnd(ui->doubleSpinBox_end->value());
+//    ui->frame_selector->onChangeDuration(ui->doubleSpinBox_maxDuration->value());
+    ui->frame_selector->setDuration(ui->doubleSpinBox_maxDuration->value());
 
     // WIDGET_RULER
-    ui->scrollAreaWidgetContents->setMaxDuration(ui->doubleSpinBox_maxDuration->value());
+//    ui->scrollAreaWidgetContents->setMaxDuration(ui->doubleSpinBox_maxDuration->value());
 
     //
     // connect internal signals to external ones (black box)
     // --------------------------- SIGNAL TO SIGNAL ---------------------------
     connect(ui->toolButton_playPause, &QToolButtonPlayPause::playClicked, this, &AnimTimeline::playClicked);
     connect(ui->toolButton_playPause, &QToolButtonPlayPause::pauseClicked, this, &AnimTimeline::pauseClicked);
-    connect(ui->scrollAreaWidgetContents, &QWidgetRuler::durationChanged, this, &AnimTimeline::durationChanged);
+//    connect(ui->scrollAreaWidgetContents, &QWidgetRuler::durationChanged, this, &AnimTimeline::durationChanged);
 
     connect(ui->frame_selector, &QFrameSelector::cursorChanged, this, &AnimTimeline::cursorChanged);
     connect(ui->frame_selector, &QFrameSelector::startChanged, this, &AnimTimeline::startChanged);
     connect(ui->frame_selector, &QFrameSelector::endChanged, this, &AnimTimeline::endChanged);
+    connect(ui->frame_selector, &QFrameSelector::durationChanged, this, &AnimTimeline::durationChanged);
 
     connect(ui->frame_selector, &QFrameSelector::keyPoseAdded, this, &AnimTimeline::keyPoseAdded);
     connect(ui->frame_selector, &QFrameSelector::keyPoseDeleted, this, &AnimTimeline::keyPoseDeleted);
@@ -180,12 +187,14 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     //    Ui::animTimelineWidth =&this->width();
     //    setFocusPolicy(Qt::StrongFocus);
 
+    // set sizePolicy to set, to allow zoom in scrollArea
     ui->scrollAreaWidgetContents->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
-    // draw ruler
+    // first draw of ruler with current width of dialog
     ui->scrollAreaWidgetContents->onDrawRuler(width() - 2); // left/right border width = 2 *1 pixel
 }
 
 AnimTimeline::~AnimTimeline() { delete ui; }
+
 
 void AnimTimeline::resizeEvent(QResizeEvent* event)
 {
@@ -225,9 +234,9 @@ void AnimTimeline::onSetPauseMode()
     ui->toolButton_playPause->onPauseMode();
 }
 
-void AnimTimeline::onChangeAnimDuration(double time)
+void AnimTimeline::onChangeDuration(double time)
 {
-    qDebug() << "\033[32monChangeAnimDuration(" << time << ")\033[0m";
+    qDebug() << "\033[32monChangeDuration(" << time << ")\033[0m";
 //    ui->scrollAreaWidgetContents->setMaxDuration(time);
 //    ui->doubleSpinBox_maxDuration->setValue(time);
 //    ui->frame_selector->onUpdateDurationSpin();
@@ -256,7 +265,7 @@ void AnimTimeline::onChangeEnd(double time)
 void AnimTimeline::onAddingKeyPose(double time)
 {
     qDebug() << "\033[32monAddingKeyPose(" << time << ")\033[0m";
-    ui->frame_selector->onAddingKeyPose(time);
+    ui->frame_selector->onAddingKeyPose(time, false);
 }
 
 void AnimTimeline::onClearKeyPoses()

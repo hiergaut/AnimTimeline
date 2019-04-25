@@ -37,7 +37,7 @@ QScrollAreaRuler::QScrollAreaRuler(QWidget* parent)
 
 void QScrollAreaRuler::keyPressEvent(QKeyEvent* event)
 {
-    qDebug() << "QScrollAreaRuler::keyPressEvent event : " << event;
+//    qDebug() << "QScrollAreaRuler::keyPressEvent event : " << event;
 
     switch (event->key()) {
 
@@ -49,9 +49,9 @@ void QScrollAreaRuler::keyPressEvent(QKeyEvent* event)
         playPause->onChangeMode();
         break;
 
-//    case Qt::Key_Delete:
-//        emit removeKeyPose();
-//        break;
+    case Qt::Key_Delete:
+        emit removeKeyPose();
+        break;
 
     case Qt::Key_I:
         if (shiftDown) {
@@ -80,20 +80,21 @@ void QScrollAreaRuler::keyPressEvent(QKeyEvent* event)
         break;
 
     case Qt::Key_Up:
-        spinDuration->setValue(spinDuration->value() + spinDuration->singleStep());
-        emit durationChanged();
+//        spinDuration->setValue(spinDuration->value() + spinDuration->singleStep());
+        emit durationChanged(spinDuration->value() +spinDuration->singleStep());
         break;
 
     case Qt::Key_Down:
-        spinDuration->setValue(spinDuration->value() - spinDuration->singleStep());
-        emit durationChanged();
+//        spinDuration->setValue(spinDuration->value() - spinDuration->singleStep());
+        emit durationChanged(spinDuration->value() -spinDuration->singleStep());
         break;
     }
 }
 
 void QScrollAreaRuler::keyReleaseEvent(QKeyEvent* event)
 {
-    qDebug() << "QScrollAreaRuler::keyReleaseEvent event : " << event;
+//    qDebug() << "QScrollAreaRuler::keyReleaseEvent event : " << event;
+
     switch (event->key()) {
 
     case Qt::Key_Control:

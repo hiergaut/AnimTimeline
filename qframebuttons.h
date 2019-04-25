@@ -6,6 +6,7 @@
 #include <QFrame>
 #include <QPoint>
 #include <QScrollArea>
+#include <QToolButton>
 
 class QFrameButtons : public QFrame {
     Q_OBJECT
@@ -17,6 +18,8 @@ public:
     void setRuler(QWidgetRuler* value);
 
     void setScrollArea(QScrollArea *value);
+
+    void setHelpButton(QToolButton *value);
 
 protected:
     //    void wheelEvent(QWheelEvent* event) override;
@@ -37,6 +40,8 @@ private:
     QWidgetRuler* ruler;
     QPoint offset;
     QScrollArea * scrollArea;
+
+    QToolButton * helpButton;
 };
 
 #endif // QFRAMEBUTTONS_H

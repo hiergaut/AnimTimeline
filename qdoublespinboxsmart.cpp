@@ -27,7 +27,7 @@ void QDoubleSpinBoxSmart::wheelEvent(QWheelEvent *event)
 void QDoubleSpinBoxSmart::keyPressEvent(QKeyEvent* event)
 {
     QDoubleSpinBox::keyPressEvent(event);
-    qDebug() << "QDoubleSpinBoxSmart::keyPressEvent(" << event << ")";
+//    qDebug() << "QDoubleSpinBoxSmart::keyPressEvent(" << event << ")";
     switch (event->key()) {
     case Qt::Key_Up:
     case Qt::Key_Down:

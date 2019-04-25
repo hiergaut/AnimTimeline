@@ -19,7 +19,7 @@ public:
     int drawRuler(int newWidth);
     double* getZero();
     double* getMaxDuration();
-    void setMaxDuration(double value); // EXTERNAL SLOT
+//    void setMaxDuration(double value); // EXTERNAL SLOT
 //    bool * getDrawLock();
     bool * getTimescaleLock();
     bool * getSelectorLock();
@@ -30,7 +30,7 @@ public:
 
 //    void setAreaRuler(QScrollAreaRuler *value);
 
-    bool *getCtrlDown() const;
+//    bool *getCtrlDown() const;
 
     void setShiftDown(bool *value);
 
@@ -40,7 +40,7 @@ protected:
 //    void wheelEvent(QWheelEvent* event) override;
 
 signals:
-    void durationChanged(double time); // EXTERNAL SIGNAL
+//    void durationChanged(double time); // EXTERNAL SIGNAL
     void rulerZoomed(QWheelEvent *event, double xr);
 
 public slots:

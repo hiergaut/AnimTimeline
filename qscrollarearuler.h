@@ -50,7 +50,7 @@ signals:
     void removeKeyPose();
     void previousKeyPose();
     void nextKeyPose();
-    void durationChanged();
+    void durationChanged(double time);
     void addKeyPose();
 
 public slots:

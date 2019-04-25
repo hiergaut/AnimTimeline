@@ -37,6 +37,7 @@ signals:
     void cursorChanged(double time); // EXTERNAL SIGNAL
     void startChanged(double time); // EXTERNAL SIGNAL
     void endChanged(double time); // EXTERNAL SIGNAL
+    void durationChanged(double time); // EXTERNAL SIGNAL
 
     void keyPoseAdded(double time); // EXTERNAL SIGNAL
     void keyPoseDeleted(int num); // EXTERNAL SIGNAL
@@ -46,7 +47,7 @@ signals:
 
 public slots:
     // ---------------------- EXTERNAL SLOTS ----------------------------------
-    void onAddingKeyPose(double time); // EXTERNAL SLOT
+    void onAddingKeyPose(double time = -1.0, bool internal = true); // EXTERNAL SLOT
     void onClearKeyPoses(); // EXTERNAL SLOT
 
     void onChangeStart(double time, bool internal = true); // EXTERNAL SLOT
@@ -63,7 +64,7 @@ public slots:
     void onRightSlideRelease();
 
     // by default (time = -1.0), add keyPose on cursor
-    void onInternalAddingKeyPose(double time = -1.0);
+//    void onInternalAddingKeyPose(double time = -1.0);
 
     void onDeleteKeyPose();
 //    bool onInternalChangeCursor(double time, bool findNearestStep = true);
@@ -94,7 +95,10 @@ private:
     void updateCursorSpin();
     void updateStartSpin();
     void updateEndSpin();
+    void updateDurationSpin();
     void moveKeyPoses(double gap, int first = 0);
+    void deleteZone(double time, double time2);
+
 
 private:
     int paintCounter { 0 };
@@ -107,7 +111,7 @@ private:
     double* step;
     double* pixPerSec;
     double* zero;
-    double* maxDuration;
+    double* duration;
 
     // question : why QSet is unordered
     //    QSet<double> keyPoses;
@@ -120,6 +124,8 @@ private:
     bool * midMouseDown;
 
     bool* shiftDown;
+    bool * ctrlDown;
+
     //    bool * drawLock;
     int updateKeyPoseFlash {0};
     double keyPoseFlash;
@@ -137,7 +143,7 @@ private:
     QDoubleSpinBox* cursorSpin;
     QDoubleSpinBox* startSpin;
     QDoubleSpinBox* endSpin;
-    QDoubleSpinBox* totalDurationSpin;
+    QDoubleSpinBox* durationSpin;
 
     QToolButton* removeKeyPoseButton;
     QDoubleSpinBox* startInc;
@@ -161,6 +167,7 @@ public:
     //    void setDrawLock(bool *value);
     void setStart(double value);
     void setEnd(double value);
+    void setDuration(double time);
 
     //
     // ---------------------- REFERENCES SETTERS ------------------------------
@@ -172,13 +179,14 @@ public:
     void setCursorSpin(QDoubleSpinBox* value);
     void setStartSpin(QDoubleSpinBox* value);
     void setEndSpin(QDoubleSpinBox* value);
-    void setTotalDurationSpin(QDoubleSpinBox* value);
+    void setDurationSpin(QDoubleSpinBox* value);
 
     void setRemoveKeyPoseButton(QToolButton* value);
     void setStartInc(QDoubleSpinBox* value);
     void setEndInc(QDoubleSpinBox* value);
     void setNbKeyPosesSpin(QSpinBox* value);
     void setMidMouseDown(bool *value);
+    void setCtrlDown(bool *value);
 };
 
 #endif // QFRAMESELECTOR_H
