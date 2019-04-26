@@ -53,6 +53,9 @@ signals:
     void durationChanged(double time);
     void addKeyPose();
 
+    void undo();
+    void redo();
+
 public slots:
     void onKeyPress(QKeyEvent *event);
     void onKeyRelease(QKeyEvent *event);

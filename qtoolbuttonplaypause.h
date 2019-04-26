@@ -10,6 +10,8 @@ public:
     explicit QToolButtonPlayPause(QWidget* parent = nullptr);
     ~QToolButtonPlayPause() override;
 
+    bool * getPlay();
+
 protected:
     void mousePressEvent(QMouseEvent* event) override;
 

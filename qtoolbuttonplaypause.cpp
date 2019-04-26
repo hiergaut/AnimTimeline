@@ -73,3 +73,8 @@ void QToolButtonPlayPause::onChangeMode()
         emit playClicked();
     }
 }
+
+bool * QToolButtonPlayPause::getPlay()
+{
+    return & play;
+}

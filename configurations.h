@@ -16,6 +16,7 @@
 // |                                 |
 //  ---------------------------------
 //#define STARTUP_WIDTH 700
+// now fix timeline's width directly in animtimeline.ui
 
 
 // first timeline position is fixed at startup with these margins (right/bottom)
@@ -64,6 +65,7 @@
 // slide ruler speed factor (<ctrl> + <wheelMouse> on ruler)
 #define SLIDE_SPEED 1.0 // unit : double (0.0 .. oo)
 
+// todo : maybe global static var
 // frame per second to draw position of each frame in ruler
 #define FPS 24
 

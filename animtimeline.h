@@ -1,7 +1,9 @@
 #ifndef ANIMTIMELINE_H
 #define ANIMTIMELINE_H
 
-#include "configurations.h"
+//#include "configurations.h"
+#include "session.h"
+
 #include <QDialog>
 
 namespace Ui {
@@ -20,13 +22,6 @@ protected:
     virtual void resizeEvent(QResizeEvent* ev) override;
     //    void showEvent(QShowEvent* ev) override;
 
-    //public:
-    //    double getCursor();
-    //    double getStart();
-    //    double getEnd();
-    //    int getNbKeyPoses();
-    //    double getKeyPose(int id);
-
 signals:
     void startChanged(double time);
     void endChanged(double time);
@@ -42,6 +37,7 @@ signals:
     void playClicked();
     void pauseClicked();
 
+
 public slots:
     void onChangeStart(double time);
     void onChangeEnd(double time);
@@ -51,14 +47,36 @@ public slots:
     void onAddingKeyPose(double time);
     void onClearKeyPoses();
 
-    void onSetPlayMode();
-    void onSetPauseMode();
+    void onSetPlayMode(); // useless : why use it ?
+    void onSetPauseMode(); // useless : why use it ?
+
+
+signals:
+    // session (undo/redo)
+    void envSaved();
+    void sessionCleared();
+    void undid();
+    void redid();
+
+    // getters
+    //public:
+    //    double getCursor();
+    //    double getStart();
+    //    double getEnd();
+    //    int getNbKeyPoses();
+    //    double getKeyPose(int id);
 
     //private:
     //    virtual void resizeEvent(QResizeEvent* ev) override;
 
 private:
     Ui::AnimTimeline* ui;
+//    static const Session & session;
+//    const Session & session =new Session();
+    Session session;
 };
+
+//const Session & AnimTimeline::session{};
+
 
 #endif // ANIMTIMELINE_H

@@ -14,6 +14,7 @@ class QFrameSelector : public QFrame {
     Q_OBJECT
 public:
     explicit QFrameSelector(QWidget* parent = nullptr);
+    ~QFrameSelector() override;
 
     //    void updatePlayZone();
 
@@ -81,6 +82,7 @@ public slots:
     void onChangeCursorSpin();
     void onChangeDurationSpin();
 
+
 //    void onAddingKeyPoseOnMouse();
 
     //    void onStartIncPlus();
@@ -89,13 +91,14 @@ public slots:
     //    void onEndIncLess();
 
 //    void onCursorChanged(double time);
-
-private:
-    // ---------------------- PRIVATE FUNCTIONS --------------------------------
     void updateCursorSpin();
     void updateStartSpin();
     void updateEndSpin();
     void updateDurationSpin();
+    void redrawPlayZone();
+
+private:
+    // ---------------------- PRIVATE FUNCTIONS --------------------------------
     void moveKeyPoses(double gap, int first = 0);
     void deleteZone(double time, double time2);
 
@@ -153,11 +156,16 @@ private:
 public:
     // --------------------------- GETTERS ------------------------------------
     double getStart() const;
+    double * getStart();
+    double * getEnd();
+    double * getCursor();
     double getEnd() const;
-    double getCursor();
+    double getCursor() const;
     int getNbKeyPoses() const;
     double getKeyPose(int id) const;
     std::set<double> getKeyPoses() const;
+    std::set<double> * getKeyPoses();
+
 
     //
     // --------------------------- SETTERS ------------------------------------

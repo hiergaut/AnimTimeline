@@ -10,11 +10,11 @@
     <x>0</x>
     <y>0</y>
     <width>650</width>
-    <height>140</height>
+    <height>142</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -22,13 +22,13 @@
   <property name="minimumSize">
    <size>
     <width>650</width>
-    <height>140</height>
+    <height>142</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>16777215</width>
-    <height>140</height>
+    <height>16777215</height>
    </size>
   </property>
   <property name="sizeIncrement">
@@ -125,7 +125,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;start of playZone (unit : seconde)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Start of playZone (unit : seconde)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;wheelMouse&amp;gt;&lt;/span&gt; or &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;up/down&amp;gt;&lt;/span&gt; : +/- change value&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#aa00ff;&quot;&gt;[on ruler]&lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;moveLeftSliderBar&amp;gt;&lt;/span&gt; : +/- change value&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="autoFillBackground">
          <bool>false</bool>
@@ -193,7 +193,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;end of playZone (unit : seconde)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;End of playZone (unit : seconde)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;wheelMouse&amp;gt;&lt;/span&gt; or &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;up/down&amp;gt;&lt;/span&gt; : +/- change value&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#aa00ff;&quot;&gt;[on ruler] &lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;moveRightSliderBar&amp;gt;&lt;/span&gt; : +/- change value&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color: #ff6666</string>
@@ -252,7 +252,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;postition of cursor (unit : seconde)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Postition of cursor (unit : seconde)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;wheelMouse&amp;gt;&lt;/span&gt; or &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;up/down&amp;gt;&lt;/span&gt; : +/- change value&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#aa00ff;&quot;&gt;[on ruler]&lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;leftClick&amp;gt;&lt;/span&gt; : change value&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
@@ -317,7 +317,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#ffffff;&quot;&gt;insert/replace key pose on cursor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;shortcut: &amp;lt;i&amp;gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ffffff;&quot;&gt;Insert/replace key pose on cursor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#ffffff;&quot;&gt;&amp;lt;i&amp;gt; &lt;/span&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;: insert/replace keyPose on cursor&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color:black;</string>
@@ -346,7 +346,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;numbers of keyPoses&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Numbers of keyPoses&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;wheelMouse&amp;gt;&lt;/span&gt; : set cursor to next/previous keyPose&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="autoFillBackground">
          <bool>false</bool>
@@ -380,7 +380,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;delete keyPose on cursor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;shortcut: &amp;lt;shift&amp;gt;&amp;lt;i&amp;gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Delete keyPose on cursor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;shift&amp;gt;&amp;lt;i&amp;gt;&lt;/span&gt; or &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;del&amp;gt; &lt;/span&gt;: delete current keyPose on cursor&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
          <string>...</string>
@@ -413,7 +413,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;set cursor on the start&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Set cursor to the start&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
          <string>...</string>
@@ -433,7 +433,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;set cursor on previous keyPose&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Set cursor to previous keyPose&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#aa00ff;&quot;&gt;[on ruler]&lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt; &amp;lt;left&amp;gt;&lt;/span&gt; or &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;shift&amp;gt;&amp;lt;wheelMouse&amp;gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
          <string>...</string>
@@ -453,7 +453,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;play/pause animation until end&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Play/pause animation until end (autoloop)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;space&amp;gt;&lt;/span&gt; : play/pause animation&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
          <string>...</string>
@@ -473,7 +473,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;set cursor on next keyPose&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Set cursor to next keyPose&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#aa00ff;&quot;&gt;[on ruler]&lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt; &amp;lt;right&amp;gt;&lt;/span&gt; or &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;shift&amp;gt;&amp;lt;wheelMouse&amp;gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
          <string>...</string>
@@ -493,7 +493,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;set cursor on the end&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Set cursor to the end&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
          <string>...</string>
@@ -530,6 +530,9 @@
           <width>120</width>
           <height>0</height>
          </size>
+        </property>
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Total duration (unit : seconde)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;up/down&amp;gt;&lt;/span&gt; or &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;wheelMouse&amp;gt;&lt;/span&gt; : +/- change value&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#aa00ff;&quot;&gt;[on ruler]&lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt; &amp;lt;up/down&amp;gt;&lt;/span&gt; : +/- change value&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="styleSheet">
          <string notr="true">background: darkgray;</string>
@@ -573,7 +576,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:24pt;&quot;&gt;List of keybindings&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt; font-weight:600; font-style:italic;&quot;&gt;* KeyPose :&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; color:#ff5500;&quot;&gt;Next / Previous :&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;left/right&amp;gt;&lt;/span&gt; or &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;shift&amp;gt;+&amp;lt;wheelMouse&amp;gt; &lt;/span&gt;&lt;span style=&quot; color:#aa00ff;&quot;&gt;(on ruler)&lt;/span&gt; : set cursor to next / previous keyPose&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;wheelMouse&amp;gt; &lt;/span&gt;&lt;span style=&quot; color:#aa00ff;&quot;&gt;(over keyPose numbering spinBox)&lt;/span&gt; : idem&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; color:#ff5500;&quot;&gt;Insert / Replace :&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;i&amp;gt;&lt;/span&gt; : insert/replace keyPose on cursor&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; color:#ff5500;&quot;&gt;Delete :&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;shift&amp;gt;+&amp;lt;i&amp;gt; &lt;/span&gt;or &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;del&amp;gt;&lt;/span&gt; : delete current keyPose&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;shift&amp;gt;+&amp;lt;leftClick&amp;gt; &lt;/span&gt;&lt;span style=&quot; color:#aa00ff;&quot;&gt;(on ruler)&lt;/span&gt; : remove keyPoses between cursor and mouse&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; color:#ff5500;&quot;&gt;Move :&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#ff5500;&quot;&gt;cursor already on keyPose :&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;rightClick&amp;gt; &lt;/span&gt;&lt;span style=&quot; color:#aa00ff;&quot;&gt;(on ruler)&lt;/span&gt; : move current keyPose on mouse and slide its right brothers (right brothers : all keyPoses on the right of current keyPose)&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;shift&amp;gt;+&amp;lt;rightClick&amp;gt; &lt;/span&gt;&lt;span style=&quot; color:#aa00ff;&quot;&gt;(on ruler)&lt;/span&gt; : move current keyPose on mouse click&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#ff5500;&quot;&gt;cursor not on keyPose :&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;rightClick&amp;gt; &lt;/span&gt;&lt;span style=&quot; color:#aa00ff;&quot;&gt;(on ruler)&lt;/span&gt; : move first keyPose on the left of mouse on mouse and slide its right brothers&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;shift&amp;gt;+&amp;lt;rightClick&amp;gt; &lt;/span&gt;&lt;span style=&quot; color:#aa00ff;&quot;&gt;(on ruler)&lt;/span&gt; : move first keyPose on the right of mouse on mouse and slide its right brothers&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt; font-weight:600; font-style:italic;&quot;&gt;* Cursor :&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;leftClick&amp;gt; &lt;/span&gt;&lt;span style=&quot; color:#aa00ff;&quot;&gt;(on ruler)&lt;/span&gt; : move cursor and update renderer&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;ctrl&amp;gt;+&amp;lt;leftClick&amp;gt; &lt;/span&gt;&lt;span style=&quot; color:#aa00ff;&quot;&gt;(on ruler)&lt;/span&gt; : move cursor without renderer update (need to create multiple keyPose of same skeleton, avoid auto interpolate)&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt; font-weight:600; font-style:italic;&quot;&gt;* Ruler :&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;wheeMouse&amp;gt;&lt;/span&gt;&lt;span style=&quot; color:#aa00ff;&quot;&gt;(on ruler)&lt;/span&gt; : zoom in/out (&lt;span style=&quot; color:#00aa00;&quot;&gt;speed of zoom can be changed, see configuration.h&lt;/span&gt;)&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;ctrl&amp;gt;+&amp;lt;wheelMouse&amp;gt;&lt;/span&gt; or &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;hold middleClick&amp;gt;+&amp;lt;mouseMove&amp;gt;&lt;/span&gt; (&lt;span style=&quot; color:#aa00ff;&quot;&gt;on ruler&lt;/span&gt;) : slide left/right ruler (&lt;span style=&quot; color:#00aa00;&quot;&gt;slide speed can be changed, see configuration.h&lt;/span&gt;)&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;shift&amp;gt;+&amp;lt;ctrl&amp;gt;+&amp;lt;wheelMouse&amp;gt;&lt;/span&gt; : increase/decrease size of timeline (width of dialog)&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt; font-weight:600; font-style:italic;&quot;&gt;* Others :&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;space&amp;gt;&lt;/span&gt; : set play/pause mode&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:24pt;&quot;&gt;List of keybindings&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt; font-weight:600; font-style:italic;&quot;&gt;* KeyPose :&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; color:#ff5500;&quot;&gt;Next / Previous :&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;left/right&amp;gt;&lt;/span&gt; or &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;shift&amp;gt;+&amp;lt;wheelMouse&amp;gt; &lt;/span&gt;&lt;span style=&quot; color:#aa00ff;&quot;&gt;(on ruler)&lt;/span&gt; : set cursor to next / previous keyPose&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;wheelMouse&amp;gt; &lt;/span&gt;&lt;span style=&quot; color:#aa00ff;&quot;&gt;(over keyPose numbering spinBox)&lt;/span&gt; : idem&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; color:#ff5500;&quot;&gt;Insert / Replace :&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;i&amp;gt;&lt;/span&gt; : insert/replace keyPose on cursor&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; color:#ff5500;&quot;&gt;Delete :&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;shift&amp;gt;+&amp;lt;i&amp;gt; &lt;/span&gt;or &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;del&amp;gt;&lt;/span&gt; : delete current keyPose&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;shift&amp;gt;+&amp;lt;leftClick&amp;gt; &lt;/span&gt;&lt;span style=&quot; color:#aa00ff;&quot;&gt;(on ruler)&lt;/span&gt; : remove keyPoses between cursor and mouse&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; color:#ff5500;&quot;&gt;Move :&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#ff5500;&quot;&gt;cursor already on keyPose :&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;rightClick&amp;gt; &lt;/span&gt;&lt;span style=&quot; color:#aa00ff;&quot;&gt;(on ruler)&lt;/span&gt; : move current keyPose on mouse and slide its right brothers (right brothers : all keyPoses on the right of current keyPose)&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;shift&amp;gt;+&amp;lt;rightClick&amp;gt; &lt;/span&gt;&lt;span style=&quot; color:#aa00ff;&quot;&gt;(on ruler)&lt;/span&gt; : move current keyPose on mouse click&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#ff5500;&quot;&gt;cursor not on keyPose :&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;rightClick&amp;gt; &lt;/span&gt;&lt;span style=&quot; color:#aa00ff;&quot;&gt;(on ruler)&lt;/span&gt; : move first keyPose on the left of mouse on mouse and slide its right brothers&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;shift&amp;gt;+&amp;lt;rightClick&amp;gt; &lt;/span&gt;&lt;span style=&quot; color:#aa00ff;&quot;&gt;(on ruler)&lt;/span&gt; : move first keyPose on the right of mouse on mouse and slide its right brothers&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt; font-weight:600; font-style:italic;&quot;&gt;* Cursor :&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;leftClick&amp;gt; &lt;/span&gt;&lt;span style=&quot; color:#aa00ff;&quot;&gt;(on ruler)&lt;/span&gt; : move cursor and update renderer&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;ctrl&amp;gt;+&amp;lt;leftClick&amp;gt; &lt;/span&gt;&lt;span style=&quot; color:#aa00ff;&quot;&gt;(on ruler)&lt;/span&gt; : move cursor without renderer update (need to create multiple keyPose of same skeleton, avoid auto interpolate)&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt; font-weight:600; font-style:italic;&quot;&gt;* Ruler :&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;wheeMouse&amp;gt; &lt;/span&gt;&lt;span style=&quot; color:#aa00ff;&quot;&gt;(on ruler)&lt;/span&gt; : zoom in/out (&lt;span style=&quot; color:#00aa00;&quot;&gt;speed of zoom can be changed, see configuration.h&lt;/span&gt;)&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;ctrl&amp;gt;+&amp;lt;wheelMouse&amp;gt;&lt;/span&gt; or &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;hold middleClick&amp;gt;+&amp;lt;mouseMove&amp;gt;&lt;/span&gt; (&lt;span style=&quot; color:#aa00ff;&quot;&gt;on ruler&lt;/span&gt;) : slide left/right ruler (&lt;span style=&quot; color:#00aa00;&quot;&gt;slide speed can be changed, see configuration.h&lt;/span&gt;)&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;shift&amp;gt;+&amp;lt;ctrl&amp;gt;+&amp;lt;wheelMouse&amp;gt;&lt;/span&gt; : increase/decrease size of timeline (width of dialog)&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:20pt; font-weight:600; font-style:italic;&quot;&gt;* Others :&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;space&amp;gt;&lt;/span&gt; : set play/pause mode&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;u&amp;gt;&lt;/span&gt; or &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;ctrl&amp;gt;+&amp;lt;z&amp;gt;&lt;/span&gt; : undo&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;r&amp;gt;&lt;/span&gt; or &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;shift&amp;gt;+&amp;lt;ctrl&amp;gt;+&amp;lt;z&amp;gt;&lt;/span&gt; : redo&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="styleSheet">
          <string notr="true">background: lightgray;</string>
@@ -610,6 +613,9 @@
      <property name="frameShadow">
       <enum>QFrame::Sunken</enum>
      </property>
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAsNeeded</enum>
+     </property>
      <property name="horizontalScrollBarPolicy">
       <enum>Qt::ScrollBarAlwaysOn</enum>
      </property>
@@ -622,7 +628,7 @@
         <x>0</x>
         <y>0</y>
         <width>648</width>
-        <height>103</height>
+        <height>105</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -816,7 +822,7 @@ border: 0px;</string>
             <property name="minimumSize">
              <size>
               <width>0</width>
-              <height>50</height>
+              <height>86</height>
              </size>
             </property>
             <property name="cursor">
