@@ -125,7 +125,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Start of playZone (unit : seconde)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;wheelMouse&amp;gt;&lt;/span&gt; or &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;up/down&amp;gt;&lt;/span&gt; : +/- change value&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#aa00ff;&quot;&gt;[on ruler]&lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;moveLeftSliderBar&amp;gt;&lt;/span&gt; : +/- change value&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Start of playZone&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="autoFillBackground">
          <bool>false</bool>
@@ -193,7 +193,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;End of playZone (unit : seconde)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;wheelMouse&amp;gt;&lt;/span&gt; or &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;up/down&amp;gt;&lt;/span&gt; : +/- change value&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#aa00ff;&quot;&gt;[on ruler] &lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;moveRightSliderBar&amp;gt;&lt;/span&gt; : +/- change value&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;End of playZone&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color: #ff6666</string>
@@ -252,7 +252,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Postition of cursor (unit : seconde)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;wheelMouse&amp;gt;&lt;/span&gt; or &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;up/down&amp;gt;&lt;/span&gt; : +/- change value&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#aa00ff;&quot;&gt;[on ruler]&lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;leftClick&amp;gt;&lt;/span&gt; : change value&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Postition of cursor&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
@@ -317,7 +317,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ffffff;&quot;&gt;Insert/replace key pose on cursor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#ffffff;&quot;&gt;&amp;lt;i&amp;gt; &lt;/span&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;: insert/replace keyPose on cursor&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600; color:#ffffff;&quot;&gt;Insert/replace key pose on cursor&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color:black;</string>
@@ -346,7 +346,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Numbers of keyPoses&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;wheelMouse&amp;gt;&lt;/span&gt; : set cursor to next/previous keyPose&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Numbers of keyPoses&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="autoFillBackground">
          <bool>false</bool>
@@ -380,7 +380,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Delete keyPose on cursor&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;shift&amp;gt;&amp;lt;i&amp;gt;&lt;/span&gt; or &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;del&amp;gt; &lt;/span&gt;: delete current keyPose on cursor&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Delete keyPose on cursor&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
          <string>...</string>
@@ -433,7 +433,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Set cursor to previous keyPose&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#aa00ff;&quot;&gt;[on ruler]&lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt; &amp;lt;left&amp;gt;&lt;/span&gt; or &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;shift&amp;gt;&amp;lt;wheelMouse&amp;gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Set cursor to previous keyPose&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
          <string>...</string>
@@ -453,7 +453,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Play/pause animation until end (autoloop)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;space&amp;gt;&lt;/span&gt; : play/pause animation&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Play/pause animation&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
          <string>...</string>
@@ -473,7 +473,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Set cursor to next keyPose&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#aa00ff;&quot;&gt;[on ruler]&lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt; &amp;lt;right&amp;gt;&lt;/span&gt; or &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;shift&amp;gt;&amp;lt;wheelMouse&amp;gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Set cursor to next keyPose&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
          <string>...</string>
@@ -532,7 +532,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Total duration (unit : seconde)&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;up/down&amp;gt;&lt;/span&gt; or &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;lt;wheelMouse&amp;gt;&lt;/span&gt; : +/- change value&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#aa00ff;&quot;&gt;[on ruler]&lt;/span&gt;&lt;span style=&quot; font-weight:600;&quot;&gt; &amp;lt;up/down&amp;gt;&lt;/span&gt; : +/- change value&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Total duration&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="styleSheet">
          <string notr="true">background: darkgray;</string>

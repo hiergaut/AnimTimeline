@@ -5,6 +5,7 @@
 #include "session.h"
 
 #include <QDialog>
+#include <QObject>
 
 namespace Ui {
 class AnimTimeline;
@@ -17,6 +18,10 @@ class AnimTimeline : public QDialog {
 public:
     explicit AnimTimeline(QWidget* parent = nullptr);
     ~AnimTimeline() override;
+
+
+
+//    Ui::AnimTimeline *getUi() const;
 
 protected:
     virtual void resizeEvent(QResizeEvent* ev) override;
@@ -51,12 +56,14 @@ public slots:
     void onSetPauseMode(); // useless : why use it ?
 
 
-signals:
-    // session (undo/redo)
-    void envSaved();
-    void sessionCleared();
-    void undid();
-    void redid();
+    //signals:
+    //    void sessionCleared();
+    //    void undid();
+    //    void redid();
+//signals:
+//    void undid();
+//    void redid();
+
 
     // getters
     //public:
@@ -69,14 +76,89 @@ signals:
     //private:
     //    virtual void resizeEvent(QResizeEvent* ev) override;
 
-private:
+//private:
+protected:
     Ui::AnimTimeline* ui;
-//    static const Session & session;
-//    const Session & session =new Session();
+    //    static const Session & session;
+    //    const Session & session =new Session();
+//    Session session;
+};
+
+//template <class T>
+//class AnimTimelineWithSession : public AnimTimeline {
+//    Q_OBJECT
+
+//public:
+////    explicit AnimTimeline(QWidget* parent = nullptr);
+//    explicit AnimTimelineWithSession(QWidget * parent = nullptr);
+
+//signals:
+//    // session (undo/redo)
+//    void envSaved();
+//    void rendered(T anim);
+//    void renderDeleted(T anim);
+
+//public slots:
+//    void onChangeStart(double time);
+//    void onChangeEnd(double time);
+////    void onChangeCursor(double time);
+//    void onChangeDuration(double time);
+
+//    void onAddingKeyPose(double time);
+//    void onClearKeyPoses();
+
+////    void onSetPlayMode(); // useless : why use it ?
+////    void onSetPauseMode(); // useless : why use it ?
+//    // undo/redo, must be called before envSaved receive
+//    void onSaveRendering(T anim);
+
+//private:
+//    Session session;
+//};
+
+
+//typedef struct s_Env Env;
+class AnimTimelineWithSession : public AnimTimeline {
+    Q_OBJECT
+
+public:
+//    explicit AnimTimeline(QWidget* parent = nullptr);
+    explicit AnimTimelineWithSession(QWidget * parent = nullptr);
+//    ~AnimTimelineWithSession();
+
+signals:
+    // for session, after receive signal, user must call onSaveRendering
+    // AnimTimeline slot to save client anim to render later due undo/redo event
+    void envSaved();
+
+    // use void * because qt Q_OBJECT no accept template class
+    // and signals and slots are needed to send signal to user to render
+    void rendered(void * anim);
+    void renderDeleted(void * anim);
+
+public slots:
+    // undo/redo, must be called by user after envSaved receive
+    void onSaveRendering(void * anim, int bytes);
+
+    // overload parent slots
+public slots:
+    void onChangeStart(double time);
+    void onChangeEnd(double time);
+//    void onChangeCursor(double time);
+    void onChangeDuration(double time);
+//    void onUndo();
+//    void onRedo();
+    void onAddingKeyPose(double time);
+    void onClearKeyPoses();
+//    void onSetPlayMode(); // useless : why use it ?
+//    void onSetPauseMode(); // useless : why use it ?
+
+
+private:
+//    QTimer * saveDelay;
     Session session;
 };
 
 //const Session & AnimTimeline::session{};
-
 
 #endif // ANIMTIMELINE_H

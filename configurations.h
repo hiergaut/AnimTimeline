@@ -81,4 +81,8 @@
 // define default duration
 //#define INIT_DURATION 30.0
 
+#define BUFFER_SESSION_MAX_SIZE 1000 // bytes, max bytes of saving user anim
+
+#define DELAY_AUTO_SAVE 100 // millisecond, auto save environment after delay
+
 #endif // CONSTANTS_H

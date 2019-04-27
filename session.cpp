@@ -3,13 +3,80 @@
 #include <QDebug>
 #include <QTimer>
 #include <set>
+#include "configurations.h"
 //#include <boost/circular_buffer.hpp> // need boost lib
 
-Session::Session()
+typedef struct s_Env {
+    double start;
+    double end;
+    double cursor;
+    double duration;
+
+    std::set<double> keyPoses;
+
+    //    bool play;
+    void* anim;
+    int bytes;
+} Env;
+//template <class T>
+//struct s_Env {
+//    double start;
+//    double end;
+//    double cursor;
+//    double duration;
+
+//    std::set<double> keyPoses;
+
+////    bool play;
+//    T render;
+//};
+
+Session::Session(QObject* parent)
+    : QObject(parent)
 {
     saveDelay = new QTimer(this);
-    connect(saveDelay, SIGNAL(timeout()), this, SLOT(saveEnv()));
+    //    connect(saveDelay, SIGNAL(timeout()), this, SLOT(onSaveEnv()));
+    connect(saveDelay, &QTimer::timeout, this, &Session::envSaved);
     saveDelay->setSingleShot(true);
+
+    //    connect(timeline, &AnimTimeline::startChanged, this, &Session::onChangeEnv);
+    //    connect(timeline, &AnimTimeline::endChanged, this, &Session::onChangeEnv);
+    //    //    connect(this, &AnimTimeline::cursorChanged, this, &Session::onChangeEnv);
+    //    connect(timeline, &AnimTimeline::durationChanged, this, &Session::onChangeEnv);
+    //    connect(timeline, &AnimTimeline::keyPoseAdded, this, &Session::onChangeEnv);
+    //    connect(timeline, &AnimTimeline::keyPoseDeleted, this, &Session::onChangeEnv);
+    //    connect(timeline, &AnimTimeline::keyPoseChanged, this, &Session::onChangeEnv);
+    //    connect(timeline, &AnimTimeline::keyPoseMoved, this, &Session::onChangeEnv);
+    //    connect(timeline, &AnimTimeline::keyPosesMoved, this, &Session::onChangeEnv);
+    //    //    connect(this, &AnimTimeline::playClicked, &session, &Session::onChangeEnv);
+    //    connect(this, &AnimTimeline::pauseClicked, &session, &Session::onChangeEnv);
+
+    //    connect(ui->scrollArea, &QScrollAreaRuler::undo, &session, &Session::onUndo);
+    //    connect(ui->scrollArea, &QScrollAreaRuler::redo, &session, &Session::onRedo);
+
+    //    // signal to signal
+    //    connect(&session, &Session::envSaved, this, &AnimTimelineWithSession::envSaved);
+    //    connect(&session, &Session::rendered, this, &AnimTimelineWithSession::rendered);
+    //    connect(&session, &Session::renderDeleted, this, &AnimTimelineWithSession::renderDeleted);
+    //    //    connect(&session, &Session::sessionCleared, this, &AnimTimeline::sessionCleared);
+    //    //    connect(&session, &Session::undid, this, &AnimTimeline::undid);
+    //    //    connect(&session, &Session::redid, this, &AnimTimeline::redid);
+
+    //    session.setStart(ui->frame_selector->getStart());
+    //    session.setEnd(ui->frame_selector->getEnd());
+    //    session.setCursor(ui->frame_selector->getCursor());
+    //    session.setDuration(ui->scrollAreaWidgetContents->getMaxDuration());
+    //    session.setKeyPoses(ui->frame_selector->getKeyPoses());
+    //    //    session.setPlay(ui->toolButton_playPause->getPlay());
+
+    //    session.setStartSpin(ui->doubleSpinBox_start);
+    //    session.setEndSpin(ui->doubleSpinBox_end);
+    //    session.setCursorSpin(ui->doubleSpinBox_cursor);
+    //    session.setDurationSpin(ui->doubleSpinBox_maxDuration);
+    //    session.setPlayButton(ui->toolButton_playPause);
+    //    session.setRuler(ui->scrollAreaWidgetContents);
+    //    session.setSelector(ui->frame_selector);
+    //    session.setNbKeyPosesSpin(ui->spinBox_nbKeyPoses);
 }
 
 Session::~Session()
@@ -18,38 +85,46 @@ Session::~Session()
 }
 
 // timeline changed, save timeline and anim environment
-void Session::onSaveEnv()
+void Session::onChangeEnv()
 {
-    saveDelay->start(100);
+    qDebug() << "Session::onChangeEnv()";
+    saveDelay->start(DELAY_AUTO_SAVE);
 }
 
 void Session::onClearSession()
 {
-    while (!undoHeap.empty())
-        undoHeap.pop();
-    while (!redoHeap.empty())
+    while (!undo.empty()) {
+        emit renderDeleted(undo.back().anim);
+//        undo.pop();
+        undo.pop_back();
+    }
+    while (!redoHeap.empty()) {
+        emit renderDeleted(redoHeap.top().anim);
         redoHeap.pop();
+    }
 
-    emit sessionCleared();
+    size =0;
+
+    //    emit sessionCleared();
 }
 
 void Session::onUndo()
 {
-    if (undoHeap.empty()) {
+    if (undo.empty()) {
         qDebug() << "\033[31mSession::onUndo() : empty stack !\033[0m";
         return;
     }
     //    if (redoHeap.empty()) {
-    //        redoHeap.push(undoHeap.top());
-    //        undoHeap.pop();
+    //        redoHeap.push(undo.top());
+    //        undo.pop();
     //    }
 
-    if (undoHeap.size() > 1) {
-        redoHeap.push(undoHeap.top());
-        undoHeap.pop();
+    if (undo.size() > 1) {
+        redoHeap.push(undo.back());
+        undo.pop_back();
 
-        setEnv(undoHeap.top());
-        emit undid();
+        setEnv(undo.back());
+        //        emit undid();
     } else {
         qDebug() << "\033[31mSession::onUndo() : last element, can't delete !\033[0m";
     }
@@ -62,58 +137,55 @@ void Session::onRedo()
         return;
     }
 
-    undoHeap.push(redoHeap.top());
+    undo.emplace_back(redoHeap.top());
     redoHeap.pop();
 
     //    if (!redoHeap.empty()) {
-    setEnv(undoHeap.top());
-    emit redid();
+    setEnv(undo.back());
+    //    emit redid();
     //    } else {
     //        qDebug() << "\033[31mSession::onRedo() : empty stack !\033[0m";
     //    }
 
-    //    if (undoHeap.empty()) {
-    //        undoHeap.push(redoHeap.top());
+    //    if (undo.empty()) {
+    //        undo.push(redoHeap.top());
     //        redoHeap.pop();
     //    }
 
     //    if (!redoHeap.empty()) {
-    //        undoHeap.push(redoHeap.top());
+    //        undo.push(redoHeap.top());
     //        redoHeap.pop();
 
-    //        setEnv(undoHeap.top());
+    //        setEnv(undo.top());
     //        emit redid();
     //    }
 }
 
-void Session::saveEnv()
+void Session::onSaveRendering(void* anim, int bytes)
 {
-    //    undoHeap.push({ *start, *end, *cursor, *duration, *keyPoses, *play });
-    undoHeap.push({ *start, *end, *cursor, *duration, *keyPoses });
-    while (!redoHeap.empty())
+    //    Env env { *start, *end, *cursor, *duration, *keyPoses, anim};
+    //    undo.push(env);
+//    qDebug() << "onSaveRendering : size of anim " << sizeof (anim);
+//    qDebug() << "onSaveRendering(" << anim << ") : sizeof session = " << sizeof (undo);
+
+    while (!redoHeap.empty()) {
+        emit renderDeleted(redoHeap.top().anim);
+        size -= redoHeap.top().bytes;
         redoHeap.pop();
+    }
 
-    emit envSaved();
-}
+    undo.emplace_back(Env{ *start, *end, *cursor, *duration, *keyPoses, anim, bytes });
+    size += bytes;
+    qDebug() << "onSaveRendering : buff size = " << size;
 
-void Session::setNbKeyPosesSpin(QSpinBoxSmart *value)
-{
-    nbKeyPosesSpin = value;
-}
+    while (size > BUFFER_SESSION_MAX_SIZE) {
+    qDebug() << "\033[31monSaveRendering : buffer overflow\033[0m";
+        emit renderDeleted(undo.front().anim);
+        size -= undo.front().bytes;
+        undo.pop_front();
+    }
 
-void Session::setSelector(QFrameSelector* value)
-{
-    selector = value;
-}
-
-void Session::setRuler(QWidgetRuler* value)
-{
-    ruler = value;
-}
-
-void Session::setPlayButton(QToolButtonPlayPause* value)
-{
-    playButton = value;
+    //    emit envSaved();
 }
 
 void Session::setEnv(Env env)
@@ -129,7 +201,7 @@ void Session::setEnv(Env env)
     *keyPoses = env.keyPoses;
     nbKeyPosesSpin->setValue(static_cast<int>(keyPoses->size()));
 
-//    *cursor = env.cursor;
+    //    *cursor = env.cursor;
     //    cursorSpin->setValue(*cursor);
     selector->updateCursorSpin();
 
@@ -147,9 +219,11 @@ void Session::setEnv(Env env)
 
     selector->redrawPlayZone();
     ruler->onDrawRuler(ruler->width());
+
+    emit rendered(env.anim);
 }
 
-// ############################### SETTERS
+// ------------------------------- SETTERS ------------------------------------
 //void Session::setPlay(bool* value)
 //{
 //    play = value;
@@ -198,4 +272,24 @@ void Session::setEndSpin(QDoubleSpinBoxSmart* value)
 void Session::setStartSpin(QDoubleSpinBoxSmart* value)
 {
     startSpin = value;
+}
+
+void Session::setNbKeyPosesSpin(QSpinBoxSmart* value)
+{
+    nbKeyPosesSpin = value;
+}
+
+void Session::setSelector(QFrameSelector* value)
+{
+    selector = value;
+}
+
+void Session::setRuler(QWidgetRuler* value)
+{
+    ruler = value;
+}
+
+void Session::setPlayButton(QToolButtonPlayPause* value)
+{
+    playButton = value;
 }
