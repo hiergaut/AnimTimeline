@@ -1,4 +1,5 @@
-#include "qscrollarearuler.h"
+//#include "qscrollarearuler.h"
+#include <AnimTimeline/qscrollarearuler.h>
 
 //#include "animtimeline.h"
 //#include "ui_animtimeline.h"

@@ -1,11 +1,14 @@
 #ifndef QWIDGETRULER_H
 #define QWIDGETRULER_H
 
+//#include "configurations.h"
+#include <AnimTimeline/configurations.h>
+//#include "qdoublespinboxsmart.h"
+#include <AnimTimeline/qdoublespinboxsmart.h>
+
 #include <QLabel>
 #include <QSpacerItem>
 #include <QWidget>
-#include "configurations.h"
-#include "qdoublespinboxsmart.h"
 //#include "qscrollarearuler.h"
 
 class QWidgetRuler : public QWidget {

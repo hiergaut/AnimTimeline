@@ -1,14 +1,21 @@
 #ifndef QSCROLLAREARULER_H
 #define QSCROLLAREARULER_H
 
-#include "animtimeline.h"
-#include "qtoolbuttonplaypause.h"
-#include "qwidgetruler.h"
+//#include "animtimeline.h"
+#include <AnimTimeline/animtimeline.h>
+
+//#include "qtoolbuttonplaypause.h"
+#include <AnimTimeline/animtimeline.h>
+//#include "qwidgetruler.h"
+#include <AnimTimeline/qwidgetruler.h>
+//#include "qdoublespinboxsmart.h"
+#include <AnimTimeline/qdoublespinboxsmart.h>
+//#include "qframeselector.h"
+#include <AnimTimeline/qframeselector.h>
+
 #include <QObject>
 #include <QScrollArea>
 #include <QWidget>
-#include "qdoublespinboxsmart.h"
-#include "qframeselector.h"
 
 class QScrollAreaRuler : public QScrollArea {
     Q_OBJECT

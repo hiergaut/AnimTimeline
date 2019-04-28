@@ -2,7 +2,8 @@
 #define ANIMTIMELINE_H
 
 //#include "configurations.h"
-#include "session.h"
+//#include "session.h"
+#include <AnimTimeline/session.h>
 
 #include <QDialog>
 #include <QObject>
@@ -138,7 +139,7 @@ signals:
 
 public slots:
     // undo/redo, must be called by user after envSaved receive
-    void onSaveRendering(void * anim, int bytes);
+    void onSaveRendering(void * anim, size_t bytes);
 
     // overload parent slots
 public slots:
@@ -156,7 +157,7 @@ public slots:
 
 private:
 //    QTimer * saveDelay;
-    Session session;
+    Session session{this};
 };
 
 //const Session & AnimTimeline::session{};

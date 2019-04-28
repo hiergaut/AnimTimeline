@@ -1,33 +1,38 @@
 #ifndef SESSION_H
 #define SESSION_H
 
-#include "qdoublespinboxsmart.h"
-#include "qframeselector.h"
-#include "qspinboxsmart.h"
-#include "qtoolbuttonplaypause.h"
-#include "qwidgetruler.h"
+//#include "qdoublespinboxsmart.h"
+#include <AnimTimeline/qdoublespinboxsmart.h>
+//#include "qframeselector.h"
+#include <AnimTimeline/qframeselector.h>
+//#include "qspinboxsmart.h"
+#include <AnimTimeline/qspinboxsmart.h>
+//#include "qtoolbuttonplaypause.h"
+#include <AnimTimeline/qtoolbuttonplaypause.h>
+//#include "qwidgetruler.h"
+#include <AnimTimeline/qwidgetruler.h>
+
 //#include <QObject>
 #include <set>
 #include <stack>
 //#include "animtimeline.h"
 
-typedef struct s_Env Env;
+//typedef struct s_Env Env;
 
 //template <class T>
 class Session : public QObject {
     Q_OBJECT
 public:
-
     //    typedef struct s_Env Env;
-    Session(QObject * parent = nullptr);
+    Session(QObject* parent = nullptr);
     //    virtual ~Session() = default;
     virtual ~Session();
 
 signals:
     void envSaved(); // EXTERNAL
 
-    void rendered(void * render); // EXTERNAL
-    void renderDeleted(void * render); // EXTERNAL
+    void rendered(void* render); // EXTERNAL
+    void renderDeleted(void* render); // EXTERNAL
     //    void sessionCleared();
     //    void undid();
     //    void redid();
@@ -39,12 +44,27 @@ public slots:
     void onUndo();
     void onRedo();
 
-    void onSaveRendering(void * anim, int bytes); // EXTERNAL
+    void onSaveRendering(void* anim, size_t bytes); // EXTERNAL
 
 private:
+    typedef struct s_Env {
+        double start;
+        double end;
+        double cursor;
+        double duration;
+
+        std::set<double> keyPoses;
+
+        //    bool play;
+        void* anim;
+        size_t bytes;
+        //    int c;
+    } Env;
 
     std::deque<Env> undo;
     std::stack<Env> redoHeap;
+
+    Env first;
 
     double* start;
     double* end;
@@ -53,7 +73,7 @@ private:
     std::set<double>* keyPoses;
     //    bool * play;
 
-    int size {0};
+    int size { 0 };
 
     QDoubleSpinBoxSmart* startSpin;
     QDoubleSpinBoxSmart* endSpin;
@@ -68,11 +88,10 @@ private:
     QFrameSelector* selector;
     QSpinBoxSmart* nbKeyPosesSpin;
 
-
-
 private:
     void setEnv(Env env);
-//    int size();
+//    void saveFirst();
+    //    int size();
 
 public: // setters
     void setStart(double* value);

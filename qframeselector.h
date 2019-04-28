@@ -2,8 +2,11 @@
 #ifndef QFRAMESELECTOR_H
 #define QFRAMESELECTOR_H
 
-#include "configurations.h"
-#include "qwidgetruler.h"
+//#include "configurations.h"
+#include <AnimTimeline/configurations.h>
+//#include "qwidgetruler.h"
+#include <AnimTimeline/qwidgetruler.h>
+
 #include <QDoubleSpinBox>
 #include <QFrame>
 #include <QSpacerItem>

@@ -1,8 +1,11 @@
 #ifndef QFRAMEBUTTONS_H
 #define QFRAMEBUTTONS_H
 
-#include "animtimeline.h"
-#include "qwidgetruler.h"
+//#include "animtimeline.h"
+#include <AnimTimeline/animtimeline.h>
+//#include "qwidgetruler.h"
+#include <AnimTimeline/qwidgetruler.h>
+
 #include <QFrame>
 #include <QPoint>
 #include <QScrollArea>

@@ -1,4 +1,5 @@
-#include "qlabelslider.h"
+//#include "qlabelslider.h"
+#include <AnimTimeline/qlabelslider.h>
 
 #include <QMouseEvent>
 

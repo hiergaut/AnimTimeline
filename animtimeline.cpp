@@ -1,5 +1,7 @@
-#include "animtimeline.h"
+#include <AnimTimeline/animtimeline.h>
+//#include "animtimeline.h"
 #include "ui_animtimeline.h"
+//#include <AnimTimeline/ui_animtimeline.h>
 
 #include <QDebug>
 #include <QDesktopWidget>
@@ -415,6 +417,8 @@ AnimTimelineWithSession::AnimTimelineWithSession(QWidget * parent) : AnimTimelin
         session.setRuler(ui->scrollAreaWidgetContents);
         session.setSelector(ui->frame_selector);
         session.setNbKeyPosesSpin(ui->spinBox_nbKeyPoses);
+
+        session.onChangeEnv();
 }
 
 //AnimTimelineWithSession::~AnimTimelineWithSession()
@@ -463,7 +467,7 @@ void AnimTimelineWithSession::onClearKeyPoses()
     session.onClearSession();
 }
 
-void AnimTimelineWithSession::onSaveRendering(void * anim, int bytes)
+void AnimTimelineWithSession::onSaveRendering(void * anim, size_t bytes)
 {
     qDebug() << "\033[32monSaveRendering(" << anim << ", " << bytes << ")\033[0m";
     session.onSaveRendering(anim, bytes);

@@ -1,4 +1,6 @@
-#include "qspinboxsmart.h"
+//#include "qspinboxsmart.h"
+#include <AnimTimeline/qspinboxsmart.h>
+
 #include <QWheelEvent>
 
 QSpinBoxSmart::QSpinBoxSmart(QWidget* parent)

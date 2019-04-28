@@ -1,7 +1,9 @@
-#include "qframetimescale.h"
+//#include "qframetimescale.h"
+#include <AnimTimeline/qframetimescale.h>
+//#include "qwidgetruler.h"
+#include <AnimTimeline/qwidgetruler.h>
 
 #include <QDebug>
-#include "qwidgetruler.h"
 #include <QPainter>
 
 QFrameTimescale::QFrameTimescale(QWidget* parent)

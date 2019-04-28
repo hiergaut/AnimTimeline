@@ -1,4 +1,5 @@
-#include "qframebuttons.h"
+//#include "qframebuttons.h"
+#include <AnimTimeline/qframebuttons.h>
 
 #include <QDebug>
 #include <QMessageBox>

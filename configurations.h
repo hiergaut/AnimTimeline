@@ -1,5 +1,5 @@
-#ifndef CONSTANTS_H
-#define CONSTANTS_H
+#ifndef CONFIGURATIONS_H
+#define CONFIGURATIONS_H
 
 
 // fixed startup width of timeline
@@ -85,4 +85,4 @@
 
 #define DELAY_AUTO_SAVE 100 // millisecond, auto save environment after delay
 
-#endif // CONSTANTS_H
+#endif // CONFIGURATIONS_H

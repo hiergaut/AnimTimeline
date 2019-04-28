@@ -1,4 +1,7 @@
-#include "qframeselector.h"
+//#include "qframeselector.h"
+#include <AnimTimeline/qframeselector.h>
+#include <AnimTimeline/animtimeline.h>
+//#include "animtimeline.h"
 
 #include <QDebug>
 #include <QPainter>
@@ -7,7 +10,6 @@
 #include <QtGlobal>
 //#include <QtMath>
 
-#include "animtimeline.h"
 
 QFrameSelector::QFrameSelector(QWidget* parent)
     : QFrame(parent)

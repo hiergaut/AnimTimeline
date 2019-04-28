@@ -1,23 +1,13 @@
-#include "session.h"
+//#include "session.h"
+#include <AnimTimeline/session.h>
+#include "configurations.h"
+#include <AnimTimeline/configurations.h>
 
 #include <QDebug>
 #include <QTimer>
 #include <set>
-#include "configurations.h"
 //#include <boost/circular_buffer.hpp> // need boost lib
 
-typedef struct s_Env {
-    double start;
-    double end;
-    double cursor;
-    double duration;
-
-    std::set<double> keyPoses;
-
-    //    bool play;
-    void* anim;
-    int bytes;
-} Env;
 //template <class T>
 //struct s_Env {
 //    double start;
@@ -34,10 +24,12 @@ typedef struct s_Env {
 Session::Session(QObject* parent)
     : QObject(parent)
 {
+    qDebug() << "sizeof Env = " << sizeof (Env);
     saveDelay = new QTimer(this);
     //    connect(saveDelay, SIGNAL(timeout()), this, SLOT(onSaveEnv()));
     connect(saveDelay, &QTimer::timeout, this, &Session::envSaved);
     saveDelay->setSingleShot(true);
+
 
     //    connect(timeline, &AnimTimeline::startChanged, this, &Session::onChangeEnv);
     //    connect(timeline, &AnimTimeline::endChanged, this, &Session::onChangeEnv);
@@ -81,6 +73,7 @@ Session::Session(QObject* parent)
 
 Session::~Session()
 {
+    onClearSession();
     delete saveDelay;
 }
 
@@ -105,6 +98,7 @@ void Session::onClearSession()
 
     size =0;
 
+    onChangeEnv();
     //    emit sessionCleared();
 }
 
@@ -161,7 +155,7 @@ void Session::onRedo()
     //    }
 }
 
-void Session::onSaveRendering(void* anim, int bytes)
+void Session::onSaveRendering(void* anim, size_t bytes)
 {
     //    Env env { *start, *end, *cursor, *duration, *keyPoses, anim};
     //    undo.push(env);
@@ -222,6 +216,11 @@ void Session::setEnv(Env env)
 
     emit rendered(env.anim);
 }
+
+//void Session::saveFirst()
+//{
+
+//}
 
 // ------------------------------- SETTERS ------------------------------------
 //void Session::setPlay(bool* value)

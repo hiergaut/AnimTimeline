@@ -1,4 +1,5 @@
-#include "qtoolbuttonplaypause.h"
+//#include "qtoolbuttonplaypause.h"
+#include <AnimTimeline/qtoolbuttonplaypause.h>
 
 #include <QDebug>
 #include <QMouseEvent>

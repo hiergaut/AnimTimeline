@@ -1,9 +1,11 @@
-#include "qwidgetruler.h"
+//#include "qwidgetruler.h"
+#include <AnimTimeline/qwidgetruler.h>
 
 //#include "ui_animtimeline.h"
 //#include "animtimeline.h"
 
-#include "configurations.h"
+//#include "configurations.h"
+#include <AnimTimeline/configurations.h>
 
 #include <QDebug>
 #include <QWheelEvent>
