@@ -69,13 +69,15 @@ void QToolButtonPlayPause::onChangeMode()
     if (play) {
         onPauseMode();
         emit pauseClicked();
+        qDebug() << "\033[35mpauseClicked()\033[0m";
     } else {
         onPlayMode();
         emit playClicked();
+        qDebug() << "\033[35mplayClicked()\033[0m";
     }
 }
 
-bool * QToolButtonPlayPause::getPlay()
+bool* QToolButtonPlayPause::getPlay()
 {
-    return & play;
+    return &play;
 }

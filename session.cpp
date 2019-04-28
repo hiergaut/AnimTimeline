@@ -28,6 +28,9 @@ Session::Session(QObject* parent)
     saveDelay = new QTimer(this);
     //    connect(saveDelay, SIGNAL(timeout()), this, SLOT(onSaveEnv()));
     connect(saveDelay, &QTimer::timeout, this, &Session::envSaved);
+#ifndef QT_NO_DEBUG_OUTPUT
+    connect(this, &Session::envSaved, this, &Session::envSavedTrace);
+#endif
     saveDelay->setSingleShot(true);
 
 
@@ -88,11 +91,13 @@ void Session::onClearSession()
 {
     while (!undo.empty()) {
         emit renderDeleted(undo.back().anim);
+    qDebug() << "\033[35mrenderDeleted(" << undo.back().anim << ")\033[0m";
 //        undo.pop();
         undo.pop_back();
     }
     while (!redoHeap.empty()) {
         emit renderDeleted(redoHeap.top().anim);
+    qDebug() << "\033[35mrenderDeleted(" << redoHeap.top().anim << ")\033[0m";
         redoHeap.pop();
     }
 
@@ -164,6 +169,7 @@ void Session::onSaveRendering(void* anim, size_t bytes)
 
     while (!redoHeap.empty()) {
         emit renderDeleted(redoHeap.top().anim);
+    qDebug() << "\033[35mrenderDeleted(" << redoHeap.top().anim << ")\033[0m";
         size -= redoHeap.top().bytes;
         redoHeap.pop();
     }
@@ -174,6 +180,7 @@ void Session::onSaveRendering(void* anim, size_t bytes)
     while (size > BUFFER_SESSION_MAX_SIZE) {
     qDebug() << "\033[31monSaveRendering : buffer overflow\033[0m";
         emit renderDeleted(undo.front().anim);
+    qDebug() << "\033[35mrenderDeleted(" << undo.front().anim << ")\033[0m";
         size -= undo.front().bytes;
         undo.pop_front();
     }
@@ -217,7 +224,15 @@ void Session::setEnv(Env env)
     ruler->onDrawRuler(ruler->width());
 
     emit rendered(env.anim);
+    qDebug() << "\033[35mrendered(" << env.anim << ")\033[0m";
 }
+
+#ifndef QT_NO_DEBUG_OUTPUT
+void Session::envSavedTrace()
+{
+    qDebug() << "\033[35menvSaved()\033[0m";
+}
+#endif
 
 //void Session::saveFirst()
 //{

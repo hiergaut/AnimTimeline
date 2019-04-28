@@ -418,7 +418,7 @@ AnimTimelineWithSession::AnimTimelineWithSession(QWidget * parent) : AnimTimelin
         session.setSelector(ui->frame_selector);
         session.setNbKeyPosesSpin(ui->spinBox_nbKeyPoses);
 
-        session.onChangeEnv();
+//        session.onChangeEnv();
 }
 
 //AnimTimelineWithSession::~AnimTimelineWithSession()

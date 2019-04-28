@@ -90,6 +90,10 @@ private:
 
 private:
     void setEnv(Env env);
+
+#ifndef QT_NO_DEBUG_OUTPUT
+    void envSavedTrace();
+#endif
 //    void saveFirst();
     //    int size();
 
