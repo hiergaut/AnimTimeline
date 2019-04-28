@@ -35,10 +35,10 @@ signals:
     void durationChanged(double time);
 
     void keyPoseAdded(double time);
-    void keyPoseDeleted(int num);
-    void keyPoseChanged(int num); // skeleton changed
-    void keyPoseMoved(int num, double time);
-    void keyPosesMoved(double gap, int first = 0); // first ith keyPose to move
+    void keyPoseDeleted(size_t id);
+    void keyPoseChanged(size_t id); // save client anim
+    void keyPoseMoved(size_t id, double time);
+    void keyPosesMoved(double gap, size_t first = 0); // first : first ith keyPose to move
 
     void playClicked();
     void pauseClicked();
@@ -53,8 +53,8 @@ public slots:
     void onAddingKeyPose(double time);
     void onClearKeyPoses();
 
-    void onSetPlayMode(); // useless : why use it ?
-    void onSetPauseMode(); // useless : why use it ?
+    void onSetPlayMode(); // use it if external play button
+    void onSetPauseMode(); // use it if external pause button
 
 
     //signals:
@@ -151,8 +151,8 @@ public slots:
 //    void onRedo();
     void onAddingKeyPose(double time);
     void onClearKeyPoses();
-//    void onSetPlayMode(); // useless : why use it ?
-//    void onSetPauseMode(); // useless : why use it ?
+//    void onSetPlayMode();
+//    void onSetPauseMode();
 
 
 private:

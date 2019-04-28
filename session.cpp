@@ -24,7 +24,7 @@
 Session::Session(QObject* parent)
     : QObject(parent)
 {
-    qDebug() << "sizeof Env = " << sizeof (Env);
+//    qDebug() << "sizeof Env = " << sizeof (Env);
     saveDelay = new QTimer(this);
     //    connect(saveDelay, SIGNAL(timeout()), this, SLOT(onSaveEnv()));
     connect(saveDelay, &QTimer::timeout, this, &Session::envSaved);
@@ -170,7 +170,6 @@ void Session::onSaveRendering(void* anim, size_t bytes)
 
     undo.emplace_back(Env{ *start, *end, *cursor, *duration, *keyPoses, anim, bytes });
     size += bytes;
-    qDebug() << "onSaveRendering : buff size = " << size;
 
     while (size > BUFFER_SESSION_MAX_SIZE) {
     qDebug() << "\033[31monSaveRendering : buffer overflow\033[0m";
@@ -178,6 +177,9 @@ void Session::onSaveRendering(void* anim, size_t bytes)
         size -= undo.front().bytes;
         undo.pop_front();
     }
+
+//    qDebug() << "Session::onSaveRendering(" << anim << ", " << bytes << ") : buff size = " << size;
+    qDebug() << "Session::onSaveRendering() : buff size (bytes) =" << size << "/" << BUFFER_SESSION_MAX_SIZE << "(" << size * 100.0 / BUFFER_SESSION_MAX_SIZE << "% )";
 
     //    emit envSaved();
 }

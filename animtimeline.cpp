@@ -17,9 +17,9 @@ AnimTimeline::AnimTimeline(QWidget* parent)
 {
     //    Ui::ui = ui;
     //    qDebug() << this;
-    qDebug() << "AnimTimeline::AnimTimeline(" << parent << ") : setup start";
+//    qDebug() << "AnimTimeline::AnimTimeline(" << parent << ") : ui setup start";
     ui->setupUi(this);
-    qDebug() << "AnimTimeline::AnimTimeline(" << parent << ") : setup end";
+    qDebug() << "AnimTimeline::AnimTimeline(" << parent << ") : ui setup end";
 
     //
     // --------------------------- INTERNAL CONNECTIONS --------------------------
@@ -203,7 +203,7 @@ AnimTimeline::~AnimTimeline() { delete ui; }
 // -------------------------- LEGACY ---------------------------------------
 void AnimTimeline::resizeEvent(QResizeEvent* event)
 {
-    qDebug() << "resizeEvent : " << event->size();
+    qDebug() << "AnimTimeline::resizeEvent(" << event->size() << ")";
 
     ui->scrollAreaWidgetContents->onDrawRuler(event->size().width() - 2);
 }

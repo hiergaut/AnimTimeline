@@ -44,10 +44,10 @@ signals:
     void durationChanged(double time); // EXTERNAL SIGNAL
 
     void keyPoseAdded(double time); // EXTERNAL SIGNAL
-    void keyPoseDeleted(int num); // EXTERNAL SIGNAL
-    void keyPoseChanged(int num); // EXTERNAL SIGNAL
-    void keyPosesMoved(double gap, int first); // EXTERNAL SIGNAL
-    void keyPoseMoved(int num, double time); // EXTERNAL SIGNAL
+    void keyPoseDeleted(size_t id); // EXTERNAL SIGNAL
+    void keyPoseChanged(size_t id); // EXTERNAL SIGNAL
+    void keyPosesMoved(double gap, size_t first); // EXTERNAL SIGNAL
+    void keyPoseMoved(size_t id, double time); // EXTERNAL SIGNAL
 
 public slots:
     // ---------------------- EXTERNAL SLOTS ----------------------------------
@@ -102,7 +102,7 @@ public slots:
 
 private:
     // ---------------------- PRIVATE FUNCTIONS --------------------------------
-    void moveKeyPoses(double gap, int first = 0);
+    void moveKeyPoses(double gap, size_t first = 0);
     void deleteZone(double time, double time2);
 
 

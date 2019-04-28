@@ -25,7 +25,7 @@ QFrameSelector::QFrameSelector(QWidget* parent)
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
 
-    qDebug() << "end construct frameSelector, parent : " << parent;
+//    qDebug() << "end construct frameSelector, parent : " << parent;
 }
 
 QFrameSelector::~QFrameSelector()
@@ -270,7 +270,7 @@ void QFrameSelector::mousePressEvent(QMouseEvent* event)
                         //                    if (onInternalChangeCursor(nearest, false)) {
                         cursor = nearest;
 
-                        int num = static_cast<int>(std::distance(keyPoses.begin(), it));
+                        size_t id = static_cast<size_t>(std::distance(keyPoses.begin(), it));
                         keyPoses.erase(it);
                         keyPoses.insert(cursor);
 
@@ -278,7 +278,7 @@ void QFrameSelector::mousePressEvent(QMouseEvent* event)
                         update();
 
                         //                onChangeCursor(newPose);
-                        emit keyPoseMoved(num, cursor); // EXTERNAL SIGNAL
+                        emit keyPoseMoved(id, cursor); // EXTERNAL SIGNAL
                     }
                 }
 
@@ -292,8 +292,8 @@ void QFrameSelector::mousePressEvent(QMouseEvent* event)
 
                 if (nearest > left) {
                     double dist = nearest - cursor;
-                    int num = static_cast<int>(std::distance(keyPoses.begin(), it));
-                    moveKeyPoses(dist, num);
+                    size_t id = static_cast<size_t>(std::distance(keyPoses.begin(), it));
+                    moveKeyPoses(dist, id);
 
                     //                        widgetRuler->setMaxDuration(*duration + dist);
                     //                        updateDurationSpin();
@@ -308,7 +308,7 @@ void QFrameSelector::mousePressEvent(QMouseEvent* event)
             // --------------- MOVE RIGHT KEYPOSE TO THE LEFT -----------------
             if (*shiftDown) {
                 auto it = keyPoses.begin();
-                int iRight = 0;
+                size_t iRight = 0;
                 while (it != keyPoses.end() && *it < newPose) {
                     ++it;
                     ++iRight;
@@ -459,10 +459,10 @@ void QFrameSelector::onAddingKeyPose(double time, bool internal /* = true */)
         // keyPose already here, change actual keyPose
     } else {
         auto it = keyPoses.find(time);
-        int num = static_cast<int>(std::distance(keyPoses.begin(), it));
+        size_t id = static_cast<size_t>(std::distance(keyPoses.begin(), it));
 
         if (internal)
-            emit keyPoseChanged(num); // EXTERNAL SIGNAL
+            emit keyPoseChanged(id); // EXTERNAL SIGNAL
 
         updateKeyPoseFlash = 6;
         keyPoseFlash = time;
@@ -734,9 +734,9 @@ void QFrameSelector::onRightSlideRelease()
 //        // keyPose already here, change actual keyPose
 //    } else {
 //        auto it = keyPoses.find(time);
-//        int num = static_cast<int>(std::distance(keyPoses.begin(), it));
+//        int id = static_cast<int>(std::distance(keyPoses.begin(), it));
 
-//        emit keyPoseChanged(num); // EXTERNAL SIGNAL
+//        emit keyPoseChanged(id); // EXTERNAL SIGNAL
 
 //        updateKeyPoseFlash = 6;
 //        keyPoseFlash = time;
@@ -753,7 +753,7 @@ void QFrameSelector::onDeleteKeyPose()
 
     if (it != keyPoses.end()) {
 
-        int num = static_cast<int>(std::distance(keyPoses.begin(), it));
+        size_t id = static_cast<size_t>(std::distance(keyPoses.begin(), it));
         keyPoses.erase(it);
 
         updateCursorSpin();
@@ -761,7 +761,7 @@ void QFrameSelector::onDeleteKeyPose()
 
         //        emit nbKeyPosesChanged(static_cast<int>(keyPoses.size()));
         nbKeyPosesSpin->setValue(static_cast<int>(keyPoses.size()));
-        emit keyPoseDeleted(num); // EXTERNAL SIGNAL
+        emit keyPoseDeleted(id); // EXTERNAL SIGNAL
 
         onSetCursorToNextKeyPose();
     }
@@ -997,10 +997,10 @@ void QFrameSelector::updateDurationSpin()
     durationSpin->setValue(*duration);
 }
 
-void QFrameSelector::moveKeyPoses(double gap, int iFirst)
+void QFrameSelector::moveKeyPoses(double gap, size_t iFirst)
 {
     std::set<double> clone;
-    int i = 0;
+    size_t i = 0;
     double first { 0 };
     for (double d : keyPoses) {
         if (i < iFirst)
