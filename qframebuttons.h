@@ -20,9 +20,9 @@ public:
 
     void setRuler(QWidgetRuler* value);
 
-    void setScrollArea(QScrollArea *value);
+    void setScrollArea(QScrollArea* value);
 
-    void setHelpButton(QToolButton *value);
+    void setHelpButton(QToolButton* value);
 
 protected:
     //    void wheelEvent(QWheelEvent* event) override;
@@ -36,15 +36,14 @@ signals:
 public slots:
     void helpClicked();
 
-
 private:
     bool clicked = false;
     AnimTimeline* animTimeline;
     QWidgetRuler* ruler;
     QPoint offset;
-    QScrollArea * scrollArea;
+    QScrollArea* scrollArea;
 
-    QToolButton * helpButton;
+    QToolButton* helpButton;
 };
 
 #endif // QFRAMEBUTTONS_H

@@ -1,8 +1,14 @@
+/*!
+ * \brief Custom Qt widget for animation (timeline)
+ * \author Gauthier Bouyjou (email : gauthierbouyjou@aol.com)
+ * \date april 2019
+ *
+ * initial github repo : https://github.com/hiergaut/AnimTimeline.git
+ */
+
 #ifndef ANIMTIMELINE_H
 #define ANIMTIMELINE_H
 
-//#include "configurations.h"
-//#include "session.h"
 #include <AnimTimeline/session.h>
 
 #include <QDialog>
@@ -10,9 +16,11 @@
 
 namespace Ui {
 class AnimTimeline;
-//static AnimTimeline * ui;
 }
 
+/*!
+ * \brief The AnimTimeline class is a minimal specification of timeline abilities
+ */
 class AnimTimeline : public QDialog {
     Q_OBJECT
 
@@ -20,146 +28,162 @@ public:
     explicit AnimTimeline(QWidget* parent = nullptr);
     ~AnimTimeline() override;
 
-
-
-//    Ui::AnimTimeline *getUi() const;
-
 protected:
     virtual void resizeEvent(QResizeEvent* ev) override;
-    //    void showEvent(QShowEvent* ev) override;
 
 signals:
+    /*!
+     * \brief startChanged is emitted when user move left slider of playzone
+     * \param time is the new start time for playzone
+     */
     void startChanged(double time);
+    /*!
+     * \brief endChanged is emitted when user move right slider of playzone
+     * \param time is the new end time for playzone
+     */
     void endChanged(double time);
+    /*!
+     * \brief cursorChanged is emitted when user move cursor (left click on ruler)
+     * \param time is the new time of cursor to render in engine
+     */
     void cursorChanged(double time);
+    /*!
+     * \brief durationChanged is emitted when user change duration time
+     * \param time is the new time for animation
+     */
     void durationChanged(double time);
 
+    /*!
+     * \brief keyPoseAdded is emitted when user add new keyPose
+     * \param time is the time of new keyPose
+     */
     void keyPoseAdded(double time);
+    /*!
+     * \brief keyPoseDeleted is emitted when user remove keyPose on cursor
+     * \param id is the ith keyPose to remove (chronological order)
+     */
     void keyPoseDeleted(size_t id);
+    /*!
+     * \brief keyPoseChanged is emitted when user move keyPose on cursor
+     * \param id is the ith keyPose to change
+     */
     void keyPoseChanged(size_t id); // save client anim
+    /*!
+     * \brief keyPoseMoved is emitted when user move keyPose
+     * \param id is the ith keyPose to move
+     * \param time is the new time of keyPose
+     */
     void keyPoseMoved(size_t id, double time);
+    /*!
+     * \brief keyPosesMoved is emitted when user move keyPoses
+     * \param gap is the sliding distance after moving
+     * \param first is the first keyPose to move with its right brothers
+     */
     void keyPosesMoved(double gap, size_t first = 0); // first : first ith keyPose to move
 
+    /*!
+     * \brief playClicked is emitted when user click on play button
+     */
     void playClicked();
+    /*!
+     * \brief pauseClicked is emitted when user click on pause button
+     */
     void pauseClicked();
 
-
 public slots:
-    void onChangeStart(double time);
-    void onChangeEnd(double time);
-    void onChangeCursor(double time);
-    void onChangeDuration(double time);
+    /*!
+     * \brief onChangeStart change start in timeline
+     * \param time is the new start
+     */
+    virtual void onChangeStart(double time);
+    /*!
+     * \brief onChangeEnd change end in timeline
+     * \param time is the new end
+     */
+    virtual void onChangeEnd(double time);
+    /*!
+     * \brief onChangeCursor change cursor in timeline
+     * \param time is the new cursor
+     */
+    virtual void onChangeCursor(double time);
+    /*!
+     * \brief onChangeDuration change duration in timeline
+     * \param time is the new duration
+     */
+    virtual void onChangeDuration(double time);
 
-    void onAddingKeyPose(double time);
-    void onClearKeyPoses();
+    /*!
+     * \brief onAddingKeyPose add keyPose in timeline
+     * \param time is the new keyPose time
+     */
+    virtual void onAddingKeyPose(double time);
+    /*!
+     * \brief onClearKeyPoses remove all keyPoses in timeline
+     */
+    virtual void onClearKeyPoses();
 
-    void onSetPlayMode(); // use it if external play button
-    void onSetPauseMode(); // use it if external pause button
+    /*!
+     * \brief onSetPlayMode set play mode in timeline
+     */
+    virtual void onSetPlayMode(); // use it if external play button
+    /*!
+     * \brief onSetPauseMode set pause mode in timeline
+     */
+    virtual void onSetPauseMode(); // use it if external pause button
 
-
-    //signals:
-    //    void sessionCleared();
-    //    void undid();
-    //    void redid();
-//signals:
-//    void undid();
-//    void redid();
-
-
-    // getters
-    //public:
-    //    double getCursor();
-    //    double getStart();
-    //    double getEnd();
-    //    int getNbKeyPoses();
-    //    double getKeyPose(int id);
-
-    //private:
-    //    virtual void resizeEvent(QResizeEvent* ev) override;
-
-//private:
 protected:
     Ui::AnimTimeline* ui;
-    //    static const Session & session;
-    //    const Session & session =new Session();
-//    Session session;
 };
 
-//template <class T>
-//class AnimTimelineWithSession : public AnimTimeline {
-//    Q_OBJECT
-
-//public:
-////    explicit AnimTimeline(QWidget* parent = nullptr);
-//    explicit AnimTimelineWithSession(QWidget * parent = nullptr);
-
-//signals:
-//    // session (undo/redo)
-//    void envSaved();
-//    void rendered(T anim);
-//    void renderDeleted(T anim);
-
-//public slots:
-//    void onChangeStart(double time);
-//    void onChangeEnd(double time);
-////    void onChangeCursor(double time);
-//    void onChangeDuration(double time);
-
-//    void onAddingKeyPose(double time);
-//    void onClearKeyPoses();
-
-////    void onSetPlayMode(); // useless : why use it ?
-////    void onSetPauseMode(); // useless : why use it ?
-//    // undo/redo, must be called before envSaved receive
-//    void onSaveRendering(T anim);
-
-//private:
-//    Session session;
-//};
-
-
-//typedef struct s_Env Env;
+/*!
+ * \brief The AnimTimelineWithSession class is a AnimTimeline with session, permit (undo/redo)
+ */
 class AnimTimelineWithSession : public AnimTimeline {
     Q_OBJECT
 
 public:
-//    explicit AnimTimeline(QWidget* parent = nullptr);
-    explicit AnimTimelineWithSession(QWidget * parent = nullptr);
-//    ~AnimTimelineWithSession();
+    explicit AnimTimelineWithSession(QWidget* parent = nullptr);
 
 signals:
-    // for session, after receive signal, user must call onSaveRendering
-    // AnimTimeline slot to save client anim to render later due undo/redo event
+    /*!
+     * \brief envSaved is emitted for session, after receive this signal, user must call
+     * onSaveRendering slot of AnimTimeline to save client anim to render later due of undo/redo envent
+     */
     void envSaved();
-
-    // use void * because qt Q_OBJECT no accept template class
-    // and signals and slots are needed to send signal to user to render
-    void rendered(void * anim);
-    void renderDeleted(void * anim);
+    /*!
+     * \brief rendered is emmited when undo/redo envent is calling and need to render previous environment
+     * \param is the environment to render, anim is void* because Qt Q_OBJECT no accept template class
+     * and signal and slots are needed to send signal to user to render
+     */
+    void rendered(void* anim);
+    /*!
+     * \brief renderDeleted is emmited when environment is not needed for future
+     * \param anim is the environment to delete
+     */
+    void renderDeleted(void* anim);
 
 public slots:
-    // undo/redo, must be called by user after envSaved receive
-    void onSaveRendering(void * anim, size_t bytes);
+    /*!
+     * \brief onSaveRendering must be called by user after envSaved receive
+     * \param anim is the minimal environment to save in timeline session to render later
+     * \param bytes is the size of minimal environment, permit to save RAM
+     */
+    void onSaveRendering(void* anim, size_t bytes);
 
-    // overload parent slots
 public slots:
-    void onChangeStart(double time);
-    void onChangeEnd(double time);
-//    void onChangeCursor(double time);
-    void onChangeDuration(double time);
-//    void onUndo();
-//    void onRedo();
-    void onAddingKeyPose(double time);
-    void onClearKeyPoses();
-//    void onSetPlayMode();
-//    void onSetPauseMode();
+    void onChangeStart(double time) override;
+    void onChangeEnd(double time) override;
+    //    void onChangeCursor(double time);
+    void onChangeDuration(double time) override;
 
+    void onAddingKeyPose(double time) override;
+    void onClearKeyPoses() override;
+
+    //    void onSetPlayMode();
+    //    void onSetPauseMode();
 
 private:
-//    QTimer * saveDelay;
-    Session session{this};
+    Session session { this };
 };
-
-//const Session & AnimTimeline::session{};
 
 #endif // ANIMTIMELINE_H

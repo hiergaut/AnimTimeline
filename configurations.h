@@ -1,7 +1,6 @@
 #ifndef CONFIGURATIONS_H
 #define CONFIGURATIONS_H
 
-
 // fixed startup width of timeline
 //  ---------------------------------
 // |                                 |
@@ -17,7 +16,6 @@
 //  ---------------------------------
 //#define STARTUP_WIDTH 700
 // now fix timeline's width directly in animtimeline.ui
-
 
 // first timeline position is fixed at startup with these margins (right/bottom)
 // parent area :
@@ -47,7 +45,6 @@
 // |                  v              |
 //  ---------------------------------
 #define MARGIN_DOWN 40 // unit : pixel
-
 
 // timeline :
 //  -----------------------     -----------------------
@@ -81,7 +78,7 @@
 // define default duration
 //#define INIT_DURATION 30.0
 
-#define BUFFER_SESSION_MAX_SIZE 1000 // bytes, max bytes of saving user anim
+#define BUFFER_SESSION_MAX_SIZE 500'000'000 // 500M bytes in RAM, max bytes of saving user anim
 
 #define DELAY_AUTO_SAVE 100 // millisecond, auto save environment after delay
 

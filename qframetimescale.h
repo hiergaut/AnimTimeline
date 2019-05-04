@@ -12,7 +12,7 @@ class QFrameTimescale : public QFrame {
 public:
     explicit QFrameTimescale(QWidget* parent = nullptr);
 
-    void setDrawLock(bool *value);
+    void setDrawLock(bool* value);
 
 signals:
 
@@ -22,7 +22,7 @@ protected:
 public slots:
 
 private:
-    int counter {0};
+    int counter { 0 };
 
     QWidgetRuler* widgetRuler;
 
@@ -30,7 +30,7 @@ private:
     double* step;
     double* pixPerSec;
 
-    bool * drawLock;
+    bool* drawLock;
 };
 
 #endif // QFRAMETIMESCALE_H

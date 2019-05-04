@@ -1,7 +1,7 @@
 //#include "session.h"
-#include <AnimTimeline/session.h>
 #include "configurations.h"
 #include <AnimTimeline/configurations.h>
+#include <AnimTimeline/session.h>
 
 #include <QDebug>
 #include <QTimer>
@@ -24,7 +24,7 @@
 Session::Session(QObject* parent)
     : QObject(parent)
 {
-//    qDebug() << "sizeof Env = " << sizeof (Env);
+    //    qDebug() << "sizeof Env = " << sizeof (Env);
     saveDelay = new QTimer(this);
     //    connect(saveDelay, SIGNAL(timeout()), this, SLOT(onSaveEnv()));
     connect(saveDelay, &QTimer::timeout, this, &Session::envSaved);
@@ -32,7 +32,6 @@ Session::Session(QObject* parent)
     connect(this, &Session::envSaved, this, &Session::envSavedTrace);
 #endif
     saveDelay->setSingleShot(true);
-
 
     //    connect(timeline, &AnimTimeline::startChanged, this, &Session::onChangeEnv);
     //    connect(timeline, &AnimTimeline::endChanged, this, &Session::onChangeEnv);
@@ -91,17 +90,17 @@ void Session::onClearSession()
 {
     while (!undo.empty()) {
         emit renderDeleted(undo.back().anim);
-    qDebug() << "\033[35mrenderDeleted(" << undo.back().anim << ")\033[0m";
-//        undo.pop();
+        qDebug() << "\033[35mrenderDeleted(" << undo.back().anim << ")\033[0m";
+        //        undo.pop();
         undo.pop_back();
     }
     while (!redoHeap.empty()) {
         emit renderDeleted(redoHeap.top().anim);
-    qDebug() << "\033[35mrenderDeleted(" << redoHeap.top().anim << ")\033[0m";
+        qDebug() << "\033[35mrenderDeleted(" << redoHeap.top().anim << ")\033[0m";
         redoHeap.pop();
     }
 
-    size =0;
+    size = 0;
 
     onChangeEnv();
     //    emit sessionCleared();
@@ -110,7 +109,9 @@ void Session::onClearSession()
 void Session::onUndo()
 {
     if (undo.empty()) {
-        qDebug() << "\033[31mSession::onUndo() : empty stack !\033[0m";
+        qDebug() << "\033[31mSession::onUndo() : empty buffer ! (suggestion for client : "
+                    "you need to catch envSaved to launch onSaveRendering with your anim "
+                    "structure due of undo/redo calling, wanted to restore your environment\033[0m";
         return;
     }
     //    if (redoHeap.empty()) {
@@ -164,28 +165,28 @@ void Session::onSaveRendering(void* anim, size_t bytes)
 {
     //    Env env { *start, *end, *cursor, *duration, *keyPoses, anim};
     //    undo.push(env);
-//    qDebug() << "onSaveRendering : size of anim " << sizeof (anim);
-//    qDebug() << "onSaveRendering(" << anim << ") : sizeof session = " << sizeof (undo);
+    //    qDebug() << "onSaveRendering : size of anim " << sizeof (anim);
+    //    qDebug() << "onSaveRendering(" << anim << ") : sizeof session = " << sizeof (undo);
 
     while (!redoHeap.empty()) {
         emit renderDeleted(redoHeap.top().anim);
-    qDebug() << "\033[35mrenderDeleted(" << redoHeap.top().anim << ")\033[0m";
+        qDebug() << "\033[35mrenderDeleted(" << redoHeap.top().anim << ")\033[0m";
         size -= redoHeap.top().bytes;
         redoHeap.pop();
     }
 
-    undo.emplace_back(Env{ *start, *end, *cursor, *duration, *keyPoses, anim, bytes });
+    undo.emplace_back(Env { *start, *end, *cursor, *duration, *keyPoses, anim, bytes });
     size += bytes;
 
     while (size > BUFFER_SESSION_MAX_SIZE) {
-    qDebug() << "\033[31monSaveRendering : buffer overflow\033[0m";
+        qDebug() << "\033[31monSaveRendering : buffer overflow\033[0m";
         emit renderDeleted(undo.front().anim);
-    qDebug() << "\033[35mrenderDeleted(" << undo.front().anim << ")\033[0m";
+        qDebug() << "\033[35mrenderDeleted(" << undo.front().anim << ")\033[0m";
         size -= undo.front().bytes;
         undo.pop_front();
     }
 
-//    qDebug() << "Session::onSaveRendering(" << anim << ", " << bytes << ") : buff size = " << size;
+    //    qDebug() << "Session::onSaveRendering(" << anim << ", " << bytes << ") : buff size = " << size;
     qDebug() << "Session::onSaveRendering() : buff size (bytes) =" << size << "/" << BUFFER_SESSION_MAX_SIZE << "(" << size * 100.0 / BUFFER_SESSION_MAX_SIZE << "% )";
 
     //    emit envSaved();

@@ -39,11 +39,11 @@ void QFrameButtons::keyPressEvent(QKeyEvent* event)
     //    qDebug() << "QFrameButtons::keyPressEvent, event : " << event;
     //    event->accept();
     //    scrollArea->keyPressEvent(event);
-//    if (event->key() == Qt::Key_Enter) {
-//        event->accept();
-//    } else {
-        emit keyPressed(event);
-//    }
+    //    if (event->key() == Qt::Key_Enter) {
+    //        event->accept();
+    //    } else {
+    emit keyPressed(event);
+    //    }
 }
 
 void QFrameButtons::keyReleaseEvent(QKeyEvent* event)
@@ -60,26 +60,26 @@ void QFrameButtons::helpClicked()
 {
     QMessageBox msgBox;
     msgBox.setText(helpButton->toolTip());
-//    msgBox.setText("List of Shortcuts :\n"
-//                   "\n"
-//                   "keyBoard :\n"
-//                   "i : insert/replace keyPose on cursor\n"
-//                   "<shift> + i : delete keyPose on cursor\n"
-//                   "<left> : previous keyPose\n"
-//                   "<right> : next keyPose\n"
-//                   "<space> : play/pause mode\n"
-//                   "\n"
-//                   "mouse :\n"
-//                   "<wheelMouse[Up/Down]> : zoom on ruler\n"
-//                   "<ctrl>+<wheelMouse[Up/Down] : move right/left ruler\n"
-//                   "<leftClick> : move cursor\n"
-//                   "<rightClick> (cursor on keyPose) : move keyPose\n"
-//                   "<rightClick> : insert time on mouse\n"
-//                   "<shift>+<rightClick> : remove time on mouse\n");
+    //    msgBox.setText("List of Shortcuts :\n"
+    //                   "\n"
+    //                   "keyBoard :\n"
+    //                   "i : insert/replace keyPose on cursor\n"
+    //                   "<shift> + i : delete keyPose on cursor\n"
+    //                   "<left> : previous keyPose\n"
+    //                   "<right> : next keyPose\n"
+    //                   "<space> : play/pause mode\n"
+    //                   "\n"
+    //                   "mouse :\n"
+    //                   "<wheelMouse[Up/Down]> : zoom on ruler\n"
+    //                   "<ctrl>+<wheelMouse[Up/Down] : move right/left ruler\n"
+    //                   "<leftClick> : move cursor\n"
+    //                   "<rightClick> (cursor on keyPose) : move keyPose\n"
+    //                   "<rightClick> : insert time on mouse\n"
+    //                   "<shift>+<rightClick> : remove time on mouse\n");
     msgBox.exec();
 }
 
-void QFrameButtons::setHelpButton(QToolButton *value)
+void QFrameButtons::setHelpButton(QToolButton* value)
 {
     helpButton = value;
 }

@@ -17,8 +17,8 @@ QWidgetRuler::QWidgetRuler(QWidget* parent)
     : QWidget(parent)
 {
     //    updateTimeline(parent->width());
-//    qDebug() << "end construct widgetRuler, parent : " << parent;
-//    qDebug() << "ruler width " << width();
+    //    qDebug() << "end construct widgetRuler, parent : " << parent;
+    //    qDebug() << "ruler width " << width();
     //    drawRuler(width()); // ui fixed width of ruler
     //    setSizePolicy(QSizePolicy::Fixed, sizePolicy().verticalPolicy());
     //    setMinimumWidth(1000);

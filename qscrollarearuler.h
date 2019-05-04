@@ -28,17 +28,18 @@ public:
 
     void setPlayPause(QToolButtonPlayPause* value);
 
-    void setAnimTimeline(AnimTimeline *value);
+    void setAnimTimeline(AnimTimeline* value);
 
-    void setSpinDuration(QDoubleSpinBoxSmart *value);
+    void setSpinDuration(QDoubleSpinBoxSmart* value);
 
-    bool * getCtrlDown();
+    bool* getCtrlDown();
 
-//    void setZero(double *value);
+    //    void setZero(double *value);
 
-    void setSelector(QFrameSelector *value);
+    void setSelector(QFrameSelector* value);
 
-    bool * getMidMouseDown();
+    bool* getMidMouseDown();
+    void setCursorSpin(QDoubleSpinBoxSmart* value);
 
 protected:
     void keyPressEvent(QKeyEvent* event) override;
@@ -49,10 +50,10 @@ protected:
     void mousePressEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
-//    void scrollContentsBy(int dx, int dy) override;
+    //    void scrollContentsBy(int dx, int dy) override;
 
 signals:
-//    void changePrecision(int width);
+    //    void changePrecision(int width);
     void keyPoseOnMouseAdded();
     void removeKeyPose();
     void previousKeyPose();
@@ -64,9 +65,9 @@ signals:
     void redo();
 
 public slots:
-    void onKeyPress(QKeyEvent *event);
-    void onKeyRelease(QKeyEvent *event);
-//    void onZoomRuler(QWheelEvent *event, double xr);
+    void onKeyPress(QKeyEvent* event);
+    void onKeyRelease(QKeyEvent* event);
+    //    void onZoomRuler(QWheelEvent *event, double xr);
 
 private:
     bool ctrlDown = false;
@@ -78,11 +79,13 @@ private:
 
     QWidgetRuler* ruler;
     QToolButtonPlayPause* playPause;
-    AnimTimeline * animTimeline;
-    QDoubleSpinBoxSmart * spinDuration;
+    AnimTimeline* animTimeline;
+    QDoubleSpinBoxSmart* spinDuration;
 
-    QFrameSelector * selector;
-//    double * zero;
+    QDoubleSpinBoxSmart* cursorSpin;
+
+    QFrameSelector* selector;
+    //    double * zero;
 };
 
 #endif // QSCROLLAREARULER_H

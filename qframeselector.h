@@ -23,8 +23,6 @@ public:
 
     double nearestStep(double time) const;
 
-
-
 protected:
     virtual void paintEvent(QPaintEvent* event) override;
 
@@ -63,15 +61,15 @@ public slots:
     // ---------------------- INTERNAL SLOTS ----------------------------------
     void onSlideLeftSlider(int deltaX);
     void onSlideRightSlider(int deltaX);
-//    void onSlideRelease();
+    //    void onSlideRelease();
     void onLeftSlideRelease();
     void onRightSlideRelease();
 
     // by default (time = -1.0), add keyPose on cursor
-//    void onInternalAddingKeyPose(double time = -1.0);
+    //    void onInternalAddingKeyPose(double time = -1.0);
 
     void onDeleteKeyPose();
-//    bool onInternalChangeCursor(double time, bool findNearestStep = true);
+    //    bool onInternalChangeCursor(double time, bool findNearestStep = true);
 
     void onSetCursorToStart();
     void onSetCursorToEnd();
@@ -85,15 +83,14 @@ public slots:
     void onChangeCursorSpin();
     void onChangeDurationSpin();
 
-
-//    void onAddingKeyPoseOnMouse();
+    //    void onAddingKeyPoseOnMouse();
 
     //    void onStartIncPlus();
     //    void onStartIncLess();
     //    void onEndIncPlus();
     //    void onEndIncLess();
 
-//    void onCursorChanged(double time);
+    //    void onCursorChanged(double time);
     void updateCursorSpin();
     void updateStartSpin();
     void updateEndSpin();
@@ -104,7 +101,6 @@ private:
     // ---------------------- PRIVATE FUNCTIONS --------------------------------
     void moveKeyPoses(double gap, size_t first = 0);
     void deleteZone(double time, double time2);
-
 
 private:
     int paintCounter { 0 };
@@ -127,16 +123,16 @@ private:
     bool sliding { false };
     bool mouseLeftClicked { false };
 
-    bool * midMouseDown;
+    bool* midMouseDown;
 
     bool* shiftDown;
-    bool * ctrlDown;
+    bool* ctrlDown;
 
     //    bool * drawLock;
-    int updateKeyPoseFlash {0};
+    int updateKeyPoseFlash { 0 };
     double keyPoseFlash;
 
-    QTimer * timer;
+    QTimer* timer;
 
     // ---------------------- REFERENCES --------------------------------------
     QWidgetRuler* widgetRuler;
@@ -159,16 +155,15 @@ private:
 public:
     // --------------------------- GETTERS ------------------------------------
     double getStart() const;
-    double * getStart();
-    double * getEnd();
-    double * getCursor();
+    double* getStart();
+    double* getEnd();
+    double* getCursor();
     double getEnd() const;
     double getCursor() const;
     int getNbKeyPoses() const;
     double getKeyPose(int id) const;
     std::set<double> getKeyPoses() const;
-    std::set<double> * getKeyPoses();
-
+    std::set<double>* getKeyPoses();
 
     //
     // --------------------------- SETTERS ------------------------------------
@@ -196,8 +191,8 @@ public:
     void setStartInc(QDoubleSpinBox* value);
     void setEndInc(QDoubleSpinBox* value);
     void setNbKeyPosesSpin(QSpinBox* value);
-    void setMidMouseDown(bool *value);
-    void setCtrlDown(bool *value);
+    void setMidMouseDown(bool* value);
+    void setCtrlDown(bool* value);
 };
 
 #endif // QFRAMESELECTOR_H

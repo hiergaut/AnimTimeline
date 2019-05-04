@@ -15,32 +15,32 @@ QFrameTimescale::QFrameTimescale(QWidget* parent)
     step = widgetRuler->getStep();
     pixPerSec = widgetRuler->getPixPerSec();
 
-    drawLock =widgetRuler->getTimescaleLock();
+    drawLock = widgetRuler->getTimescaleLock();
 }
 
 void QFrameTimescale::paintEvent(QPaintEvent* event)
 {
     (void)event;
 
-//    if (! *drawLock) {
-        qDebug() << "QFrameTimescale::paintEvent " << ++counter;
+    //    if (! *drawLock) {
+    qDebug() << "QFrameTimescale::paintEvent " << ++counter;
 
-        QPainter painter(this);
-        painter.setRenderHint(QPainter::HighQualityAntialiasing);
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::HighQualityAntialiasing);
 
-        painter.drawText(0, 11, "sec");
-        for (int i = 1; i < *nbInterval; i++) {
-            int x = static_cast<int>(*pixPerSec * *step * i);
-            QString time = QString::number((i - 1) * *step);
-            int dec = time.size() * 6 / 2;
-            painter.drawText(x - dec, 11, time);
-        }
+    painter.drawText(0, 11, "sec");
+    for (int i = 1; i < *nbInterval; i++) {
+        int x = static_cast<int>(*pixPerSec * *step * i);
+        QString time = QString::number((i - 1) * *step);
+        int dec = time.size() * 6 / 2;
+        painter.drawText(x - dec, 11, time);
+    }
 
-//        *drawLock =true;
-//    }
+    //        *drawLock =true;
+    //    }
 }
 
-void QFrameTimescale::setDrawLock(bool *value)
+void QFrameTimescale::setDrawLock(bool* value)
 {
     drawLock = value;
 }

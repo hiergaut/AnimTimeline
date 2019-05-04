@@ -2,23 +2,22 @@
 #define QSPINBOXSMART_H
 
 #include <QObject>
-#include <QWidget>
 #include <QSpinBox>
+#include <QWidget>
 
-class QSpinBoxSmart : public QSpinBox
-{
+class QSpinBoxSmart : public QSpinBox {
     Q_OBJECT
 public:
-    explicit QSpinBoxSmart(QWidget * parent = nullptr);
+    explicit QSpinBoxSmart(QWidget* parent = nullptr);
 
 protected:
-        void wheelEvent(QWheelEvent* event) override;
+    void wheelEvent(QWheelEvent* event) override;
     void keyPressEvent(QKeyEvent* event) override;
 
 signals:
-        void nextKeyPose();
-        void previousKeyPose();
-        void deleteKeyPose();
+    void nextKeyPose();
+    void previousKeyPose();
+    void deleteKeyPose();
 };
 
 #endif // QSPINBOXSMART_H

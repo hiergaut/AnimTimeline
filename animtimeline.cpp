@@ -1,25 +1,20 @@
 #include <AnimTimeline/animtimeline.h>
-//#include "animtimeline.h"
 #include "ui_animtimeline.h"
-//#include <AnimTimeline/ui_animtimeline.h>
 
 #include <QDebug>
 #include <QDesktopWidget>
 #include <QEvent>
 #include <QPainter>
-#include <QWheelEvent>
 #include <QTimer>
+#include <QWheelEvent>
 
 AnimTimeline::AnimTimeline(QWidget* parent)
     : QDialog(parent)
     , ui(new Ui::AnimTimeline)
-//    , session(new Session())
 {
-    //    Ui::ui = ui;
-    //    qDebug() << this;
-//    qDebug() << "AnimTimeline::AnimTimeline(" << parent << ") : ui setup start";
+    //    qDebug() << "AnimTimeline::AnimTimeline(" << parent << ") : ui setup start";
     ui->setupUi(this);
-    qDebug() << "AnimTimeline::AnimTimeline(" << parent << ") : ui setup end";
+//    qDebug() << "AnimTimeline::AnimTimeline(" << parent << ") : ui setup end";
 
     //
     // --------------------------- INTERNAL CONNECTIONS --------------------------
@@ -114,6 +109,7 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     ui->scrollArea->setPlayPause(ui->toolButton_playPause);
     ui->scrollArea->setSpinDuration(ui->doubleSpinBox_maxDuration);
     ui->scrollArea->setSelector(ui->frame_selector);
+    ui->scrollArea->setCursorSpin(ui->doubleSpinBox_cursor);
     //    ui->scrollArea->setZero(ui->scrollAreaWidgetContents->getZero());
 
     // WIDGET_RULER
@@ -155,8 +151,8 @@ AnimTimeline::AnimTimeline(QWidget* parent)
     connect(ui->frame_selector, &QFrameSelector::keyPosesMoved, this, &AnimTimeline::keyPosesMoved);
     connect(ui->frame_selector, &QFrameSelector::keyPoseMoved, this, &AnimTimeline::keyPoseMoved);
 
-//    connect(ui->scrollArea	, &QScrollAreaRuler::undo, this, &AnimTimeline::undid);
-//    connect(ui->scrollArea, &QScrollAreaRuler::redo, this, &AnimTimeline::redid);
+    //    connect(ui->scrollArea	, &QScrollAreaRuler::undo, this, &AnimTimeline::undid);
+    //    connect(ui->scrollArea, &QScrollAreaRuler::redo, this, &AnimTimeline::redid);
     //    if (parent) {
     //        rightBorder = parent->x() + parent->width();
     //        bottomBorder = parent->y() + parent->height();
@@ -199,7 +195,6 @@ AnimTimeline::AnimTimeline(QWidget* parent)
 
 AnimTimeline::~AnimTimeline() { delete ui; }
 
-
 // -------------------------- LEGACY ---------------------------------------
 void AnimTimeline::resizeEvent(QResizeEvent* event)
 {
@@ -230,14 +225,14 @@ void AnimTimeline::onChangeStart(double time)
 {
     qDebug() << "\033[32monChangeStart(" << time << ")\033[0m";
     ui->frame_selector->onChangeStart(time, false);
-//    session.onClearSession();
+    //    session.onClearSession();
 }
 
 void AnimTimeline::onChangeEnd(double time)
 {
     qDebug() << "\033[32monChangeEnd(" << time << ")\033[0m";
     ui->frame_selector->onChangeEnd(time, false);
-//    session.onClearSession();
+    //    session.onClearSession();
 }
 
 void AnimTimeline::onChangeCursor(double time)
@@ -255,21 +250,21 @@ void AnimTimeline::onChangeDuration(double time)
     //    ui->frame_selector->onUpdateDurationSpin();
     //    ui->frame_selector->onUpdateDurationSpin();
     ui->frame_selector->onChangeDuration(time, false);
-//    session.onClearSession();
+    //    session.onClearSession();
 }
 
 void AnimTimeline::onAddingKeyPose(double time)
 {
     qDebug() << "\033[32monAddingKeyPose(" << time << ")\033[0m";
     ui->frame_selector->onAddingKeyPose(time, false);
-//    session.onClearSession();
+    //    session.onClearSession();
 }
 
 void AnimTimeline::onClearKeyPoses()
 {
     qDebug() << "\033[32monClearKeyPoses()\033[0m";
     ui->frame_selector->onClearKeyPoses();
-//    session.onClearSession();
+    //    session.onClearSession();
 }
 
 void AnimTimeline::onSetPlayMode()
@@ -370,13 +365,13 @@ void AnimTimeline::onSetPauseMode()
 //    session.setNbKeyPosesSpin(ui->spinBox_nbKeyPoses);
 //}
 
-
-AnimTimelineWithSession::AnimTimelineWithSession(QWidget * parent) : AnimTimeline(parent)
+AnimTimelineWithSession::AnimTimelineWithSession(QWidget* parent)
+    : AnimTimeline(parent)
 {
-//    saveDelay = new QTimer(this);
-//    ////    connect(saveDelay, SIGNAL(timeout()), this, SLOT(onSaveEnv()));
-//    connect(saveDelay, &QTimer::timeout, this, &AnimTimelineWithSession::onSaveEnv);
-//    saveDelay->setSingleShot(true);
+    //    saveDelay = new QTimer(this);
+    //    ////    connect(saveDelay, SIGNAL(timeout()), this, SLOT(onSaveEnv()));
+    //    connect(saveDelay, &QTimer::timeout, this, &AnimTimelineWithSession::onSaveEnv);
+    //    saveDelay->setSingleShot(true);
 
     connect(this, &AnimTimelineWithSession::startChanged, &session, &Session::onChangeEnv);
     connect(this, &AnimTimelineWithSession::endChanged, &session, &Session::onChangeEnv);
@@ -392,33 +387,33 @@ AnimTimelineWithSession::AnimTimelineWithSession(QWidget * parent) : AnimTimelin
 
     connect(ui->scrollArea, &QScrollAreaRuler::undo, &session, &Session::onUndo);
     connect(ui->scrollArea, &QScrollAreaRuler::redo, &session, &Session::onRedo);
-//    connect(this, &AnimTimeline::redid, this, &AnimTimelineWithSession::onRedo);
+    //    connect(this, &AnimTimeline::redid, this, &AnimTimelineWithSession::onRedo);
 
-        // signal to signal
-        connect(&session, &Session::envSaved, this, &AnimTimelineWithSession::envSaved);
-        connect(&session, &Session::rendered, this, &AnimTimelineWithSession::rendered);
-        connect(&session, &Session::renderDeleted, this, &AnimTimelineWithSession::renderDeleted);
-        //    connect(&session, &Session::sessionCleared, this, &AnimTimeline::sessionCleared);
-        //    connect(&session, &Session::undid, this, &AnimTimeline::undid);
-        //    connect(&session, &Session::redid, this, &AnimTimeline::redid);
+    // signal to signal
+    connect(&session, &Session::envSaved, this, &AnimTimelineWithSession::envSaved);
+    connect(&session, &Session::rendered, this, &AnimTimelineWithSession::rendered);
+    connect(&session, &Session::renderDeleted, this, &AnimTimelineWithSession::renderDeleted);
+    //    connect(&session, &Session::sessionCleared, this, &AnimTimeline::sessionCleared);
+    //    connect(&session, &Session::undid, this, &AnimTimeline::undid);
+    //    connect(&session, &Session::redid, this, &AnimTimeline::redid);
 
-        session.setStart(ui->frame_selector->getStart());
-        session.setEnd(ui->frame_selector->getEnd());
-        session.setCursor(ui->frame_selector->getCursor());
-        session.setDuration(ui->scrollAreaWidgetContents->getMaxDuration());
-        session.setKeyPoses(ui->frame_selector->getKeyPoses());
-        //    session.setPlay(ui->toolButton_playPause->getPlay());
+    session.setStart(ui->frame_selector->getStart());
+    session.setEnd(ui->frame_selector->getEnd());
+    session.setCursor(ui->frame_selector->getCursor());
+    session.setDuration(ui->scrollAreaWidgetContents->getMaxDuration());
+    session.setKeyPoses(ui->frame_selector->getKeyPoses());
+    //    session.setPlay(ui->toolButton_playPause->getPlay());
 
-        session.setStartSpin(ui->doubleSpinBox_start);
-        session.setEndSpin(ui->doubleSpinBox_end);
-        session.setCursorSpin(ui->doubleSpinBox_cursor);
-        session.setDurationSpin(ui->doubleSpinBox_maxDuration);
-        session.setPlayButton(ui->toolButton_playPause);
-        session.setRuler(ui->scrollAreaWidgetContents);
-        session.setSelector(ui->frame_selector);
-        session.setNbKeyPosesSpin(ui->spinBox_nbKeyPoses);
+    session.setStartSpin(ui->doubleSpinBox_start);
+    session.setEndSpin(ui->doubleSpinBox_end);
+    session.setCursorSpin(ui->doubleSpinBox_cursor);
+    session.setDurationSpin(ui->doubleSpinBox_maxDuration);
+    session.setPlayButton(ui->toolButton_playPause);
+    session.setRuler(ui->scrollAreaWidgetContents);
+    session.setSelector(ui->frame_selector);
+    session.setNbKeyPosesSpin(ui->spinBox_nbKeyPoses);
 
-//        session.onChangeEnv();
+    //        session.onChangeEnv();
 }
 
 //AnimTimelineWithSession::~AnimTimelineWithSession()
@@ -467,7 +462,7 @@ void AnimTimelineWithSession::onClearKeyPoses()
     session.onClearSession();
 }
 
-void AnimTimelineWithSession::onSaveRendering(void * anim, size_t bytes)
+void AnimTimelineWithSession::onSaveRendering(void* anim, size_t bytes)
 {
     qDebug() << "\033[32monSaveRendering(" << anim << ", " << bytes << ")\033[0m";
     session.onSaveRendering(anim, bytes);

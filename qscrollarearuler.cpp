@@ -44,6 +44,7 @@ void QScrollAreaRuler::keyPressEvent(QKeyEvent* event)
 
     case Qt::Key_Control:
         ctrlDown = true;
+        //        cursorSpin->setStyleSheet("background-color: black");
         break;
 
     case Qt::Key_Space:
@@ -105,9 +106,9 @@ void QScrollAreaRuler::keyPressEvent(QKeyEvent* event)
         break;
 
     case Qt::Key_R:
-//        if (ctrlDown) {
-            emit redo();
-//        }
+        //        if (ctrlDown) {
+        emit redo();
+        //        }
     }
 }
 
@@ -119,6 +120,7 @@ void QScrollAreaRuler::keyReleaseEvent(QKeyEvent* event)
 
     case Qt::Key_Control:
         ctrlDown = false;
+        //        cursorSpin->setStyleSheet("background-color: #5555ff");
         break;
 
     case Qt::Key_Shift:
@@ -325,6 +327,11 @@ void QScrollAreaRuler::onKeyPress(QKeyEvent* event)
 void QScrollAreaRuler::onKeyRelease(QKeyEvent* event)
 {
     keyReleaseEvent(event);
+}
+
+void QScrollAreaRuler::setCursorSpin(QDoubleSpinBoxSmart* value)
+{
+    cursorSpin = value;
 }
 
 bool* QScrollAreaRuler::getMidMouseDown()
