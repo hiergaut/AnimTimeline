@@ -652,19 +652,30 @@ void QFrameSelector::deleteZone(double time, double time2)
     double dist = right - left;
 
     auto it = keyPoses.begin();
+    size_t id = 0;
+    bool first = true;
     while (it != keyPoses.end()) {
         double keyPose = *it;
 
         if (keyPose >= left) {
-            it = keyPoses.erase(it);
+            keyPoses.erase(it++);
 
             if (keyPose > right) {
+                if (first) {
+                    emit keyPosesMoved(-dist, id);
+                    qDebug() << "\033[35mkeyPosesMoved(" << -dist << ", " << id << ")\033[0m";
+                    first = false;
+                }
                 keyPoses.insert(keyPose - dist);
-                //                ++it;
+            } else {
+                emit keyPoseDeleted(id);
+                qDebug() << "\033[35mkeyPoseDeleted(" << id << ")\033[0m";
             }
         } else {
             ++it;
         }
+
+        ++id;
     }
     nbKeyPosesSpin->setValue(static_cast<int>(keyPoses.size()));
 
