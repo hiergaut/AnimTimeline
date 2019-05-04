@@ -1,5 +1,5 @@
 CMAKE_MINIMUM_REQUIRED( VERSION 3.8 )
-PROJECT(TestAnimTimeline)
+PROJECT(AnimTimeline)
 
 ################################################################################
 # Compiler and linker options
