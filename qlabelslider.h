@@ -9,7 +9,6 @@ public:
     explicit QLabelSlider(QWidget* parent = nullptr);
 
 protected:
-    //    void keyPressEvent(QKeyEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
@@ -21,8 +20,10 @@ signals:
 public slots:
 
 private:
-    bool clicked = false;
     int x;
+    bool clicked = false;
+
+    bool align[3];
 };
 
 #endif // QLABELSLIDER_H

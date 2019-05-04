@@ -1,31 +1,19 @@
 #ifndef SESSION_H
 #define SESSION_H
 
-//#include "qdoublespinboxsmart.h"
 #include <AnimTimeline/qdoublespinboxsmart.h>
-//#include "qframeselector.h"
 #include <AnimTimeline/qframeselector.h>
-//#include "qspinboxsmart.h"
 #include <AnimTimeline/qspinboxsmart.h>
-//#include "qtoolbuttonplaypause.h"
 #include <AnimTimeline/qtoolbuttonplaypause.h>
-//#include "qwidgetruler.h"
 #include <AnimTimeline/qwidgetruler.h>
 
-//#include <QObject>
 #include <set>
 #include <stack>
-//#include "animtimeline.h"
 
-//typedef struct s_Env Env;
-
-//template <class T>
 class Session : public QObject {
     Q_OBJECT
 public:
-    //    typedef struct s_Env Env;
     Session(QObject* parent = nullptr);
-    //    virtual ~Session() = default;
     virtual ~Session();
 
 signals:
@@ -33,9 +21,6 @@ signals:
 
     void rendered(void* render); // EXTERNAL
     void renderDeleted(void* render); // EXTERNAL
-    //    void sessionCleared();
-    //    void undid();
-    //    void redid();
 
 public slots:
     void onChangeEnv();
@@ -55,10 +40,8 @@ private:
 
         std::set<double> keyPoses;
 
-        //    bool play;
         void* anim;
         size_t bytes;
-        //    int c;
     } Env;
 
     std::deque<Env> undo;
@@ -71,9 +54,8 @@ private:
     double* cursor;
     double* duration;
     std::set<double>* keyPoses;
-    //    bool * play;
 
-    int size { 0 };
+    size_t size { 0 };
 
     QDoubleSpinBoxSmart* startSpin;
     QDoubleSpinBoxSmart* endSpin;
@@ -94,8 +76,6 @@ private:
 #ifndef QT_NO_DEBUG_OUTPUT
     void envSavedTrace();
 #endif
-    //    void saveFirst();
-    //    int size();
 
 public: // setters
     void setStart(double* value);
@@ -103,7 +83,6 @@ public: // setters
     void setCursor(double* value);
     void setDuration(double* value);
     void setKeyPoses(std::set<double>* value);
-    //    void setPlay(bool *value);
     void setStartSpin(QDoubleSpinBoxSmart* value);
     void setEndSpin(QDoubleSpinBoxSmart* value);
     void setCursorSpin(QDoubleSpinBoxSmart* value);

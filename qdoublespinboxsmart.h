@@ -15,12 +15,6 @@ public:
 protected:
     void keyPressEvent(QKeyEvent* event) override;
     void wheelEvent(QWheelEvent* event) override;
-
-    //signals:
-    //    void valueChanged(double time);
-
-    //public slots:
-    //    void onChangeValue(double time);
 };
 
 #endif // QDOUBLESPINBOXSMART_H

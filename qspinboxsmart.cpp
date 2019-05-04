@@ -1,4 +1,3 @@
-//#include "qspinboxsmart.h"
 #include <AnimTimeline/qspinboxsmart.h>
 
 #include <QWheelEvent>

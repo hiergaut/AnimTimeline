@@ -1,7 +1,6 @@
 #ifndef QFRAMETIMESCALE_H
 #define QFRAMETIMESCALE_H
 
-//#include "qwidgetruler.h"
 #include <AnimTimeline/qwidgetruler.h>
 
 #include <QFrame>
@@ -22,8 +21,6 @@ protected:
 public slots:
 
 private:
-    int counter { 0 };
-
     QWidgetRuler* widgetRuler;
 
     int* nbInterval;
@@ -31,6 +28,9 @@ private:
     double* pixPerSec;
 
     bool* drawLock;
+    int counter { 0 };
+
+    int align;
 };
 
 #endif // QFRAMETIMESCALE_H

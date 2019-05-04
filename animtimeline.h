@@ -3,7 +3,9 @@
  * \author Gauthier Bouyjou (email : gauthierbouyjou@aol.com)
  * \date april 2019
  *
- * initial github repo : https://github.com/hiergaut/AnimTimeline.git
+ * For question send me mail or add issue to initial
+ * github repo : https://github.com/hiergaut/AnimTimeline.git
+ * current commit id : 93854c5c91578430aa6efb665b7b63773ade4619
  */
 
 #ifndef ANIMTIMELINE_H
@@ -33,53 +35,53 @@ protected:
 
 signals:
     /*!
-     * \brief startChanged is emitted when user move left slider of playzone
+     * \brief startChanged is emitted when user move left slider of playzone or set new value in start spin (green)
      * \param time is the new start time for playzone
      */
     void startChanged(double time);
     /*!
-     * \brief endChanged is emitted when user move right slider of playzone
+     * \brief endChanged is emitted when user move right slider of playzone or set new value in end spin (red)
      * \param time is the new end time for playzone
      */
     void endChanged(double time);
     /*!
-     * \brief cursorChanged is emitted when user move cursor (left click on ruler)
+     * \brief cursorChanged is emitted when user move cursor
      * \param time is the new time of cursor to render in engine
      */
     void cursorChanged(double time);
     /*!
-     * \brief durationChanged is emitted when user change duration time
+     * \brief durationChanged is emitted when user change duration time in top right spin
      * \param time is the new time for animation
      */
     void durationChanged(double time);
 
     /*!
      * \brief keyPoseAdded is emitted when user add new keyPose
-     * \param time is the time of new keyPose
+     * \param time is the time of new keyPose, if a keyPose is already here so signal keyPoseChanged is called
      */
     void keyPoseAdded(double time);
     /*!
-     * \brief keyPoseDeleted is emitted when user remove keyPose on cursor
+     * \brief keyPoseDeleted is emitted when user remove keyPose
      * \param id is the ith keyPose to remove (chronological order)
      */
     void keyPoseDeleted(size_t id);
     /*!
-     * \brief keyPoseChanged is emitted when user move keyPose on cursor
+     * \brief keyPoseChanged is emitted when user insert keyPose in a known keyPose position
      * \param id is the ith keyPose to change
      */
-    void keyPoseChanged(size_t id); // save client anim
+    void keyPoseChanged(size_t id);
     /*!
-     * \brief keyPoseMoved is emitted when user move keyPose
+     * \brief keyPoseMoved is emitted when user move keyPose on cursor to new position (on mouse)
      * \param id is the ith keyPose to move
-     * \param time is the new time of keyPose
+     * \param time is the time of keyPose, move current keyPose in other keyPose is not possible
      */
     void keyPoseMoved(size_t id, double time);
     /*!
      * \brief keyPosesMoved is emitted when user move keyPoses
-     * \param gap is the sliding distance after moving
+     * \param gap is the sliding distance for moving
      * \param first is the first keyPose to move with its right brothers
      */
-    void keyPosesMoved(double gap, size_t first = 0); // first : first ith keyPose to move
+    void keyPosesMoved(double gap, size_t first = 0);
 
     /*!
      * \brief playClicked is emitted when user click on play button

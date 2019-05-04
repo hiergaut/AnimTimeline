@@ -1,4 +1,3 @@
-//#include "qlabelslider.h"
 #include <AnimTimeline/qlabelslider.h>
 
 #include <QMouseEvent>
@@ -7,10 +6,6 @@ QLabelSlider::QLabelSlider(QWidget* parent)
     : QLabel(parent)
 {
 }
-
-//void QLabelSlider::keyPressEvent(QKeyEvent* event)
-//{
-//}
 
 void QLabelSlider::mousePressEvent(QMouseEvent* event)
 {

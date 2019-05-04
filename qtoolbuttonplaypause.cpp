@@ -1,4 +1,3 @@
-//#include "qtoolbuttonplaypause.h"
 #include <AnimTimeline/qtoolbuttonplaypause.h>
 
 #include <QDebug>
@@ -25,16 +24,6 @@ QToolButtonPlayPause::~QToolButtonPlayPause()
 void QToolButtonPlayPause::mousePressEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::LeftButton) {
-        //        if (play) {
-        //            this->setIcon(*playIcon);
-        //            play = false;
-        //            emit pauseClicked();
-
-        //        } else {
-        //            this->setIcon(*pauseIcon);
-        //            play = true;
-        //            emit playClicked();
-        //        }
         onChangeMode();
         event->accept();
     }

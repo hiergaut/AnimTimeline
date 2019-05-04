@@ -1,6 +1,4 @@
-//#include "qframetimescale.h"
 #include <AnimTimeline/qframetimescale.h>
-//#include "qwidgetruler.h"
 #include <AnimTimeline/qwidgetruler.h>
 
 #include <QDebug>
@@ -18,11 +16,8 @@ QFrameTimescale::QFrameTimescale(QWidget* parent)
     drawLock = widgetRuler->getTimescaleLock();
 }
 
-void QFrameTimescale::paintEvent(QPaintEvent* event)
+void QFrameTimescale::paintEvent(QPaintEvent*)
 {
-    (void)event;
-
-    //    if (! *drawLock) {
     qDebug() << "QFrameTimescale::paintEvent " << ++counter;
 
     QPainter painter(this);
@@ -35,9 +30,6 @@ void QFrameTimescale::paintEvent(QPaintEvent* event)
         int dec = time.size() * 6 / 2;
         painter.drawText(x - dec, 11, time);
     }
-
-    //        *drawLock =true;
-    //    }
 }
 
 void QFrameTimescale::setDrawLock(bool* value)
