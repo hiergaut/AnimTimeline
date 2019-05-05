@@ -29,4 +29,4 @@ AnimTimeline * timeline = new AnimTimeline();
 timeline->show(); // dialog window
 ```
 
-<!-- [![](https://img.youtube.com/vi/)](https://www.youtube.com/watch/ "view on youtube") -->
+[![test timeline](testApplication.png)](https://youtu.be/0igq4E6YkDE)
