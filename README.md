@@ -18,7 +18,7 @@ $ make
 ./build/AnimTimeline
 ```
 
-[![test timeline](testApplication.png)](https://youtu.be/0igq4E6YkDE)
+[![test timeline](testApplication.png)](https://youtu.be/0igq4E6YkDE "wiew on youtube")
 
 
 ## On your Qt application write
