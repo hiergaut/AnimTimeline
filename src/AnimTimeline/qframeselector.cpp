@@ -673,9 +673,8 @@ void QFrameSelector::deleteZone(double time, double time2)
             }
         } else {
             ++it;
+            ++id;
         }
-
-        ++id;
     }
     nbKeyPosesSpin->setValue(static_cast<int>(keyPoses.size()));
 
