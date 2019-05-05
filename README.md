@@ -18,9 +18,7 @@ $ make
 ./build/AnimTimeline
 ```
 
-![test timeline](testApplication.png)
-
-![video test timeline](testApplication.mp4)
+[![test timeline](testApplication.png)](https://youtu.be/0igq4E6YkDE)
 
 
 ## On your Qt application write
@@ -29,4 +27,3 @@ AnimTimeline * timeline = new AnimTimeline();
 timeline->show(); // dialog window
 ```
 
-[![test timeline](testApplication.png)](https://youtu.be/0igq4E6YkDE)
