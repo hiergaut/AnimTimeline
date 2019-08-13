@@ -1,5 +1,7 @@
-#include <AnimTimeline/animtimeline.h>
-#include <AnimTimeline/qframeselector.h>
+//#include <AnimTimeline/animtimeline.h>
+#include "FormAnimTimeline.h"
+//#include <AnimTimeline/qframeselector.h>
+#include "qframeselector.h"
 
 #include <QDebug>
 #include <QPainter>
@@ -451,7 +453,7 @@ void QFrameSelector::onSlideLeftSlider(int deltaX)
 {
 
     if (!sliding) {
-        leftSlider->setStyleSheet("background-color: #00ff00");
+//        leftSlider->setStyleSheet("background-color: #00ff00");
         sliding = true;
     }
 
@@ -459,14 +461,14 @@ void QFrameSelector::onSlideLeftSlider(int deltaX)
 
     onChangeStart(newStart); // EXTERNAL SLOT
 
-    leftSpacer->setMinimumWidth(static_cast<int>(*zero + start * *pixPerSec - leftSlider->width()));
+    leftSpacer->setMinimumWidth(static_cast<int>(*zero + start * *pixPerSec));
     playZone->setMinimumWidth(static_cast<int>((end - start) * *pixPerSec));
 }
 
 void QFrameSelector::onSlideRightSlider(int deltaX)
 {
     if (!sliding) {
-        rightSlider->setStyleSheet("background-color: red");
+//        rightSlider->setStyleSheet("background-color: red");
         sliding = true;
     }
     double newEnd = end + deltaX / *pixPerSec;
@@ -701,7 +703,8 @@ void QFrameSelector::deleteZone(double time, double time2)
 
 void QFrameSelector::redrawPlayZone()
 {
-    leftSpacer->setMinimumWidth(static_cast<int>(*zero + start * *pixPerSec - leftSlider->width()));
+//    leftSpacer->setMinimumWidth(static_cast<int>(*zero + start * *pixPerSec - leftSlider->width()));
+    leftSpacer->setMinimumWidth(static_cast<int>(*zero + start * *pixPerSec));
     playZone->setMinimumWidth(static_cast<int>((end - start) * *pixPerSec));
 }
 
@@ -798,20 +801,20 @@ void QFrameSelector::setLeftSpacer(QFrame* value)
     leftSpacer = value;
 }
 
-void QFrameSelector::setLeftSlider(QLabel* value)
-{
-    leftSlider = value;
-}
+//void QFrameSelector::setLeftSlider(QWidget* value)
+//{
+//    leftSlider = value;
+//}
 
 void QFrameSelector::setPlayZone(QFrame* value)
 {
     playZone = value;
 }
 
-void QFrameSelector::setRightSlider(QLabel* value)
-{
-    rightSlider = value;
-}
+//void QFrameSelector::setRightSlider(QWidget* value)
+//{
+//    rightSlider = value;
+//}
 //
 
 void QFrameSelector::setCursorSpin(QDoubleSpinBox* value)

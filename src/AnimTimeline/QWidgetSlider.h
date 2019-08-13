@@ -1,12 +1,14 @@
 #ifndef QLABELSLIDER_H
 #define QLABELSLIDER_H
 
-#include <QLabel>
+//#include <QLabel>
+#include <QWidget>
 
-class QLabelSlider : public QLabel {
+//class QLabelSlider : public QLabel {
+class QWidgetSlider : public QWidget {
     Q_OBJECT
 public:
-    explicit QLabelSlider(QWidget* parent = nullptr);
+    explicit QWidgetSlider(QWidget* parent = nullptr);
 
 protected:
     void mousePressEvent(QMouseEvent* event) override;

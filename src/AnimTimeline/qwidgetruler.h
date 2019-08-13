@@ -1,8 +1,10 @@
 #ifndef QWIDGETRULER_H
 #define QWIDGETRULER_H
 
-#include <AnimTimeline/configurations.h>
-#include <AnimTimeline/qdoublespinboxsmart.h>
+//#include <AnimTimeline/configurations.h>
+#include "configurations.h"
+//#include <AnimTimeline/qdoublespinboxsmart.h>
+#include "qdoublespinboxsmart.h"
 
 #include <QLabel>
 #include <QSpacerItem>

@@ -11,24 +11,25 @@
 #ifndef ANIMTIMELINE_H
 #define ANIMTIMELINE_H
 
-#include <AnimTimeline/session.h>
+//#include <AnimTimeline/session.h>
+#include "session.h"
 
 #include <QDialog>
 #include <QObject>
 
 namespace Ui {
-class AnimTimeline;
+class FormAnimTimeline;
 }
 
 /*!
- * \brief The AnimTimeline class is a minimal specification of timeline abilities
+ * \brief The FormAnimTimeline class is a minimal specification of timeline abilities
  */
-class AnimTimeline : public QDialog {
+class FormAnimTimeline : public QWidget {
     Q_OBJECT
 
 public:
-    explicit AnimTimeline(QWidget* parent = nullptr);
-    ~AnimTimeline() override;
+    explicit FormAnimTimeline(QWidget* parent = nullptr);
+    ~FormAnimTimeline() override;
 
 protected:
     virtual void resizeEvent(QResizeEvent* ev) override;
@@ -134,22 +135,22 @@ public slots:
     virtual void onSetPauseMode(); // use it if external pause button
 
 protected:
-    Ui::AnimTimeline* ui;
+    Ui::FormAnimTimeline* ui;
 };
 
 /*!
- * \brief The AnimTimelineWithSession class is a AnimTimeline with session, permit (undo/redo)
+ * \brief The FormAnimTimelineWithSession class is a FormAnimTimeline with session, permit (undo/redo)
  */
-class AnimTimelineWithSession : public AnimTimeline {
+class FormAnimTimelineWithSession : public FormAnimTimeline {
     Q_OBJECT
 
 public:
-    explicit AnimTimelineWithSession(QWidget* parent = nullptr);
+    explicit FormAnimTimelineWithSession(QWidget* parent = nullptr);
 
 signals:
     /*!
      * \brief envSaved is emitted for session, after receive this signal, user must call
-     * onSaveRendering slot of AnimTimeline to save client anim to render later due of undo/redo envent
+     * onSaveRendering slot of FormAnimTimeline to save client anim to render later due of undo/redo envent
      */
     void envSaved();
     /*!

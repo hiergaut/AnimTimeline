@@ -1,6 +1,8 @@
 #include "configurations.h"
-#include <AnimTimeline/configurations.h>
-#include <AnimTimeline/session.h>
+//#include <AnimTimeline/configurations.h>
+#include "configurations.h"
+//#include <AnimTimeline/session.h>
+#include "session.h"
 
 #include <QDebug>
 #include <QTimer>

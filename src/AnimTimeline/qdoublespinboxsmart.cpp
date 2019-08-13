@@ -1,4 +1,5 @@
-#include <AnimTimeline/qdoublespinboxsmart.h>
+//#include <AnimTimeline/qdoublespinboxsmart.h>
+#include "qdoublespinboxsmart.h"
 
 #include <QDebug>
 #include <QWheelEvent>

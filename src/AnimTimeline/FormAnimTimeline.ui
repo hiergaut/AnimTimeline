@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AnimTimeline</class>
- <widget class="QWidget" name="AnimTimeline">
+ <class>FormAnimTimeline</class>
+ <widget class="QWidget" name="FormAnimTimeline">
   <property name="windowModality">
    <enum>Qt::NonModal</enum>
   </property>
@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>650</width>
-    <height>145</height>
+    <width>629</width>
+    <height>212</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -21,8 +21,8 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>650</width>
-    <height>145</height>
+    <width>0</width>
+    <height>0</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -65,7 +65,7 @@
    <item>
     <widget class="QFrameButtons" name="frame_buttons">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+      <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -627,8 +627,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>648</width>
-        <height>105</height>
+        <width>627</width>
+        <height>175</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -713,188 +713,62 @@
           <enum>QFrame::Raised</enum>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <property name="spacing">
-           <number>0</number>
-          </property>
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>1</number>
-          </property>
-          <property name="rightMargin">
-           <number>1</number>
-          </property>
-          <property name="bottomMargin">
-           <number>1</number>
-          </property>
           <item>
-           <widget class="QFrame" name="frame_spacer">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>50</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgba(0, 0, 255, 00);
-</string>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabelSlider" name="label_leftSlider">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>50</height>
-             </size>
-            </property>
-            <property name="cursor">
-             <cursorShape>SizeHorCursor</cursorShape>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: gray;</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="pixmap">
-             <pixmap resource="timeline.qrc">:/images/leftSlider.png</pixmap>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QFrame" name="frame_playZone">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>400</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: qlineargradient(spread:pad, x1: 0 y1: 0, x2: 1 y2: 0, stop:0 rgba(0,255, 0, 50), stop:1 rgba(255, 0, 0, 50));
-border: 0px;</string>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <property name="lineWidth">
-             <number>1</number>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabelSlider" name="label_rightSlider">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>86</height>
-             </size>
-            </property>
-            <property name="cursor">
-             <cursorShape>SizeHorCursor</cursorShape>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: gray;</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="pixmap">
-             <pixmap resource="timeline.qrc">:/images/rightSlider.png</pixmap>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer_2">
+           <widget class="QSplitter" name="splitter">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Expanding</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QFrame" name="frame_spacer_2">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgba(0, 0, 255, 0);</string>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_2">
-             <property name="spacing">
-              <number>0</number>
+            <widget class="QFrame" name="frame_spacer">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
              </property>
-             <property name="leftMargin">
-              <number>0</number>
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>0</height>
+              </size>
              </property>
-             <property name="topMargin">
-              <number>0</number>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgba(0, 0, 255, 00);
+</string>
              </property>
-             <property name="rightMargin">
-              <number>0</number>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
              </property>
-             <property name="bottomMargin">
-              <number>0</number>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
              </property>
-            </layout>
+            </widget>
+            <widget class="QFrame" name="frame_playZone">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>400</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: qlineargradient(spread:pad, x1: 0 y1: 0, x2: 1 y2: 0, stop:0 rgba(0,255, 0, 50), stop:1 rgba(255, 0, 0, 50));
+border: 0px;</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <property name="lineWidth">
+              <number>1</number>
+             </property>
+            </widget>
            </widget>
           </item>
          </layout>
@@ -938,7 +812,7 @@ border: 0px;</string>
   <customwidget>
    <class>QFrameSelector</class>
    <extends>QFrame</extends>
-   <header>qframeselector.h</header>
+   <header>AnimTimeline/qframeselector.h</header>
    <container>1</container>
    <slots>
     <signal>updatePlayZone(int)</signal>
@@ -982,13 +856,13 @@ border: 0px;</string>
   <customwidget>
    <class>QWidgetRuler</class>
    <extends>QWidget</extends>
-   <header>qwidgetruler.h</header>
+   <header>AnimTimeline/qwidgetruler.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>QScrollAreaRuler</class>
    <extends>QScrollArea</extends>
-   <header>qscrollarearuler.h</header>
+   <header>AnimTimeline/qscrollarearuler.h</header>
    <container>1</container>
    <slots>
     <signal>addKeyPose()</signal>
@@ -1002,22 +876,13 @@ border: 0px;</string>
   <customwidget>
    <class>QFrameTimescale</class>
    <extends>QFrame</extends>
-   <header>qframetimescale.h</header>
+   <header>AnimTimeline/qframetimescale.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>QLabelSlider</class>
-   <extends>QLabel</extends>
-   <header>qlabelslider.h</header>
-   <slots>
-    <signal>slide(int)</signal>
-    <signal>slideRelease()</signal>
-   </slots>
   </customwidget>
   <customwidget>
    <class>QToolButtonPlayPause</class>
    <extends>QToolButton</extends>
-   <header>qtoolbuttonplaypause.h</header>
+   <header>AnimTimeline/qtoolbuttonplaypause.h</header>
    <slots>
     <signal>playClicked()</signal>
     <signal>pauseClicked()</signal>
@@ -1027,7 +892,7 @@ border: 0px;</string>
   <customwidget>
    <class>QFrameButtons</class>
    <extends>QFrame</extends>
-   <header>qframebuttons.h</header>
+   <header>AnimTimeline/qframebuttons.h</header>
    <container>1</container>
    <slots>
     <slot>helpClicked()</slot>
@@ -1036,12 +901,12 @@ border: 0px;</string>
   <customwidget>
    <class>QDoubleSpinBoxSmart</class>
    <extends>QDoubleSpinBox</extends>
-   <header>qdoublespinboxsmart.h</header>
+   <header>AnimTimeline/qdoublespinboxsmart.h</header>
   </customwidget>
   <customwidget>
    <class>QSpinBoxSmart</class>
    <extends>QSpinBox</extends>
-   <header>qspinboxsmart.h</header>
+   <header>AnimTimeline/qspinboxsmart.h</header>
   </customwidget>
  </customwidgets>
  <resources>

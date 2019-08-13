@@ -1,8 +1,10 @@
 #ifndef QFRAMESELECTOR_H
 #define QFRAMESELECTOR_H
 
-#include <AnimTimeline/configurations.h>
-#include <AnimTimeline/qwidgetruler.h>
+//#include <AnimTimeline/configurations.h>
+#include "configurations.h"
+//#include <AnimTimeline/qwidgetruler.h>
+#include "qwidgetruler.h"
 
 #include <QDoubleSpinBox>
 #include <QFrame>
@@ -113,9 +115,9 @@ private:
     QWidgetRuler* widgetRuler;
 
     QFrame* leftSpacer;
-    QLabel* leftSlider;
+//    QWidget* leftSlider;
     QFrame* playZone;
-    QLabel* rightSlider;
+//    QWidget* rightSlider;
 
     QDoubleSpinBox* cursorSpin;
     QDoubleSpinBox* startSpin;
@@ -151,9 +153,9 @@ public:
     //
     // ---------------------- REFERENCES SETTERS ------------------------------
     void setLeftSpacer(QFrame* value);
-    void setLeftSlider(QLabel* value);
+//    void setLeftSlider(QWidget* value);
     void setPlayZone(QFrame* value);
-    void setRightSlider(QLabel* value);
+//    void setRightSlider(QWidget *value);
 
     void setCursorSpin(QDoubleSpinBox* value);
     void setStartSpin(QDoubleSpinBox* value);

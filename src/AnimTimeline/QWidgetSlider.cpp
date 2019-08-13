@@ -1,13 +1,16 @@
-#include <AnimTimeline/qlabelslider.h>
+//#include <AnimTimeline/qlabelslider.h>
+//#include "qlabelslider.h"
+#include "QWidgetSlider.h"
 
 #include <QMouseEvent>
 
-QLabelSlider::QLabelSlider(QWidget* parent)
-    : QLabel(parent)
+QWidgetSlider::QWidgetSlider(QWidget* parent)
+//    : QLabel(parent)
+    : QWidget(parent)
 {
 }
 
-void QLabelSlider::mousePressEvent(QMouseEvent* event)
+void QWidgetSlider::mousePressEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::LeftButton) {
         clicked = true;
@@ -15,7 +18,7 @@ void QLabelSlider::mousePressEvent(QMouseEvent* event)
     }
 }
 
-void QLabelSlider::mouseReleaseEvent(QMouseEvent* event)
+void QWidgetSlider::mouseReleaseEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::LeftButton) {
         setStyleSheet("background-color: gray");
@@ -25,7 +28,7 @@ void QLabelSlider::mouseReleaseEvent(QMouseEvent* event)
     }
 }
 
-void QLabelSlider::mouseMoveEvent(QMouseEvent* event)
+void QWidgetSlider::mouseMoveEvent(QMouseEvent* event)
 {
     if (clicked) {
         emit slide(event->x());

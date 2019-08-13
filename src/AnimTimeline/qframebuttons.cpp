@@ -1,4 +1,5 @@
-#include <AnimTimeline/qframebuttons.h>
+//#include <AnimTimeline/qframebuttons.h>
+#include "qframebuttons.h"
 
 #include <QDebug>
 #include <QMessageBox>
@@ -24,7 +25,7 @@ void QFrameButtons::keyReleaseEvent(QKeyEvent* event)
     emit keyReleased(event);
 }
 
-void QFrameButtons::setAnimTimeline(AnimTimeline* value)
+void QFrameButtons::setAnimTimeline(FormAnimTimeline* value)
 {
     animTimeline = value;
 }

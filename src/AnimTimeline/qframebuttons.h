@@ -1,8 +1,10 @@
 #ifndef QFRAMEBUTTONS_H
 #define QFRAMEBUTTONS_H
 
-#include <AnimTimeline/animtimeline.h>
-#include <AnimTimeline/qwidgetruler.h>
+//#include <AnimTimeline/animtimeline.h>
+#include "FormAnimTimeline.h"
+//#include <AnimTimeline/qwidgetruler.h>
+#include "qwidgetruler.h"
 
 #include <QFrame>
 #include <QPoint>
@@ -14,7 +16,7 @@ class QFrameButtons : public QFrame {
 public:
     explicit QFrameButtons(QWidget* parent = nullptr);
 
-    void setAnimTimeline(AnimTimeline* value);
+    void setAnimTimeline(FormAnimTimeline* value);
     void setRuler(QWidgetRuler* value);
     void setScrollArea(QScrollArea* value);
     void setHelpButton(QToolButton* value);
@@ -31,7 +33,7 @@ public slots:
     void helpClicked();
 
 private:
-    AnimTimeline* animTimeline;
+    FormAnimTimeline* animTimeline;
     QWidgetRuler* ruler;
     QPoint offset;
     QScrollArea* scrollArea;

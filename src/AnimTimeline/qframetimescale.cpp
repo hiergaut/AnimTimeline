@@ -1,5 +1,7 @@
-#include <AnimTimeline/qframetimescale.h>
-#include <AnimTimeline/qwidgetruler.h>
+//#include <AnimTimeline/qframetimescale.h>
+#include "qframetimescale.h"
+//#include <AnimTimeline/qwidgetruler.h>
+#include "qwidgetruler.h"
 
 #include <QDebug>
 #include <QPainter>

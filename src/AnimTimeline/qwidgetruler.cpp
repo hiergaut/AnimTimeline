@@ -1,6 +1,8 @@
-#include <AnimTimeline/qwidgetruler.h>
+//#include <AnimTimeline/qwidgetruler.h>
+#include "qwidgetruler.h"
 
-#include <AnimTimeline/configurations.h>
+//#include <AnimTimeline/configurations.h>
+#include "configurations.h"
 
 #include <QDebug>
 #include <QScrollBar>

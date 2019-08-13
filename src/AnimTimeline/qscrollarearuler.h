@@ -1,12 +1,17 @@
 #ifndef QSCROLLAREARULER_H
 #define QSCROLLAREARULER_H
 
-#include <AnimTimeline/animtimeline.h>
+//#include <AnimTimeline/animtimeline.h>
+#include "FormAnimTimeline.h"
 
-#include <AnimTimeline/animtimeline.h>
-#include <AnimTimeline/qdoublespinboxsmart.h>
-#include <AnimTimeline/qframeselector.h>
-#include <AnimTimeline/qwidgetruler.h>
+//#include <AnimTimeline/animtimeline.h>
+//#include "animtimeline.h"
+//#include <AnimTimeline/qdoublespinboxsmart.h>
+#include "qdoublespinboxsmart.h"
+//#include <AnimTimeline/qframeselector.h>
+#include "qframeselector.h"
+//#include <AnimTimeline/qwidgetruler.h>
+#include "qwidgetruler.h"
 
 #include <QObject>
 #include <QScrollArea>
@@ -20,7 +25,7 @@ public:
     bool* getShiftDown();
     void setRuler(QWidgetRuler* value);
     void setPlayPause(QToolButtonPlayPause* value);
-    void setAnimTimeline(AnimTimeline* value);
+    void setAnimTimeline(FormAnimTimeline* value);
     void setSpinDuration(QDoubleSpinBoxSmart* value);
     bool* getCtrlDown();
     void setSelector(QFrameSelector* value);
@@ -58,7 +63,7 @@ private:
 
     QWidgetRuler* ruler;
     QToolButtonPlayPause* playPause;
-    AnimTimeline* animTimeline;
+    FormAnimTimeline* animTimeline;
     QDoubleSpinBoxSmart* spinDuration;
 
     QDoubleSpinBoxSmart* cursorSpin;

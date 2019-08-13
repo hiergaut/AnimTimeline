@@ -1,7 +1,8 @@
 #ifndef QFRAMETIMESCALE_H
 #define QFRAMETIMESCALE_H
 
-#include <AnimTimeline/qwidgetruler.h>
+//#include <AnimTimeline/qwidgetruler.h>
+#include "qwidgetruler.h"
 
 #include <QFrame>
 #include <QObject>

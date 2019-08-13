@@ -1,4 +1,5 @@
-#include <AnimTimeline/qscrollarearuler.h>
+//#include <AnimTimeline/qscrollarearuler.h>
+#include "qscrollarearuler.h"
 
 #include <QDebug>
 #include <QScrollBar>
@@ -68,9 +69,9 @@ void QScrollAreaRuler::keyPressEvent(QKeyEvent* event)
         emit nextKeyPose();
         break;
 
-    case Qt::Key_Escape:
-        animTimeline->hide();
-        break;
+//    case Qt::Key_Escape:
+//        animTimeline->hide();
+//        break;
 
     case Qt::Key_Up:
         emit durationChanged(spinDuration->value() + spinDuration->singleStep());
@@ -121,27 +122,27 @@ void QScrollAreaRuler::wheelEvent(QWheelEvent* event)
     int ry = event->angleDelta().ry();
 
     // change dialog width
-    if (shiftDown && ctrlDown) {
-        int curWidth = animTimeline->width();
-        int minWidth = animTimeline->minimumWidth();
+//    if (shiftDown && ctrlDown) {
+//        int curWidth = animTimeline->width();
+//        int minWidth = animTimeline->minimumWidth();
 
-        if (curWidth == minWidth && ry <= 0)
-            return;
+//        if (curWidth == minWidth && ry <= 0)
+//            return;
 
-        if (ry + curWidth <= minWidth)
-            ry = minWidth - curWidth;
+//        if (ry + curWidth <= minWidth)
+//            ry = minWidth - curWidth;
 
-        int newX = animTimeline->x() - ry;
-        int newY = animTimeline->y() + 1;
-        int newWidth = animTimeline->width() + 1 + ry;
-        int newHeight = animTimeline->height();
+//        int newX = animTimeline->x() - ry;
+//        int newY = animTimeline->y() + 1;
+//        int newWidth = animTimeline->width() + 1 + ry;
+//        int newHeight = animTimeline->height();
 
-        ruler->onDrawRuler(newWidth - 2);
-        animTimeline->setGeometry(newX, newY, newWidth, newHeight);
+//        ruler->onDrawRuler(newWidth - 2);
+//        animTimeline->setGeometry(newX, newY, newWidth, newHeight);
 
-    }
+//    }
     // next/previous keyPose
-    else if (shiftDown) {
+    if (shiftDown) {
         if (ry > 0) {
             emit nextKeyPose();
         } else {
@@ -214,7 +215,7 @@ void QScrollAreaRuler::mouseMoveEvent(QMouseEvent* event)
     }
 }
 
-void QScrollAreaRuler::setAnimTimeline(AnimTimeline* value)
+void QScrollAreaRuler::setAnimTimeline(FormAnimTimeline* value)
 {
     animTimeline = value;
 }

@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 //#include "dialog.h"
-#include <AnimTimeline/animtimeline.h>
+#include <AnimTimeline/FormAnimTimeline.h>
 //#include <AnimTimeline/animsession.h>
 
 typedef struct s_Anim {
@@ -79,7 +79,7 @@ private:
     Ui::MainWindow* ui;
     //    Dialog * dialog;
 //    AnimTimeline* timeline;
-    AnimTimelineWithSession * timeline;
+//    AnimTimelineWithSession * timeline;
 //    AnimSession * session;
 };
 

@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
 //    timeline = new AnimTimeline(this);
 //    dialog = new Dialog(this);
 //    dialog->show();
-    timeline = new AnimTimelineWithSession();
+//    timeline = new AnimTimelineWithSession();
 //    session = new AnimSession(timeline);
 //    session->setAnimType<Anim>();
 //    timeline->show();
@@ -37,30 +37,30 @@ MainWindow::MainWindow(QWidget *parent) :
 //    connect(timeline, &AnimTimeline::cursorChanged, ui->cursorIn, &QDoubleSpinBox::setValue);
 
     // --------------------------- ANIM_TIMELINE SIGNALS ----------------------
-    connect(timeline, SIGNAL(playClicked()), this, SLOT(onPlay()));
-    connect(timeline, SIGNAL(pauseClicked()), this, SLOT(onPause()));
+    connect(ui->widget_timeline, SIGNAL(playClicked()), this, SLOT(onPlay()));
+    connect(ui->widget_timeline, SIGNAL(pauseClicked()), this, SLOT(onPause()));
 //    connect(timeline, SIGNAL(durationChanged(double)), ui->durationIn, SLOT(setValue(double)));
-    connect(timeline, SIGNAL(durationChanged(double)), this, SLOT(onChangeDuration(double)));
+    connect(ui->widget_timeline, SIGNAL(durationChanged(double)), this, SLOT(onChangeDuration(double)));
 
 //    connect(timeline, SIGNAL(durationChanged(double)), this, SLOT(onChangeDuration(double)));
 
 //    connect(timeline, SIGNAL(cursorChanged(double)), ui->cursorIn, SLOT(setValue(double)));
-    connect(timeline, SIGNAL(cursorChanged(double)), this, SLOT(onChangeCursor(double)));
+    connect(ui->widget_timeline, SIGNAL(cursorChanged(double)), this, SLOT(onChangeCursor(double)));
 //    connect(timeline, SIGNAL(startChanged(double)), ui->doubleSpinBox_startIn, SLOT(setValue(double)));
-    connect(timeline, SIGNAL(startChanged(double)), this, SLOT(onChangeStart(double)));
+    connect(ui->widget_timeline, SIGNAL(startChanged(double)), this, SLOT(onChangeStart(double)));
 //    connect(timeline, SIGNAL(endChanged(double)), ui->doubleSpinBox_endIn, SLOT(setValue(double)));
-    connect(timeline, SIGNAL(endChanged(double)), this, SLOT(onChangeEnd(double)));
+    connect(ui->widget_timeline, SIGNAL(endChanged(double)), this, SLOT(onChangeEnd(double)));
 
-    connect(timeline, SIGNAL(keyPoseAdded(double)), this, SLOT(onAddKeyPose(double)));
-    connect(timeline, SIGNAL(keyPoseDeleted(size_t)), this, SLOT(onDeleteKeyPose(size_t)));
-    connect(timeline, SIGNAL(keyPoseChanged(size_t)), this, SLOT(onChangeKeyPose(size_t)));
-    connect(timeline, SIGNAL(keyPosesMoved(double, size_t)), this, SLOT(onMoveKeyPoses(double, size_t)));
-    connect(timeline, SIGNAL(keyPoseMoved(size_t, double)), this, SLOT(onMoveKeyPose(size_t, double)));
+    connect(ui->widget_timeline, SIGNAL(keyPoseAdded(double)), this, SLOT(onAddKeyPose(double)));
+    connect(ui->widget_timeline, SIGNAL(keyPoseDeleted(size_t)), this, SLOT(onDeleteKeyPose(size_t)));
+    connect(ui->widget_timeline, SIGNAL(keyPoseChanged(size_t)), this, SLOT(onChangeKeyPose(size_t)));
+    connect(ui->widget_timeline, SIGNAL(keyPosesMoved(double, size_t)), this, SLOT(onMoveKeyPoses(double, size_t)));
+    connect(ui->widget_timeline, SIGNAL(keyPoseMoved(size_t, double)), this, SLOT(onMoveKeyPose(size_t, double)));
 
-    connect(timeline, SIGNAL(envSaved()), this, SLOT(onSaveEnv()));
-    connect(timeline, SIGNAL(rendered(void *)), this, SLOT(onRendering(void *)));
+    connect(ui->widget_timeline, SIGNAL(envSaved()), this, SLOT(onSaveEnv()));
+    connect(ui->widget_timeline, SIGNAL(rendered(void *)), this, SLOT(onRendering(void *)));
 //    connect(timeline, &AnimTimeline::rendered, this, &MainWindow::onRendering);
-    connect(timeline, &AnimTimelineWithSession::renderDeleted, this, &MainWindow::onDeleteRender);
+    connect(ui->widget_timeline, &FormAnimTimelineWithSession::renderDeleted, this, &MainWindow::onDeleteRender);
 //    connect(timeline, )
 
 //    connect(timeline, SIGNAL(envSaved()), this, SLOT(onSaveEnv()));
@@ -81,7 +81,7 @@ MainWindow::MainWindow(QWidget *parent) :
 //    std::vector<double> vect{1, 5};
 //    timeline->onAddingKeyPose(6);
 
-    timeline->show();
+    ui->widget_timeline->show();
 
 }
 
@@ -189,7 +189,7 @@ void MainWindow::onSaveEnv()
 //    render->b = 1.0;
 //    render->keyPoses = {0, 1.0, 2};
 
-    timeline->onSaveRendering(anim, sizeof(*anim));
+    ui->widget_timeline->onSaveRendering(anim, sizeof(*anim));
 }
 
 void MainWindow::onRendering(void *render)
@@ -261,45 +261,45 @@ void MainWindow::onDeleteRender(void *render)
 
 void MainWindow::on_play_clicked()
 {
-    timeline->onSetPlayMode();
+    ui->widget_timeline->onSetPlayMode();
 }
 
 void MainWindow::on_pause_clicked()
 {
-    timeline->onSetPauseMode();
+    ui->widget_timeline->onSetPauseMode();
 }
 
 void MainWindow::on_durationOut_editingFinished()
 {
-//    timeline->onChangeAnimDuration(ui->durationOut->value());
-    timeline->onChangeDuration(ui->durationOut->value());
+//    ui->widget_timeline->onChangeAnimDuration(ui->durationOut->value());
+    ui->widget_timeline->onChangeDuration(ui->durationOut->value());
 }
 
 
 void MainWindow::on_cursorOut_editingFinished()
 {
-    timeline->onChangeCursor(ui->cursorOut->value());
+    ui->widget_timeline->onChangeCursor(ui->cursorOut->value());
 }
 
 void MainWindow::on_doubleSpinBox_startOut_editingFinished()
 {
-    timeline->onChangeStart(ui->doubleSpinBox_startOut->value());
+    ui->widget_timeline->onChangeStart(ui->doubleSpinBox_startOut->value());
 }
 
 void MainWindow::on_doubleSpinBox_endOut_editingFinished()
 {
-    timeline->onChangeEnd(ui->doubleSpinBox_endOut->value());
+    ui->widget_timeline->onChangeEnd(ui->doubleSpinBox_endOut->value());
 }
 
 
 void MainWindow::on_keyPoseOut_editingFinished()
 {
-    timeline->onAddingKeyPose(ui->keyPoseOut->value());
+    ui->widget_timeline->onAddingKeyPose(ui->keyPoseOut->value());
 }
 
 void MainWindow::on_pushButton_clearKeyPoses_clicked()
 {
-    timeline->onClearKeyPoses();
+    ui->widget_timeline->onClearKeyPoses();
     ui->nbKeyPose->setValue(0);
 }
 
@@ -307,12 +307,12 @@ void MainWindow::on_pushButton_clearKeyPoses_clicked()
 
 void MainWindow::on_pushButton_showTimeline_clicked()
 {
-    timeline->show();
+    ui->widget_timeline->show();
 }
 
 void MainWindow::on_pushButton_hideTimeline_clicked()
 {
-    timeline->hide();
+    ui->widget_timeline->hide();
 }
 
 //void MainWindow::on_changeCursor_clicked()

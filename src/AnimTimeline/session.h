@@ -1,11 +1,16 @@
 #ifndef SESSION_H
 #define SESSION_H
 
-#include <AnimTimeline/qdoublespinboxsmart.h>
-#include <AnimTimeline/qframeselector.h>
-#include <AnimTimeline/qspinboxsmart.h>
-#include <AnimTimeline/qtoolbuttonplaypause.h>
-#include <AnimTimeline/qwidgetruler.h>
+//#include <AnimTimeline/qdoublespinboxsmart.h>
+#include "qdoublespinboxsmart.h"
+//#include <AnimTimeline/qframeselector.h>
+#include "qframeselector.h"
+//#include <AnimTimeline/qspinboxsmart.h>
+#include "qspinboxsmart.h"
+//#include <AnimTimeline/qtoolbuttonplaypause.h>
+#include "qtoolbuttonplaypause.h"
+//#include <AnimTimeline/qwidgetruler.h>
+#include "qwidgetruler.h"
 
 #include <set>
 #include <stack>
