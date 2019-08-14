@@ -34,6 +34,35 @@ public:
 protected:
     virtual void resizeEvent(QResizeEvent* ev) override;
 
+//signals:
+//    void startChanged(double time);
+//    void endChanged(double time);
+//    void cursorChanged(double time);
+//    void durationChanged(double time);
+
+//    void keyPoseAdded(double time);
+//    void keyPoseDeleted(size_t id);
+//    void keyPoseChanged(size_t id);
+//    void keyPoseMoved(size_t id, double time);
+//    void keyPosesMoved(double gap, size_t first = 0);
+
+//    void playClicked();
+//    void pauseClicked();
+
+//public slots:
+//    virtual void onChangeStart(double time);
+//    virtual void onChangeEnd(double time);
+//    virtual void onChangeCursor(double time);
+//    virtual void onChangeDuration(double time);
+
+//    virtual void onAddingKeyPose(double time);
+//    virtual void onClearKeyPoses();
+//    virtual void onSetPlayMode(); // use it if external play button
+//    virtual void onSetPauseMode(); // use it if external pause button
+
+//protected:
+//    Ui::FormAnimTimeline* ui;
+
 signals:
     /*!
      * \brief startChanged is emitted when user move left slider of playzone or set new value in start spin (green)

@@ -36,7 +36,11 @@ int QWidgetRuler::drawRuler(int width)
     pixPerSec = (width / double(nbInterval)) / step;
 
     zero = pixPerSec * step;
+
+    emit rulerChanged();
+
     setMinimumWidth(width);
+
 
     update();
 

@@ -34,6 +34,7 @@ public:
 
 signals:
     void rulerZoomed(QWheelEvent* event, double xr);
+    void rulerChanged();
 
 public slots:
     void onDrawRuler(int width);

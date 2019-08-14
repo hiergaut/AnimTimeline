@@ -123,7 +123,7 @@ void Session::setEnv(Env env)
     *duration = env.duration;
     selector->updateDurationSpin();
 
-    selector->redrawPlayZone();
+//    selector->redrawPlayZone();
     ruler->onDrawRuler(ruler->width());
 
     emit rendered(env.anim);

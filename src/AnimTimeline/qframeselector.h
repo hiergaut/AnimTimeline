@@ -11,6 +11,7 @@
 #include <QSpacerItem>
 #include <QToolButton>
 #include <set>
+#include <QSplitter>
 
 class QFrameSelector : public QFrame {
     Q_OBJECT
@@ -24,6 +25,7 @@ public:
 
 protected:
     virtual void paintEvent(QPaintEvent* event) override;
+//    virtual void resizeEvent(QResizeEvent * event) override;
 
     void mousePressEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
@@ -51,12 +53,16 @@ public slots:
     void onChangeCursor(double time, bool internal = true); // EXTERNAL SLOT
     void onChangeDuration(double time, bool internal = true); // EXTERNAL SLOT
 
+    void prepareBackground(int width, int height);
+
+    void onRulerChange();
     //
     // ---------------------- INTERNAL SLOTS ----------------------------------
     void onSlideLeftSlider(int deltaX);
     void onSlideRightSlider(int deltaX);
-    void onLeftSlideRelease();
-    void onRightSlideRelease();
+//    void onLeftSlideRelease();
+//    void onRightSlideRelease();
+    void onSplitterMove(int pos, int index);
 
     void onDeleteKeyPose();
 
@@ -82,7 +88,8 @@ private:
     void deleteZone(double time, double time2);
 
 private:
-    int paintCounter { 0 };
+//    int paintCounter { 0 };
+//    uint rulerChangeCounter = 0;
 
     double start;
     double end;
@@ -94,11 +101,13 @@ private:
     double* zero;
     double* duration;
 
+    bool m_rulerChanged = false;
+    QPixmap * m_pixmapBackground = nullptr;
     // question : why QSet is unordered
     //    QSet<double> keyPoses;
     std::set<double> keyPoses;
 
-    bool sliding { false };
+//    bool sliding { false };
     bool mouseLeftClicked { false };
 
     bool* midMouseDown;
@@ -115,9 +124,11 @@ private:
     QWidgetRuler* widgetRuler;
 
     QFrame* leftSpacer;
+    QFrame* rightSpacer;
 //    QWidget* leftSlider;
     QFrame* playZone;
 //    QWidget* rightSlider;
+    QSplitter * m_splitter;
 
     QDoubleSpinBox* cursorSpin;
     QDoubleSpinBox* startSpin;
@@ -168,6 +179,8 @@ public:
     void setNbKeyPosesSpin(QSpinBox* value);
     void setMidMouseDown(bool* value);
     void setCtrlDown(bool* value);
+    void setRightSpacer(QFrame *value);
+    void setSplitter(QSplitter *splitter);
 };
 
 #endif // QFRAMESELECTOR_H

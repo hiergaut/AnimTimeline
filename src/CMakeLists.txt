@@ -53,8 +53,8 @@ add_library(${PROJECT_NAME} SHARED
 # qt5_use_modules(${PROJECT_NAME} Core Widgets)
 #
 target_link_libraries(${PROJECT_NAME} ${M_Qt5_LIBRARIES})
-add_definitions(-DQT_NO_DEBUG_OUTPUT)
 
+add_definitions(-DQT_NO_DEBUG_OUTPUT)
 # if(CMAKE_BUILD_TYPE MATCHES "Release")
 #     add_definitions(-DQT_NO_DEBUG_OUTPUT)
 # endif()

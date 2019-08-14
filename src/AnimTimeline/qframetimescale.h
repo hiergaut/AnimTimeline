@@ -18,18 +18,24 @@ signals:
 
 protected:
     virtual void paintEvent(QPaintEvent* event) override;
+//    virtual void resizeEvent(QResizeEvent * event) override;
 
 public slots:
+    void onRulerChange();
 
 private:
     QWidgetRuler* widgetRuler;
+
+    QPixmap * m_pixmapBackground = nullptr;
+
+    bool m_rulerChanged = false;
 
     int* nbInterval;
     double* step;
     double* pixPerSec;
 
     bool* drawLock;
-    int counter { 0 };
+//    int counter { 0 };
 
     int align;
 };

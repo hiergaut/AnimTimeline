@@ -74,25 +74,27 @@ double QFrameSelector::nearestStep(double time) const
 // ------------------------------- PROTECTED ----------------------------------
 void QFrameSelector::paintEvent(QPaintEvent*)
 {
-    qDebug() << "QFrameSelector::paintEvent " << ++paintCounter;
-
-    QPainter painter(this);
-    int h = height();
     int w = width();
+    int h = height();
 
-    if (!sliding) {
+    if (m_rulerChanged) {
+        leftSpacer->setMinimumWidth(static_cast<int>(*zero) - 3);
+        rightSpacer->setMinimumWidth(w - (*zero + *duration * *pixPerSec) - 4);
+        //    leftSpacer->resize(200, 0);
         redrawPlayZone();
-    }
 
-    // DRAW FRAME SCALE
-    painter.setPen(QPen(Qt::lightGray));
-    double frameDuration = 1.0 / FPS;
-    int hUp = h / 3;
-    double nbFrame = *duration / frameDuration;
-    for (int i = 0; i < nbFrame; i++) {
-        int x = static_cast<int>(i * frameDuration * *pixPerSec + *zero);
-        painter.drawLine(x, 0, x, hUp);
+        prepareBackground(w, h);
+
+        m_rulerChanged = false;
     }
+    //    qDebug() << "fuck";
+    //    m_rulerChanged = true;
+    //    m_pixmapBackground.fill(Qt::red);
+    //    qDebug() << "QFrameSelector::paintEvent";
+    //        m_pixmapBackground = new QPixmap;
+    //    QPainter painter(m_pixmapBackground);
+    //    painter.drawText(100, 100, "fuck");
+    QPainter painter(this);
 
     // DRAW CURSOR
     painter.setPen(QPen(QColor(0, 0, 255, 255), 3));
@@ -101,24 +103,10 @@ void QFrameSelector::paintEvent(QPaintEvent*)
 
     // DRAW KEYPOSES
     painter.setPen(QPen(QColor(255, 255, 0, 255), 3));
-    int hTemp = h / 3 + 2;
+    int hTemp = h / 4 + 2;
     for (double keyPose : keyPoses) {
         int xKeyPose = static_cast<int>(*zero + keyPose * *pixPerSec);
         painter.drawLine(xKeyPose, hTemp, xKeyPose, h);
-    }
-
-    // DRAW TIME SCALE
-    int hDown = 2 * h / 3;
-    painter.setPen(Qt::black);
-    for (int i = 1; i < *nbInterval; i++) {
-        int x = static_cast<int>(i * *step * *pixPerSec);
-        painter.drawLine(x, hDown, x, h);
-    }
-    int hDown2 = 3 * h / 4;
-    painter.setPen(Qt::darkGray);
-    for (int i = 1; i < *nbInterval - 1; i++) {
-        int middle = static_cast<int>((i + 0.5) * *step * *pixPerSec);
-        painter.drawLine(middle, hDown2, middle, h);
     }
 
     if (updateKeyPoseFlash > 0) {
@@ -133,19 +121,22 @@ void QFrameSelector::paintEvent(QPaintEvent*)
             timer->stop();
     }
 
-    // DRAW MIDDLE RULER SEPARATOR
-    int gap = 5;
-    painter.setPen(Qt::white);
-    painter.drawLine(0, h / 2 + gap + 2, w, h / 2 + gap + 2);
-    painter.drawLine(0, h / 2 + gap + 1, w, h / 2 + gap + 1);
+    painter.drawPixmap(rect(), *m_pixmapBackground);
+//    return;
 
-    painter.setPen(Qt::darkGray);
-    painter.drawLine(0, h / 2 - gap - 1, w, h / 2 - gap - 1);
-    painter.drawLine(0, h / 2 + gap, w, h / 2 + gap);
-
-    painter.setPen(Qt::black);
-    painter.drawLine(0, h / 2 - gap - 2, w, h / 2 - gap - 2);
+    //        m_rulerChanged = false;
+    //    } else {
+    //        qDebug() << "QFrameSelector::paintEvent rulerChanged" << paintCounter;
+    //    }
 }
+
+//void QFrameSelector::resizeEvent(QResizeEvent* event)
+//{
+////    qDebug() << "QFrameSelector::resizeEvent " << event;
+//    QSize size = event->size();
+//    int w = size.width();
+//    int h = size.height();
+//}
 
 void QFrameSelector::mousePressEvent(QMouseEvent* event)
 {
@@ -371,7 +362,8 @@ void QFrameSelector::onChangeEnd(double time, bool internal /* = true */)
     if (change) {
         end = newEnd;
         updateEndSpin();
-        update();
+        redrawPlayZone();
+        //        update();
 
         if (internal || out) {
             emit endChanged(end); // EXTERNAL SIGNAL
@@ -400,6 +392,7 @@ void QFrameSelector::onChangeCursor(double time, bool internal /* = true */)
     if (change) {
         cursor = newCursor;
         updateCursorSpin();
+        //        redrawPlayZone();
         update();
 
         if (internal || out) {
@@ -426,6 +419,7 @@ void QFrameSelector::onChangeDuration(double time, bool internal /* = true */)
         *duration = newDuration;
         widgetRuler->drawRuler(widgetRuler->minimumWidth());
         updateDurationSpin();
+        //        redrawPlayZone();
 
         // emit signal if time of emitter is internal changed due of limits
         if (internal || out) {
@@ -448,44 +442,136 @@ void QFrameSelector::onChangeDuration(double time, bool internal /* = true */)
     // auto update
 }
 
+void QFrameSelector::prepareBackground(int w, int h)
+{
+    if (m_pixmapBackground != nullptr)
+        delete m_pixmapBackground;
+    m_pixmapBackground = new QPixmap(this->size());
+    m_pixmapBackground->fill(QColor(255, 255, 255, 0));
+    //    m_pixmapBackground->fill(QColor(255, 0, 0, 255));
+
+    QPainter painter(m_pixmapBackground);
+    //        int h = height;
+    //        int w = width;
+    //        painter.begin(this);
+    //        painter.drawText(100, 100, "fuck");
+    //        painter.end();
+
+    //    if (!sliding) {
+    //        redrawPlayZone();
+    //    }
+
+    // DRAW FRAME SCALE
+    //    painter.setPen(QPen(Qt::lightGray));
+    painter.setPen(QPen(QColor(127, 127, 127, 64), 1));
+    double frameDuration = 1.0 / FPS;
+    int hUp = h / 3;
+    double nbFrame = *duration / frameDuration;
+    for (int i = 0; i < nbFrame; i++) {
+        int x = static_cast<int>(i * frameDuration * *pixPerSec + *zero);
+        painter.drawLine(x, 0, x, hUp);
+    }
+
+    // DRAW TIME SCALE
+    int hDown = 2 * h / 3;
+    painter.setPen(Qt::black);
+    for (int i = 1; i < *nbInterval; i++) {
+        int x = static_cast<int>(i * *step * *pixPerSec);
+        painter.drawLine(x, hDown, x, h);
+    }
+    int hDown2 = 3 * h / 4;
+    painter.setPen(Qt::darkGray);
+    for (int i = 1; i < *nbInterval - 1; i++) {
+        int middle = static_cast<int>((i + 0.5) * *step * *pixPerSec);
+        painter.drawLine(middle, hDown2, middle, h);
+    }
+
+    // DRAW MIDDLE RULER SEPARATOR
+    int gap = h / 15;
+    painter.setPen(Qt::white);
+    //    painter.drawLine(0, h / 2 + gap + 2, w, h / 2 + gap + 2);
+    painter.drawLine(0, h / 2 + gap + 1, w, h / 2 + gap + 1);
+
+    painter.setPen(Qt::darkGray);
+    painter.drawLine(0, h / 2 + gap, w, h / 2 + gap);
+
+    painter.setPen(Qt::black);
+    painter.drawLine(0, h / 2 - gap - 1, w, h / 2 - gap - 1);
+    //    painter.drawLine(0, h / 2 - gap - 2, w, h / 2 - gap - 2);
+
+    QRect rect(0, h / 2 - gap, w, gap + gap / 3);
+    QLinearGradient gradient(0, rect.top(), 0, rect.bottom());
+    gradient.setColorAt(0, QColor(128, 128, 128, 127));
+    gradient.setColorAt(1, QColor(255, 255, 255, 255));
+    painter.fillRect(rect, gradient);
+
+    QRect rect2(0, h / 2 + gap / 3, w, 2 * gap / 3 + 1);
+    QLinearGradient gradient2(0, rect2.top(), 0, rect2.bottom());
+    gradient2.setColorAt(0, QColor(255, 255, 255, 255));
+    gradient2.setColorAt(1, QColor(192, 192, 192, 127));
+    painter.fillRect(rect2, gradient2);
+}
+
+void QFrameSelector::onRulerChange()
+{
+    m_rulerChanged = true;
+}
+
 // -------------------------- INTERNAL SLOTS ----------------------------------
 void QFrameSelector::onSlideLeftSlider(int deltaX)
 {
+    //    qDebug() << "QFrameSelector::onSlideLeftSlider " << deltaX;
 
-    if (!sliding) {
-//        leftSlider->setStyleSheet("background-color: #00ff00");
-        sliding = true;
-    }
+    //    if (!sliding) {
+    ////        leftSlider->setStyleSheet("background-color: #00ff00");
+    //        sliding = true;
+    //    }
 
-    double newStart = start + deltaX / *pixPerSec;
+    //    double newStart = start + deltaX / *pixPerSec;
+    double newStart = (deltaX - *zero) / *pixPerSec;
 
     onChangeStart(newStart); // EXTERNAL SLOT
 
-    leftSpacer->setMinimumWidth(static_cast<int>(*zero + start * *pixPerSec));
-    playZone->setMinimumWidth(static_cast<int>((end - start) * *pixPerSec));
+    //    leftSpacer->setMinimumWidth(static_cast<int>(*zero + start * *pixPerSec));
+    //    leftSpacer->setMinimumWidth(static_cast<int>(*zero) - 3);
+    //    playZone->setMinimumWidth(static_cast<int>((end - start) * *pixPerSec));
 }
 
 void QFrameSelector::onSlideRightSlider(int deltaX)
 {
-    if (!sliding) {
-//        rightSlider->setStyleSheet("background-color: red");
-        sliding = true;
-    }
-    double newEnd = end + deltaX / *pixPerSec;
+    //    qDebug() << "QFrameSelector::onSlideRightSlider " << deltaX;
+
+    //    if (!sliding) {
+    ////        rightSlider->setStyleSheet("background-color: red");
+    //        sliding = true;
+    //    }
+    //    double newEnd = end + deltaX / *pixPerSec;
+    double newEnd = (deltaX - *zero) / *pixPerSec;
 
     onChangeEnd(newEnd); // EXTERNAL SLOT
 
-    playZone->setMinimumWidth(static_cast<int>((end - start) * *pixPerSec));
+    //    playZone->setMinimumWidth(static_cast<int>((end - start) * *pixPerSec));
+    //    rightSpacer->setMinimumWidth(width() - (*zero + *duration * *pixPerSec) - 3);
 }
 
-void QFrameSelector::onLeftSlideRelease()
-{
-    sliding = false;
-}
+//void QFrameSelector::onLeftSlideRelease()
+//{
+//    //    sliding = false;
+//}
 
-void QFrameSelector::onRightSlideRelease()
+//void QFrameSelector::onRightSlideRelease()
+//{
+//    //    sliding = false;
+//}
+
+void QFrameSelector::onSplitterMove(int pos, int index)
 {
-    sliding = false;
+    //    qDebug() << "QFrameSelector::splitterMove " << pos << index;
+    if (index == 1) {
+        onSlideLeftSlider(pos);
+    } else {
+        onSlideRightSlider(pos);
+    }
 }
 
 void QFrameSelector::onDeleteKeyPose()
@@ -701,11 +787,30 @@ void QFrameSelector::deleteZone(double time, double time2)
     update();
 }
 
+void QFrameSelector::setSplitter(QSplitter* splitter)
+{
+    m_splitter = splitter;
+}
+
+void QFrameSelector::setRightSpacer(QFrame* value)
+{
+    rightSpacer = value;
+}
+
 void QFrameSelector::redrawPlayZone()
 {
-//    leftSpacer->setMinimumWidth(static_cast<int>(*zero + start * *pixPerSec - leftSlider->width()));
-    leftSpacer->setMinimumWidth(static_cast<int>(*zero + start * *pixPerSec));
-    playZone->setMinimumWidth(static_cast<int>((end - start) * *pixPerSec));
+    QList<int> sizes = m_splitter->sizes();
+    sizes[0] = *zero + start * *pixPerSec - 3;
+    sizes[1] = (end - start) * *pixPerSec - 3;
+    sizes[2] = width() - sizes[0] - sizes[1] - 3 - 3 - 3 - 4;
+    //    sizes[2] = 0;
+    m_splitter->setSizes(sizes);
+    //    m_splitter->setSizes({100, 100});
+    //    leftSpacer->resize(*zero + start * *pixPerSec, h);
+    //    leftSpacer->setMinimumWidth(static_cast<int>(*zero + start * *pixPerSec - leftSlider->width()));
+
+    //    leftSpacer->setMinimumWidth(static_cast<int>(*zero + start * *pixPerSec));
+    //    playZone->setMinimumWidth(static_cast<int>((end - start) * *pixPerSec));
 }
 
 // -------------------------- GETTERS -----------------------------------------

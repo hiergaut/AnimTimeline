@@ -57,6 +57,11 @@ void QScrollAreaRuler::keyPressEvent(QKeyEvent* event)
         }
         break;
 
+    case Qt::Key_X:
+        emit removeKeyPose();
+        break;
+
+
     case Qt::Key_Shift:
         shiftDown = true;
         break;

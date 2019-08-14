@@ -28,9 +28,14 @@ FormAnimTimeline::FormAnimTimeline(QWidget* parent)
     connect(ui->doubleSpinBox_maxDuration, &QDoubleSpinBoxSmart::editingFinished, ui->frame_selector, &QFrameSelector::onChangeDurationSpin);
 
 //    connect(ui->widget_leftSlider, &QWidgetSlider::slide, ui->frame_selector, &QFrameSelector::onSlideLeftSlider);
+    ui->splitter->setCollapsible(0, false);
+    ui->splitter->setCollapsible(2, false);
+    connect(ui->splitter, &QSplitter::splitterMoved, ui->frame_selector, &QFrameSelector::onSplitterMove);
 //    connect(ui->widget_leftSlider, &QWidgetSlider::slideRelease, ui->frame_selector, &QFrameSelector::onLeftSlideRelease);
 //    connect(ui->widget_rightSlider, &QWidgetSlider::slide, ui->frame_selector, &QFrameSelector::onSlideRightSlider);
 //    connect(ui->widget_rightSlider, &QWidgetSlider::slideRelease, ui->frame_selector, &QFrameSelector::onRightSlideRelease);
+    connect(ui->scrollAreaWidgetContents, &QWidgetRuler::rulerChanged, ui->frame_selector, &QFrameSelector::onRulerChange);
+    connect(ui->scrollAreaWidgetContents, &QWidgetRuler::rulerChanged, ui->frame_timescale, &QFrameTimescale::onRulerChange);
 
     connect(ui->scrollArea, &QScrollAreaRuler::removeKeyPose, ui->frame_selector, &QFrameSelector::onDeleteKeyPose);
     connect(ui->scrollArea, SIGNAL(addKeyPose()), ui->frame_selector, SLOT(onAddingKeyPose()));
@@ -59,6 +64,7 @@ FormAnimTimeline::FormAnimTimeline(QWidget* parent)
     ui->frame_selector->setPlayZone(ui->frame_playZone);
 //    ui->frame_selector->setLeftSlider(ui->widget_leftSlider);
     ui->frame_selector->setLeftSpacer(ui->frame_spacer);
+    ui->frame_selector->setRightSpacer(ui->frame_rightSpacer);
 //    ui->frame_selector->setRightSlider(ui->widget_rightSlider);
     ui->frame_selector->setCursorSpin(ui->doubleSpinBox_cursor);
     ui->frame_selector->setStartSpin(ui->doubleSpinBox_start);
@@ -69,6 +75,7 @@ FormAnimTimeline::FormAnimTimeline(QWidget* parent)
     ui->frame_selector->setShiftDown(ui->scrollArea->getShiftDown());
     ui->frame_selector->setMidMouseDown(ui->scrollArea->getMidMouseDown());
     ui->frame_selector->setCtrlDown(ui->scrollArea->getCtrlDown());
+    ui->frame_selector->setSplitter(ui->splitter);
 
     // FRAME_BUTTONS
     ui->frame_buttons->setAnimTimeline(this);
