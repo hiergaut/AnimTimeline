@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>629</width>
-    <height>212</height>
+    <width>599</width>
+    <height>518</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -520,19 +520,22 @@
       <item>
        <widget class="QDoubleSpinBoxSmart" name="doubleSpinBox_maxDuration">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
         <property name="minimumSize">
          <size>
-          <width>120</width>
+          <width>100</width>
           <height>0</height>
          </size>
         </property>
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Total duration&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
         </property>
         <property name="styleSheet">
          <string notr="true">background: darkgray;</string>
@@ -543,8 +546,8 @@
         <property name="buttonSymbols">
          <enum>QAbstractSpinBox::NoButtons</enum>
         </property>
-        <property name="prefix">
-         <string>total duration: </string>
+        <property name="suffix">
+         <string> : duration</string>
         </property>
         <property name="maximum">
          <double>999.000000000000000</double>
@@ -627,8 +630,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>627</width>
-        <height>175</height>
+        <width>597</width>
+        <height>481</height>
        </rect>
       </property>
       <property name="sizePolicy">
