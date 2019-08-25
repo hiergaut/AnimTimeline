@@ -87,7 +87,6 @@ void QFrameSelector::paintEvent(QPaintEvent*)
 
         m_rulerChanged = false;
     }
-    //    qDebug() << "fuck";
     //    m_rulerChanged = true;
     //    m_pixmapBackground.fill(Qt::red);
     //    qDebug() << "QFrameSelector::paintEvent";
@@ -473,7 +472,8 @@ void QFrameSelector::prepareBackground(int w, int h)
     }
 
     // DRAW TIME SCALE
-    int hDown = 2 * h / 3;
+//    int hDown = 2 * h / 3;
+    int hDown = h / 2;
     painter.setPen(Qt::black);
     for (int i = 1; i < *nbInterval; i++) {
         int x = static_cast<int>(i * *step * *pixPerSec);
@@ -487,29 +487,29 @@ void QFrameSelector::prepareBackground(int w, int h)
     }
 
     // DRAW MIDDLE RULER SEPARATOR
-    int gap = h / 15;
-    painter.setPen(Qt::white);
-    //    painter.drawLine(0, h / 2 + gap + 2, w, h / 2 + gap + 2);
-    painter.drawLine(0, h / 2 + gap + 1, w, h / 2 + gap + 1);
+//    int gap = h / 15;
+//    painter.setPen(Qt::white);
+//    //    painter.drawLine(0, h / 2 + gap + 2, w, h / 2 + gap + 2);
+//    painter.drawLine(0, h / 2 + gap + 1, w, h / 2 + gap + 1);
 
-    painter.setPen(Qt::darkGray);
-    painter.drawLine(0, h / 2 + gap, w, h / 2 + gap);
+//    painter.setPen(Qt::darkGray);
+//    painter.drawLine(0, h / 2 + gap, w, h / 2 + gap);
 
-    painter.setPen(Qt::black);
-    painter.drawLine(0, h / 2 - gap - 1, w, h / 2 - gap - 1);
-    //    painter.drawLine(0, h / 2 - gap - 2, w, h / 2 - gap - 2);
+//    painter.setPen(Qt::black);
+//    painter.drawLine(0, h / 2 - gap - 1, w, h / 2 - gap - 1);
+//    //    painter.drawLine(0, h / 2 - gap - 2, w, h / 2 - gap - 2);
 
-    QRect rect(0, h / 2 - gap, w, gap + gap / 3);
-    QLinearGradient gradient(0, rect.top(), 0, rect.bottom());
-    gradient.setColorAt(0, QColor(128, 128, 128, 127));
-    gradient.setColorAt(1, QColor(255, 255, 255, 255));
-    painter.fillRect(rect, gradient);
+//    QRect rect(0, h / 2 - gap, w, gap + gap / 3);
+//    QLinearGradient gradient(0, rect.top(), 0, rect.bottom());
+//    gradient.setColorAt(0, QColor(128, 128, 128, 127));
+//    gradient.setColorAt(1, QColor(255, 255, 255, 255));
+//    painter.fillRect(rect, gradient);
 
-    QRect rect2(0, h / 2 + gap / 3, w, 2 * gap / 3 + 1);
-    QLinearGradient gradient2(0, rect2.top(), 0, rect2.bottom());
-    gradient2.setColorAt(0, QColor(255, 255, 255, 255));
-    gradient2.setColorAt(1, QColor(192, 192, 192, 127));
-    painter.fillRect(rect2, gradient2);
+//    QRect rect2(0, h / 2 + gap / 3, w, 2 * gap / 3 + 1);
+//    QLinearGradient gradient2(0, rect2.top(), 0, rect2.bottom());
+//    gradient2.setColorAt(0, QColor(255, 255, 255, 255));
+//    gradient2.setColorAt(1, QColor(192, 192, 192, 127));
+//    painter.fillRect(rect2, gradient2);
 }
 
 void QFrameSelector::onRulerChange()
