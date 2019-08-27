@@ -2,38 +2,38 @@
 //#include <AnimTimeline/configurations.h>
 #include "configurations.h"
 //#include <AnimTimeline/session.h>
-#include "session.h"
+#include "AnimTimelineSession.h"
 
 #include <QDebug>
 #include <QTimer>
 #include <set>
 //#include <boost/circular_buffer.hpp> // need boost lib
 
-Session::Session(QObject* parent)
+AnimTimelineSession::AnimTimelineSession(QObject* parent)
     : QObject(parent)
 {
     saveDelay = new QTimer(this);
-    connect(saveDelay, &QTimer::timeout, this, &Session::envSaved);
+    connect(saveDelay, &QTimer::timeout, this, &AnimTimelineSession::envSaved);
 #ifndef QT_NO_DEBUG_OUTPUT
-    connect(this, &Session::envSaved, this, &Session::envSavedTrace);
+    connect(this, &AnimTimelineSession::envSaved, this, &AnimTimelineSession::envSavedTrace);
 #endif
     saveDelay->setSingleShot(true);
 }
 
-Session::~Session()
+AnimTimelineSession::~AnimTimelineSession()
 {
     onClearSession();
     delete saveDelay;
 }
 
 // timeline changed, save timeline and anim environment
-void Session::onChangeEnv()
+void AnimTimelineSession::onChangeEnv()
 {
-    qDebug() << "Session::onChangeEnv()";
+    qDebug() << "AnimTimelineSession::onChangeEnv()";
     saveDelay->start(DELAY_AUTO_SAVE);
 }
 
-void Session::onClearSession()
+void AnimTimelineSession::onClearSession()
 {
     while (!undo.empty()) {
         emit renderDeleted(undo.back().anim);
@@ -51,7 +51,7 @@ void Session::onClearSession()
     onChangeEnv();
 }
 
-void Session::onUndo()
+void AnimTimelineSession::onUndo()
 {
     if (undo.empty()) {
         qDebug() << "\033[31mSession::onUndo() : empty buffer ! (suggestion for client : "
@@ -70,7 +70,7 @@ void Session::onUndo()
     }
 }
 
-void Session::onRedo()
+void AnimTimelineSession::onRedo()
 {
     if (redoHeap.empty()) {
         qDebug() << "\033[31mSession::onRedo() : empty stack !\033[0m";
@@ -83,7 +83,7 @@ void Session::onRedo()
     setEnv(undo.back());
 }
 
-void Session::onSaveRendering(void* anim, size_t bytes)
+void AnimTimelineSession::onSaveRendering(void* anim, size_t bytes)
 {
 
     while (!redoHeap.empty()) {
@@ -104,10 +104,10 @@ void Session::onSaveRendering(void* anim, size_t bytes)
         undo.pop_front();
     }
 
-    qDebug() << "Session::onSaveRendering() : buff size (bytes) =" << size << "/" << BUFFER_SESSION_MAX_SIZE << "(" << size * 100.0 / BUFFER_SESSION_MAX_SIZE << "% )";
+    qDebug() << "AnimTimelineSession::onSaveRendering() : buff size (bytes) =" << size << "/" << BUFFER_SESSION_MAX_SIZE << "(" << size * 100.0 / BUFFER_SESSION_MAX_SIZE << "% )";
 }
 
-void Session::setEnv(Env env)
+void AnimTimelineSession::setEnv(Env env)
 {
     *start = env.start;
     selector->updateStartSpin();
@@ -131,73 +131,73 @@ void Session::setEnv(Env env)
 }
 
 #ifndef QT_NO_DEBUG_OUTPUT
-void Session::envSavedTrace()
+void AnimTimelineSession::envSavedTrace()
 {
     qDebug() << "\033[35menvSaved()\033[0m";
 }
 #endif
 
-void Session::setKeyPoses(std::set<double>* value)
+void AnimTimelineSession::setKeyPoses(std::set<double>* value)
 {
     keyPoses = value;
 }
 
-void Session::setDuration(double* value)
+void AnimTimelineSession::setDuration(double* value)
 {
     duration = value;
 }
 
-void Session::setCursor(double* value)
+void AnimTimelineSession::setCursor(double* value)
 {
     cursor = value;
 }
 
-void Session::setEnd(double* value)
+void AnimTimelineSession::setEnd(double* value)
 {
     end = value;
 }
 
-void Session::setStart(double* value)
+void AnimTimelineSession::setStart(double* value)
 {
     start = value;
 }
 
-void Session::setDurationSpin(QDoubleSpinBoxSmart* value)
+void AnimTimelineSession::setDurationSpin(QDoubleSpinBoxSmart* value)
 {
     durationSpin = value;
 }
 
-void Session::setCursorSpin(QDoubleSpinBoxSmart* value)
+void AnimTimelineSession::setCursorSpin(QDoubleSpinBoxSmart* value)
 {
     cursorSpin = value;
 }
 
-void Session::setEndSpin(QDoubleSpinBoxSmart* value)
+void AnimTimelineSession::setEndSpin(QDoubleSpinBoxSmart* value)
 {
     endSpin = value;
 }
 
-void Session::setStartSpin(QDoubleSpinBoxSmart* value)
+void AnimTimelineSession::setStartSpin(QDoubleSpinBoxSmart* value)
 {
     startSpin = value;
 }
 
-void Session::setNbKeyPosesSpin(QSpinBoxSmart* value)
+void AnimTimelineSession::setNbKeyPosesSpin(QSpinBoxSmart* value)
 {
     nbKeyPosesSpin = value;
 }
 
-void Session::setSelector(QFrameSelector* value)
+void AnimTimelineSession::setSelector(QFrameSelector* value)
 {
     selector = value;
 }
 
-void Session::setRuler(QWidgetRuler* value)
+void AnimTimelineSession::setRuler(QWidgetRuler* value)
 {
     ruler = value;
 }
 
-void Session::setPlayButton(QToolButtonPlayPause* value)
+void AnimTimelineSession::setPlayButton(QToolButtonPlayPause* value)
 {
     playButton = value;
 }

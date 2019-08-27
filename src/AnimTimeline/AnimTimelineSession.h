@@ -1,5 +1,5 @@
-#ifndef SESSION_H
-#define SESSION_H
+#ifndef ANIM_TIMELINE_SESSION_H
+#define ANIM_TIMELINE_SESSION_H
 
 //#include <AnimTimeline/qdoublespinboxsmart.h>
 #include "qdoublespinboxsmart.h"
@@ -15,11 +15,11 @@
 #include <set>
 #include <stack>
 
-class Session : public QObject {
+class AnimTimelineSession : public QObject {
     Q_OBJECT
 public:
-    Session(QObject* parent = nullptr);
-    virtual ~Session();
+    AnimTimelineSession(QObject* parent = nullptr);
+    virtual ~AnimTimelineSession();
 
 signals:
     void envSaved(); // EXTERNAL
@@ -98,4 +98,4 @@ public: // setters
     void setNbKeyPosesSpin(QSpinBoxSmart* value);
 };
 
-#endif // SESSION_H
+#endif // ANIM_TIMELINE_SESSION_H

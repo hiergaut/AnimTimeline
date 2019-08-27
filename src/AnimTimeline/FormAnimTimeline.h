@@ -12,7 +12,7 @@
 #define ANIMTIMELINE_H
 
 //#include <AnimTimeline/session.h>
-#include "session.h"
+#include "AnimTimelineSession.h"
 
 #include <QDialog>
 #include <QObject>
@@ -215,7 +215,7 @@ public slots:
     //    void onSetPauseMode();
 
 private:
-    Session session { this };
+    AnimTimelineSession session { this };
 };
 
 #endif // ANIMTIMELINE_H

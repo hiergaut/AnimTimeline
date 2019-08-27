@@ -196,25 +196,25 @@ void FormAnimTimeline::onSetPauseMode()
 FormAnimTimelineWithSession::FormAnimTimelineWithSession(QWidget* parent)
     : FormAnimTimeline(parent)
 {
-    connect(this, &FormAnimTimelineWithSession::startChanged, &session, &Session::onChangeEnv);
-    connect(this, &FormAnimTimelineWithSession::endChanged, &session, &Session::onChangeEnv);
-    //    connect(this, &FormAnimTimelineWithSession::cursorChanged, this, &Session::onChangeEnv);
-    connect(this, &FormAnimTimelineWithSession::durationChanged, &session, &Session::onChangeEnv);
-    connect(this, &FormAnimTimelineWithSession::keyPoseAdded, &session, &Session::onChangeEnv);
-    connect(this, &FormAnimTimelineWithSession::keyPoseDeleted, &session, &Session::onChangeEnv);
-    connect(this, &FormAnimTimelineWithSession::keyPoseChanged, &session, &Session::onChangeEnv);
-    connect(this, &FormAnimTimelineWithSession::keyPoseMoved, &session, &Session::onChangeEnv);
-    connect(this, &FormAnimTimelineWithSession::keyPosesMoved, &session, &Session::onChangeEnv);
-    //        connect(this, &FormAnimTimelineWithSession::playClicked, &session, &Session::onChangeEnv);
-    //        connect(this, &FormAnimTimelineWithSession::pauseClicked, &session, &Session::onChangeEnv);
+    connect(this, &FormAnimTimelineWithSession::startChanged, &session, &AnimTimelineSession::onChangeEnv);
+    connect(this, &FormAnimTimelineWithSession::endChanged, &session, &AnimTimelineSession::onChangeEnv);
+    //    connect(this, &FormAnimTimelineWithSession::cursorChanged, this, &AnimTimelineSession::onChangeEnv);
+    connect(this, &FormAnimTimelineWithSession::durationChanged, &session, &AnimTimelineSession::onChangeEnv);
+    connect(this, &FormAnimTimelineWithSession::keyPoseAdded, &session, &AnimTimelineSession::onChangeEnv);
+    connect(this, &FormAnimTimelineWithSession::keyPoseDeleted, &session, &AnimTimelineSession::onChangeEnv);
+    connect(this, &FormAnimTimelineWithSession::keyPoseChanged, &session, &AnimTimelineSession::onChangeEnv);
+    connect(this, &FormAnimTimelineWithSession::keyPoseMoved, &session, &AnimTimelineSession::onChangeEnv);
+    connect(this, &FormAnimTimelineWithSession::keyPosesMoved, &session, &AnimTimelineSession::onChangeEnv);
+    //        connect(this, &FormAnimTimelineWithSession::playClicked, &session, &AnimTimelineSession::onChangeEnv);
+    //        connect(this, &FormAnimTimelineWithSession::pauseClicked, &session, &AnimTimelineSession::onChangeEnv);
 
-    connect(ui->scrollArea, &QScrollAreaRuler::undo, &session, &Session::onUndo);
-    connect(ui->scrollArea, &QScrollAreaRuler::redo, &session, &Session::onRedo);
+    connect(ui->scrollArea, &QScrollAreaRuler::undo, &session, &AnimTimelineSession::onUndo);
+    connect(ui->scrollArea, &QScrollAreaRuler::redo, &session, &AnimTimelineSession::onRedo);
 
     // signal to signal
-    connect(&session, &Session::envSaved, this, &FormAnimTimelineWithSession::envSaved);
-    connect(&session, &Session::rendered, this, &FormAnimTimelineWithSession::rendered);
-    connect(&session, &Session::renderDeleted, this, &FormAnimTimelineWithSession::renderDeleted);
+    connect(&session, &AnimTimelineSession::envSaved, this, &FormAnimTimelineWithSession::envSaved);
+    connect(&session, &AnimTimelineSession::rendered, this, &FormAnimTimelineWithSession::rendered);
+    connect(&session, &AnimTimelineSession::renderDeleted, this, &FormAnimTimelineWithSession::renderDeleted);
 
     session.setStart(ui->frame_selector->getStart());
     session.setEnd(ui->frame_selector->getEnd());
