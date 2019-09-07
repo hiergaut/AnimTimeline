@@ -30,7 +30,7 @@ AnimTimelineSession::~AnimTimelineSession()
 void AnimTimelineSession::onChangeEnv()
 {
     qDebug() << "AnimTimelineSession::onChangeEnv()";
-    saveDelay->start(DELAY_AUTO_SAVE);
+    saveDelay->start(AnimTimeline::DELAY_AUTO_SAVE);
 }
 
 void AnimTimelineSession::onClearSession()
@@ -96,7 +96,7 @@ void AnimTimelineSession::onSaveRendering(void* anim, size_t bytes)
     undo.emplace_back(Env { *start, *end, *cursor, *duration, *keyPoses, anim, bytes });
     size += bytes;
 
-    while (size > BUFFER_SESSION_MAX_SIZE) {
+    while (size > AnimTimeline::BUFFER_SESSION_MAX_SIZE) {
         qDebug() << "\033[31monSaveRendering : buffer overflow\033[0m";
         emit renderDeleted(undo.front().anim);
         qDebug() << "\033[35mrenderDeleted(" << undo.front().anim << ")\033[0m";
@@ -104,7 +104,7 @@ void AnimTimelineSession::onSaveRendering(void* anim, size_t bytes)
         undo.pop_front();
     }
 
-    qDebug() << "AnimTimelineSession::onSaveRendering() : buff size (bytes) =" << size << "/" << BUFFER_SESSION_MAX_SIZE << "(" << size * 100.0 / BUFFER_SESSION_MAX_SIZE << "% )";
+    qDebug() << "AnimTimelineSession::onSaveRendering() : buff size (bytes) =" << size << "/" << AnimTimeline::BUFFER_SESSION_MAX_SIZE << "(" << size * 100.0 / AnimTimeline::BUFFER_SESSION_MAX_SIZE << "% )";
 }
 
 void AnimTimelineSession::setEnv(Env env)

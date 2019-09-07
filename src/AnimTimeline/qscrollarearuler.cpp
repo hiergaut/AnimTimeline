@@ -157,12 +157,12 @@ void QScrollAreaRuler::wheelEvent(QWheelEvent* event)
     }
     // scroll left/right bar
     else if (ctrlDown) {
-        horizontalScrollBar()->setValue(static_cast<int>(horizontalScrollBar()->value() + ry * SLIDE_SPEED));
+        horizontalScrollBar()->setValue(static_cast<int>(horizontalScrollBar()->value() + ry * AnimTimeline::SLIDE_SPEED));
 
     }
     // zoom in/out
     else {
-        int newRulerWidth = static_cast<int>(ruler->minimumWidth() + ry * ZOOM_SPEED * ruler->minimumWidth() / width());
+        int newRulerWidth = static_cast<int>(ruler->minimumWidth() + ry * AnimTimeline::ZOOM_SPEED * ruler->minimumWidth() / width());
         if (newRulerWidth <= width() - 2) {
             if (ruler->minimumWidth() == width() - 2) {
                 return;

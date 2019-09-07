@@ -31,7 +31,7 @@ QFrameSelector::~QFrameSelector()
 
 double QFrameSelector::nearestStep(double time) const
 {
-    double deltaT = AUTO_SUGGEST_CURSOR_RADIUS / *pixPerSec;
+    double deltaT = AnimTimeline::AUTO_SUGGEST_CURSOR_RADIUS / *pixPerSec;
 
     double minDist = durationSpin->maximum();
     double dist;
@@ -102,10 +102,12 @@ void QFrameSelector::paintEvent(QPaintEvent*)
 
     // DRAW KEYPOSES
     painter.setPen(QPen(QColor(255, 255, 0, 255), 3));
-    int hTemp = h / 4 + 2;
+//    int hTemp = h / 4 + 2;
+    int hTemp = 3 *h / 8;
     for (double keyPose : keyPoses) {
         int xKeyPose = static_cast<int>(*zero + keyPose * *pixPerSec);
         painter.drawLine(xKeyPose, hTemp, xKeyPose, h);
+//        painter.drawLine(xKeyPose, 0, xKeyPose, hTemp);
     }
 
     if (updateKeyPoseFlash > 0) {
@@ -463,7 +465,7 @@ void QFrameSelector::prepareBackground(int w, int h)
     // DRAW FRAME SCALE
     //    painter.setPen(QPen(Qt::lightGray));
     painter.setPen(QPen(QColor(127, 127, 127, 64), 1));
-    double frameDuration = 1.0 / FPS;
+    double frameDuration = 1.0 / AnimTimeline::FPS;
     int hUp = h / 3;
     double nbFrame = *duration / frameDuration;
     for (int i = 0; i < nbFrame; i++) {
